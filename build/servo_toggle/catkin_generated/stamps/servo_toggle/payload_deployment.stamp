@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+"""
+ROS node: toggle two servos between MIN and MAX positions independently.
+
+Control:
+  /servo1/set (std_msgs/Bool)  True = MAX, False = MIN
+  /servo2/set (std_msgs/Bool)  True = MAX, False = MIN
+
+Hardware (BCM numbering):
+  Servo 1 signal -> GPIO12  (physical pin 32)
+  Servo 2 signal -> GPIO13  (physical pin 33)
+  Power servos from external 5 V; tie grounds together (Pi GND ↔ supply GND ↔ servo GND).
+"""
+
+import rospy
+import RPi.GPIO as GPIO
+from std_msgs.msg import Bool
+from time import sleep
+
+
+def main():
+    # --- ROS node init (required for any ROS Python program) ---
+    rospy.init_node("servo_toggle_controller", anonymous=False)
+
+    # --- CONFIGURATION ---
+    # You can hardcode these, or override at runtime with rosparam.
+    # Example: rosparam set /servo_toggle_controller/servo1_min_duty 3.0
+    #
+    # Pins (BCM numbering)
+    pin_servo1 = rospy.get_param("~pin_servo1", 12)  # GPIO12
+    pin_servo2 = rospy.get_param("~pin_servo2", 13)  # GPIO13
+    pwm_hz = rospy.get_param(
+        "~pwm_hz", 50
+    )  # 50 Hz -> 20 ms period (standard hobby servos)
+
+    # Endpoint duty cycles (tune per servo; too big => buzzing, too small => short travel)
+    s1_min = rospy.get_param("~servo1_min_duty", 2.5)  # ~0.5 ms pulse
+    s1_max = rospy.get_param("~servo1_max_duty", 12.5)  # ~2.5 ms pulse
+    s2_min = rospy.get_param("~servo2_min_duty", 2.5)
+    s2_max = rospy.get_param("~servo2_max_duty", 12.5)
+    s1_invert = rospy.get_param("~servo1_invert", False)
+    s2_invert = rospy.get_param("~servo2_invert", False)
+
+    # OPTIONAL: choose "hold" behavior.
+    #  - hold=False: send pulse to move, then duty=0 (quieter, less heat, less torque).
+    #  - hold=True : keep PWM applied to hold torque (louder, warmer, more power).
+    hold = rospy.get_param("~hold", False)  # OPTIONAL
+    pulse_s = rospy.get_param(
+        "~pulse_s", 0.35
+    )  # OPTIONAL: time to keep PWM if hold=False
+
+    # --- GPIO / PWM setup (required) ---
+    GPIO.setmode(GPIO.BCM)  # Use BCM numbering (GPIO12, GPIO13)
+    GPIO.setup(pin_servo1, GPIO.OUT)  # Make pins outputs
+    GPIO.setup(pin_servo2, GPIO.OUT)
+
+    pwm1 = GPIO.PWM(pin_servo1, pwm_hz)  # Create PWM channel on servo1 pin
+    pwm2 = GPIO.PWM(pin_servo2, pwm_hz)  # Create PWM channel on servo2 pin
+    pwm1.start(0)  # Start at 0% duty (no movement)
+    pwm2.start(0)
+
+    # --- Helper that actually moves a servo to MIN or MAX ---
+    def set_servo(pwm, want_max, min_duty, max_duty):
+        """
+        pwm:      PWM channel object
+        want_max: bool -> True => MAX duty, False => MIN duty
+        min_duty/max_duty: endpoints for this servo (percent duty)
+        """
+        target = max_duty if want_max else min_duty
+        # Send the target duty; servo moves to that endpoint.
+        pwm.ChangeDutyCycle(target)
+
+        if not hold:  # OPTIONAL behavior: relax after reaching position
+            sleep(pulse_s)  # allow time to move
+            pwm.ChangeDutyCycle(0)  # stop PWM to reduce buzz/heat
+
+    # --- ROS callbacks: each servo controlled independently ---
+    def cb_servo1(msg: Bool):
+        # Map the Bool to MAX/MIN. If inverted, flip meaning of True/False.
+        want_max = msg.data if not s1_invert else (not msg.data)  # OPTIONAL (invert)
+        set_servo(pwm1, want_max, s1_min, s1_max)
+        rospy.loginfo(f"Servo1 -> {'MAX' if want_max else 'MIN'}")  # OPTIONAL: logging
+
+    def cb_servo2(msg: Bool):
+        want_max = msg.data if not s2_invert else (not msg.data)  # OPTIONAL (invert)
+        set_servo(pwm2, want_max, s2_min, s2_max)
+        rospy.loginfo(f"Servo2 -> {'MAX' if want_max else 'MIN'}")  # OPTIONAL: logging
+
+    # --- Subscribers (wire topics to callbacks) ---
+    # These create two independent controls:
+    #   /servo1/set -> cb_servo1
+    #   /servo2/set -> cb_servo2
+    sub1 = rospy.Subscriber("/servo1/set", Bool, cb_servo1, queue_size=10)
+    sub2 = rospy.Subscriber("/servo2/set", Bool, cb_servo2, queue_size=10)
+
+    # --- Clean shutdown (good practice) ---
+    def on_shutdown():
+        # OPTIONAL: logs are optional; the cleanup itself is strongly recommended.
+        rospy.loginfo("Stopping PWM and cleaning up GPIO...")  # OPTIONAL
+        try:
+            pwm1.stop()
+            pwm2.stop()
+        finally:
+            GPIO.cleanup()  # Reset pins so next run starts cleanly
+
+    rospy.on_shutdown(on_shutdown)
+
+    rospy.loginfo(
+        "Ready. Publish Bool to /servo1/set and /servo2/set (True=max, False=min)."
+    )  # OPTIONAL
+    rospy.spin()  # Keep the node alive, processing incoming messages
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass
