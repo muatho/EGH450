@@ -37,3 +37,7 @@
 [submodule "src/uavasr_emulator"]
 	path = src/uavasr_emulator
 	url = git@github.com:qutas/uavasr_emulator.git
+[submodule "src/detection_viz"]
+	path = src/detection_viz
+	url = git@github.com:anhadjangra/detection_viz.git
+	branch = main
