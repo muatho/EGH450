@@ -73,6 +73,7 @@ all: rqt_mavros_gui/all
 all: rqt_quaternion_view/all
 all: breadcrumb/all
 all: depthai_publisher/all
+all: detection_viz/all
 all: qutas_lab_450/all
 all: servo_toggle/all
 all: spar/spar_msgs/all
@@ -97,6 +98,7 @@ codegen: rqt_mavros_gui/codegen
 codegen: rqt_quaternion_view/codegen
 codegen: breadcrumb/codegen
 codegen: depthai_publisher/codegen
+codegen: detection_viz/codegen
 codegen: qutas_lab_450/codegen
 codegen: servo_toggle/codegen
 codegen: spar/spar_msgs/codegen
@@ -121,6 +123,7 @@ preinstall: rqt_mavros_gui/preinstall
 preinstall: rqt_quaternion_view/preinstall
 preinstall: breadcrumb/preinstall
 preinstall: depthai_publisher/preinstall
+preinstall: detection_viz/preinstall
 preinstall: qutas_lab_450/preinstall
 preinstall: servo_toggle/preinstall
 preinstall: spar/spar_msgs/preinstall
@@ -150,6 +153,7 @@ clean: rqt_mavros_gui/clean
 clean: rqt_quaternion_view/clean
 clean: breadcrumb/clean
 clean: depthai_publisher/clean
+clean: detection_viz/clean
 clean: qutas_lab_450/clean
 clean: servo_toggle/clean
 clean: spar/spar_msgs/clean
@@ -456,6 +460,29 @@ depthai_publisher/clean:
 .PHONY : depthai_publisher/clean
 
 #=============================================================================
+# Directory level rules for directory detection_viz
+
+# Recursive "all" directory target.
+detection_viz/all:
+.PHONY : detection_viz/all
+
+# Recursive "codegen" directory target.
+detection_viz/codegen:
+.PHONY : detection_viz/codegen
+
+# Recursive "preinstall" directory target.
+detection_viz/preinstall:
+.PHONY : detection_viz/preinstall
+
+# Recursive "clean" directory target.
+detection_viz/clean: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/clean
+detection_viz/clean: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/clean
+detection_viz/clean: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/clean
+detection_viz/clean: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/clean
+detection_viz/clean: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/clean
+.PHONY : detection_viz/clean
+
+#=============================================================================
 # Directory level rules for directory egh450_image_processor
 
 # Recursive "all" directory target.
@@ -628,11 +655,6 @@ qutas_lab_450/clean: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_eus.di
 qutas_lab_450/clean: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/clean
 qutas_lab_450/clean: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/clean
 qutas_lab_450/clean: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/clean
-qutas_lab_450/clean: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/clean
-qutas_lab_450/clean: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/clean
-qutas_lab_450/clean: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/clean
-qutas_lab_450/clean: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/clean
-qutas_lab_450/clean: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/clean
 qutas_lab_450/clean: qutas_lab_450/CMakeFiles/area_map.dir/clean
 qutas_lab_450/clean: qutas_lab_450/CMakeFiles/area_viz.dir/clean
 qutas_lab_450/clean: qutas_lab_450/CMakeFiles/area_map_node.dir/clean
@@ -3596,6 +3618,166 @@ breadcrumb/CMakeFiles/breadcrumb_node.dir/clean:
 .PHONY : breadcrumb/CMakeFiles/breadcrumb_node.dir/clean
 
 #=============================================================================
+# Target rules for target detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir
+
+# All Build rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/depend
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_cpp"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+
+# Build rule for subdir invocation for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_cpp: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
+.PHONY : visualization_msgs_generate_messages_cpp
+
+# codegen rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_cpp"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/codegen
+
+# clean rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/clean:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/clean
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/clean
+
+#=============================================================================
+# Target rules for target detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir
+
+# All Build rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/depend
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_eus"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+
+# Build rule for subdir invocation for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_eus: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
+.PHONY : visualization_msgs_generate_messages_eus
+
+# codegen rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_eus"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/codegen
+
+# clean rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/clean:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/clean
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/clean
+
+#=============================================================================
+# Target rules for target detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir
+
+# All Build rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/depend
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_lisp"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+
+# Build rule for subdir invocation for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_lisp: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+.PHONY : visualization_msgs_generate_messages_lisp
+
+# codegen rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_lisp"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/codegen
+
+# clean rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/clean:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/clean
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/clean
+
+#=============================================================================
+# Target rules for target detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir
+
+# All Build rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/depend
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_nodejs"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+
+# Build rule for subdir invocation for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_nodejs: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
+.PHONY : visualization_msgs_generate_messages_nodejs
+
+# codegen rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_nodejs"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/codegen
+
+# clean rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/clean:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/clean
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/clean
+
+#=============================================================================
+# Target rules for target detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir
+
+# All Build rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/depend
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_py"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
+
+# Build rule for subdir invocation for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_py: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
+.PHONY : visualization_msgs_generate_messages_py
+
+# codegen rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_py"
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/codegen
+
+# clean rule for target.
+detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/clean:
+	$(MAKE) $(MAKESILENT) -f detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/clean
+.PHONY : detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/clean
+
+#=============================================================================
 # Target rules for target qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_cpp.dir
 
 # All Build rule for target.
@@ -4076,166 +4258,6 @@ qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/clean:
 .PHONY : qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/clean
 
 #=============================================================================
-# Target rules for target qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir
-
-# All Build rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/depend
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_cpp"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-
-# Build rule for subdir invocation for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_cpp: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
-.PHONY : visualization_msgs_generate_messages_cpp
-
-# codegen rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_cpp"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/codegen
-
-# clean rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/clean:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/clean
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/clean
-
-#=============================================================================
-# Target rules for target qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir
-
-# All Build rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/depend
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_eus"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-
-# Build rule for subdir invocation for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_eus: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-.PHONY : visualization_msgs_generate_messages_eus
-
-# codegen rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_eus"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/codegen
-
-# clean rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/clean:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/clean
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/clean
-
-#=============================================================================
-# Target rules for target qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir
-
-# All Build rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/depend
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_lisp"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-
-# Build rule for subdir invocation for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_lisp: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-.PHONY : visualization_msgs_generate_messages_lisp
-
-# codegen rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_lisp"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/codegen
-
-# clean rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/clean:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/clean
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/clean
-
-#=============================================================================
-# Target rules for target qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir
-
-# All Build rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/depend
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_nodejs"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-
-# Build rule for subdir invocation for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_nodejs: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
-.PHONY : visualization_msgs_generate_messages_nodejs
-
-# codegen rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_nodejs"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/codegen
-
-# clean rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/clean:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/clean
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/clean
-
-#=============================================================================
-# Target rules for target qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir
-
-# All Build rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/depend
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target visualization_msgs_generate_messages_py"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
-
-# Build rule for subdir invocation for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_py: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
-.PHONY : visualization_msgs_generate_messages_py
-
-# codegen rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target visualization_msgs_generate_messages_py"
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/codegen
-
-# clean rule for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/clean:
-	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/clean
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/clean
-
-#=============================================================================
 # Target rules for target qutas_lab_450/CMakeFiles/area_map.dir
 
 # All Build rule for target.
@@ -4274,6 +4296,11 @@ qutas_lab_450/CMakeFiles/area_map.dir/all: breadcrumb/CMakeFiles/nav_msgs_genera
 qutas_lab_450/CMakeFiles/area_map.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_cpp.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_eus.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_lisp.dir/all
@@ -4289,11 +4316,6 @@ qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_ge
 qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_map.dir/build.make qutas_lab_450/CMakeFiles/area_map.dir/depend
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_map.dir/build.make qutas_lab_450/CMakeFiles/area_map.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Built target area_map"
@@ -4346,6 +4368,11 @@ qutas_lab_450/CMakeFiles/area_map.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_ge
 qutas_lab_450/CMakeFiles/area_map.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+qutas_lab_450/CMakeFiles/area_map.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_cpp.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_eus.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_lisp.dir/all
@@ -4361,11 +4388,6 @@ qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msg
 qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-qutas_lab_450/CMakeFiles/area_map.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_map.dir/build.make qutas_lab_450/CMakeFiles/area_map.dir/codegen
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num= "Finished codegen for target area_map"
 .PHONY : qutas_lab_450/CMakeFiles/area_map.dir/codegen
@@ -4414,6 +4436,11 @@ qutas_lab_450/CMakeFiles/area_viz.dir/all: breadcrumb/CMakeFiles/nav_msgs_genera
 qutas_lab_450/CMakeFiles/area_viz.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_cpp.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_eus.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_lisp.dir/all
@@ -4429,11 +4456,6 @@ qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_ge
 qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_viz.dir/build.make qutas_lab_450/CMakeFiles/area_viz.dir/depend
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_viz.dir/build.make qutas_lab_450/CMakeFiles/area_viz.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=2 "Built target area_viz"
@@ -4486,6 +4508,11 @@ qutas_lab_450/CMakeFiles/area_viz.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_ge
 qutas_lab_450/CMakeFiles/area_viz.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+qutas_lab_450/CMakeFiles/area_viz.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_cpp.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_eus.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_lisp.dir/all
@@ -4501,11 +4528,6 @@ qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msg
 qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-qutas_lab_450/CMakeFiles/area_viz.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_viz.dir/build.make qutas_lab_450/CMakeFiles/area_viz.dir/codegen
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=2 "Finished codegen for target area_viz"
 .PHONY : qutas_lab_450/CMakeFiles/area_viz.dir/codegen
@@ -4554,6 +4576,11 @@ qutas_lab_450/CMakeFiles/area_map_node.dir/all: breadcrumb/CMakeFiles/nav_msgs_g
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_cpp.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_eus.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_lisp.dir/all
@@ -4569,11 +4596,6 @@ qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/uuid_ms
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/all: qutas_lab_450/CMakeFiles/area_map.dir/all
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_map_node.dir/build.make qutas_lab_450/CMakeFiles/area_map_node.dir/depend
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_map_node.dir/build.make qutas_lab_450/CMakeFiles/area_map_node.dir/build
@@ -4627,6 +4649,11 @@ qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: breadcrumb/CMakeFiles/nav_ms
 qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_cpp.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_eus.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_lisp.dir/all
@@ -4642,11 +4669,6 @@ qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/uui
 qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-qutas_lab_450/CMakeFiles/area_map_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_map_node.dir/build.make qutas_lab_450/CMakeFiles/area_map_node.dir/codegen
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=1 "Finished codegen for target area_map_node"
 .PHONY : qutas_lab_450/CMakeFiles/area_map_node.dir/codegen
@@ -4695,6 +4717,11 @@ qutas_lab_450/CMakeFiles/area_viz_node.dir/all: breadcrumb/CMakeFiles/nav_msgs_g
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: breadcrumb/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_cpp.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_eus.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_lisp.dir/all
@@ -4710,11 +4737,6 @@ qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/uuid_ms
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/all: qutas_lab_450/CMakeFiles/area_viz.dir/all
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_viz_node.dir/build.make qutas_lab_450/CMakeFiles/area_viz_node.dir/depend
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_viz_node.dir/build.make qutas_lab_450/CMakeFiles/area_viz_node.dir/build
@@ -4768,6 +4790,11 @@ qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: breadcrumb/CMakeFiles/nav_ms
 qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: breadcrumb/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_cpp.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_eus.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/mavros_msgs_generate_messages_lisp.dir/all
@@ -4783,11 +4810,6 @@ qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/uui
 qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/all
 qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/uuid_msgs_generate_messages_py.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 	$(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/area_viz_node.dir/build.make qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=3 "Finished codegen for target area_viz_node"
 .PHONY : qutas_lab_450/CMakeFiles/area_viz_node.dir/codegen
@@ -8219,11 +8241,11 @@ depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: breadcrumb/CMake
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: breadcrumb/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: breadcrumb/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: breadcrumb/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: depthai-ros/depthai_ros_msgs/CMakeFiles/vision_msgs_generate_messages_cpp.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: depthai-ros/depthai_ros_msgs/CMakeFiles/vision_msgs_generate_messages_eus.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/all: depthai-ros/depthai_ros_msgs/CMakeFiles/vision_msgs_generate_messages_lisp.dir/all
@@ -8293,11 +8315,11 @@ depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: breadcrumb/C
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: breadcrumb/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: breadcrumb/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: breadcrumb/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
-depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
+depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: detection_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: depthai-ros/depthai_ros_msgs/CMakeFiles/vision_msgs_generate_messages_cpp.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: depthai-ros/depthai_ros_msgs/CMakeFiles/vision_msgs_generate_messages_eus.dir/all
 depthai-ros/depthai_filters/CMakeFiles/depthai_filters.dir/codegen: depthai-ros/depthai_ros_msgs/CMakeFiles/vision_msgs_generate_messages_lisp.dir/all

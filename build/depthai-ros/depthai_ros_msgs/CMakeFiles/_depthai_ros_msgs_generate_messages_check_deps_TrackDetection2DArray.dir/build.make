@@ -67,7 +67,7 @@ include depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messa
 include depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_TrackDetection2DArray.dir/progress.make
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_TrackDetection2DArray:
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py depthai_ros_msgs /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2DArray.msg std_msgs/Header:geometry_msgs/Pose:depthai_ros_msgs/TrackDetection2D:geometry_msgs/Point:geometry_msgs/Quaternion:geometry_msgs/PoseWithCovariance:vision_msgs/BoundingBox2D:geometry_msgs/Pose2D:vision_msgs/ObjectHypothesisWithPose
+	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py depthai_ros_msgs /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2DArray.msg geometry_msgs/Pose:geometry_msgs/Quaternion:depthai_ros_msgs/TrackDetection2D:std_msgs/Header:geometry_msgs/Pose2D:vision_msgs/BoundingBox2D:geometry_msgs/Point:geometry_msgs/PoseWithCovariance:vision_msgs/ObjectHypothesisWithPose
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_TrackDetection2DArray.dir/codegen:
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_TrackDetection2DArray.dir/codegen

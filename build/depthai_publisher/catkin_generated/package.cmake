@@ -1,6 +1,6 @@
 set(_CATKIN_CURRENT_PACKAGE "depthai_publisher")
 set(depthai_publisher_VERSION "0.0.0")
-set(depthai_publisher_MAINTAINER "dennis <dennis@todo.todo>")
+set(depthai_publisher_MAINTAINER "dennis <j.galvezserna@qut.edu.au>, dennis <dennis@todo.todo>")
 set(depthai_publisher_PACKAGE_FORMAT "2")
 set(depthai_publisher_BUILD_DEPENDS "roscpp" "rospy" "std_msgs")
 set(depthai_publisher_BUILD_EXPORT_DEPENDS "roscpp" "rospy" "std_msgs")

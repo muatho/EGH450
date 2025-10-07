@@ -382,76 +382,6 @@ uuid_msgs_generate_messages_py/fast:
 .PHONY : uuid_msgs_generate_messages_py/fast
 
 # Convenience name for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_cpp: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
-.PHONY : visualization_msgs_generate_messages_cpp
-
-# fast build rule for target.
-visualization_msgs_generate_messages_cpp/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
-.PHONY : visualization_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_eus: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-.PHONY : visualization_msgs_generate_messages_eus
-
-# fast build rule for target.
-visualization_msgs_generate_messages_eus/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
-.PHONY : visualization_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_lisp: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-.PHONY : visualization_msgs_generate_messages_lisp
-
-# fast build rule for target.
-visualization_msgs_generate_messages_lisp/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
-.PHONY : visualization_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_nodejs: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/rule
-.PHONY : visualization_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-visualization_msgs_generate_messages_nodejs/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build
-.PHONY : visualization_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
-.PHONY : qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_py: qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/rule
-.PHONY : visualization_msgs_generate_messages_py
-
-# fast build rule for target.
-visualization_msgs_generate_messages_py/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make qutas_lab_450/CMakeFiles/visualization_msgs_generate_messages_py.dir/build
-.PHONY : visualization_msgs_generate_messages_py/fast
-
-# Convenience name for target.
 qutas_lab_450/CMakeFiles/area_map.dir/rule:
 	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qutas_lab_450/CMakeFiles/area_map.dir/rule
 .PHONY : qutas_lab_450/CMakeFiles/area_map.dir/rule
@@ -631,11 +561,6 @@ help:
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_nodejs"
 	@echo "... uuid_msgs_generate_messages_py"
-	@echo "... visualization_msgs_generate_messages_cpp"
-	@echo "... visualization_msgs_generate_messages_eus"
-	@echo "... visualization_msgs_generate_messages_lisp"
-	@echo "... visualization_msgs_generate_messages_nodejs"
-	@echo "... visualization_msgs_generate_messages_py"
 	@echo "... area_map"
 	@echo "... area_map_node"
 	@echo "... area_viz"

@@ -557,6 +557,15 @@ depthai_ros_msgs_IS_TOP_LEVEL:STATIC=OFF
 //Value Computed by CMake
 depthai_ros_msgs_SOURCE_DIR:STATIC=/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs
 
+//Value Computed by CMake
+detection_viz_BINARY_DIR:STATIC=/home/uavteam6/catkin_ws/build/detection_viz
+
+//Value Computed by CMake
+detection_viz_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+detection_viz_SOURCE_DIR:STATIC=/home/uavteam6/catkin_ws/src/detection_viz
+
 //The directory containing a CMake configuration file for diagnostic_msgs.
 diagnostic_msgs_DIR:PATH=/opt/ros/noetic/share/diagnostic_msgs/cmake
 
@@ -1037,7 +1046,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=24
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=25
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

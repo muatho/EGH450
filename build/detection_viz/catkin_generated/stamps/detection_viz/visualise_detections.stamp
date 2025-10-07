@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+import rospy
+from std_msgs.msg import Float32MultiArray
+from geometry_msgs.msg import PointStamped
+from visualization_msgs.msg import Marker, MarkerArray
+import colorsys
+import os
+import yaml
+
+def iter_triples(data):
+	n = len(data)
+	for i in range(0, n - 2, 3):
+		yield float(data[i]), float(data[i+1]), int(round(data[i+2]))
+
+def color_for_id(tid):
+	# Deterministic distinct-ish colors per ID
+	h = (tid * 0.61803398875) % 1.0  # golden ratio hop around hue wheel
+	r, g, b = colorsys.hsv_to_rgb(h, 0.6, 0.95)
+	return r, g, b
+
+class VisualiseDetections:
+	PERSON_TID = 998
+	BAG_TID    = 999
+
+	def __init__(self):
+		config = None
+		with open(f"{os.getcwd()}/catkin_ws/config.yaml", "r") as f:
+			config = yaml.safe_load(f)
+
+		self.LANDING_ARUCO_ID = config["landing_aruco_id"]
+
+		# Params
+		self.frame_id    = rospy.get_param("~frame_id", "map")
+		self.topic_in    = rospy.get_param("~topic_in", "/marker_locations")
+		self.topic_out   = rospy.get_param("~topic_out", "/detections/markers")
+		self.person_topic  = rospy.get_param("~person_topic", "/marker_locations/id/person")
+		self.bag_topic     = rospy.get_param("~bag_topic", "/marker_locations/id/bag")
+		self.landing_marker_topic     = rospy.get_param("~landing_marker_topic", f"/marker_locations/id/{self.LANDING_ARUCO_ID}")
+		self.shape       = rospy.get_param("~shape", "CUBE")   # CUBE | SPHERE | CYLINDER
+		self.scale_xy    = rospy.get_param("~scale_xy", 0.10)
+		self.scale_z     = rospy.get_param("~scale_z", 0.02)
+		self.z_offset    = rospy.get_param("~z_offset", 0.0)   # lift markers if you want
+		self.expire_after= rospy.get_param("~expire_after", 0.0) # seconds; 0 = forever
+		self.frame_locked= rospy.get_param("~frame_locked", True)
+		self.add_text    = rospy.get_param("~add_text", True) # also publish ID as text
+		self.freeze_on_first = rospy.get_param("~freeze_on_first", False)
+		self.fixed_ids = {}  # tid -> (x, y)
+
+		self.pub = rospy.Publisher(self.topic_out, MarkerArray, queue_size=50, latch=True)
+		self.sub = rospy.Subscriber(self.topic_in, Float32MultiArray, self.cb, queue_size=10)
+		self.sub_person  = rospy.Subscriber(self.person_topic, PointStamped, self.cb_named, queue_size=10,
+											callback_args=("person", self.PERSON_TID))
+		self.sub_bag     = rospy.Subscriber(self.bag_topic, PointStamped, self.cb_named, queue_size=10,
+											callback_args=("bag", self.BAG_TID))
+		self.sub_landing_marker = rospy.Subscriber(self.landing_marker_topic, PointStamped, self.cb_named, queue_size=10,
+											callback_args=("landing_marker", self.LANDING_ARUCO_ID))
+
+		self.marker_type = {
+			"CUBE": Marker.CUBE,
+			"SPHERE": Marker.SPHERE,
+			"CYLINDER": Marker.CYLINDER
+		}.get(self.shape.upper(), Marker.CUBE)
+
+		rospy.loginfo("visualise_detections: listening on %s (triples), %s (person), %s (bag), %s (landing marker) -> %s (MarkerArray)",
+					  self.topic_in, self.person_topic, self.bag_topic, self.landing_marker_topic, self.topic_out)
+
+	# helper to build markers consistently
+	def make_markers(self, tid, x, y, stamp, frame_id=None, label=None):
+		marr = []
+		# shape
+		m = Marker()
+		m.header.frame_id = self.frame_id
+		m.header.stamp = stamp
+		m.ns = "tiles"
+		m.id = tid
+		m.type = self.marker_type
+		m.action = Marker.ADD
+		m.pose.position.x = x
+		m.pose.position.y = y
+		m.pose.position.z = self.z_offset
+		m.pose.orientation.w = 1.0
+		m.scale.x = self.scale_xy
+		m.scale.y = self.scale_xy
+		m.scale.z = self.scale_z
+		m.color.r, m.color.g, m.color.b = color_for_id(tid)
+		m.color.a = 1.0
+		m.frame_locked = self.frame_locked
+		m.lifetime = rospy.Duration(0)  # never auto-expire
+		marr.append(m)
+
+		if self.add_text:
+			t = Marker()
+			t.header.frame_id = self.frame_id
+			t.header.stamp = stamp
+			t.ns = "tiles_text"
+			t.id = 1_000_000 + tid
+			t.type = Marker.TEXT_VIEW_FACING
+			t.action = Marker.ADD
+			t.pose.position.x = x
+			t.pose.position.y = y
+			t.pose.position.z = self.z_offset + max(self.scale_z, 0.02) + 0.06
+			t.scale.z = max(self.scale_xy, 0.12)
+			t.color.r = t.color.g = t.color.b = 1.0
+			t.color.a = 1.0
+			t.text = f"{str(label) if label is not None else str(tid)} @ ({x:.2f}, {y:.2f})"
+			t.frame_locked = self.frame_locked
+			t.lifetime = rospy.Duration(0)
+			marr.append(t)
+		return marr
+
+
+	def cb(self, msg):
+		data = msg.data or []
+		if len(data) < 3:
+			rospy.logwarn_throttle(5.0, "Float32MultiArray too short (<3)")
+			return
+
+		stamp = rospy.Time.now()
+		seen = set()
+
+		if self.freeze_on_first:
+			# record first-ever sighting per ID, ignore later updates
+			for x, y, tid in iter_triples(data):
+				if tid in seen:
+					continue
+				seen.add(tid)
+				if tid not in self.fixed_ids:
+					self.fixed_ids[tid] = (x, y)
+
+			# publish ALL frozen markers each time we add any new ones
+			marr = MarkerArray()
+			for tid, (fx, fy) in self.fixed_ids.items():
+				marr.markers.extend(self.make_markers(tid, fx, fy, stamp))
+				rospy.loginfo(f"Saw Marker ID {tid} at ({fx:.2f}, {fy:.2f})")
+			if marr.markers:
+				self.pub.publish(marr)
+		else:
+			# live-updating mode: one marker per ID, updates pose every message
+			marr = MarkerArray()
+			for x, y, tid in iter_triples(data):
+				if tid in seen:
+					continue
+				seen.add(tid)
+				marr.markers.extend(self.make_markers(tid, x, y, stamp))
+			if marr.markers:
+				self.pub.publish(marr)
+
+	# Named streams: person/bag as PointStamped
+	def cb_named(self, msg, extra):
+		label, tid = extra  # label: "person" or "bag", tid: numeric constant
+		x, y = msg.point.x, msg.point.y
+		frame = msg.header.frame_id or self.frame_id
+		stamp = rospy.Time.now()
+
+		if self.freeze_on_first:
+			if label not in self.named_fixed:
+				self.named_fixed[label] = (frame, x, y)
+			frame, x, y = self.named_fixed[label]
+
+		marr = MarkerArray()
+		marr.markers.extend(self.make_markers(tid, x, y, stamp, frame_id=frame, label=label))
+		rospy.loginfo(f"Saw {label} at ({x:.2f}, {y:.2f})")
+		self.pub.publish(marr)
+
+if __name__ == "__main__":
+	rospy.init_node("visualise_detections")
+	VisualiseDetections()
+	try:
+		rospy.spin()
+	except rospy.ROSInterruptException:
+		pass

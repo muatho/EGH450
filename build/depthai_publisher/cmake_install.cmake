@@ -66,6 +66,10 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/depthai_publisher" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws/build/depthai_publisher/catkin_generated/installspace/dai_publisher_yolov5_runner")
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/depthai_publisher" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws/build/depthai_publisher/catkin_generated/installspace/aruco_subscriber")
 endif()
 

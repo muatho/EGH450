@@ -67,7 +67,7 @@ include depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messa
 include depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_ImuWithMagneticField.dir/progress.make
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_ImuWithMagneticField:
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py depthai_ros_msgs /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/ImuWithMagneticField.msg std_msgs/Header:geometry_msgs/Quaternion:geometry_msgs/Vector3:sensor_msgs/Imu:sensor_msgs/MagneticField
+	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py depthai_ros_msgs /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/ImuWithMagneticField.msg sensor_msgs/MagneticField:geometry_msgs/Quaternion:std_msgs/Header:sensor_msgs/Imu:geometry_msgs/Vector3
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_ImuWithMagneticField.dir/codegen:
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_ImuWithMagneticField.dir/codegen

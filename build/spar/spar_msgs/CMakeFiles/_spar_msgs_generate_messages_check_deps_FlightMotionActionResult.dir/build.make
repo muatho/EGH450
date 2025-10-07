@@ -67,7 +67,7 @@ include spar/spar_msgs/CMakeFiles/_spar_msgs_generate_messages_check_deps_Flight
 include spar/spar_msgs/CMakeFiles/_spar_msgs_generate_messages_check_deps_FlightMotionActionResult.dir/progress.make
 
 spar/spar_msgs/CMakeFiles/_spar_msgs_generate_messages_check_deps_FlightMotionActionResult:
-	cd /home/uavteam6/catkin_ws/build/spar/spar_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py spar_msgs /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionResult.msg actionlib_msgs/GoalStatus:std_msgs/Header:geometry_msgs/Point:actionlib_msgs/GoalID:spar_msgs/FlightMotionResult
+	cd /home/uavteam6/catkin_ws/build/spar/spar_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py spar_msgs /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionResult.msg geometry_msgs/Point:spar_msgs/FlightMotionResult:actionlib_msgs/GoalID:actionlib_msgs/GoalStatus:std_msgs/Header
 
 spar/spar_msgs/CMakeFiles/_spar_msgs_generate_messages_check_deps_FlightMotionActionResult.dir/codegen:
 .PHONY : spar/spar_msgs/CMakeFiles/_spar_msgs_generate_messages_check_deps_FlightMotionActionResult.dir/codegen
