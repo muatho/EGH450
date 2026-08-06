@@ -1,5 +1,5 @@
 depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_control_service.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_examples/src/crop_control_service.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_examples/src/crop_control_service.cpp \
  /usr/include/stdc-predef.h /usr/include/ctype.h /usr/include/features.h \
  /usr/include/aarch64-linux-gnu/sys/cdefs.h \
  /usr/include/aarch64-linux-gnu/bits/wordsize.h \
@@ -27,7 +27,7 @@ depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_contro
  /usr/include/aarch64-linux-gnu/bits/types/cookie_io_functions_t.h \
  /usr/include/aarch64-linux-gnu/bits/stdio_lim.h \
  /usr/include/aarch64-linux-gnu/bits/sys_errlist.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/NormalizedImageCrop.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/NormalizedImageCrop.h \
  /opt/ros/noetic/include/ros/service_traits.h \
  /usr/include/boost/type_traits/remove_reference.hpp \
  /usr/include/boost/config.hpp /usr/include/boost/config/user.hpp \
@@ -77,7 +77,7 @@ depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_contro
  /usr/include/boost/detail/workaround.hpp \
  /usr/include/boost/config/workaround.hpp \
  /usr/include/boost/type_traits/remove_const.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/NormalizedImageCropRequest.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/NormalizedImageCropRequest.h \
  /usr/include/c++/9/string /usr/include/c++/9/bits/stringfwd.h \
  /usr/include/c++/9/bits/memoryfwd.h \
  /usr/include/c++/9/bits/char_traits.h \
@@ -618,7 +618,7 @@ depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_contro
  /usr/include/boost/type_traits/is_pointer.hpp \
  /opt/ros/noetic/include/ros/message_operations.h \
  /opt/ros/noetic/include/geometry_msgs/Pose2D.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/NormalizedImageCropResponse.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/NormalizedImageCropResponse.h \
  /opt/ros/noetic/include/ros/ros.h /opt/ros/noetic/include/ros/rate.h \
  /opt/ros/noetic/include/ros/console.h \
  /opt/ros/noetic/include/ros/console_backend.h /usr/include/c++/9/cstdarg \

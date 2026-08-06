@@ -1,8 +1,8 @@
-# Install script for directory: /home/uavteam6/catkin_ws/src/depthai_publisher
+# Install script for directory: /home/uavteam6/catkin_ws_G6/src/depthai_publisher
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws_G6/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,39 +43,39 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/uavteam6/catkin_ws/build/depthai_publisher/catkin_generated/safe_execute_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/depthai_publisher/catkin_generated/safe_execute_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws/build/depthai_publisher/catkin_generated/installspace/depthai_publisher.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/build/depthai_publisher/catkin_generated/installspace/depthai_publisher.pc")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/depthai_publisher/cmake" TYPE FILE FILES
-    "/home/uavteam6/catkin_ws/build/depthai_publisher/catkin_generated/installspace/depthai_publisherConfig.cmake"
-    "/home/uavteam6/catkin_ws/build/depthai_publisher/catkin_generated/installspace/depthai_publisherConfig-version.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/depthai_publisher/catkin_generated/installspace/depthai_publisherConfig.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/depthai_publisher/catkin_generated/installspace/depthai_publisherConfig-version.cmake"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/depthai_publisher" TYPE FILE FILES "/home/uavteam6/catkin_ws/src/depthai_publisher/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/depthai_publisher" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/src/depthai_publisher/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/depthai_publisher" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws/build/depthai_publisher/catkin_generated/installspace/dai_publisher")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/depthai_publisher" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws_G6/build/depthai_publisher/catkin_generated/installspace/dai_publisher")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/depthai_publisher" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws/build/depthai_publisher/catkin_generated/installspace/dai_publisher_yolov5_runner")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/depthai_publisher" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws_G6/build/depthai_publisher/catkin_generated/installspace/dai_publisher_yolov5_runner")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/depthai_publisher" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws/build/depthai_publisher/catkin_generated/installspace/aruco_subscriber")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/depthai_publisher" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws_G6/build/depthai_publisher/catkin_generated/installspace/aruco_subscriber")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/uavteam6/catkin_ws/build/depthai_publisher/install_local_manifest.txt"
+  file(WRITE "/home/uavteam6/catkin_ws_G6/build/depthai_publisher/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

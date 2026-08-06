@@ -1,4 +1,4 @@
-prefix=/home/uavteam6/catkin_ws/devel
+prefix=/home/uavteam6/catkin_ws_G6/devel
 
 Name: rqt_mavros_gui
 Description: Description of rqt_mavros_gui

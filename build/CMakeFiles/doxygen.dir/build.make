@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 # Utility rule file for doxygen.
 
@@ -81,6 +81,6 @@ CMakeFiles/doxygen.dir/clean:
 .PHONY : CMakeFiles/doxygen.dir/clean
 
 CMakeFiles/doxygen.dir/depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws/src /home/uavteam6/catkin_ws/src /home/uavteam6/catkin_ws/build /home/uavteam6/catkin_ws/build /home/uavteam6/catkin_ws/build/CMakeFiles/doxygen.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws_G6/src /home/uavteam6/catkin_ws_G6/src /home/uavteam6/catkin_ws_G6/build /home/uavteam6/catkin_ws_G6/build /home/uavteam6/catkin_ws_G6/build/CMakeFiles/doxygen.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/doxygen.dir/depend
 

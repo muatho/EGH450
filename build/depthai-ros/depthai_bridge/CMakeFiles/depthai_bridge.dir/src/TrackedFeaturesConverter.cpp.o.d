@@ -1,8 +1,8 @@
 depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TrackedFeaturesConverter.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/src/TrackedFeaturesConverter.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/src/TrackedFeaturesConverter.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/TrackedFeaturesConverter.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/TrackedFeatures.h \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/TrackedFeaturesConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/TrackedFeatures.h \
  /usr/include/c++/9/string \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -618,7 +618,7 @@ depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TrackedFeaturesConv
  /usr/include/boost/type_traits/is_pointer.hpp \
  /opt/ros/noetic/include/ros/message_operations.h \
  /opt/ros/noetic/include/std_msgs/Header.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/TrackedFeature.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/TrackedFeature.h \
  /opt/ros/noetic/include/geometry_msgs/Point.h /usr/include/c++/9/deque \
  /usr/include/c++/9/bits/stl_deque.h /usr/include/c++/9/bits/deque.tcc \
  /opt/ros/noetic/include/depthai/pipeline/datatype/TrackedFeatures.hpp \
@@ -691,7 +691,7 @@ depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TrackedFeaturesConv
  /opt/ros/noetic/include/depthai-shared/common/Point2f.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/Buffer.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/ADatatype.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
  /opt/ros/noetic/include/ros/ros.h /opt/ros/noetic/include/ros/rate.h \
  /opt/ros/noetic/include/ros/console.h \
  /opt/ros/noetic/include/ros/console_backend.h /usr/include/c++/9/cstdarg \

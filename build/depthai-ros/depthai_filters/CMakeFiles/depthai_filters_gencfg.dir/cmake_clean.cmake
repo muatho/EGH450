@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/include/depthai_filters/wlsConfig.h"
-  "/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/depthai_filters/cfg/wlsConfig.py"
-  "/home/uavteam6/catkin_ws/devel/share/depthai_filters/docs/wlsConfig-usage.dox"
-  "/home/uavteam6/catkin_ws/devel/share/depthai_filters/docs/wlsConfig.dox"
-  "/home/uavteam6/catkin_ws/devel/share/depthai_filters/docs/wlsConfig.wikidoc"
+  "/home/uavteam6/catkin_ws_G6/devel/include/depthai_filters/wlsConfig.h"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/depthai_filters/cfg/wlsConfig.py"
+  "/home/uavteam6/catkin_ws_G6/devel/share/depthai_filters/docs/wlsConfig-usage.dox"
+  "/home/uavteam6/catkin_ws_G6/devel/share/depthai_filters/docs/wlsConfig.dox"
+  "/home/uavteam6/catkin_ws_G6/devel/share/depthai_filters/docs/wlsConfig.wikidoc"
   "CMakeFiles/depthai_filters_gencfg"
 )
 

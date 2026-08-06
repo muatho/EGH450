@@ -1,5 +1,5 @@
 depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_examples/src/stereo_nodelet.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_examples/src/stereo_nodelet.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/9/functional \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -1264,7 +1264,7 @@ depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cp
  /opt/ros/noetic/include/depthai-shared/properties/XLinkInProperties.hpp \
  /opt/ros/noetic/include/depthai/pipeline/node/XLinkOut.hpp \
  /opt/ros/noetic/include/depthai-shared/properties/XLinkOutProperties.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/BridgePublisher.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/BridgePublisher.hpp \
  /opt/ros/noetic/include/depthai/depthai.hpp \
  /opt/ros/noetic/include/depthai/utility/Initialization.hpp \
  /opt/ros/noetic/include/depthai/device/DeviceBootloader.hpp \
@@ -1390,7 +1390,7 @@ depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cp
  /opt/ros/noetic/include/image_transport/transport_hints.h \
  /opt/ros/noetic/include/image_transport/camera_publisher.h \
  /opt/ros/noetic/include/image_transport/camera_subscriber.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
  /opt/ros/noetic/include/cv_bridge/cv_bridge.h \
  /opt/ros/noetic/include/sensor_msgs/CompressedImage.h \
  /opt/ros/noetic/include/sensor_msgs/image_encodings.h \
@@ -1429,17 +1429,17 @@ depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cp
  /usr/include/opencv4/opencv2/imgproc/types_c.h \
  /usr/include/opencv4/opencv2/core/core_c.h \
  /usr/include/opencv4/opencv2/core/types_c.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/FFMPEGPacket.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImuConverter.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/ImuWithMagneticField.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/FFMPEGPacket.h \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImuConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/ImuWithMagneticField.h \
  /opt/ros/noetic/include/sensor_msgs/Imu.h \
  /opt/ros/noetic/include/geometry_msgs/Quaternion.h \
  /opt/ros/noetic/include/geometry_msgs/Vector3.h \
  /opt/ros/noetic/include/sensor_msgs/MagneticField.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/SpatialDetectionConverter.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/SpatialDetectionArray.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/SpatialDetection.h \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/SpatialDetectionConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/SpatialDetectionArray.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/SpatialDetection.h \
  /opt/ros/noetic/include/vision_msgs/ObjectHypothesis.h \
  /opt/ros/noetic/include/vision_msgs/BoundingBox2D.h \
  /opt/ros/noetic/include/geometry_msgs/Pose2D.h \

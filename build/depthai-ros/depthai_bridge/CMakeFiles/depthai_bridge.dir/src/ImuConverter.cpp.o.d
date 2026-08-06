@@ -1,7 +1,7 @@
 depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImuConverter.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/src/ImuConverter.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/src/ImuConverter.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImuConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImuConverter.hpp \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -250,7 +250,7 @@ depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImuConverter.cpp.o:
  /opt/ros/noetic/include/depthai/pipeline/datatype/IMUData.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/Buffer.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/ADatatype.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
  /opt/ros/noetic/include/ros/ros.h /opt/ros/noetic/include/ros/time.h \
  /opt/ros/noetic/include/ros/platform.h /usr/include/c++/9/stdlib.h \
  /usr/include/c++/9/iostream /opt/ros/noetic/include/ros/exception.h \
@@ -1167,7 +1167,7 @@ depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImuConverter.cpp.o:
  /opt/ros/noetic/include/ros/this_node.h \
  /opt/ros/noetic/include/ros/param.h /opt/ros/noetic/include/ros/topic.h \
  /opt/ros/noetic/include/ros/node_handle.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/ImuWithMagneticField.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/ImuWithMagneticField.h \
  /opt/ros/noetic/include/ros/message_operations.h \
  /opt/ros/noetic/include/std_msgs/Header.h \
  /opt/ros/noetic/include/sensor_msgs/Imu.h \

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/libuavasr_imagery.pdb"
-  "/home/uavteam6/catkin_ws/devel/lib/libuavasr_imagery.so"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libuavasr_imagery.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libuavasr_imagery.so"
   "CMakeFiles/uavasr_imagery.dir/src/uavasr_emulator/uavasr_imagery.cpp.o"
   "CMakeFiles/uavasr_imagery.dir/src/uavasr_emulator/uavasr_imagery.cpp.o.d"
 )

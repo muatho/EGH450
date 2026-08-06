@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/src/dai_nodes/nn/nn_wrapper.cpp" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.o" "gcc" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.o.d"
-  "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/src/dai_nodes/nn/segmentation.cpp" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.o" "gcc" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.o.d"
-  "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/src/dai_nodes/nn/spatial_nn_wrapper.cpp" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.o" "gcc" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.o.d"
+  "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/src/dai_nodes/nn/nn_wrapper.cpp" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.o" "gcc" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.o.d"
+  "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/src/dai_nodes/nn/segmentation.cpp" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.o" "gcc" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.o.d"
+  "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/src/dai_nodes/nn/spatial_nn_wrapper.cpp" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.o" "gcc" "depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -1,7 +1,7 @@
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/imu_param_handler.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/src/param_handlers/imu_param_handler.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/src/param_handlers/imu_param_handler.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/imu_param_handler.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/imu_param_handler.hpp \
  /usr/include/c++/9/memory /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -255,11 +255,11 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/para
  /opt/ros/noetic/include/depthai-shared/datatype/RawCameraControl.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/Buffer.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/ADatatype.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImuConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImuConverter.hpp \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_deque.h \
  /usr/include/c++/9/bits/deque.tcc \
  /opt/ros/noetic/include/depthai/pipeline/datatype/IMUData.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
  /opt/ros/noetic/include/ros/ros.h /opt/ros/noetic/include/ros/time.h \
  /opt/ros/noetic/include/ros/platform.h /usr/include/c++/9/stdlib.h \
  /usr/include/c++/9/iostream /opt/ros/noetic/include/ros/exception.h \
@@ -1176,16 +1176,16 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/para
  /opt/ros/noetic/include/ros/this_node.h \
  /opt/ros/noetic/include/ros/param.h /opt/ros/noetic/include/ros/topic.h \
  /opt/ros/noetic/include/ros/node_handle.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/ImuWithMagneticField.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/ImuWithMagneticField.h \
  /opt/ros/noetic/include/ros/message_operations.h \
  /opt/ros/noetic/include/std_msgs/Header.h \
  /opt/ros/noetic/include/sensor_msgs/Imu.h \
  /opt/ros/noetic/include/geometry_msgs/Quaternion.h \
  /opt/ros/noetic/include/geometry_msgs/Vector3.h \
  /opt/ros/noetic/include/sensor_msgs/MagneticField.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/base_param_handler.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/base_param_handler.hpp \
  /opt/ros/noetic/include/depthai-shared/common/CameraBoardSocket.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/sensor_helpers.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/sensor_helpers.hpp \
  /opt/ros/noetic/include/depthai-shared/common/CameraSensorType.hpp \
  /opt/ros/noetic/include/depthai-shared/datatype/RawImgFrame.hpp \
  /opt/ros/noetic/include/depthai-shared/common/FrameEvent.hpp \
@@ -1199,7 +1199,7 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/para
  /opt/ros/noetic/include/sensor_msgs/RegionOfInterest.h \
  /opt/ros/noetic/include/image_transport/single_subscriber_publisher.h \
  /opt/ros/noetic/include/image_transport/exports.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h \
  /opt/ros/noetic/include/dynamic_reconfigure/config_tools.h \
  /opt/ros/noetic/include/dynamic_reconfigure/Config.h \
  /opt/ros/noetic/include/dynamic_reconfigure/BoolParameter.h \
@@ -1220,5 +1220,5 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/para
  /opt/ros/noetic/include/depthai/pipeline/AssetManager.hpp \
  /opt/ros/noetic/include/depthai-shared/pipeline/Assets.hpp \
  /opt/ros/noetic/include/depthai/utility/copyable_unique_ptr.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/utils.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/utils.hpp \
  /opt/ros/noetic/include/depthai/common/CameraExposureOffset.hpp

@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,14 +142,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver//CMakeFiles/progress.marks
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws_G6/build/CMakeFiles /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver//CMakeFiles/progress.marks
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws_G6/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/clean
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/clean
 .PHONY : clean
 
 # The main clean target
@@ -158,22 +158,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/preinstall
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/preinstall
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -182,12 +182,12 @@ diagnostic_msgs_generate_messages_cpp: depthai-ros/depthai_ros_driver/CMakeFiles
 
 # fast build rule for target.
 diagnostic_msgs_generate_messages_cpp/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build
 .PHONY : diagnostic_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -196,12 +196,12 @@ diagnostic_msgs_generate_messages_eus: depthai-ros/depthai_ros_driver/CMakeFiles
 
 # fast build rule for target.
 diagnostic_msgs_generate_messages_eus/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build
 .PHONY : diagnostic_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -210,12 +210,12 @@ diagnostic_msgs_generate_messages_lisp: depthai-ros/depthai_ros_driver/CMakeFile
 
 # fast build rule for target.
 diagnostic_msgs_generate_messages_lisp/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build
 .PHONY : diagnostic_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ diagnostic_msgs_generate_messages_nodejs: depthai-ros/depthai_ros_driver/CMakeFi
 
 # fast build rule for target.
 diagnostic_msgs_generate_messages_nodejs/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build
 .PHONY : diagnostic_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -238,12 +238,12 @@ diagnostic_msgs_generate_messages_py: depthai-ros/depthai_ros_driver/CMakeFiles/
 
 # fast build rule for target.
 diagnostic_msgs_generate_messages_py/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build
 .PHONY : diagnostic_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/rule
 
 # Convenience name for target.
@@ -252,12 +252,12 @@ depthai_ros_driver_gencfg: depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros
 
 # fast build rule for target.
 depthai_ros_driver_gencfg/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/build
 .PHONY : depthai_ros_driver_gencfg/fast
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/rule
 
 # Convenience name for target.
@@ -266,12 +266,12 @@ depthai_ros_driver_common: depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros
 
 # fast build rule for target.
 depthai_ros_driver_common/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build
 .PHONY : depthai_ros_driver_common/fast
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/rule
 
 # Convenience name for target.
@@ -280,12 +280,12 @@ depthai_ros_driver_sensor_nodes: depthai-ros/depthai_ros_driver/CMakeFiles/depth
 
 # fast build rule for target.
 depthai_ros_driver_sensor_nodes/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build
 .PHONY : depthai_ros_driver_sensor_nodes/fast
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/rule
 
 # Convenience name for target.
@@ -294,12 +294,12 @@ depthai_ros_driver_nn_nodes: depthai-ros/depthai_ros_driver/CMakeFiles/depthai_r
 
 # fast build rule for target.
 depthai_ros_driver_nn_nodes/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build
 .PHONY : depthai_ros_driver_nn_nodes/fast
 
 # Convenience name for target.
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/rule
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/rule
 
 # Convenience name for target.
@@ -308,7 +308,7 @@ depthai_ros_driver: depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver
 
 # fast build rule for target.
 depthai_ros_driver/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build
 .PHONY : depthai_ros_driver/fast
 
 src/camera.o: src/camera.cpp.o
@@ -316,7 +316,7 @@ src/camera.o: src/camera.cpp.o
 
 # target to build an object file
 src/camera.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/camera.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/camera.cpp.o
 .PHONY : src/camera.cpp.o
 
 src/camera.i: src/camera.cpp.i
@@ -324,7 +324,7 @@ src/camera.i: src/camera.cpp.i
 
 # target to preprocess a source file
 src/camera.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/camera.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/camera.cpp.i
 .PHONY : src/camera.cpp.i
 
 src/camera.s: src/camera.cpp.s
@@ -332,7 +332,7 @@ src/camera.s: src/camera.cpp.s
 
 # target to generate assembly for a file
 src/camera.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/camera.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
 src/dai_nodes/base_node.o: src/dai_nodes/base_node.cpp.o
@@ -340,7 +340,7 @@ src/dai_nodes/base_node.o: src/dai_nodes/base_node.cpp.o
 
 # target to build an object file
 src/dai_nodes/base_node.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/base_node.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/base_node.cpp.o
 .PHONY : src/dai_nodes/base_node.cpp.o
 
 src/dai_nodes/base_node.i: src/dai_nodes/base_node.cpp.i
@@ -348,7 +348,7 @@ src/dai_nodes/base_node.i: src/dai_nodes/base_node.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/base_node.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/base_node.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/base_node.cpp.i
 .PHONY : src/dai_nodes/base_node.cpp.i
 
 src/dai_nodes/base_node.s: src/dai_nodes/base_node.cpp.s
@@ -356,7 +356,7 @@ src/dai_nodes/base_node.s: src/dai_nodes/base_node.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/base_node.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/base_node.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/base_node.cpp.s
 .PHONY : src/dai_nodes/base_node.cpp.s
 
 src/dai_nodes/nn/nn_wrapper.o: src/dai_nodes/nn/nn_wrapper.cpp.o
@@ -364,7 +364,7 @@ src/dai_nodes/nn/nn_wrapper.o: src/dai_nodes/nn/nn_wrapper.cpp.o
 
 # target to build an object file
 src/dai_nodes/nn/nn_wrapper.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.o
 .PHONY : src/dai_nodes/nn/nn_wrapper.cpp.o
 
 src/dai_nodes/nn/nn_wrapper.i: src/dai_nodes/nn/nn_wrapper.cpp.i
@@ -372,7 +372,7 @@ src/dai_nodes/nn/nn_wrapper.i: src/dai_nodes/nn/nn_wrapper.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/nn/nn_wrapper.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.i
 .PHONY : src/dai_nodes/nn/nn_wrapper.cpp.i
 
 src/dai_nodes/nn/nn_wrapper.s: src/dai_nodes/nn/nn_wrapper.cpp.s
@@ -380,7 +380,7 @@ src/dai_nodes/nn/nn_wrapper.s: src/dai_nodes/nn/nn_wrapper.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/nn/nn_wrapper.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.s
 .PHONY : src/dai_nodes/nn/nn_wrapper.cpp.s
 
 src/dai_nodes/nn/segmentation.o: src/dai_nodes/nn/segmentation.cpp.o
@@ -388,7 +388,7 @@ src/dai_nodes/nn/segmentation.o: src/dai_nodes/nn/segmentation.cpp.o
 
 # target to build an object file
 src/dai_nodes/nn/segmentation.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.o
 .PHONY : src/dai_nodes/nn/segmentation.cpp.o
 
 src/dai_nodes/nn/segmentation.i: src/dai_nodes/nn/segmentation.cpp.i
@@ -396,7 +396,7 @@ src/dai_nodes/nn/segmentation.i: src/dai_nodes/nn/segmentation.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/nn/segmentation.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.i
 .PHONY : src/dai_nodes/nn/segmentation.cpp.i
 
 src/dai_nodes/nn/segmentation.s: src/dai_nodes/nn/segmentation.cpp.s
@@ -404,7 +404,7 @@ src/dai_nodes/nn/segmentation.s: src/dai_nodes/nn/segmentation.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/nn/segmentation.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.s
 .PHONY : src/dai_nodes/nn/segmentation.cpp.s
 
 src/dai_nodes/nn/spatial_nn_wrapper.o: src/dai_nodes/nn/spatial_nn_wrapper.cpp.o
@@ -412,7 +412,7 @@ src/dai_nodes/nn/spatial_nn_wrapper.o: src/dai_nodes/nn/spatial_nn_wrapper.cpp.o
 
 # target to build an object file
 src/dai_nodes/nn/spatial_nn_wrapper.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.o
 .PHONY : src/dai_nodes/nn/spatial_nn_wrapper.cpp.o
 
 src/dai_nodes/nn/spatial_nn_wrapper.i: src/dai_nodes/nn/spatial_nn_wrapper.cpp.i
@@ -420,7 +420,7 @@ src/dai_nodes/nn/spatial_nn_wrapper.i: src/dai_nodes/nn/spatial_nn_wrapper.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/nn/spatial_nn_wrapper.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.i
 .PHONY : src/dai_nodes/nn/spatial_nn_wrapper.cpp.i
 
 src/dai_nodes/nn/spatial_nn_wrapper.s: src/dai_nodes/nn/spatial_nn_wrapper.cpp.s
@@ -428,7 +428,7 @@ src/dai_nodes/nn/spatial_nn_wrapper.s: src/dai_nodes/nn/spatial_nn_wrapper.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/nn/spatial_nn_wrapper.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/spatial_nn_wrapper.cpp.s
 .PHONY : src/dai_nodes/nn/spatial_nn_wrapper.cpp.s
 
 src/dai_nodes/sensors/feature_tracker.o: src/dai_nodes/sensors/feature_tracker.cpp.o
@@ -436,7 +436,7 @@ src/dai_nodes/sensors/feature_tracker.o: src/dai_nodes/sensors/feature_tracker.c
 
 # target to build an object file
 src/dai_nodes/sensors/feature_tracker.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/feature_tracker.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/feature_tracker.cpp.o
 .PHONY : src/dai_nodes/sensors/feature_tracker.cpp.o
 
 src/dai_nodes/sensors/feature_tracker.i: src/dai_nodes/sensors/feature_tracker.cpp.i
@@ -444,7 +444,7 @@ src/dai_nodes/sensors/feature_tracker.i: src/dai_nodes/sensors/feature_tracker.c
 
 # target to preprocess a source file
 src/dai_nodes/sensors/feature_tracker.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/feature_tracker.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/feature_tracker.cpp.i
 .PHONY : src/dai_nodes/sensors/feature_tracker.cpp.i
 
 src/dai_nodes/sensors/feature_tracker.s: src/dai_nodes/sensors/feature_tracker.cpp.s
@@ -452,7 +452,7 @@ src/dai_nodes/sensors/feature_tracker.s: src/dai_nodes/sensors/feature_tracker.c
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/feature_tracker.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/feature_tracker.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/feature_tracker.cpp.s
 .PHONY : src/dai_nodes/sensors/feature_tracker.cpp.s
 
 src/dai_nodes/sensors/img_pub.o: src/dai_nodes/sensors/img_pub.cpp.o
@@ -460,7 +460,7 @@ src/dai_nodes/sensors/img_pub.o: src/dai_nodes/sensors/img_pub.cpp.o
 
 # target to build an object file
 src/dai_nodes/sensors/img_pub.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/img_pub.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/img_pub.cpp.o
 .PHONY : src/dai_nodes/sensors/img_pub.cpp.o
 
 src/dai_nodes/sensors/img_pub.i: src/dai_nodes/sensors/img_pub.cpp.i
@@ -468,7 +468,7 @@ src/dai_nodes/sensors/img_pub.i: src/dai_nodes/sensors/img_pub.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/sensors/img_pub.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/img_pub.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/img_pub.cpp.i
 .PHONY : src/dai_nodes/sensors/img_pub.cpp.i
 
 src/dai_nodes/sensors/img_pub.s: src/dai_nodes/sensors/img_pub.cpp.s
@@ -476,7 +476,7 @@ src/dai_nodes/sensors/img_pub.s: src/dai_nodes/sensors/img_pub.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/img_pub.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/img_pub.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/img_pub.cpp.s
 .PHONY : src/dai_nodes/sensors/img_pub.cpp.s
 
 src/dai_nodes/sensors/imu.o: src/dai_nodes/sensors/imu.cpp.o
@@ -484,7 +484,7 @@ src/dai_nodes/sensors/imu.o: src/dai_nodes/sensors/imu.cpp.o
 
 # target to build an object file
 src/dai_nodes/sensors/imu.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/imu.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/imu.cpp.o
 .PHONY : src/dai_nodes/sensors/imu.cpp.o
 
 src/dai_nodes/sensors/imu.i: src/dai_nodes/sensors/imu.cpp.i
@@ -492,7 +492,7 @@ src/dai_nodes/sensors/imu.i: src/dai_nodes/sensors/imu.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/sensors/imu.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/imu.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/imu.cpp.i
 .PHONY : src/dai_nodes/sensors/imu.cpp.i
 
 src/dai_nodes/sensors/imu.s: src/dai_nodes/sensors/imu.cpp.s
@@ -500,7 +500,7 @@ src/dai_nodes/sensors/imu.s: src/dai_nodes/sensors/imu.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/imu.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/imu.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/imu.cpp.s
 .PHONY : src/dai_nodes/sensors/imu.cpp.s
 
 src/dai_nodes/sensors/mono.o: src/dai_nodes/sensors/mono.cpp.o
@@ -508,7 +508,7 @@ src/dai_nodes/sensors/mono.o: src/dai_nodes/sensors/mono.cpp.o
 
 # target to build an object file
 src/dai_nodes/sensors/mono.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/mono.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/mono.cpp.o
 .PHONY : src/dai_nodes/sensors/mono.cpp.o
 
 src/dai_nodes/sensors/mono.i: src/dai_nodes/sensors/mono.cpp.i
@@ -516,7 +516,7 @@ src/dai_nodes/sensors/mono.i: src/dai_nodes/sensors/mono.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/sensors/mono.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/mono.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/mono.cpp.i
 .PHONY : src/dai_nodes/sensors/mono.cpp.i
 
 src/dai_nodes/sensors/mono.s: src/dai_nodes/sensors/mono.cpp.s
@@ -524,7 +524,7 @@ src/dai_nodes/sensors/mono.s: src/dai_nodes/sensors/mono.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/mono.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/mono.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/mono.cpp.s
 .PHONY : src/dai_nodes/sensors/mono.cpp.s
 
 src/dai_nodes/sensors/rgb.o: src/dai_nodes/sensors/rgb.cpp.o
@@ -532,7 +532,7 @@ src/dai_nodes/sensors/rgb.o: src/dai_nodes/sensors/rgb.cpp.o
 
 # target to build an object file
 src/dai_nodes/sensors/rgb.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/rgb.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/rgb.cpp.o
 .PHONY : src/dai_nodes/sensors/rgb.cpp.o
 
 src/dai_nodes/sensors/rgb.i: src/dai_nodes/sensors/rgb.cpp.i
@@ -540,7 +540,7 @@ src/dai_nodes/sensors/rgb.i: src/dai_nodes/sensors/rgb.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/sensors/rgb.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/rgb.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/rgb.cpp.i
 .PHONY : src/dai_nodes/sensors/rgb.cpp.i
 
 src/dai_nodes/sensors/rgb.s: src/dai_nodes/sensors/rgb.cpp.s
@@ -548,7 +548,7 @@ src/dai_nodes/sensors/rgb.s: src/dai_nodes/sensors/rgb.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/rgb.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/rgb.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/rgb.cpp.s
 .PHONY : src/dai_nodes/sensors/rgb.cpp.s
 
 src/dai_nodes/sensors/sensor_helpers.o: src/dai_nodes/sensors/sensor_helpers.cpp.o
@@ -556,7 +556,7 @@ src/dai_nodes/sensors/sensor_helpers.o: src/dai_nodes/sensors/sensor_helpers.cpp
 
 # target to build an object file
 src/dai_nodes/sensors/sensor_helpers.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/sensor_helpers.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/sensor_helpers.cpp.o
 .PHONY : src/dai_nodes/sensors/sensor_helpers.cpp.o
 
 src/dai_nodes/sensors/sensor_helpers.i: src/dai_nodes/sensors/sensor_helpers.cpp.i
@@ -564,7 +564,7 @@ src/dai_nodes/sensors/sensor_helpers.i: src/dai_nodes/sensors/sensor_helpers.cpp
 
 # target to preprocess a source file
 src/dai_nodes/sensors/sensor_helpers.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/sensor_helpers.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/sensor_helpers.cpp.i
 .PHONY : src/dai_nodes/sensors/sensor_helpers.cpp.i
 
 src/dai_nodes/sensors/sensor_helpers.s: src/dai_nodes/sensors/sensor_helpers.cpp.s
@@ -572,7 +572,7 @@ src/dai_nodes/sensors/sensor_helpers.s: src/dai_nodes/sensors/sensor_helpers.cpp
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/sensor_helpers.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/sensor_helpers.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/sensor_helpers.cpp.s
 .PHONY : src/dai_nodes/sensors/sensor_helpers.cpp.s
 
 src/dai_nodes/sensors/sensor_wrapper.o: src/dai_nodes/sensors/sensor_wrapper.cpp.o
@@ -580,7 +580,7 @@ src/dai_nodes/sensors/sensor_wrapper.o: src/dai_nodes/sensors/sensor_wrapper.cpp
 
 # target to build an object file
 src/dai_nodes/sensors/sensor_wrapper.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sensor_wrapper.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sensor_wrapper.cpp.o
 .PHONY : src/dai_nodes/sensors/sensor_wrapper.cpp.o
 
 src/dai_nodes/sensors/sensor_wrapper.i: src/dai_nodes/sensors/sensor_wrapper.cpp.i
@@ -588,7 +588,7 @@ src/dai_nodes/sensors/sensor_wrapper.i: src/dai_nodes/sensors/sensor_wrapper.cpp
 
 # target to preprocess a source file
 src/dai_nodes/sensors/sensor_wrapper.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sensor_wrapper.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sensor_wrapper.cpp.i
 .PHONY : src/dai_nodes/sensors/sensor_wrapper.cpp.i
 
 src/dai_nodes/sensors/sensor_wrapper.s: src/dai_nodes/sensors/sensor_wrapper.cpp.s
@@ -596,7 +596,7 @@ src/dai_nodes/sensors/sensor_wrapper.s: src/dai_nodes/sensors/sensor_wrapper.cpp
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/sensor_wrapper.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sensor_wrapper.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sensor_wrapper.cpp.s
 .PHONY : src/dai_nodes/sensors/sensor_wrapper.cpp.s
 
 src/dai_nodes/sensors/stereo.o: src/dai_nodes/sensors/stereo.cpp.o
@@ -604,7 +604,7 @@ src/dai_nodes/sensors/stereo.o: src/dai_nodes/sensors/stereo.cpp.o
 
 # target to build an object file
 src/dai_nodes/sensors/stereo.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/stereo.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/stereo.cpp.o
 .PHONY : src/dai_nodes/sensors/stereo.cpp.o
 
 src/dai_nodes/sensors/stereo.i: src/dai_nodes/sensors/stereo.cpp.i
@@ -612,7 +612,7 @@ src/dai_nodes/sensors/stereo.i: src/dai_nodes/sensors/stereo.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/sensors/stereo.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/stereo.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/stereo.cpp.i
 .PHONY : src/dai_nodes/sensors/stereo.cpp.i
 
 src/dai_nodes/sensors/stereo.s: src/dai_nodes/sensors/stereo.cpp.s
@@ -620,7 +620,7 @@ src/dai_nodes/sensors/stereo.s: src/dai_nodes/sensors/stereo.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/stereo.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/stereo.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/stereo.cpp.s
 .PHONY : src/dai_nodes/sensors/stereo.cpp.s
 
 src/dai_nodes/sensors/sync.o: src/dai_nodes/sensors/sync.cpp.o
@@ -628,7 +628,7 @@ src/dai_nodes/sensors/sync.o: src/dai_nodes/sensors/sync.cpp.o
 
 # target to build an object file
 src/dai_nodes/sensors/sync.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sync.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sync.cpp.o
 .PHONY : src/dai_nodes/sensors/sync.cpp.o
 
 src/dai_nodes/sensors/sync.i: src/dai_nodes/sensors/sync.cpp.i
@@ -636,7 +636,7 @@ src/dai_nodes/sensors/sync.i: src/dai_nodes/sensors/sync.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/sensors/sync.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sync.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sync.cpp.i
 .PHONY : src/dai_nodes/sensors/sync.cpp.i
 
 src/dai_nodes/sensors/sync.s: src/dai_nodes/sensors/sync.cpp.s
@@ -644,7 +644,7 @@ src/dai_nodes/sensors/sync.s: src/dai_nodes/sensors/sync.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/sync.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sync.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/sync.cpp.s
 .PHONY : src/dai_nodes/sensors/sync.cpp.s
 
 src/dai_nodes/sensors/thermal.o: src/dai_nodes/sensors/thermal.cpp.o
@@ -652,7 +652,7 @@ src/dai_nodes/sensors/thermal.o: src/dai_nodes/sensors/thermal.cpp.o
 
 # target to build an object file
 src/dai_nodes/sensors/thermal.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/thermal.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/thermal.cpp.o
 .PHONY : src/dai_nodes/sensors/thermal.cpp.o
 
 src/dai_nodes/sensors/thermal.i: src/dai_nodes/sensors/thermal.cpp.i
@@ -660,7 +660,7 @@ src/dai_nodes/sensors/thermal.i: src/dai_nodes/sensors/thermal.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/sensors/thermal.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/thermal.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/thermal.cpp.i
 .PHONY : src/dai_nodes/sensors/thermal.cpp.i
 
 src/dai_nodes/sensors/thermal.s: src/dai_nodes/sensors/thermal.cpp.s
@@ -668,7 +668,7 @@ src/dai_nodes/sensors/thermal.s: src/dai_nodes/sensors/thermal.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/thermal.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/thermal.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/thermal.cpp.s
 .PHONY : src/dai_nodes/sensors/thermal.cpp.s
 
 src/dai_nodes/sensors/tof.o: src/dai_nodes/sensors/tof.cpp.o
@@ -676,7 +676,7 @@ src/dai_nodes/sensors/tof.o: src/dai_nodes/sensors/tof.cpp.o
 
 # target to build an object file
 src/dai_nodes/sensors/tof.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/tof.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/tof.cpp.o
 .PHONY : src/dai_nodes/sensors/tof.cpp.o
 
 src/dai_nodes/sensors/tof.i: src/dai_nodes/sensors/tof.cpp.i
@@ -684,7 +684,7 @@ src/dai_nodes/sensors/tof.i: src/dai_nodes/sensors/tof.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/sensors/tof.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/tof.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/tof.cpp.i
 .PHONY : src/dai_nodes/sensors/tof.cpp.i
 
 src/dai_nodes/sensors/tof.s: src/dai_nodes/sensors/tof.cpp.s
@@ -692,7 +692,7 @@ src/dai_nodes/sensors/tof.s: src/dai_nodes/sensors/tof.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/sensors/tof.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/tof.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/tof.cpp.s
 .PHONY : src/dai_nodes/sensors/tof.cpp.s
 
 src/dai_nodes/sys_logger.o: src/dai_nodes/sys_logger.cpp.o
@@ -700,7 +700,7 @@ src/dai_nodes/sys_logger.o: src/dai_nodes/sys_logger.cpp.o
 
 # target to build an object file
 src/dai_nodes/sys_logger.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sys_logger.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sys_logger.cpp.o
 .PHONY : src/dai_nodes/sys_logger.cpp.o
 
 src/dai_nodes/sys_logger.i: src/dai_nodes/sys_logger.cpp.i
@@ -708,7 +708,7 @@ src/dai_nodes/sys_logger.i: src/dai_nodes/sys_logger.cpp.i
 
 # target to preprocess a source file
 src/dai_nodes/sys_logger.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sys_logger.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sys_logger.cpp.i
 .PHONY : src/dai_nodes/sys_logger.cpp.i
 
 src/dai_nodes/sys_logger.s: src/dai_nodes/sys_logger.cpp.s
@@ -716,7 +716,7 @@ src/dai_nodes/sys_logger.s: src/dai_nodes/sys_logger.cpp.s
 
 # target to generate assembly for a file
 src/dai_nodes/sys_logger.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sys_logger.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sys_logger.cpp.s
 .PHONY : src/dai_nodes/sys_logger.cpp.s
 
 src/param_handlers/camera_param_handler.o: src/param_handlers/camera_param_handler.cpp.o
@@ -724,7 +724,7 @@ src/param_handlers/camera_param_handler.o: src/param_handlers/camera_param_handl
 
 # target to build an object file
 src/param_handlers/camera_param_handler.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/camera_param_handler.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/camera_param_handler.cpp.o
 .PHONY : src/param_handlers/camera_param_handler.cpp.o
 
 src/param_handlers/camera_param_handler.i: src/param_handlers/camera_param_handler.cpp.i
@@ -732,7 +732,7 @@ src/param_handlers/camera_param_handler.i: src/param_handlers/camera_param_handl
 
 # target to preprocess a source file
 src/param_handlers/camera_param_handler.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/camera_param_handler.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/camera_param_handler.cpp.i
 .PHONY : src/param_handlers/camera_param_handler.cpp.i
 
 src/param_handlers/camera_param_handler.s: src/param_handlers/camera_param_handler.cpp.s
@@ -740,7 +740,7 @@ src/param_handlers/camera_param_handler.s: src/param_handlers/camera_param_handl
 
 # target to generate assembly for a file
 src/param_handlers/camera_param_handler.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/camera_param_handler.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/camera_param_handler.cpp.s
 .PHONY : src/param_handlers/camera_param_handler.cpp.s
 
 src/param_handlers/feature_tracker_param_handler.o: src/param_handlers/feature_tracker_param_handler.cpp.o
@@ -748,7 +748,7 @@ src/param_handlers/feature_tracker_param_handler.o: src/param_handlers/feature_t
 
 # target to build an object file
 src/param_handlers/feature_tracker_param_handler.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/feature_tracker_param_handler.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/feature_tracker_param_handler.cpp.o
 .PHONY : src/param_handlers/feature_tracker_param_handler.cpp.o
 
 src/param_handlers/feature_tracker_param_handler.i: src/param_handlers/feature_tracker_param_handler.cpp.i
@@ -756,7 +756,7 @@ src/param_handlers/feature_tracker_param_handler.i: src/param_handlers/feature_t
 
 # target to preprocess a source file
 src/param_handlers/feature_tracker_param_handler.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/feature_tracker_param_handler.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/feature_tracker_param_handler.cpp.i
 .PHONY : src/param_handlers/feature_tracker_param_handler.cpp.i
 
 src/param_handlers/feature_tracker_param_handler.s: src/param_handlers/feature_tracker_param_handler.cpp.s
@@ -764,7 +764,7 @@ src/param_handlers/feature_tracker_param_handler.s: src/param_handlers/feature_t
 
 # target to generate assembly for a file
 src/param_handlers/feature_tracker_param_handler.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/feature_tracker_param_handler.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/feature_tracker_param_handler.cpp.s
 .PHONY : src/param_handlers/feature_tracker_param_handler.cpp.s
 
 src/param_handlers/imu_param_handler.o: src/param_handlers/imu_param_handler.cpp.o
@@ -772,7 +772,7 @@ src/param_handlers/imu_param_handler.o: src/param_handlers/imu_param_handler.cpp
 
 # target to build an object file
 src/param_handlers/imu_param_handler.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/imu_param_handler.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/imu_param_handler.cpp.o
 .PHONY : src/param_handlers/imu_param_handler.cpp.o
 
 src/param_handlers/imu_param_handler.i: src/param_handlers/imu_param_handler.cpp.i
@@ -780,7 +780,7 @@ src/param_handlers/imu_param_handler.i: src/param_handlers/imu_param_handler.cpp
 
 # target to preprocess a source file
 src/param_handlers/imu_param_handler.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/imu_param_handler.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/imu_param_handler.cpp.i
 .PHONY : src/param_handlers/imu_param_handler.cpp.i
 
 src/param_handlers/imu_param_handler.s: src/param_handlers/imu_param_handler.cpp.s
@@ -788,7 +788,7 @@ src/param_handlers/imu_param_handler.s: src/param_handlers/imu_param_handler.cpp
 
 # target to generate assembly for a file
 src/param_handlers/imu_param_handler.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/imu_param_handler.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/imu_param_handler.cpp.s
 .PHONY : src/param_handlers/imu_param_handler.cpp.s
 
 src/param_handlers/nn_param_handler.o: src/param_handlers/nn_param_handler.cpp.o
@@ -796,7 +796,7 @@ src/param_handlers/nn_param_handler.o: src/param_handlers/nn_param_handler.cpp.o
 
 # target to build an object file
 src/param_handlers/nn_param_handler.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/nn_param_handler.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/nn_param_handler.cpp.o
 .PHONY : src/param_handlers/nn_param_handler.cpp.o
 
 src/param_handlers/nn_param_handler.i: src/param_handlers/nn_param_handler.cpp.i
@@ -804,7 +804,7 @@ src/param_handlers/nn_param_handler.i: src/param_handlers/nn_param_handler.cpp.i
 
 # target to preprocess a source file
 src/param_handlers/nn_param_handler.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/nn_param_handler.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/nn_param_handler.cpp.i
 .PHONY : src/param_handlers/nn_param_handler.cpp.i
 
 src/param_handlers/nn_param_handler.s: src/param_handlers/nn_param_handler.cpp.s
@@ -812,7 +812,7 @@ src/param_handlers/nn_param_handler.s: src/param_handlers/nn_param_handler.cpp.s
 
 # target to generate assembly for a file
 src/param_handlers/nn_param_handler.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/nn_param_handler.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/nn_param_handler.cpp.s
 .PHONY : src/param_handlers/nn_param_handler.cpp.s
 
 src/param_handlers/pipeline_gen_param_handler.o: src/param_handlers/pipeline_gen_param_handler.cpp.o
@@ -820,7 +820,7 @@ src/param_handlers/pipeline_gen_param_handler.o: src/param_handlers/pipeline_gen
 
 # target to build an object file
 src/param_handlers/pipeline_gen_param_handler.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/pipeline_gen_param_handler.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/pipeline_gen_param_handler.cpp.o
 .PHONY : src/param_handlers/pipeline_gen_param_handler.cpp.o
 
 src/param_handlers/pipeline_gen_param_handler.i: src/param_handlers/pipeline_gen_param_handler.cpp.i
@@ -828,7 +828,7 @@ src/param_handlers/pipeline_gen_param_handler.i: src/param_handlers/pipeline_gen
 
 # target to preprocess a source file
 src/param_handlers/pipeline_gen_param_handler.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/pipeline_gen_param_handler.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/pipeline_gen_param_handler.cpp.i
 .PHONY : src/param_handlers/pipeline_gen_param_handler.cpp.i
 
 src/param_handlers/pipeline_gen_param_handler.s: src/param_handlers/pipeline_gen_param_handler.cpp.s
@@ -836,7 +836,7 @@ src/param_handlers/pipeline_gen_param_handler.s: src/param_handlers/pipeline_gen
 
 # target to generate assembly for a file
 src/param_handlers/pipeline_gen_param_handler.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/pipeline_gen_param_handler.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/pipeline_gen_param_handler.cpp.s
 .PHONY : src/param_handlers/pipeline_gen_param_handler.cpp.s
 
 src/param_handlers/sensor_param_handler.o: src/param_handlers/sensor_param_handler.cpp.o
@@ -844,7 +844,7 @@ src/param_handlers/sensor_param_handler.o: src/param_handlers/sensor_param_handl
 
 # target to build an object file
 src/param_handlers/sensor_param_handler.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sensor_param_handler.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sensor_param_handler.cpp.o
 .PHONY : src/param_handlers/sensor_param_handler.cpp.o
 
 src/param_handlers/sensor_param_handler.i: src/param_handlers/sensor_param_handler.cpp.i
@@ -852,7 +852,7 @@ src/param_handlers/sensor_param_handler.i: src/param_handlers/sensor_param_handl
 
 # target to preprocess a source file
 src/param_handlers/sensor_param_handler.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sensor_param_handler.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sensor_param_handler.cpp.i
 .PHONY : src/param_handlers/sensor_param_handler.cpp.i
 
 src/param_handlers/sensor_param_handler.s: src/param_handlers/sensor_param_handler.cpp.s
@@ -860,7 +860,7 @@ src/param_handlers/sensor_param_handler.s: src/param_handlers/sensor_param_handl
 
 # target to generate assembly for a file
 src/param_handlers/sensor_param_handler.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sensor_param_handler.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sensor_param_handler.cpp.s
 .PHONY : src/param_handlers/sensor_param_handler.cpp.s
 
 src/param_handlers/stereo_param_handler.o: src/param_handlers/stereo_param_handler.cpp.o
@@ -868,7 +868,7 @@ src/param_handlers/stereo_param_handler.o: src/param_handlers/stereo_param_handl
 
 # target to build an object file
 src/param_handlers/stereo_param_handler.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/stereo_param_handler.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/stereo_param_handler.cpp.o
 .PHONY : src/param_handlers/stereo_param_handler.cpp.o
 
 src/param_handlers/stereo_param_handler.i: src/param_handlers/stereo_param_handler.cpp.i
@@ -876,7 +876,7 @@ src/param_handlers/stereo_param_handler.i: src/param_handlers/stereo_param_handl
 
 # target to preprocess a source file
 src/param_handlers/stereo_param_handler.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/stereo_param_handler.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/stereo_param_handler.cpp.i
 .PHONY : src/param_handlers/stereo_param_handler.cpp.i
 
 src/param_handlers/stereo_param_handler.s: src/param_handlers/stereo_param_handler.cpp.s
@@ -884,7 +884,7 @@ src/param_handlers/stereo_param_handler.s: src/param_handlers/stereo_param_handl
 
 # target to generate assembly for a file
 src/param_handlers/stereo_param_handler.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/stereo_param_handler.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/stereo_param_handler.cpp.s
 .PHONY : src/param_handlers/stereo_param_handler.cpp.s
 
 src/param_handlers/sync_param_handler.o: src/param_handlers/sync_param_handler.cpp.o
@@ -892,7 +892,7 @@ src/param_handlers/sync_param_handler.o: src/param_handlers/sync_param_handler.c
 
 # target to build an object file
 src/param_handlers/sync_param_handler.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sync_param_handler.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sync_param_handler.cpp.o
 .PHONY : src/param_handlers/sync_param_handler.cpp.o
 
 src/param_handlers/sync_param_handler.i: src/param_handlers/sync_param_handler.cpp.i
@@ -900,7 +900,7 @@ src/param_handlers/sync_param_handler.i: src/param_handlers/sync_param_handler.c
 
 # target to preprocess a source file
 src/param_handlers/sync_param_handler.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sync_param_handler.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sync_param_handler.cpp.i
 .PHONY : src/param_handlers/sync_param_handler.cpp.i
 
 src/param_handlers/sync_param_handler.s: src/param_handlers/sync_param_handler.cpp.s
@@ -908,7 +908,7 @@ src/param_handlers/sync_param_handler.s: src/param_handlers/sync_param_handler.c
 
 # target to generate assembly for a file
 src/param_handlers/sync_param_handler.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sync_param_handler.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/sync_param_handler.cpp.s
 .PHONY : src/param_handlers/sync_param_handler.cpp.s
 
 src/param_handlers/tof_param_handler.o: src/param_handlers/tof_param_handler.cpp.o
@@ -916,7 +916,7 @@ src/param_handlers/tof_param_handler.o: src/param_handlers/tof_param_handler.cpp
 
 # target to build an object file
 src/param_handlers/tof_param_handler.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/tof_param_handler.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/tof_param_handler.cpp.o
 .PHONY : src/param_handlers/tof_param_handler.cpp.o
 
 src/param_handlers/tof_param_handler.i: src/param_handlers/tof_param_handler.cpp.i
@@ -924,7 +924,7 @@ src/param_handlers/tof_param_handler.i: src/param_handlers/tof_param_handler.cpp
 
 # target to preprocess a source file
 src/param_handlers/tof_param_handler.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/tof_param_handler.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/tof_param_handler.cpp.i
 .PHONY : src/param_handlers/tof_param_handler.cpp.i
 
 src/param_handlers/tof_param_handler.s: src/param_handlers/tof_param_handler.cpp.s
@@ -932,7 +932,7 @@ src/param_handlers/tof_param_handler.s: src/param_handlers/tof_param_handler.cpp
 
 # target to generate assembly for a file
 src/param_handlers/tof_param_handler.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/tof_param_handler.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/tof_param_handler.cpp.s
 .PHONY : src/param_handlers/tof_param_handler.cpp.s
 
 src/pipeline/base_types.o: src/pipeline/base_types.cpp.o
@@ -940,7 +940,7 @@ src/pipeline/base_types.o: src/pipeline/base_types.cpp.o
 
 # target to build an object file
 src/pipeline/base_types.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/base_types.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/base_types.cpp.o
 .PHONY : src/pipeline/base_types.cpp.o
 
 src/pipeline/base_types.i: src/pipeline/base_types.cpp.i
@@ -948,7 +948,7 @@ src/pipeline/base_types.i: src/pipeline/base_types.cpp.i
 
 # target to preprocess a source file
 src/pipeline/base_types.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/base_types.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/base_types.cpp.i
 .PHONY : src/pipeline/base_types.cpp.i
 
 src/pipeline/base_types.s: src/pipeline/base_types.cpp.s
@@ -956,7 +956,7 @@ src/pipeline/base_types.s: src/pipeline/base_types.cpp.s
 
 # target to generate assembly for a file
 src/pipeline/base_types.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/base_types.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/base_types.cpp.s
 .PHONY : src/pipeline/base_types.cpp.s
 
 src/pipeline/pipeline_generator.o: src/pipeline/pipeline_generator.cpp.o
@@ -964,7 +964,7 @@ src/pipeline/pipeline_generator.o: src/pipeline/pipeline_generator.cpp.o
 
 # target to build an object file
 src/pipeline/pipeline_generator.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/pipeline_generator.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/pipeline_generator.cpp.o
 .PHONY : src/pipeline/pipeline_generator.cpp.o
 
 src/pipeline/pipeline_generator.i: src/pipeline/pipeline_generator.cpp.i
@@ -972,7 +972,7 @@ src/pipeline/pipeline_generator.i: src/pipeline/pipeline_generator.cpp.i
 
 # target to preprocess a source file
 src/pipeline/pipeline_generator.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/pipeline_generator.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/pipeline_generator.cpp.i
 .PHONY : src/pipeline/pipeline_generator.cpp.i
 
 src/pipeline/pipeline_generator.s: src/pipeline/pipeline_generator.cpp.s
@@ -980,7 +980,7 @@ src/pipeline/pipeline_generator.s: src/pipeline/pipeline_generator.cpp.s
 
 # target to generate assembly for a file
 src/pipeline/pipeline_generator.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/pipeline_generator.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver.dir/src/pipeline/pipeline_generator.cpp.s
 .PHONY : src/pipeline/pipeline_generator.cpp.s
 
 src/utils.o: src/utils.cpp.o
@@ -988,7 +988,7 @@ src/utils.o: src/utils.cpp.o
 
 # target to build an object file
 src/utils.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/utils.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/utils.cpp.o
 .PHONY : src/utils.cpp.o
 
 src/utils.i: src/utils.cpp.i
@@ -996,7 +996,7 @@ src/utils.i: src/utils.cpp.i
 
 # target to preprocess a source file
 src/utils.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/utils.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/utils.cpp.i
 .PHONY : src/utils.cpp.i
 
 src/utils.s: src/utils.cpp.s
@@ -1004,7 +1004,7 @@ src/utils.s: src/utils.cpp.s
 
 # target to generate assembly for a file
 src/utils.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/utils.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/build.make depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/utils.cpp.s
 .PHONY : src/utils.cpp.s
 
 # Help Target
@@ -1128,6 +1128,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

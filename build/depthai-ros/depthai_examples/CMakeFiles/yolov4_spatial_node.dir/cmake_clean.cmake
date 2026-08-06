@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/depthai_examples/yolov4_spatial_node"
-  "/home/uavteam6/catkin_ws/devel/lib/depthai_examples/yolov4_spatial_node.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/depthai_examples/yolov4_spatial_node"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/depthai_examples/yolov4_spatial_node.pdb"
   "CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.o"
   "CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.o.d"
 )

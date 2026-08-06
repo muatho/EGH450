@@ -1,8 +1,8 @@
-# Install script for directory: /home/uavteam6/catkin_ws/src/uavasr_emulator
+# Install script for directory: /home/uavteam6/catkin_ws_G6/src/uavasr_emulator
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws_G6/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,43 +43,43 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/uavasr_emulator" TYPE FILE FILES "/home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/uavasr_emulator" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/uavasr_emulator" TYPE FILE FILES "/home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/uavasr_emulator" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/uavasr_emulator" TYPE FILE FILES "/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/__init__.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/uavasr_emulator" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/__init__.py")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg")
+  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/uavasr_emulator" TYPE DIRECTORY FILES "/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/uavasr_emulator" TYPE DIRECTORY FILES "/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws/build/uavasr_emulator/catkin_generated/installspace/uavasr_emulator.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/build/uavasr_emulator/catkin_generated/installspace/uavasr_emulator.pc")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/uavasr_emulator/cmake" TYPE FILE FILES
-    "/home/uavteam6/catkin_ws/build/uavasr_emulator/catkin_generated/installspace/uavasr_emulatorConfig.cmake"
-    "/home/uavteam6/catkin_ws/build/uavasr_emulator/catkin_generated/installspace/uavasr_emulatorConfig-version.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/uavasr_emulator/catkin_generated/installspace/uavasr_emulatorConfig.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/uavasr_emulator/catkin_generated/installspace/uavasr_emulatorConfig-version.cmake"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/uavasr_emulator" TYPE FILE FILES "/home/uavteam6/catkin_ws/src/uavasr_emulator/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/uavasr_emulator" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/package.xml")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/uavteam6/catkin_ws/build/uavasr_emulator/install_local_manifest.txt"
+  file(WRITE "/home/uavteam6/catkin_ws_G6/build/uavasr_emulator/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

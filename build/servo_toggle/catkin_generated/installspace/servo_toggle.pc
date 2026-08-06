@@ -1,8 +1,0 @@
-prefix=/home/uavteam6/catkin_ws/install
-
-Name: servo_toggle
-Description: Description of servo_toggle
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

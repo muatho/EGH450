@@ -1,5 +1,5 @@
 depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_examples/src/yolov4_spatial_publisher.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_examples/src/yolov4_spatial_publisher.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/9/cstdio \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -1102,7 +1102,7 @@ depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spati
  /opt/ros/noetic/include/sensor_msgs/SetCameraInfo.h \
  /opt/ros/noetic/include/sensor_msgs/SetCameraInfoRequest.h \
  /opt/ros/noetic/include/sensor_msgs/SetCameraInfoResponse.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/BridgePublisher.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/BridgePublisher.hpp \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_deque.h \
  /usr/include/c++/9/bits/deque.tcc /usr/include/c++/9/thread \
  /opt/ros/noetic/include/depthai/depthai.hpp \
@@ -1374,7 +1374,7 @@ depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spati
  /opt/ros/noetic/include/image_transport/transport_hints.h \
  /opt/ros/noetic/include/image_transport/camera_publisher.h \
  /opt/ros/noetic/include/image_transport/camera_subscriber.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
  /opt/ros/noetic/include/cv_bridge/cv_bridge.h \
  /opt/ros/noetic/include/sensor_msgs/CompressedImage.h \
  /opt/ros/noetic/include/sensor_msgs/image_encodings.h \
@@ -1413,10 +1413,10 @@ depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spati
  /usr/include/opencv4/opencv2/imgproc/types_c.h \
  /usr/include/opencv4/opencv2/core/core_c.h \
  /usr/include/opencv4/opencv2/core/types_c.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/FFMPEGPacket.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/SpatialDetectionConverter.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/SpatialDetectionArray.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/SpatialDetection.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/FFMPEGPacket.h \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/SpatialDetectionConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/SpatialDetectionArray.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/SpatialDetection.h \
  /opt/ros/noetic/include/vision_msgs/ObjectHypothesis.h \
  /opt/ros/noetic/include/vision_msgs/BoundingBox2D.h \
  /opt/ros/noetic/include/geometry_msgs/Pose2D.h \

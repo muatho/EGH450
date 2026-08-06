@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_examples/src/yolov4_spatial_publisher.cpp" "depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.o" "gcc" "depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.o.d"
+  "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_examples/src/yolov4_spatial_publisher.cpp" "depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.o" "gcc" "depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

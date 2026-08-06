@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/include/breadcrumb/AStarParamsConfig.h"
-  "/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/breadcrumb/cfg/AStarParamsConfig.py"
-  "/home/uavteam6/catkin_ws/devel/share/breadcrumb/docs/AStarParamsConfig-usage.dox"
-  "/home/uavteam6/catkin_ws/devel/share/breadcrumb/docs/AStarParamsConfig.dox"
-  "/home/uavteam6/catkin_ws/devel/share/breadcrumb/docs/AStarParamsConfig.wikidoc"
+  "/home/uavteam6/catkin_ws_G6/devel/include/breadcrumb/AStarParamsConfig.h"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/breadcrumb/cfg/AStarParamsConfig.py"
+  "/home/uavteam6/catkin_ws_G6/devel/share/breadcrumb/docs/AStarParamsConfig-usage.dox"
+  "/home/uavteam6/catkin_ws_G6/devel/share/breadcrumb/docs/AStarParamsConfig.dox"
+  "/home/uavteam6/catkin_ws_G6/devel/share/breadcrumb/docs/AStarParamsConfig.wikidoc"
   "CMakeFiles/breadcrumb_gencfg"
 )
 

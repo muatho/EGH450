@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,14 +142,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles /home/uavteam6/catkin_ws/build/depthai-ros/depthai_examples//CMakeFiles/progress.marks
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws_G6/build/CMakeFiles /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_examples//CMakeFiles/progress.marks
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws_G6/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/clean
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/clean
 .PHONY : clean
 
 # The main clean target
@@ -158,22 +158,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/preinstall
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/preinstall
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/rule
 .PHONY : depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/rule
 
 # Convenience name for target.
@@ -182,12 +182,12 @@ nodelet_stereo: depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/rule
 
 # fast build rule for target.
 nodelet_stereo/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build
 .PHONY : nodelet_stereo/fast
 
 # Convenience name for target.
 depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/rule
 .PHONY : depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/rule
 
 # Convenience name for target.
@@ -196,12 +196,12 @@ crop_control_service: depthai-ros/depthai_examples/CMakeFiles/crop_control_servi
 
 # fast build rule for target.
 crop_control_service/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build.make depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build.make depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build
 .PHONY : crop_control_service/fast
 
 # Convenience name for target.
 depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/rule
 .PHONY : depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/rule
 
 # Convenience name for target.
@@ -210,12 +210,12 @@ mobilenet_node: depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/rule
 
 # fast build rule for target.
 mobilenet_node/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build
 .PHONY : mobilenet_node/fast
 
 # Convenience name for target.
 depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/rule
 .PHONY : depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ rgb_stereo_node: depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/rul
 
 # fast build rule for target.
 rgb_stereo_node/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build
 .PHONY : rgb_stereo_node/fast
 
 # Convenience name for target.
 depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/rule
 .PHONY : depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/rule
 
 # Convenience name for target.
@@ -238,12 +238,12 @@ rgb_subscriber_node: depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node
 
 # fast build rule for target.
 rgb_subscriber_node/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build
 .PHONY : rgb_subscriber_node/fast
 
 # Convenience name for target.
 depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/rule
 .PHONY : depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/rule
 
 # Convenience name for target.
@@ -252,12 +252,12 @@ stereo_inertial_node: depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_no
 
 # fast build rule for target.
 stereo_inertial_node/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build
 .PHONY : stereo_inertial_node/fast
 
 # Convenience name for target.
 depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/rule
 .PHONY : depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/rule
 
 # Convenience name for target.
@@ -266,12 +266,12 @@ stereo_node: depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/rule
 
 # fast build rule for target.
 stereo_node/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build
 .PHONY : stereo_node/fast
 
 # Convenience name for target.
 depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/rule
 .PHONY : depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/rule
 
 # Convenience name for target.
@@ -280,12 +280,12 @@ yolov4_spatial_node: depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node
 
 # fast build rule for target.
 yolov4_spatial_node/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build
 .PHONY : yolov4_spatial_node/fast
 
 # Convenience name for target.
 depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/rule
 .PHONY : depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/rule
 
 # Convenience name for target.
@@ -294,7 +294,7 @@ feature_tracker: depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/rul
 
 # fast build rule for target.
 feature_tracker/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build.make depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build.make depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build
 .PHONY : feature_tracker/fast
 
 src/crop_control_service.o: src/crop_control_service.cpp.o
@@ -302,7 +302,7 @@ src/crop_control_service.o: src/crop_control_service.cpp.o
 
 # target to build an object file
 src/crop_control_service.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build.make depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_control_service.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build.make depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_control_service.cpp.o
 .PHONY : src/crop_control_service.cpp.o
 
 src/crop_control_service.i: src/crop_control_service.cpp.i
@@ -310,7 +310,7 @@ src/crop_control_service.i: src/crop_control_service.cpp.i
 
 # target to preprocess a source file
 src/crop_control_service.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build.make depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_control_service.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build.make depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_control_service.cpp.i
 .PHONY : src/crop_control_service.cpp.i
 
 src/crop_control_service.s: src/crop_control_service.cpp.s
@@ -318,7 +318,7 @@ src/crop_control_service.s: src/crop_control_service.cpp.s
 
 # target to generate assembly for a file
 src/crop_control_service.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build.make depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_control_service.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/build.make depthai-ros/depthai_examples/CMakeFiles/crop_control_service.dir/src/crop_control_service.cpp.s
 .PHONY : src/crop_control_service.cpp.s
 
 src/feature_tracker_publisher.o: src/feature_tracker_publisher.cpp.o
@@ -326,7 +326,7 @@ src/feature_tracker_publisher.o: src/feature_tracker_publisher.cpp.o
 
 # target to build an object file
 src/feature_tracker_publisher.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build.make depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_publisher.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build.make depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_publisher.cpp.o
 .PHONY : src/feature_tracker_publisher.cpp.o
 
 src/feature_tracker_publisher.i: src/feature_tracker_publisher.cpp.i
@@ -334,7 +334,7 @@ src/feature_tracker_publisher.i: src/feature_tracker_publisher.cpp.i
 
 # target to preprocess a source file
 src/feature_tracker_publisher.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build.make depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_publisher.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build.make depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_publisher.cpp.i
 .PHONY : src/feature_tracker_publisher.cpp.i
 
 src/feature_tracker_publisher.s: src/feature_tracker_publisher.cpp.s
@@ -342,7 +342,7 @@ src/feature_tracker_publisher.s: src/feature_tracker_publisher.cpp.s
 
 # target to generate assembly for a file
 src/feature_tracker_publisher.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build.make depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_publisher.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/build.make depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_publisher.cpp.s
 .PHONY : src/feature_tracker_publisher.cpp.s
 
 src/mobilenet_publisher.o: src/mobilenet_publisher.cpp.o
@@ -350,7 +350,7 @@ src/mobilenet_publisher.o: src/mobilenet_publisher.cpp.o
 
 # target to build an object file
 src/mobilenet_publisher.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/src/mobilenet_publisher.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/src/mobilenet_publisher.cpp.o
 .PHONY : src/mobilenet_publisher.cpp.o
 
 src/mobilenet_publisher.i: src/mobilenet_publisher.cpp.i
@@ -358,7 +358,7 @@ src/mobilenet_publisher.i: src/mobilenet_publisher.cpp.i
 
 # target to preprocess a source file
 src/mobilenet_publisher.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/src/mobilenet_publisher.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/src/mobilenet_publisher.cpp.i
 .PHONY : src/mobilenet_publisher.cpp.i
 
 src/mobilenet_publisher.s: src/mobilenet_publisher.cpp.s
@@ -366,7 +366,7 @@ src/mobilenet_publisher.s: src/mobilenet_publisher.cpp.s
 
 # target to generate assembly for a file
 src/mobilenet_publisher.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/src/mobilenet_publisher.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/mobilenet_node.dir/src/mobilenet_publisher.cpp.s
 .PHONY : src/mobilenet_publisher.cpp.s
 
 src/rgb_stereo_node.o: src/rgb_stereo_node.cpp.o
@@ -374,7 +374,7 @@ src/rgb_stereo_node.o: src/rgb_stereo_node.cpp.o
 
 # target to build an object file
 src/rgb_stereo_node.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.o
 .PHONY : src/rgb_stereo_node.cpp.o
 
 src/rgb_stereo_node.i: src/rgb_stereo_node.cpp.i
@@ -382,7 +382,7 @@ src/rgb_stereo_node.i: src/rgb_stereo_node.cpp.i
 
 # target to preprocess a source file
 src/rgb_stereo_node.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.i
 .PHONY : src/rgb_stereo_node.cpp.i
 
 src/rgb_stereo_node.s: src/rgb_stereo_node.cpp.s
@@ -390,7 +390,7 @@ src/rgb_stereo_node.s: src/rgb_stereo_node.cpp.s
 
 # target to generate assembly for a file
 src/rgb_stereo_node.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.s
 .PHONY : src/rgb_stereo_node.cpp.s
 
 src/rgb_video_subscriber.o: src/rgb_video_subscriber.cpp.o
@@ -398,7 +398,7 @@ src/rgb_video_subscriber.o: src/rgb_video_subscriber.cpp.o
 
 # target to build an object file
 src/rgb_video_subscriber.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/src/rgb_video_subscriber.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/src/rgb_video_subscriber.cpp.o
 .PHONY : src/rgb_video_subscriber.cpp.o
 
 src/rgb_video_subscriber.i: src/rgb_video_subscriber.cpp.i
@@ -406,7 +406,7 @@ src/rgb_video_subscriber.i: src/rgb_video_subscriber.cpp.i
 
 # target to preprocess a source file
 src/rgb_video_subscriber.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/src/rgb_video_subscriber.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/src/rgb_video_subscriber.cpp.i
 .PHONY : src/rgb_video_subscriber.cpp.i
 
 src/rgb_video_subscriber.s: src/rgb_video_subscriber.cpp.s
@@ -414,7 +414,7 @@ src/rgb_video_subscriber.s: src/rgb_video_subscriber.cpp.s
 
 # target to generate assembly for a file
 src/rgb_video_subscriber.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/src/rgb_video_subscriber.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/src/rgb_video_subscriber.cpp.s
 .PHONY : src/rgb_video_subscriber.cpp.s
 
 src/stereo_inertial_publisher.o: src/stereo_inertial_publisher.cpp.o
@@ -422,7 +422,7 @@ src/stereo_inertial_publisher.o: src/stereo_inertial_publisher.cpp.o
 
 # target to build an object file
 src/stereo_inertial_publisher.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/src/stereo_inertial_publisher.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/src/stereo_inertial_publisher.cpp.o
 .PHONY : src/stereo_inertial_publisher.cpp.o
 
 src/stereo_inertial_publisher.i: src/stereo_inertial_publisher.cpp.i
@@ -430,7 +430,7 @@ src/stereo_inertial_publisher.i: src/stereo_inertial_publisher.cpp.i
 
 # target to preprocess a source file
 src/stereo_inertial_publisher.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/src/stereo_inertial_publisher.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/src/stereo_inertial_publisher.cpp.i
 .PHONY : src/stereo_inertial_publisher.cpp.i
 
 src/stereo_inertial_publisher.s: src/stereo_inertial_publisher.cpp.s
@@ -438,7 +438,7 @@ src/stereo_inertial_publisher.s: src/stereo_inertial_publisher.cpp.s
 
 # target to generate assembly for a file
 src/stereo_inertial_publisher.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/src/stereo_inertial_publisher.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_inertial_node.dir/src/stereo_inertial_publisher.cpp.s
 .PHONY : src/stereo_inertial_publisher.cpp.s
 
 src/stereo_nodelet.o: src/stereo_nodelet.cpp.o
@@ -446,7 +446,7 @@ src/stereo_nodelet.o: src/stereo_nodelet.cpp.o
 
 # target to build an object file
 src/stereo_nodelet.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cpp.o
 .PHONY : src/stereo_nodelet.cpp.o
 
 src/stereo_nodelet.i: src/stereo_nodelet.cpp.i
@@ -454,7 +454,7 @@ src/stereo_nodelet.i: src/stereo_nodelet.cpp.i
 
 # target to preprocess a source file
 src/stereo_nodelet.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cpp.i
 .PHONY : src/stereo_nodelet.cpp.i
 
 src/stereo_nodelet.s: src/stereo_nodelet.cpp.s
@@ -462,7 +462,7 @@ src/stereo_nodelet.s: src/stereo_nodelet.cpp.s
 
 # target to generate assembly for a file
 src/stereo_nodelet.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make depthai-ros/depthai_examples/CMakeFiles/nodelet_stereo.dir/src/stereo_nodelet.cpp.s
 .PHONY : src/stereo_nodelet.cpp.s
 
 src/stereo_publisher.o: src/stereo_publisher.cpp.o
@@ -470,7 +470,7 @@ src/stereo_publisher.o: src/stereo_publisher.cpp.o
 
 # target to build an object file
 src/stereo_publisher.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/src/stereo_publisher.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/src/stereo_publisher.cpp.o
 .PHONY : src/stereo_publisher.cpp.o
 
 src/stereo_publisher.i: src/stereo_publisher.cpp.i
@@ -478,7 +478,7 @@ src/stereo_publisher.i: src/stereo_publisher.cpp.i
 
 # target to preprocess a source file
 src/stereo_publisher.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/src/stereo_publisher.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/src/stereo_publisher.cpp.i
 .PHONY : src/stereo_publisher.cpp.i
 
 src/stereo_publisher.s: src/stereo_publisher.cpp.s
@@ -486,7 +486,7 @@ src/stereo_publisher.s: src/stereo_publisher.cpp.s
 
 # target to generate assembly for a file
 src/stereo_publisher.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/src/stereo_publisher.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/stereo_node.dir/src/stereo_publisher.cpp.s
 .PHONY : src/stereo_publisher.cpp.s
 
 src/yolov4_spatial_publisher.o: src/yolov4_spatial_publisher.cpp.o
@@ -494,7 +494,7 @@ src/yolov4_spatial_publisher.o: src/yolov4_spatial_publisher.cpp.o
 
 # target to build an object file
 src/yolov4_spatial_publisher.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.o
 .PHONY : src/yolov4_spatial_publisher.cpp.o
 
 src/yolov4_spatial_publisher.i: src/yolov4_spatial_publisher.cpp.i
@@ -502,7 +502,7 @@ src/yolov4_spatial_publisher.i: src/yolov4_spatial_publisher.cpp.i
 
 # target to preprocess a source file
 src/yolov4_spatial_publisher.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.i
 .PHONY : src/yolov4_spatial_publisher.cpp.i
 
 src/yolov4_spatial_publisher.s: src/yolov4_spatial_publisher.cpp.s
@@ -510,7 +510,7 @@ src/yolov4_spatial_publisher.s: src/yolov4_spatial_publisher.cpp.s
 
 # target to generate assembly for a file
 src/yolov4_spatial_publisher.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/build.make depthai-ros/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/src/yolov4_spatial_publisher.cpp.s
 .PHONY : src/yolov4_spatial_publisher.cpp.s
 
 # Help Target
@@ -573,6 +573,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

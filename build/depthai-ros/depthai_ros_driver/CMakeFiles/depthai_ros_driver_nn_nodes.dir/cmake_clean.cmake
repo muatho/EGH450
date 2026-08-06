@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/libdepthai_ros_driver_nn_nodes.pdb"
-  "/home/uavteam6/catkin_ws/devel/lib/libdepthai_ros_driver_nn_nodes.so"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libdepthai_ros_driver_nn_nodes.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libdepthai_ros_driver_nn_nodes.so"
   "CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.o"
   "CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/nn_wrapper.cpp.o.d"
   "CMakeFiles/depthai_ros_driver_nn_nodes.dir/src/dai_nodes/nn/segmentation.cpp.o"

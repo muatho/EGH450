@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,14 +142,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles /home/uavteam6/catkin_ws/build/depthai-ros/depthai_bridge//CMakeFiles/progress.marks
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws/build/CMakeFiles 0
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws_G6/build/CMakeFiles /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_bridge//CMakeFiles/progress.marks
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/uavteam6/catkin_ws_G6/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/clean
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/clean
 .PHONY : clean
 
 # The main clean target
@@ -158,22 +158,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/preinstall
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/preinstall
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_cpp.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_cpp.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_cpp.dir/rule
 .PHONY : depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -182,12 +182,12 @@ stereo_msgs_generate_messages_cpp: depthai-ros/depthai_bridge/CMakeFiles/stereo_
 
 # fast build rule for target.
 stereo_msgs_generate_messages_cpp/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_cpp.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_cpp.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_cpp.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_cpp.dir/build
 .PHONY : stereo_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_eus.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_eus.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_eus.dir/rule
 .PHONY : depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -196,12 +196,12 @@ stereo_msgs_generate_messages_eus: depthai-ros/depthai_bridge/CMakeFiles/stereo_
 
 # fast build rule for target.
 stereo_msgs_generate_messages_eus/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_eus.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_eus.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_eus.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_eus.dir/build
 .PHONY : stereo_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_lisp.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_lisp.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_lisp.dir/rule
 .PHONY : depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -210,12 +210,12 @@ stereo_msgs_generate_messages_lisp: depthai-ros/depthai_bridge/CMakeFiles/stereo
 
 # fast build rule for target.
 stereo_msgs_generate_messages_lisp/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_lisp.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_lisp.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_lisp.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_lisp.dir/build
 .PHONY : stereo_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_nodejs.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_nodejs.dir/rule
 .PHONY : depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ stereo_msgs_generate_messages_nodejs: depthai-ros/depthai_bridge/CMakeFiles/ster
 
 # fast build rule for target.
 stereo_msgs_generate_messages_nodejs/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_nodejs.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_nodejs.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_nodejs.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_nodejs.dir/build
 .PHONY : stereo_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_py.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_py.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_py.dir/rule
 .PHONY : depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -238,12 +238,12 @@ stereo_msgs_generate_messages_py: depthai-ros/depthai_bridge/CMakeFiles/stereo_m
 
 # fast build rule for target.
 stereo_msgs_generate_messages_py/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_py.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_py.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_py.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/stereo_msgs_generate_messages_py.dir/build
 .PHONY : stereo_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/rule:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/rule
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/rule
 .PHONY : depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/rule
 
 # Convenience name for target.
@@ -252,7 +252,7 @@ depthai_bridge: depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/rule
 
 # fast build rule for target.
 depthai_bridge/fast:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build
 .PHONY : depthai_bridge/fast
 
 src/DisparityConverter.o: src/DisparityConverter.cpp.o
@@ -260,7 +260,7 @@ src/DisparityConverter.o: src/DisparityConverter.cpp.o
 
 # target to build an object file
 src/DisparityConverter.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/DisparityConverter.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/DisparityConverter.cpp.o
 .PHONY : src/DisparityConverter.cpp.o
 
 src/DisparityConverter.i: src/DisparityConverter.cpp.i
@@ -268,7 +268,7 @@ src/DisparityConverter.i: src/DisparityConverter.cpp.i
 
 # target to preprocess a source file
 src/DisparityConverter.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/DisparityConverter.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/DisparityConverter.cpp.i
 .PHONY : src/DisparityConverter.cpp.i
 
 src/DisparityConverter.s: src/DisparityConverter.cpp.s
@@ -276,7 +276,7 @@ src/DisparityConverter.s: src/DisparityConverter.cpp.s
 
 # target to generate assembly for a file
 src/DisparityConverter.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/DisparityConverter.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/DisparityConverter.cpp.s
 .PHONY : src/DisparityConverter.cpp.s
 
 src/ImageConverter.o: src/ImageConverter.cpp.o
@@ -284,7 +284,7 @@ src/ImageConverter.o: src/ImageConverter.cpp.o
 
 # target to build an object file
 src/ImageConverter.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o
 .PHONY : src/ImageConverter.cpp.o
 
 src/ImageConverter.i: src/ImageConverter.cpp.i
@@ -292,7 +292,7 @@ src/ImageConverter.i: src/ImageConverter.cpp.i
 
 # target to preprocess a source file
 src/ImageConverter.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.i
 .PHONY : src/ImageConverter.cpp.i
 
 src/ImageConverter.s: src/ImageConverter.cpp.s
@@ -300,7 +300,7 @@ src/ImageConverter.s: src/ImageConverter.cpp.s
 
 # target to generate assembly for a file
 src/ImageConverter.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.s
 .PHONY : src/ImageConverter.cpp.s
 
 src/ImgDetectionConverter.o: src/ImgDetectionConverter.cpp.o
@@ -308,7 +308,7 @@ src/ImgDetectionConverter.o: src/ImgDetectionConverter.cpp.o
 
 # target to build an object file
 src/ImgDetectionConverter.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImgDetectionConverter.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImgDetectionConverter.cpp.o
 .PHONY : src/ImgDetectionConverter.cpp.o
 
 src/ImgDetectionConverter.i: src/ImgDetectionConverter.cpp.i
@@ -316,7 +316,7 @@ src/ImgDetectionConverter.i: src/ImgDetectionConverter.cpp.i
 
 # target to preprocess a source file
 src/ImgDetectionConverter.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImgDetectionConverter.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImgDetectionConverter.cpp.i
 .PHONY : src/ImgDetectionConverter.cpp.i
 
 src/ImgDetectionConverter.s: src/ImgDetectionConverter.cpp.s
@@ -324,7 +324,7 @@ src/ImgDetectionConverter.s: src/ImgDetectionConverter.cpp.s
 
 # target to generate assembly for a file
 src/ImgDetectionConverter.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImgDetectionConverter.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImgDetectionConverter.cpp.s
 .PHONY : src/ImgDetectionConverter.cpp.s
 
 src/ImuConverter.o: src/ImuConverter.cpp.o
@@ -332,7 +332,7 @@ src/ImuConverter.o: src/ImuConverter.cpp.o
 
 # target to build an object file
 src/ImuConverter.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImuConverter.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImuConverter.cpp.o
 .PHONY : src/ImuConverter.cpp.o
 
 src/ImuConverter.i: src/ImuConverter.cpp.i
@@ -340,7 +340,7 @@ src/ImuConverter.i: src/ImuConverter.cpp.i
 
 # target to preprocess a source file
 src/ImuConverter.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImuConverter.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImuConverter.cpp.i
 .PHONY : src/ImuConverter.cpp.i
 
 src/ImuConverter.s: src/ImuConverter.cpp.s
@@ -348,7 +348,7 @@ src/ImuConverter.s: src/ImuConverter.cpp.s
 
 # target to generate assembly for a file
 src/ImuConverter.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImuConverter.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImuConverter.cpp.s
 .PHONY : src/ImuConverter.cpp.s
 
 src/SpatialDetectionConverter.o: src/SpatialDetectionConverter.cpp.o
@@ -356,7 +356,7 @@ src/SpatialDetectionConverter.o: src/SpatialDetectionConverter.cpp.o
 
 # target to build an object file
 src/SpatialDetectionConverter.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o
 .PHONY : src/SpatialDetectionConverter.cpp.o
 
 src/SpatialDetectionConverter.i: src/SpatialDetectionConverter.cpp.i
@@ -364,7 +364,7 @@ src/SpatialDetectionConverter.i: src/SpatialDetectionConverter.cpp.i
 
 # target to preprocess a source file
 src/SpatialDetectionConverter.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.i
 .PHONY : src/SpatialDetectionConverter.cpp.i
 
 src/SpatialDetectionConverter.s: src/SpatialDetectionConverter.cpp.s
@@ -372,7 +372,7 @@ src/SpatialDetectionConverter.s: src/SpatialDetectionConverter.cpp.s
 
 # target to generate assembly for a file
 src/SpatialDetectionConverter.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.s
 .PHONY : src/SpatialDetectionConverter.cpp.s
 
 src/TFPublisher.o: src/TFPublisher.cpp.o
@@ -380,7 +380,7 @@ src/TFPublisher.o: src/TFPublisher.cpp.o
 
 # target to build an object file
 src/TFPublisher.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TFPublisher.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TFPublisher.cpp.o
 .PHONY : src/TFPublisher.cpp.o
 
 src/TFPublisher.i: src/TFPublisher.cpp.i
@@ -388,7 +388,7 @@ src/TFPublisher.i: src/TFPublisher.cpp.i
 
 # target to preprocess a source file
 src/TFPublisher.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TFPublisher.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TFPublisher.cpp.i
 .PHONY : src/TFPublisher.cpp.i
 
 src/TFPublisher.s: src/TFPublisher.cpp.s
@@ -396,7 +396,7 @@ src/TFPublisher.s: src/TFPublisher.cpp.s
 
 # target to generate assembly for a file
 src/TFPublisher.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TFPublisher.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TFPublisher.cpp.s
 .PHONY : src/TFPublisher.cpp.s
 
 src/TrackedFeaturesConverter.o: src/TrackedFeaturesConverter.cpp.o
@@ -404,7 +404,7 @@ src/TrackedFeaturesConverter.o: src/TrackedFeaturesConverter.cpp.o
 
 # target to build an object file
 src/TrackedFeaturesConverter.cpp.o:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TrackedFeaturesConverter.cpp.o
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TrackedFeaturesConverter.cpp.o
 .PHONY : src/TrackedFeaturesConverter.cpp.o
 
 src/TrackedFeaturesConverter.i: src/TrackedFeaturesConverter.cpp.i
@@ -412,7 +412,7 @@ src/TrackedFeaturesConverter.i: src/TrackedFeaturesConverter.cpp.i
 
 # target to preprocess a source file
 src/TrackedFeaturesConverter.cpp.i:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TrackedFeaturesConverter.cpp.i
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TrackedFeaturesConverter.cpp.i
 .PHONY : src/TrackedFeaturesConverter.cpp.i
 
 src/TrackedFeaturesConverter.s: src/TrackedFeaturesConverter.cpp.s
@@ -420,7 +420,7 @@ src/TrackedFeaturesConverter.s: src/TrackedFeaturesConverter.cpp.s
 
 # target to generate assembly for a file
 src/TrackedFeaturesConverter.cpp.s:
-	cd /home/uavteam6/catkin_ws/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TrackedFeaturesConverter.cpp.s
+	cd /home/uavteam6/catkin_ws_G6/build && $(MAKE) $(MAKESILENT) -f depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/build.make depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TrackedFeaturesConverter.cpp.s
 .PHONY : src/TrackedFeaturesConverter.cpp.s
 
 # Help Target
@@ -474,6 +474,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

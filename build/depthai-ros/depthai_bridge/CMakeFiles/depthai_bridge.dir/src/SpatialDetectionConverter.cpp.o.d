@@ -1,7 +1,7 @@
 depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/src/SpatialDetectionConverter.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/src/SpatialDetectionConverter.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/SpatialDetectionConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/SpatialDetectionConverter.hpp \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -258,7 +258,7 @@ depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionCon
  /opt/ros/noetic/include/depthai-shared/common/Size2f.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/Buffer.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/ADatatype.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/SpatialDetectionArray.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/SpatialDetectionArray.h \
  /opt/ros/noetic/include/ros/types.h \
  /opt/ros/noetic/include/ros/serialization.h \
  /opt/ros/noetic/include/ros/roscpp_serialization_macros.h \
@@ -696,7 +696,7 @@ depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionCon
  /usr/include/boost/type_traits/is_pointer.hpp \
  /opt/ros/noetic/include/ros/message_operations.h \
  /opt/ros/noetic/include/std_msgs/Header.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/SpatialDetection.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/SpatialDetection.h \
  /opt/ros/noetic/include/vision_msgs/ObjectHypothesis.h \
  /opt/ros/noetic/include/vision_msgs/BoundingBox2D.h \
  /opt/ros/noetic/include/geometry_msgs/Pose2D.h \
@@ -1193,4 +1193,4 @@ depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionCon
  /opt/ros/noetic/include/geometry_msgs/Vector3.h \
  /opt/ros/noetic/include/sensor_msgs/PointCloud2.h \
  /opt/ros/noetic/include/sensor_msgs/PointField.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp

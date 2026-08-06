@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 # Utility rule file for diagnostic_msgs_generate_messages_cpp.
 
@@ -77,10 +77,10 @@ depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build
 
 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/clean:
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver && $(CMAKE_COMMAND) -P CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver && $(CMAKE_COMMAND) -P CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/clean
 
 depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws/src /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver /home/uavteam6/catkin_ws/build /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws_G6/src /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver /home/uavteam6/catkin_ws_G6/build /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/depend
 

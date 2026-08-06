@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"spar_node\" -Dspar_node_spar_EXPORTS
 
-CXX_INCLUDES = -I/home/uavteam6/catkin_ws/src/spar/spar_node/include -I/home/uavteam6/catkin_ws/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp
+CXX_INCLUDES = -I/home/uavteam6/catkin_ws_G6/src/spar/spar_node/include -I/home/uavteam6/catkin_ws_G6/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp
 
 CXX_FLAGS = -fPIC -std=c++11
 

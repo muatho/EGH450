@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/breadcrumb/breadcrumb_node"
-  "/home/uavteam6/catkin_ws/devel/lib/breadcrumb/breadcrumb_node.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/breadcrumb/breadcrumb_node"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/breadcrumb/breadcrumb_node.pdb"
   "CMakeFiles/breadcrumb_node.dir/src/breadcrumb_node.cpp.o"
   "CMakeFiles/breadcrumb_node.dir/src/breadcrumb_node.cpp.o.d"
 )

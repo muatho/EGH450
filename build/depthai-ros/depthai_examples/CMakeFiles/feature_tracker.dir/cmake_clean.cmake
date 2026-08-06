@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/depthai_examples/feature_tracker"
-  "/home/uavteam6/catkin_ws/devel/lib/depthai_examples/feature_tracker.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/depthai_examples/feature_tracker"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/depthai_examples/feature_tracker.pdb"
   "CMakeFiles/feature_tracker.dir/src/feature_tracker_publisher.cpp.o"
   "CMakeFiles/feature_tracker.dir/src/feature_tracker_publisher.cpp.o.d"
 )

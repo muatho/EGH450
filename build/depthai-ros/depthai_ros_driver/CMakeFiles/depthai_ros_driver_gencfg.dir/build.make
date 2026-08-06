@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 # Utility rule file for depthai_ros_driver_gencfg.
 
@@ -66,36 +66,36 @@ include depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/
 # Include the progress variables for this target.
 include depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/progress.make
 
-depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h
-depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py
+depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h
+depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py
 
-/home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg
-/home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.py.template
-/home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating dynamic reconfigure files from cfg/parameters.cfg: /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver && ../../catkin_generated/env_cached.sh /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver/setup_custom_pythonpath.sh /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg /opt/ros/noetic/share/dynamic_reconfigure/cmake/.. /home/uavteam6/catkin_ws/devel/share/depthai_ros_driver /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/depthai_ros_driver
+/home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg
+/home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.py.template
+/home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating dynamic reconfigure files from cfg/parameters.cfg: /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver && ../../catkin_generated/env_cached.sh /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver/setup_custom_pythonpath.sh /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg /opt/ros/noetic/share/dynamic_reconfigure/cmake/.. /home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/depthai_ros_driver
 
-/home/uavteam6/catkin_ws/devel/share/depthai_ros_driver/docs/parametersConfig.dox: /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/share/depthai_ros_driver/docs/parametersConfig.dox
+/home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver/docs/parametersConfig.dox: /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver/docs/parametersConfig.dox
 
-/home/uavteam6/catkin_ws/devel/share/depthai_ros_driver/docs/parametersConfig-usage.dox: /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/share/depthai_ros_driver/docs/parametersConfig-usage.dox
+/home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver/docs/parametersConfig-usage.dox: /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver/docs/parametersConfig-usage.dox
 
-/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py: /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py
+/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py: /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py
 
-/home/uavteam6/catkin_ws/devel/share/depthai_ros_driver/docs/parametersConfig.wikidoc: /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/share/depthai_ros_driver/docs/parametersConfig.wikidoc
+/home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver/docs/parametersConfig.wikidoc: /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver/docs/parametersConfig.wikidoc
 
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/codegen:
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/codegen
 
 depthai_ros_driver_gencfg: depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg
-depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h
-depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py
-depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws/devel/share/depthai_ros_driver/docs/parametersConfig-usage.dox
-depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws/devel/share/depthai_ros_driver/docs/parametersConfig.dox
-depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws/devel/share/depthai_ros_driver/docs/parametersConfig.wikidoc
+depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h
+depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/depthai_ros_driver/cfg/parametersConfig.py
+depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver/docs/parametersConfig-usage.dox
+depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver/docs/parametersConfig.dox
+depthai_ros_driver_gencfg: /home/uavteam6/catkin_ws_G6/devel/share/depthai_ros_driver/docs/parametersConfig.wikidoc
 depthai_ros_driver_gencfg: depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/build.make
 .PHONY : depthai_ros_driver_gencfg
 
@@ -104,10 +104,10 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/build: d
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/build
 
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/clean:
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver && $(CMAKE_COMMAND) -P CMakeFiles/depthai_ros_driver_gencfg.dir/cmake_clean.cmake
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver && $(CMAKE_COMMAND) -P CMakeFiles/depthai_ros_driver_gencfg.dir/cmake_clean.cmake
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/clean
 
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws/src /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver /home/uavteam6/catkin_ws/build /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws_G6/src /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver /home/uavteam6/catkin_ws_G6/build /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_gencfg.dir/depend
 

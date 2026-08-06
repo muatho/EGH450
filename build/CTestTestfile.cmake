@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/uavteam6/catkin_ws/src
-# Build directory: /home/uavteam6/catkin_ws/build
+# Source directory: /home/uavteam6/catkin_ws_G6/src
+# Build directory: /home/uavteam6/catkin_ws_G6/build
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
@@ -14,9 +14,7 @@ subdirs("rqt_mavros_gui")
 subdirs("rqt_quaternion_view")
 subdirs("breadcrumb")
 subdirs("depthai_publisher")
-subdirs("detection_viz")
 subdirs("qutas_lab_450")
-subdirs("servo_toggle")
 subdirs("spar/spar_msgs")
 subdirs("spar/spar_node")
 subdirs("uavasr_emulator")

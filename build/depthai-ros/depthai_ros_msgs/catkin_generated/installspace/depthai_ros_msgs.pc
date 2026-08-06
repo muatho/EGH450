@@ -1,4 +1,4 @@
-prefix=/home/uavteam6/catkin_ws/install
+prefix=/home/uavteam6/catkin_ws_G6/install
 
 Name: depthai_ros_msgs
 Description: Description of depthai_ros_msgs

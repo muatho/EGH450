@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/libspar_node_spar.pdb"
-  "/home/uavteam6/catkin_ws/devel/lib/libspar_node_spar.so"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libspar_node_spar.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libspar_node_spar.so"
   "CMakeFiles/spar_node_spar.dir/src/spar_node/spar.cpp.o"
   "CMakeFiles/spar_node_spar.dir/src/spar_node/spar.cpp.o.d"
 )

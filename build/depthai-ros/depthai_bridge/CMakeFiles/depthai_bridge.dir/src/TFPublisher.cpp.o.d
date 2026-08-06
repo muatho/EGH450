@@ -1,7 +1,7 @@
 depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/TFPublisher.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/src/TFPublisher.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/src/TFPublisher.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/TFPublisher.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/TFPublisher.hpp \
  /opt/ros/noetic/include/depthai-shared/common/CameraFeatures.hpp \
  /opt/ros/noetic/include/depthai-shared/common/CameraBoardSocket.hpp \
  /usr/include/c++/9/cstdint \

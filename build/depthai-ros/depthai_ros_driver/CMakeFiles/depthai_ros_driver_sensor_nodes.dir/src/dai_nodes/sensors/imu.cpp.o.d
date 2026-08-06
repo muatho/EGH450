@@ -1,8 +1,8 @@
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/src/dai_nodes/sensors/imu.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/src/dai_nodes/sensors/imu.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/src/dai_nodes/sensors/imu.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/imu.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/base_node.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/imu.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/base_node.hpp \
  /usr/include/c++/9/memory /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -253,7 +253,7 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/sr
  /opt/ros/noetic/include/depthai-shared/datatype/DatatypeEnum.hpp \
  /opt/ros/noetic/include/depthai-shared/properties/Properties.hpp \
  /opt/ros/noetic/include/depthai-shared/3rdparty/tl/optional.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h \
  /opt/ros/noetic/include/dynamic_reconfigure/config_tools.h \
  /opt/ros/noetic/include/dynamic_reconfigure/Config.h \
  /opt/ros/noetic/include/ros/types.h \
@@ -1178,7 +1178,7 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/sr
  /opt/ros/noetic/include/dynamic_reconfigure/ConfigDescription.h \
  /opt/ros/noetic/include/dynamic_reconfigure/config_init_mutex.h \
  /usr/include/boost/any.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/utils.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/utils.hpp \
  /opt/ros/noetic/include/depthai-shared/datatype/RawImgFrame.hpp \
  /opt/ros/noetic/include/depthai-shared/common/FrameEvent.hpp \
  /opt/ros/noetic/include/depthai-shared/datatype/RawBuffer.hpp \
@@ -1250,10 +1250,10 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/sr
  /opt/ros/noetic/include/depthai-shared/properties/IMUProperties.hpp \
  /opt/ros/noetic/include/depthai/pipeline/node/XLinkOut.hpp \
  /opt/ros/noetic/include/depthai-shared/properties/XLinkOutProperties.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImuConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImuConverter.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/IMUData.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/Buffer.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
  /opt/ros/noetic/include/ros/ros.h \
  /opt/ros/noetic/include/ros/single_subscriber_publisher.h \
  /opt/ros/noetic/include/ros/service.h \
@@ -1261,13 +1261,13 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_sensor_nodes.dir/sr
  /opt/ros/noetic/include/ros/this_node.h \
  /opt/ros/noetic/include/ros/param.h /opt/ros/noetic/include/ros/topic.h \
  /opt/ros/noetic/include/ros/node_handle.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/ImuWithMagneticField.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/ImuWithMagneticField.h \
  /opt/ros/noetic/include/sensor_msgs/MagneticField.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/imu_param_handler.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/imu_param_handler.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/CameraControl.hpp \
  /opt/ros/noetic/include/depthai-shared/datatype/RawCameraControl.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/base_param_handler.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/sensor_helpers.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/base_param_handler.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/sensor_helpers.hpp \
  /opt/ros/noetic/include/depthai-shared/properties/ColorCameraProperties.hpp \
  /opt/ros/noetic/include/depthai-shared/properties/MonoCameraProperties.hpp \
  /opt/ros/noetic/include/image_transport/camera_publisher.h \

@@ -1,7 +1,7 @@
 depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/src/rgb_video_subscriber.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_examples/src/rgb_video_subscriber.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_examples/src/rgb_video_subscriber.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -741,7 +741,7 @@ depthai-ros/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/src/rgb_video_su
  /opt/ros/noetic/include/depthai/common/CameraExposureOffset.hpp \
  /opt/ros/noetic/include/depthai-shared/datatype/RawImgFrame.hpp \
  /opt/ros/noetic/include/depthai-shared/common/FrameEvent.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/FFMPEGPacket.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/FFMPEGPacket.h \
  /opt/ros/noetic/include/sensor_msgs/CameraInfo.h \
  /opt/ros/noetic/include/sensor_msgs/RegionOfInterest.h \
  /usr/include/opencv4/opencv2/highgui.hpp \

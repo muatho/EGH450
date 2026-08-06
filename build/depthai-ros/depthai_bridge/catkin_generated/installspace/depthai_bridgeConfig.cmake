@@ -67,14 +67,14 @@ set(depthai_bridge_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(depthai_bridge_SOURCE_PREFIX /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge)
-  set(depthai_bridge_DEVEL_PREFIX /home/uavteam6/catkin_ws/devel)
+  set(depthai_bridge_SOURCE_PREFIX /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge)
+  set(depthai_bridge_DEVEL_PREFIX /home/uavteam6/catkin_ws_G6/devel)
   set(depthai_bridge_INSTALL_PREFIX "")
   set(depthai_bridge_PREFIX ${depthai_bridge_DEVEL_PREFIX})
 else()
   set(depthai_bridge_SOURCE_PREFIX "")
   set(depthai_bridge_DEVEL_PREFIX "")
-  set(depthai_bridge_INSTALL_PREFIX /home/uavteam6/catkin_ws/install)
+  set(depthai_bridge_INSTALL_PREFIX /home/uavteam6/catkin_ws_G6/install)
   set(depthai_bridge_PREFIX ${depthai_bridge_INSTALL_PREFIX})
 endif()
 
@@ -156,7 +156,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/uavteam6/catkin_ws/install/lib;/home/uavteam6/catkin_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/uavteam6/catkin_ws_G6/install/lib;/home/uavteam6/catkin_ws_G6/devel/lib;/home/uavteam6/catkin_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

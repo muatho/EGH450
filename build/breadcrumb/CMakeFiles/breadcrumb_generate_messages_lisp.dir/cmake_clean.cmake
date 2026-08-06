@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/breadcrumb/srv/RequestPath.lisp"
+  "/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/breadcrumb/srv/RequestPath.lisp"
   "CMakeFiles/breadcrumb_generate_messages_lisp"
 )
 

@@ -1,7 +1,7 @@
 depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImgDetectionConverter.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/src/ImgDetectionConverter.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/src/ImgDetectionConverter.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImgDetectionConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImgDetectionConverter.hpp \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -699,7 +699,7 @@ depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImgDetectionConvert
  /opt/ros/noetic/include/vision_msgs/BoundingBox2D.h \
  /opt/ros/noetic/include/geometry_msgs/Pose2D.h \
  /opt/ros/noetic/include/sensor_msgs/Image.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/depthaiUtility.hpp \
  /opt/ros/noetic/include/ros/ros.h /opt/ros/noetic/include/ros/rate.h \
  /opt/ros/noetic/include/ros/console.h \
  /opt/ros/noetic/include/ros/console_backend.h /usr/include/c++/9/cstdarg \

@@ -1,8 +1,8 @@
-# Install script for directory: /home/uavteam6/catkin_ws/src/qutas_lab_450
+# Install script for directory: /home/uavteam6/catkin_ws_G6/src/qutas_lab_450
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws_G6/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,27 +43,27 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws/build/qutas_lab_450/catkin_generated/installspace/qutas_lab_450.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/build/qutas_lab_450/catkin_generated/installspace/qutas_lab_450.pc")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/qutas_lab_450/cmake" TYPE FILE FILES
-    "/home/uavteam6/catkin_ws/build/qutas_lab_450/catkin_generated/installspace/qutas_lab_450Config.cmake"
-    "/home/uavteam6/catkin_ws/build/qutas_lab_450/catkin_generated/installspace/qutas_lab_450Config-version.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/qutas_lab_450/catkin_generated/installspace/qutas_lab_450Config.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/qutas_lab_450/catkin_generated/installspace/qutas_lab_450Config-version.cmake"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/qutas_lab_450" TYPE FILE FILES "/home/uavteam6/catkin_ws/src/qutas_lab_450/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/qutas_lab_450" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/src/qutas_lab_450/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/qutas_lab_450/scripts" TYPE DIRECTORY FILES "/home/uavteam6/catkin_ws/src/qutas_lab_450/scripts/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/qutas_lab_450/scripts" TYPE DIRECTORY FILES "/home/uavteam6/catkin_ws_G6/src/qutas_lab_450/scripts/")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/uavteam6/catkin_ws/build/qutas_lab_450/install_local_manifest.txt"
+  file(WRITE "/home/uavteam6/catkin_ws_G6/build/qutas_lab_450/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

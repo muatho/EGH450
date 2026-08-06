@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/breadcrumb/srv/_RequestPath.py"
-  "/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/breadcrumb/srv/__init__.py"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/breadcrumb/srv/_RequestPath.py"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/breadcrumb/srv/__init__.py"
   "CMakeFiles/breadcrumb_generate_messages_py"
 )
 

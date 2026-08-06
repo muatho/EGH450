@@ -1,5 +1,5 @@
 uavasr_emulator/CMakeFiles/uavasr_imagery.dir/src/uavasr_emulator/uavasr_imagery.cpp.o: \
- /home/uavteam6/catkin_ws/src/uavasr_emulator/src/uavasr_emulator/uavasr_imagery.cpp \
+ /home/uavteam6/catkin_ws_G6/src/uavasr_emulator/src/uavasr_emulator/uavasr_imagery.cpp \
  /usr/include/stdc-predef.h /opt/ros/noetic/include/ros/ros.h \
  /opt/ros/noetic/include/ros/time.h \
  /opt/ros/noetic/include/ros/platform.h /usr/include/c++/9/stdlib.h \
@@ -1096,7 +1096,7 @@ uavasr_emulator/CMakeFiles/uavasr_imagery.dir/src/uavasr_emulator/uavasr_imagery
  /opt/ros/noetic/include/ros/this_node.h \
  /opt/ros/noetic/include/ros/param.h /opt/ros/noetic/include/ros/topic.h \
  /opt/ros/noetic/include/ros/node_handle.h \
- /home/uavteam6/catkin_ws/src/uavasr_emulator/include/uavasr_emulator/uavasr_imagery.h \
+ /home/uavteam6/catkin_ws_G6/src/uavasr_emulator/include/uavasr_emulator/uavasr_imagery.h \
  /opt/ros/noetic/include/sensor_msgs/Image.h \
  /opt/ros/noetic/include/ros/message_operations.h \
  /opt/ros/noetic/include/std_msgs/Header.h \
@@ -1131,7 +1131,7 @@ uavasr_emulator/CMakeFiles/uavasr_imagery.dir/src/uavasr_emulator/uavasr_imagery
  /opt/ros/noetic/include/dynamic_reconfigure/Reconfigure.h \
  /opt/ros/noetic/include/dynamic_reconfigure/ReconfigureRequest.h \
  /opt/ros/noetic/include/dynamic_reconfigure/ReconfigureResponse.h \
- /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h \
  /opt/ros/noetic/include/dynamic_reconfigure/config_tools.h \
  /opt/ros/noetic/include/dynamic_reconfigure/config_init_mutex.h \
  /usr/include/boost/any.hpp /usr/include/eigen3/Eigen/Dense \

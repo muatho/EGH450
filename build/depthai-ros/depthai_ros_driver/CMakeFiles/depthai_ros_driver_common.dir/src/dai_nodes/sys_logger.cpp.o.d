@@ -1,7 +1,7 @@
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sys_logger.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/src/dai_nodes/sys_logger.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/src/dai_nodes/sys_logger.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sys_logger.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sys_logger.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/SystemInformation.hpp \
  /usr/include/c++/9/chrono /usr/include/c++/9/ratio \
  /usr/include/c++/9/type_traits \
@@ -254,7 +254,7 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_
  /opt/ros/noetic/include/depthai-shared/common/Timestamp.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/Buffer.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/ADatatype.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/base_node.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/base_node.hpp \
  /opt/ros/noetic/include/depthai-shared/common/CameraBoardSocket.hpp \
  /opt/ros/noetic/include/depthai/pipeline/Node.hpp /usr/include/c++/9/set \
  /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
@@ -267,7 +267,7 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_
  /usr/include/c++/9/iostream \
  /opt/ros/noetic/include/depthai-shared/properties/Properties.hpp \
  /opt/ros/noetic/include/depthai-shared/3rdparty/tl/optional.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h \
  /opt/ros/noetic/include/dynamic_reconfigure/config_tools.h \
  /opt/ros/noetic/include/dynamic_reconfigure/Config.h \
  /opt/ros/noetic/include/ros/types.h \
@@ -1190,7 +1190,7 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_
  /opt/ros/noetic/include/dynamic_reconfigure/ConfigDescription.h \
  /opt/ros/noetic/include/dynamic_reconfigure/config_init_mutex.h \
  /usr/include/boost/any.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/utils.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/utils.hpp \
  /opt/ros/noetic/include/depthai-shared/datatype/RawImgFrame.hpp \
  /opt/ros/noetic/include/depthai-shared/common/FrameEvent.hpp \
  /opt/ros/noetic/include/depthai-shared/properties/VideoEncoderProperties.hpp \

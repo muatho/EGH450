@@ -1,8 +1,8 @@
-# Install script for directory: /home/uavteam6/catkin_ws/src
+# Install script for directory: /home/uavteam6/catkin_ws_G6/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws_G6/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -54,131 +54,129 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/uavteam6/catkin_ws/install/_setup_util.py")
+   "/home/uavteam6/catkin_ws_G6/install/_setup_util.py")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws/install" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/_setup_util.py")
+  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws_G6/install" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/_setup_util.py")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/uavteam6/catkin_ws/install/env.sh")
+   "/home/uavteam6/catkin_ws_G6/install/env.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws/install" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/env.sh")
+  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws_G6/install" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/env.sh")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/uavteam6/catkin_ws/install/setup.bash;/home/uavteam6/catkin_ws/install/local_setup.bash")
+   "/home/uavteam6/catkin_ws_G6/install/setup.bash;/home/uavteam6/catkin_ws_G6/install/local_setup.bash")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws/install" TYPE FILE FILES
-    "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/setup.bash"
-    "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/local_setup.bash"
+  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws_G6/install" TYPE FILE FILES
+    "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/setup.bash"
+    "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/local_setup.bash"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/uavteam6/catkin_ws/install/setup.sh;/home/uavteam6/catkin_ws/install/local_setup.sh")
+   "/home/uavteam6/catkin_ws_G6/install/setup.sh;/home/uavteam6/catkin_ws_G6/install/local_setup.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws/install" TYPE FILE FILES
-    "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/setup.sh"
-    "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/local_setup.sh"
+  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws_G6/install" TYPE FILE FILES
+    "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/setup.sh"
+    "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/local_setup.sh"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/uavteam6/catkin_ws/install/setup.zsh;/home/uavteam6/catkin_ws/install/local_setup.zsh")
+   "/home/uavteam6/catkin_ws_G6/install/setup.zsh;/home/uavteam6/catkin_ws_G6/install/local_setup.zsh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws/install" TYPE FILE FILES
-    "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/setup.zsh"
-    "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/local_setup.zsh"
+  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws_G6/install" TYPE FILE FILES
+    "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/setup.zsh"
+    "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/local_setup.zsh"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/uavteam6/catkin_ws/install/setup.fish;/home/uavteam6/catkin_ws/install/local_setup.fish")
+   "/home/uavteam6/catkin_ws_G6/install/setup.fish;/home/uavteam6/catkin_ws_G6/install/local_setup.fish")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws/install" TYPE FILE FILES
-    "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/setup.fish"
-    "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/local_setup.fish"
+  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws_G6/install" TYPE FILE FILES
+    "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/setup.fish"
+    "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/local_setup.fish"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/uavteam6/catkin_ws/install/.rosinstall")
+   "/home/uavteam6/catkin_ws_G6/install/.rosinstall")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws/install" TYPE FILE FILES "/home/uavteam6/catkin_ws/build/catkin_generated/installspace/.rosinstall")
+  file(INSTALL DESTINATION "/home/uavteam6/catkin_ws_G6/install" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/build/catkin_generated/installspace/.rosinstall")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/uavteam6/catkin_ws/build/gtest/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/depthai-ros/depthai-ros/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/egh450_image_processor/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/egh450_target_solvepnp/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/rqt_eyedropper/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/rqt_generic_hud/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/rqt_mavros_gui/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/rqt_quaternion_view/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/breadcrumb/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/depthai_publisher/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/detection_viz/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/qutas_lab_450/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/servo_toggle/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/spar/spar_msgs/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/spar/spar_node/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/uavasr_emulator/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/depthai-ros/depthai_bridge/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/depthai-ros/depthai_filters/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/depthai-ros/depthai_descriptions/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/depthai-ros/depthai_examples/cmake_install.cmake")
-  include("/home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_driver/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/gtest/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai-ros/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/egh450_image_processor/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/egh450_target_solvepnp/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/rqt_eyedropper/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/rqt_generic_hud/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/rqt_mavros_gui/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/rqt_quaternion_view/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/breadcrumb/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/depthai_publisher/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/qutas_lab_450/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/spar/spar_msgs/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/spar/spar_node/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/uavasr_emulator/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_bridge/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_filters/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_descriptions/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_examples/cmake_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_driver/cmake_install.cmake")
 
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/uavteam6/catkin_ws/build/install_local_manifest.txt"
+  file(WRITE "/home/uavteam6/catkin_ws_G6/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -194,6 +192,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/uavteam6/catkin_ws/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/home/uavteam6/catkin_ws_G6/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

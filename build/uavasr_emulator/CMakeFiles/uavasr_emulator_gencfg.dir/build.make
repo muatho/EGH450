@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 # Utility rule file for uavasr_emulator_gencfg.
 
@@ -66,61 +66,61 @@ include uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/compiler_depend.ma
 # Include the progress variables for this target.
 include uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/progress.make
 
-uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h
-uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py
-uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h
-uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py
+uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h
+uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py
+uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h
+uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py
 
-/home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h: /home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg
-/home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.py.template
-/home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating dynamic reconfigure files from cfg/EmulatorParams.cfg: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py"
-	cd /home/uavteam6/catkin_ws/build/uavasr_emulator && ../catkin_generated/env_cached.sh /home/uavteam6/catkin_ws/build/uavasr_emulator/setup_custom_pythonpath.sh /home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg /opt/ros/noetic/share/dynamic_reconfigure/cmake/.. /home/uavteam6/catkin_ws/devel/share/uavasr_emulator /home/uavteam6/catkin_ws/devel/include/uavasr_emulator /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator
+/home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h: /home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg
+/home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.py.template
+/home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating dynamic reconfigure files from cfg/EmulatorParams.cfg: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py"
+	cd /home/uavteam6/catkin_ws_G6/build/uavasr_emulator && ../catkin_generated/env_cached.sh /home/uavteam6/catkin_ws_G6/build/uavasr_emulator/setup_custom_pythonpath.sh /home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg /opt/ros/noetic/share/dynamic_reconfigure/cmake/.. /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator
 
-/home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.dox: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.dox
+/home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.dox: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.dox
 
-/home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/EmulatorParamsConfig-usage.dox: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/EmulatorParamsConfig-usage.dox
+/home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/EmulatorParamsConfig-usage.dox: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/EmulatorParamsConfig-usage.dox
 
-/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py
+/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py
 
-/home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.wikidoc: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.wikidoc
+/home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.wikidoc: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.wikidoc
 
-/home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h: /home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/ImageryParams.cfg
-/home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.py.template
-/home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating dynamic reconfigure files from cfg/ImageryParams.cfg: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py"
-	cd /home/uavteam6/catkin_ws/build/uavasr_emulator && ../catkin_generated/env_cached.sh /home/uavteam6/catkin_ws/build/uavasr_emulator/setup_custom_pythonpath.sh /home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/ImageryParams.cfg /opt/ros/noetic/share/dynamic_reconfigure/cmake/.. /home/uavteam6/catkin_ws/devel/share/uavasr_emulator /home/uavteam6/catkin_ws/devel/include/uavasr_emulator /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator
+/home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h: /home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/ImageryParams.cfg
+/home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.py.template
+/home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h: /opt/ros/noetic/share/dynamic_reconfigure/templates/ConfigType.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating dynamic reconfigure files from cfg/ImageryParams.cfg: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py"
+	cd /home/uavteam6/catkin_ws_G6/build/uavasr_emulator && ../catkin_generated/env_cached.sh /home/uavteam6/catkin_ws_G6/build/uavasr_emulator/setup_custom_pythonpath.sh /home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/ImageryParams.cfg /opt/ros/noetic/share/dynamic_reconfigure/cmake/.. /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator
 
-/home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/ImageryParamsConfig.dox: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/ImageryParamsConfig.dox
+/home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/ImageryParamsConfig.dox: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/ImageryParamsConfig.dox
 
-/home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/ImageryParamsConfig-usage.dox: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/ImageryParamsConfig-usage.dox
+/home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/ImageryParamsConfig-usage.dox: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/ImageryParamsConfig-usage.dox
 
-/home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py
+/home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py
 
-/home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/ImageryParamsConfig.wikidoc: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h
-	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/ImageryParamsConfig.wikidoc
+/home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/ImageryParamsConfig.wikidoc: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h
+	@$(CMAKE_COMMAND) -E touch_nocreate /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/ImageryParamsConfig.wikidoc
 
 uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/codegen:
 .PHONY : uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/codegen
 
 uavasr_emulator_gencfg: uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/EmulatorParamsConfig.h
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/include/uavasr_emulator/ImageryParamsConfig.h
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/EmulatorParamsConfig-usage.dox
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.dox
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.wikidoc
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/ImageryParamsConfig-usage.dox
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/ImageryParamsConfig.dox
-uavasr_emulator_gencfg: /home/uavteam6/catkin_ws/devel/share/uavasr_emulator/docs/ImageryParamsConfig.wikidoc
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/EmulatorParamsConfig.h
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/include/uavasr_emulator/ImageryParamsConfig.h
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/EmulatorParamsConfig.py
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/lib/python3/dist-packages/uavasr_emulator/cfg/ImageryParamsConfig.py
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/EmulatorParamsConfig-usage.dox
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.dox
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/EmulatorParamsConfig.wikidoc
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/ImageryParamsConfig-usage.dox
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/ImageryParamsConfig.dox
+uavasr_emulator_gencfg: /home/uavteam6/catkin_ws_G6/devel/share/uavasr_emulator/docs/ImageryParamsConfig.wikidoc
 uavasr_emulator_gencfg: uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/build.make
 .PHONY : uavasr_emulator_gencfg
 
@@ -129,10 +129,10 @@ uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/build: uavasr_emulator_gen
 .PHONY : uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/build
 
 uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/clean:
-	cd /home/uavteam6/catkin_ws/build/uavasr_emulator && $(CMAKE_COMMAND) -P CMakeFiles/uavasr_emulator_gencfg.dir/cmake_clean.cmake
+	cd /home/uavteam6/catkin_ws_G6/build/uavasr_emulator && $(CMAKE_COMMAND) -P CMakeFiles/uavasr_emulator_gencfg.dir/cmake_clean.cmake
 .PHONY : uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/clean
 
 uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws/src /home/uavteam6/catkin_ws/src/uavasr_emulator /home/uavteam6/catkin_ws/build /home/uavteam6/catkin_ws/build/uavasr_emulator /home/uavteam6/catkin_ws/build/uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws_G6/src /home/uavteam6/catkin_ws_G6/src/uavasr_emulator /home/uavteam6/catkin_ws_G6/build /home/uavteam6/catkin_ws_G6/build/uavasr_emulator /home/uavteam6/catkin_ws_G6/build/uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : uavasr_emulator/CMakeFiles/uavasr_emulator_gencfg.dir/depend
 

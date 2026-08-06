@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_examples/src/rgb_stereo_node.cpp" "depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.o" "gcc" "depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.o.d"
+  "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_examples/src/rgb_stereo_node.cpp" "depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.o" "gcc" "depthai-ros/depthai_examples/CMakeFiles/rgb_stereo_node.dir/src/rgb_stereo_node.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

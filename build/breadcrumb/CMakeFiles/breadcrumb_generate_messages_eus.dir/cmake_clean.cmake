@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/share/roseus/ros/breadcrumb/manifest.l"
-  "/home/uavteam6/catkin_ws/devel/share/roseus/ros/breadcrumb/srv/RequestPath.l"
+  "/home/uavteam6/catkin_ws_G6/devel/share/roseus/ros/breadcrumb/manifest.l"
+  "/home/uavteam6/catkin_ws_G6/devel/share/roseus/ros/breadcrumb/srv/RequestPath.l"
   "CMakeFiles/breadcrumb_generate_messages_eus"
 )
 

@@ -284,11 +284,11 @@ double max_disparity;
 
 
 
-//#line 11 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 11 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       int lambda;
-//#line 12 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 12 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       double sigma;
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       double max_disparity;
 //#line 231 "/opt/ros/noetic/share/dynamic_reconfigure/cmake/../templates/ConfigType.h.template"
 
@@ -429,35 +429,35 @@ double max_disparity;
     {
 wlsConfig::GroupDescription<wlsConfig::DEFAULT, wlsConfig> Default("Default", "", 0, 0, true, &wlsConfig::groups);
 wlsConfig::GroupDescription<wlsConfig::DEFAULT::WLS, wlsConfig::DEFAULT> wls("wls", "", 0, 1, true, &wlsConfig::DEFAULT::wls);
-//#line 11 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 11 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __min__.lambda = 0;
-//#line 11 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 11 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __max__.lambda = 20000;
-//#line 11 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 11 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __default__.lambda = 8000;
-//#line 11 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 11 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       wls.abstract_parameters.push_back(wlsConfig::AbstractParamDescriptionConstPtr(new wlsConfig::ParamDescription<int>("lambda", "int", 0, "WLS Lambda", "", &wlsConfig::lambda)));
-//#line 11 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 11 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __param_descriptions__.push_back(wlsConfig::AbstractParamDescriptionConstPtr(new wlsConfig::ParamDescription<int>("lambda", "int", 0, "WLS Lambda", "", &wlsConfig::lambda)));
-//#line 12 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 12 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __min__.sigma = 0.0;
-//#line 12 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 12 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __max__.sigma = 2.0;
-//#line 12 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 12 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __default__.sigma = 1.5;
-//#line 12 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 12 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       wls.abstract_parameters.push_back(wlsConfig::AbstractParamDescriptionConstPtr(new wlsConfig::ParamDescription<double>("sigma", "double", 0, "WLS Sigma", "", &wlsConfig::sigma)));
-//#line 12 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 12 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __param_descriptions__.push_back(wlsConfig::AbstractParamDescriptionConstPtr(new wlsConfig::ParamDescription<double>("sigma", "double", 0, "WLS Sigma", "", &wlsConfig::sigma)));
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __min__.max_disparity = 0.0;
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __max__.max_disparity = 10000.0;
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __default__.max_disparity = 760.0;
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       wls.abstract_parameters.push_back(wlsConfig::AbstractParamDescriptionConstPtr(new wlsConfig::ParamDescription<double>("max_disparity", "double", 0, "WLS Max Disparity", "", &wlsConfig::max_disparity)));
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters/cfg/wls.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters/cfg/wls.cfg"
       __param_descriptions__.push_back(wlsConfig::AbstractParamDescriptionConstPtr(new wlsConfig::ParamDescription<double>("max_disparity", "double", 0, "WLS Max Disparity", "", &wlsConfig::max_disparity)));
 //#line 125 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       wls.convertParams();

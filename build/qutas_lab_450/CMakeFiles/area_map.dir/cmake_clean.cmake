@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/libarea_map.pdb"
-  "/home/uavteam6/catkin_ws/devel/lib/libarea_map.so"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libarea_map.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libarea_map.so"
   "CMakeFiles/area_map.dir/src/area_map/area_map.cpp.o"
   "CMakeFiles/area_map.dir/src/area_map/area_map.cpp.o.d"
 )

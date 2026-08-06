@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 # Utility rule file for bond_generate_messages_nodejs.
 
@@ -77,10 +77,10 @@ depthai-ros/depthai_filters/CMakeFiles/bond_generate_messages_nodejs.dir/build: 
 .PHONY : depthai-ros/depthai_filters/CMakeFiles/bond_generate_messages_nodejs.dir/build
 
 depthai-ros/depthai_filters/CMakeFiles/bond_generate_messages_nodejs.dir/clean:
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_filters && $(CMAKE_COMMAND) -P CMakeFiles/bond_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_filters && $(CMAKE_COMMAND) -P CMakeFiles/bond_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : depthai-ros/depthai_filters/CMakeFiles/bond_generate_messages_nodejs.dir/clean
 
 depthai-ros/depthai_filters/CMakeFiles/bond_generate_messages_nodejs.dir/depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws/src /home/uavteam6/catkin_ws/src/depthai-ros/depthai_filters /home/uavteam6/catkin_ws/build /home/uavteam6/catkin_ws/build/depthai-ros/depthai_filters /home/uavteam6/catkin_ws/build/depthai-ros/depthai_filters/CMakeFiles/bond_generate_messages_nodejs.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws_G6/src /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_filters /home/uavteam6/catkin_ws_G6/build /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_filters /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_filters/CMakeFiles/bond_generate_messages_nodejs.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : depthai-ros/depthai_filters/CMakeFiles/bond_generate_messages_nodejs.dir/depend
 

@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 # Utility rule file for depthai_ros_msgs_generate_messages_lisp.
 
@@ -66,146 +66,146 @@ include depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messag
 # Include the progress variables for this target.
 include depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/progress.make
 
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/AutoFocusCtrl.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv/TriggerNamed.lisp
-depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/AutoFocusCtrl.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv/TriggerNamed.lisp
+depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/AutoFocusCtrl.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/AutoFocusCtrl.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/AutoFocusCtrl.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from depthai_ros_msgs/AutoFocusCtrl.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/AutoFocusCtrl.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/AutoFocusCtrl.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/AutoFocusCtrl.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/AutoFocusCtrl.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from depthai_ros_msgs/AutoFocusCtrl.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/AutoFocusCtrl.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/FFMPEGPacket.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from depthai_ros_msgs/FFMPEGPacket.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/FFMPEGPacket.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/FFMPEGPacket.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from depthai_ros_msgs/FFMPEGPacket.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/FFMPEGPacket.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/HandLandmark.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from depthai_ros_msgs/HandLandmark.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/HandLandmark.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/HandLandmark.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from depthai_ros_msgs/HandLandmark.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/HandLandmark.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/HandLandmarkArray.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/HandLandmark.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from depthai_ros_msgs/HandLandmarkArray.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/HandLandmarkArray.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/HandLandmarkArray.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/HandLandmark.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from depthai_ros_msgs/HandLandmarkArray.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/HandLandmarkArray.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/ImuWithMagneticField.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/sensor_msgs/msg/MagneticField.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Quaternion.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/sensor_msgs/msg/Imu.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Vector3.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Lisp code from depthai_ros_msgs/ImuWithMagneticField.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/ImuWithMagneticField.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/ImuWithMagneticField.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Vector3.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/sensor_msgs/msg/Imu.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/sensor_msgs/msg/MagneticField.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Quaternion.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Lisp code from depthai_ros_msgs/ImuWithMagneticField.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/ImuWithMagneticField.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetection.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/share/vision_msgs/msg/BoundingBox2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/share/vision_msgs/msg/ObjectHypothesis.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Lisp code from depthai_ros_msgs/SpatialDetection.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetection.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetection.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/share/vision_msgs/msg/ObjectHypothesis.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/share/vision_msgs/msg/BoundingBox2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Lisp code from depthai_ros_msgs/SpatialDetection.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetection.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetectionArray.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetection.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/vision_msgs/msg/BoundingBox2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/vision_msgs/msg/ObjectHypothesis.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Lisp code from depthai_ros_msgs/SpatialDetectionArray.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetectionArray.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetectionArray.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/vision_msgs/msg/BoundingBox2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /opt/ros/noetic/share/vision_msgs/msg/ObjectHypothesis.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetection.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Lisp code from depthai_ros_msgs/SpatialDetectionArray.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetectionArray.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Quaternion.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/vision_msgs/msg/BoundingBox2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/PoseWithCovariance.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/vision_msgs/msg/ObjectHypothesisWithPose.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Lisp code from depthai_ros_msgs/TrackDetection2D.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2D.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/vision_msgs/msg/BoundingBox2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/vision_msgs/msg/ObjectHypothesisWithPose.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/PoseWithCovariance.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Quaternion.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Lisp code from depthai_ros_msgs/TrackDetection2D.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2D.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2DArray.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Quaternion.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/vision_msgs/msg/BoundingBox2D.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/PoseWithCovariance.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/vision_msgs/msg/ObjectHypothesisWithPose.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating Lisp code from depthai_ros_msgs/TrackDetection2DArray.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2DArray.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2DArray.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/vision_msgs/msg/BoundingBox2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/vision_msgs/msg/ObjectHypothesisWithPose.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/PoseWithCovariance.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Quaternion.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating Lisp code from depthai_ros_msgs/TrackDetection2DArray.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackDetection2DArray.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeature.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating Lisp code from depthai_ros_msgs/TrackedFeature.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeature.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeature.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating Lisp code from depthai_ros_msgs/TrackedFeature.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeature.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeatures.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeature.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating Lisp code from depthai_ros_msgs/TrackedFeatures.msg"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeatures.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeatures.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeature.msg
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating Lisp code from depthai_ros_msgs/TrackedFeatures.msg"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/TrackedFeatures.msg -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/srv/NormalizedImageCrop.srv
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating Lisp code from depthai_ros_msgs/NormalizedImageCrop.srv"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/srv/NormalizedImageCrop.srv -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/srv/NormalizedImageCrop.srv
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Pose2D.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating Lisp code from depthai_ros_msgs/NormalizedImageCrop.srv"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/srv/NormalizedImageCrop.srv -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv
 
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv/TriggerNamed.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv/TriggerNamed.lisp: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/srv/TriggerNamed.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating Lisp code from depthai_ros_msgs/TriggerNamed.srv"
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/srv/TriggerNamed.srv -Idepthai_ros_msgs:/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv/TriggerNamed.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv/TriggerNamed.lisp: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/srv/TriggerNamed.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating Lisp code from depthai_ros_msgs/TriggerNamed.srv"
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/srv/TriggerNamed.srv -Idepthai_ros_msgs:/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Ivision_msgs:/opt/ros/noetic/share/vision_msgs/cmake/../msg -p depthai_ros_msgs -o /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/codegen:
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/codegen
 
 depthai_ros_msgs_generate_messages_lisp: depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/AutoFocusCtrl.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp
-depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws/devel/share/common-lisp/ros/depthai_ros_msgs/srv/TriggerNamed.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/AutoFocusCtrl.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/FFMPEGPacket.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmark.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/HandLandmarkArray.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/ImuWithMagneticField.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetection.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/SpatialDetectionArray.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2D.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackDetection2DArray.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeature.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/msg/TrackedFeatures.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv/NormalizedImageCrop.lisp
+depthai_ros_msgs_generate_messages_lisp: /home/uavteam6/catkin_ws_G6/devel/share/common-lisp/ros/depthai_ros_msgs/srv/TriggerNamed.lisp
 depthai_ros_msgs_generate_messages_lisp: depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/build.make
 .PHONY : depthai_ros_msgs_generate_messages_lisp
 
@@ -214,10 +214,10 @@ depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/build
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/clean:
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && $(CMAKE_COMMAND) -P CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/cmake_clean.cmake
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && $(CMAKE_COMMAND) -P CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/cmake_clean.cmake
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/clean
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws/src /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs /home/uavteam6/catkin_ws/build /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws_G6/src /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs /home/uavteam6/catkin_ws_G6/build /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/depend
 

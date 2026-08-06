@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/libdepthai_bridge.pdb"
-  "/home/uavteam6/catkin_ws/devel/lib/libdepthai_bridge.so"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libdepthai_bridge.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libdepthai_bridge.so"
   "CMakeFiles/depthai_bridge.dir/src/DisparityConverter.cpp.o"
   "CMakeFiles/depthai_bridge.dir/src/DisparityConverter.cpp.o.d"
   "CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o"

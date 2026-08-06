@@ -67,14 +67,14 @@ set(uavasr_emulator_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(uavasr_emulator_SOURCE_PREFIX /home/uavteam6/catkin_ws/src/uavasr_emulator)
-  set(uavasr_emulator_DEVEL_PREFIX /home/uavteam6/catkin_ws/devel)
+  set(uavasr_emulator_SOURCE_PREFIX /home/uavteam6/catkin_ws_G6/src/uavasr_emulator)
+  set(uavasr_emulator_DEVEL_PREFIX /home/uavteam6/catkin_ws_G6/devel)
   set(uavasr_emulator_INSTALL_PREFIX "")
   set(uavasr_emulator_PREFIX ${uavasr_emulator_DEVEL_PREFIX})
 else()
   set(uavasr_emulator_SOURCE_PREFIX "")
   set(uavasr_emulator_DEVEL_PREFIX "")
-  set(uavasr_emulator_INSTALL_PREFIX /home/uavteam6/catkin_ws/install)
+  set(uavasr_emulator_INSTALL_PREFIX /home/uavteam6/catkin_ws_G6/install)
   set(uavasr_emulator_PREFIX ${uavasr_emulator_INSTALL_PREFIX})
 endif()
 
@@ -156,7 +156,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/uavteam6/catkin_ws/install/lib;/home/uavteam6/catkin_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/uavteam6/catkin_ws_G6/install/lib;/home/uavteam6/catkin_ws_G6/devel/lib;/home/uavteam6/catkin_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

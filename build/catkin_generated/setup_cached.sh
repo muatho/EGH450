@@ -8,4 +8,4 @@
 
 # modified environment variables
 export PATH='/opt/ros/noetic/bin:/home/uavteam6/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
-export PWD='/home/uavteam6/catkin_ws/build'
+export PWD='/home/uavteam6/catkin_ws_G6/build'

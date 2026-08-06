@@ -348,23 +348,23 @@ double rate_pose;
 
 
 
-//#line 29 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       double auto_disarm_height;
-//#line 32 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       double w0_xy;
-//#line 33 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       double w0_z;
-//#line 34 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       double w0_psi;
-//#line 35 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       double max_vel_xy;
-//#line 36 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       double max_vel_z;
-//#line 39 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       double rate_state;
-//#line 40 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       double rate_battery;
-//#line 41 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       double rate_pose;
 //#line 231 "/opt/ros/noetic/share/dynamic_reconfigure/cmake/../templates/ConfigType.h.template"
 
@@ -505,15 +505,15 @@ double rate_pose;
     {
 EmulatorParamsConfig::GroupDescription<EmulatorParamsConfig::DEFAULT, EmulatorParamsConfig> Default("Default", "", 0, 0, true, &EmulatorParamsConfig::groups);
 EmulatorParamsConfig::GroupDescription<EmulatorParamsConfig::DEFAULT::AUTOPILOT, EmulatorParamsConfig::DEFAULT> Autopilot("Autopilot", "", 0, 1, true, &EmulatorParamsConfig::DEFAULT::autopilot);
-//#line 29 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __min__.auto_disarm_height = 0.0;
-//#line 29 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __max__.auto_disarm_height = std::numeric_limits<double>::infinity();
-//#line 29 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __default__.auto_disarm_height = 0.2;
-//#line 29 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       Autopilot.abstract_parameters.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("auto_disarm_height", "double", 0, "Height to enable automatic disarm (set to 0 to disable)", "", &EmulatorParamsConfig::auto_disarm_height)));
-//#line 29 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __param_descriptions__.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("auto_disarm_height", "double", 0, "Height to enable automatic disarm (set to 0 to disable)", "", &EmulatorParamsConfig::auto_disarm_height)));
 //#line 125 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Autopilot.convertParams();
@@ -522,55 +522,55 @@ EmulatorParamsConfig::GroupDescription<EmulatorParamsConfig::DEFAULT::AUTOPILOT,
 //#line 125 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __group_descriptions__.push_back(EmulatorParamsConfig::AbstractGroupDescriptionConstPtr(new EmulatorParamsConfig::GroupDescription<EmulatorParamsConfig::DEFAULT::AUTOPILOT, EmulatorParamsConfig::DEFAULT>(Autopilot)));
 EmulatorParamsConfig::GroupDescription<EmulatorParamsConfig::DEFAULT::CONTROL, EmulatorParamsConfig::DEFAULT> Control("Control", "", 0, 2, true, &EmulatorParamsConfig::DEFAULT::control);
-//#line 32 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __min__.w0_xy = 0.0;
-//#line 32 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __max__.w0_xy = std::numeric_limits<double>::infinity();
-//#line 32 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __default__.w0_xy = 1.0;
-//#line 32 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       Control.abstract_parameters.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("w0_xy", "double", 0, "Natural frequency for lateral position", "", &EmulatorParamsConfig::w0_xy)));
-//#line 32 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __param_descriptions__.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("w0_xy", "double", 0, "Natural frequency for lateral position", "", &EmulatorParamsConfig::w0_xy)));
-//#line 33 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __min__.w0_z = 0.0;
-//#line 33 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __max__.w0_z = std::numeric_limits<double>::infinity();
-//#line 33 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __default__.w0_z = 1.0;
-//#line 33 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       Control.abstract_parameters.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("w0_z", "double", 0, "Natural frequency vertical position", "", &EmulatorParamsConfig::w0_z)));
-//#line 33 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __param_descriptions__.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("w0_z", "double", 0, "Natural frequency vertical position", "", &EmulatorParamsConfig::w0_z)));
-//#line 34 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __min__.w0_psi = 0.0;
-//#line 34 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __max__.w0_psi = std::numeric_limits<double>::infinity();
-//#line 34 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __default__.w0_psi = 1.0;
-//#line 34 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       Control.abstract_parameters.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("w0_psi", "double", 0, "Natural frequency for the heading", "", &EmulatorParamsConfig::w0_psi)));
-//#line 34 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __param_descriptions__.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("w0_psi", "double", 0, "Natural frequency for the heading", "", &EmulatorParamsConfig::w0_psi)));
-//#line 35 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __min__.max_vel_xy = 0.0;
-//#line 35 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __max__.max_vel_xy = std::numeric_limits<double>::infinity();
-//#line 35 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __default__.max_vel_xy = 2.5;
-//#line 35 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       Control.abstract_parameters.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("max_vel_xy", "double", 0, "Maximum horizontal velocity", "", &EmulatorParamsConfig::max_vel_xy)));
-//#line 35 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __param_descriptions__.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("max_vel_xy", "double", 0, "Maximum horizontal velocity", "", &EmulatorParamsConfig::max_vel_xy)));
-//#line 36 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __min__.max_vel_z = 0.0;
-//#line 36 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __max__.max_vel_z = std::numeric_limits<double>::infinity();
-//#line 36 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __default__.max_vel_z = 1.0;
-//#line 36 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       Control.abstract_parameters.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("max_vel_z", "double", 0, "Natural vertical velocity", "", &EmulatorParamsConfig::max_vel_z)));
-//#line 36 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __param_descriptions__.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("max_vel_z", "double", 0, "Natural vertical velocity", "", &EmulatorParamsConfig::max_vel_z)));
 //#line 125 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       Control.convertParams();
@@ -579,35 +579,35 @@ EmulatorParamsConfig::GroupDescription<EmulatorParamsConfig::DEFAULT::CONTROL, E
 //#line 125 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       __group_descriptions__.push_back(EmulatorParamsConfig::AbstractGroupDescriptionConstPtr(new EmulatorParamsConfig::GroupDescription<EmulatorParamsConfig::DEFAULT::CONTROL, EmulatorParamsConfig::DEFAULT>(Control)));
 EmulatorParamsConfig::GroupDescription<EmulatorParamsConfig::DEFAULT::SYSTEM, EmulatorParamsConfig::DEFAULT> System("System", "", 0, 3, true, &EmulatorParamsConfig::DEFAULT::system);
-//#line 39 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __min__.rate_state = 0.0;
-//#line 39 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __max__.rate_state = std::numeric_limits<double>::infinity();
-//#line 39 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __default__.rate_state = 1.0;
-//#line 39 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       System.abstract_parameters.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("rate_state", "double", 0, "Update rate for system state", "", &EmulatorParamsConfig::rate_state)));
-//#line 39 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __param_descriptions__.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("rate_state", "double", 0, "Update rate for system state", "", &EmulatorParamsConfig::rate_state)));
-//#line 40 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __min__.rate_battery = 0.0;
-//#line 40 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __max__.rate_battery = std::numeric_limits<double>::infinity();
-//#line 40 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __default__.rate_battery = 1.0;
-//#line 40 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       System.abstract_parameters.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("rate_battery", "double", 0, "Update rate for battery state", "", &EmulatorParamsConfig::rate_battery)));
-//#line 40 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __param_descriptions__.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("rate_battery", "double", 0, "Update rate for battery state", "", &EmulatorParamsConfig::rate_battery)));
-//#line 41 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __min__.rate_pose = 0.0;
-//#line 41 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __max__.rate_pose = std::numeric_limits<double>::infinity();
-//#line 41 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __default__.rate_pose = 50.0;
-//#line 41 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       System.abstract_parameters.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("rate_pose", "double", 0, "Update rate for system pose", "", &EmulatorParamsConfig::rate_pose)));
-//#line 41 "/home/uavteam6/catkin_ws/src/uavasr_emulator/cfg/EmulatorParams.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/uavasr_emulator/cfg/EmulatorParams.cfg"
       __param_descriptions__.push_back(EmulatorParamsConfig::AbstractParamDescriptionConstPtr(new EmulatorParamsConfig::ParamDescription<double>("rate_pose", "double", 0, "Update rate for system pose", "", &EmulatorParamsConfig::rate_pose)));
 //#line 125 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       System.convertParams();

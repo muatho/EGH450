@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
 messages_str = ""
-services_str = "/home/uavteam6/catkin_ws/src/breadcrumb/srv/RequestPath.srv"
+services_str = "/home/uavteam6/catkin_ws_G6/src/breadcrumb/srv/RequestPath.srv"
 pkg_name = "breadcrumb"
 dependencies_str = "std_msgs;geometry_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

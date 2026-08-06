@@ -1,5 +1,5 @@
 depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_publisher.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_examples/src/feature_tracker_publisher.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_examples/src/feature_tracker_publisher.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/9/cstdio \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -143,7 +143,7 @@ depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
  /usr/include/c++/9/bits/istream.tcc \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/TrackedFeatures.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/TrackedFeatures.h \
  /usr/include/c++/9/vector /usr/include/c++/9/bits/stl_construct.h \
  /usr/include/c++/9/bits/stl_uninitialized.h \
  /usr/include/c++/9/bits/stl_vector.h \
@@ -616,7 +616,7 @@ depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_
  /usr/include/boost/type_traits/is_pointer.hpp \
  /opt/ros/noetic/include/ros/message_operations.h \
  /opt/ros/noetic/include/std_msgs/Header.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/TrackedFeature.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/TrackedFeature.h \
  /opt/ros/noetic/include/geometry_msgs/Point.h \
  /opt/ros/noetic/include/ros/ros.h /opt/ros/noetic/include/ros/rate.h \
  /opt/ros/noetic/include/ros/console.h \
@@ -1257,7 +1257,7 @@ depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_
  /opt/ros/noetic/include/depthai-shared/properties/XLinkInProperties.hpp \
  /opt/ros/noetic/include/depthai/pipeline/node/XLinkOut.hpp \
  /opt/ros/noetic/include/depthai-shared/properties/XLinkOutProperties.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/BridgePublisher.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/BridgePublisher.hpp \
  /opt/ros/noetic/include/camera_info_manager/camera_info_manager.h \
  /opt/ros/noetic/include/sensor_msgs/CameraInfo.h \
  /opt/ros/noetic/include/sensor_msgs/RegionOfInterest.h \
@@ -1380,7 +1380,7 @@ depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_
  /opt/ros/noetic/include/image_transport/transport_hints.h \
  /opt/ros/noetic/include/image_transport/camera_publisher.h \
  /opt/ros/noetic/include/image_transport/camera_subscriber.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
  /opt/ros/noetic/include/cv_bridge/cv_bridge.h \
  /opt/ros/noetic/include/sensor_msgs/CompressedImage.h \
  /opt/ros/noetic/include/sensor_msgs/image_encodings.h \
@@ -1419,5 +1419,5 @@ depthai-ros/depthai_examples/CMakeFiles/feature_tracker.dir/src/feature_tracker_
  /usr/include/opencv4/opencv2/imgproc/types_c.h \
  /usr/include/opencv4/opencv2/core/core_c.h \
  /usr/include/opencv4/opencv2/core/types_c.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/FFMPEGPacket.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/TrackedFeaturesConverter.hpp
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/FFMPEGPacket.h \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/TrackedFeaturesConverter.hpp

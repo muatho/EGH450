@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 # Utility rule file for _depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.
 
@@ -67,7 +67,7 @@ include depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messa
 include depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/progress.make
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection:
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py depthai_ros_msgs /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetection.msg vision_msgs/BoundingBox2D:geometry_msgs/Point:vision_msgs/ObjectHypothesis:geometry_msgs/Pose2D
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py depthai_ros_msgs /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs/msg/SpatialDetection.msg vision_msgs/ObjectHypothesis:vision_msgs/BoundingBox2D:geometry_msgs/Pose2D:geometry_msgs/Point
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/codegen:
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/codegen
@@ -81,10 +81,10 @@ depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_chec
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/build
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/clean:
-	cd /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs && $(CMAKE_COMMAND) -P CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/cmake_clean.cmake
+	cd /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs && $(CMAKE_COMMAND) -P CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/cmake_clean.cmake
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/clean
 
 depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws/src /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_msgs /home/uavteam6/catkin_ws/build /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs /home/uavteam6/catkin_ws/build/depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws_G6/src /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_msgs /home/uavteam6/catkin_ws_G6/build /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs /home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetection.dir/depend
 

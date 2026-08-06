@@ -1,7 +1,7 @@
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_nodes/sensors/sensor_helpers.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/src/dai_nodes/sensors/sensor_helpers.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/src/dai_nodes/sensors/sensor_helpers.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/sensor_helpers.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/sensor_helpers.hpp \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -1248,7 +1248,7 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_
  /opt/ros/noetic/include/depthai-shared/pipeline/NodeIoInfo.hpp \
  /opt/ros/noetic/include/depthai-shared/properties/GlobalProperties.hpp \
  /opt/ros/noetic/include/depthai/pipeline/node/VideoEncoder.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp \
  /opt/ros/noetic/include/cv_bridge/cv_bridge.h \
  /opt/ros/noetic/include/sensor_msgs/CompressedImage.h \
  /opt/ros/noetic/include/sensor_msgs/image_encodings.h \
@@ -1292,4 +1292,4 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/dai_
  /opt/ros/noetic/include/depthai/pipeline/datatype/ImgFrame.hpp \
  /opt/ros/noetic/include/depthai/build/config.hpp \
  /opt/ros/noetic/include/depthai/common/CameraExposureOffset.hpp \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_msgs/FFMPEGPacket.h
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_msgs/FFMPEGPacket.h

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/libbreadcrumb_astar.pdb"
-  "/home/uavteam6/catkin_ws/devel/lib/libbreadcrumb_astar.so"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libbreadcrumb_astar.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libbreadcrumb_astar.so"
   "CMakeFiles/breadcrumb_astar.dir/src/breadcrumb/AStar.cpp.o"
   "CMakeFiles/breadcrumb_astar.dir/src/breadcrumb/AStar.cpp.o.d"
 )

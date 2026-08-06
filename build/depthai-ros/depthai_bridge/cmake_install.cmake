@@ -1,8 +1,8 @@
-# Install script for directory: /home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge
+# Install script for directory: /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws_G6/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,18 +43,18 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws/build/depthai-ros/depthai_bridge/catkin_generated/installspace/depthai_bridge.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_bridge/catkin_generated/installspace/depthai_bridge.pc")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/depthai_bridge/cmake" TYPE FILE FILES
-    "/home/uavteam6/catkin_ws/build/depthai-ros/depthai_bridge/catkin_generated/installspace/depthai_bridgeConfig.cmake"
-    "/home/uavteam6/catkin_ws/build/depthai-ros/depthai_bridge/catkin_generated/installspace/depthai_bridgeConfig-version.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_bridge/catkin_generated/installspace/depthai_bridgeConfig.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_bridge/catkin_generated/installspace/depthai_bridgeConfig-version.cmake"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/depthai_bridge" TYPE FILE FILES "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/depthai_bridge" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -64,7 +64,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libdepthai_bridge.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/uavteam6/catkin_ws/devel/lib/libdepthai_bridge.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/uavteam6/catkin_ws_G6/devel/lib/libdepthai_bridge.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libdepthai_bridge.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libdepthai_bridge.so")
     file(RPATH_CHANGE
@@ -81,12 +81,12 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/depthai_bridge" TYPE DIRECTORY FILES "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_bridge/include/depthai_bridge/" FILES_MATCHING REGEX "/[^/]*\\.hpp$")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/depthai_bridge" TYPE DIRECTORY FILES "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_bridge/include/depthai_bridge/" FILES_MATCHING REGEX "/[^/]*\\.hpp$")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/uavteam6/catkin_ws/build/depthai-ros/depthai_bridge/install_local_manifest.txt"
+  file(WRITE "/home/uavteam6/catkin_ws_G6/build/depthai-ros/depthai_bridge/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

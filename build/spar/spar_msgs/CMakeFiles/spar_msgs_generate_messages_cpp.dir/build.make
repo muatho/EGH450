@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/uavteam6/catkin_ws_G6/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws/build
+CMAKE_BINARY_DIR = /home/uavteam6/catkin_ws_G6/build
 
 # Utility rule file for spar_msgs_generate_messages_cpp.
 
@@ -66,94 +66,94 @@ include spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/compiler_d
 # Include the progress variables for this target.
 include spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/progress.make
 
-spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h
-spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionGoal.h
-spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h
-spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h
-spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionGoal.h
-spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionResult.h
-spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionFeedback.h
+spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h
+spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionGoal.h
+spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h
+spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h
+spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionGoal.h
+spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionResult.h
+spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionFeedback.h
 
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionAction.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionGoal.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionFeedback.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionResult.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionFeedback.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionGoal.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionResult.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from spar_msgs/FlightMotionAction.msg"
-	cd /home/uavteam6/catkin_ws/src/spar/spar_msgs && /home/uavteam6/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionAction.msg -Ispar_msgs:/home/uavteam6/catkin_ws/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionAction.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionResult.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionFeedback.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionGoal.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionActionResult.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionActionFeedback.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionActionGoal.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from spar_msgs/FlightMotionAction.msg"
+	cd /home/uavteam6/catkin_ws_G6/src/spar/spar_msgs && /home/uavteam6/catkin_ws_G6/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionAction.msg -Ispar_msgs:/home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
 
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionFeedback.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionFeedback.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from spar_msgs/FlightMotionActionFeedback.msg"
-	cd /home/uavteam6/catkin_ws/src/spar/spar_msgs && /home/uavteam6/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionFeedback.msg -Ispar_msgs:/home/uavteam6/catkin_ws/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionActionFeedback.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionFeedback.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from spar_msgs/FlightMotionActionFeedback.msg"
+	cd /home/uavteam6/catkin_ws_G6/src/spar/spar_msgs && /home/uavteam6/catkin_ws_G6/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionActionFeedback.msg -Ispar_msgs:/home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
 
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionGoal.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionGoal.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionGoal.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionGoal.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from spar_msgs/FlightMotionActionGoal.msg"
-	cd /home/uavteam6/catkin_ws/src/spar/spar_msgs && /home/uavteam6/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionGoal.msg -Ispar_msgs:/home/uavteam6/catkin_ws/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionGoal.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionActionGoal.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionGoal.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionGoal.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionGoal.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from spar_msgs/FlightMotionActionGoal.msg"
+	cd /home/uavteam6/catkin_ws_G6/src/spar/spar_msgs && /home/uavteam6/catkin_ws_G6/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionActionGoal.msg -Ispar_msgs:/home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
 
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionResult.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionResult.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from spar_msgs/FlightMotionActionResult.msg"
-	cd /home/uavteam6/catkin_ws/src/spar/spar_msgs && /home/uavteam6/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionActionResult.msg -Ispar_msgs:/home/uavteam6/catkin_ws/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionActionResult.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionResult.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalID.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/actionlib_msgs/msg/GoalStatus.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from spar_msgs/FlightMotionActionResult.msg"
+	cd /home/uavteam6/catkin_ws_G6/src/spar/spar_msgs && /home/uavteam6/catkin_ws_G6/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionActionResult.msg -Ispar_msgs:/home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
 
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionFeedback.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionFeedback.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionFeedback.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionFeedback.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionFeedback.h: /opt/ros/noetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from spar_msgs/FlightMotionFeedback.msg"
-	cd /home/uavteam6/catkin_ws/src/spar/spar_msgs && /home/uavteam6/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionFeedback.msg -Ispar_msgs:/home/uavteam6/catkin_ws/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionFeedback.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionFeedback.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionFeedback.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionFeedback.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionFeedback.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from spar_msgs/FlightMotionFeedback.msg"
+	cd /home/uavteam6/catkin_ws_G6/src/spar/spar_msgs && /home/uavteam6/catkin_ws_G6/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionFeedback.msg -Ispar_msgs:/home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
 
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionGoal.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionGoal.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionGoal.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionGoal.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionGoal.h: /opt/ros/noetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating C++ code from spar_msgs/FlightMotionGoal.msg"
-	cd /home/uavteam6/catkin_ws/src/spar/spar_msgs && /home/uavteam6/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionGoal.msg -Ispar_msgs:/home/uavteam6/catkin_ws/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionGoal.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionGoal.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionGoal.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionGoal.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionGoal.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating C++ code from spar_msgs/FlightMotionGoal.msg"
+	cd /home/uavteam6/catkin_ws_G6/src/spar/spar_msgs && /home/uavteam6/catkin_ws_G6/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionGoal.msg -Ispar_msgs:/home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
 
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionResult.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionResult.h: /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionResult.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionResult.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionResult.h: /opt/ros/noetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating C++ code from spar_msgs/FlightMotionResult.msg"
-	cd /home/uavteam6/catkin_ws/src/spar/spar_msgs && /home/uavteam6/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws/devel/share/spar_msgs/msg/FlightMotionResult.msg -Ispar_msgs:/home/uavteam6/catkin_ws/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionResult.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionResult.h: /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionResult.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionResult.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionResult.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/uavteam6/catkin_ws_G6/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating C++ code from spar_msgs/FlightMotionResult.msg"
+	cd /home/uavteam6/catkin_ws_G6/src/spar/spar_msgs && /home/uavteam6/catkin_ws_G6/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg/FlightMotionResult.msg -Ispar_msgs:/home/uavteam6/catkin_ws_G6/devel/share/spar_msgs/msg -Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p spar_msgs -o /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
 
 spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/codegen:
 .PHONY : spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/codegen
 
 spar_msgs_generate_messages_cpp: spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp
-spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionAction.h
-spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionFeedback.h
-spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionGoal.h
-spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionActionResult.h
-spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionFeedback.h
-spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionGoal.h
-spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws/devel/include/spar_msgs/FlightMotionResult.h
+spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionAction.h
+spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionFeedback.h
+spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionGoal.h
+spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionActionResult.h
+spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionFeedback.h
+spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionGoal.h
+spar_msgs_generate_messages_cpp: /home/uavteam6/catkin_ws_G6/devel/include/spar_msgs/FlightMotionResult.h
 spar_msgs_generate_messages_cpp: spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/build.make
 .PHONY : spar_msgs_generate_messages_cpp
 
@@ -162,10 +162,10 @@ spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/build: spar_msgs_g
 .PHONY : spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/build
 
 spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/clean:
-	cd /home/uavteam6/catkin_ws/build/spar/spar_msgs && $(CMAKE_COMMAND) -P CMakeFiles/spar_msgs_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/uavteam6/catkin_ws_G6/build/spar/spar_msgs && $(CMAKE_COMMAND) -P CMakeFiles/spar_msgs_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/clean
 
 spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/depend:
-	cd /home/uavteam6/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws/src /home/uavteam6/catkin_ws/src/spar/spar_msgs /home/uavteam6/catkin_ws/build /home/uavteam6/catkin_ws/build/spar/spar_msgs /home/uavteam6/catkin_ws/build/spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/uavteam6/catkin_ws_G6/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uavteam6/catkin_ws_G6/src /home/uavteam6/catkin_ws_G6/src/spar/spar_msgs /home/uavteam6/catkin_ws_G6/build /home/uavteam6/catkin_ws_G6/build/spar/spar_msgs /home/uavteam6/catkin_ws_G6/build/spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : spar/spar_msgs/CMakeFiles/spar_msgs_generate_messages_cpp.dir/depend
 

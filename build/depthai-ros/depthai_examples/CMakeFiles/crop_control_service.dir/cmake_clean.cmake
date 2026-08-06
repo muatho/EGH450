@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/depthai_examples/crop_control_service"
-  "/home/uavteam6/catkin_ws/devel/lib/depthai_examples/crop_control_service.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/depthai_examples/crop_control_service"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/depthai_examples/crop_control_service.pdb"
   "CMakeFiles/crop_control_service.dir/src/crop_control_service.cpp.o"
   "CMakeFiles/crop_control_service.dir/src/crop_control_service.cpp.o.d"
 )

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/uavteam6/catkin_ws/devel/lib/libdepthai_filters.pdb"
-  "/home/uavteam6/catkin_ws/devel/lib/libdepthai_filters.so"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libdepthai_filters.pdb"
+  "/home/uavteam6/catkin_ws_G6/devel/lib/libdepthai_filters.so"
   "CMakeFiles/depthai_filters.dir/src/detection2d_overlay.cpp.o"
   "CMakeFiles/depthai_filters.dir/src/detection2d_overlay.cpp.o.d"
   "CMakeFiles/depthai_filters.dir/src/feature_tracker_overlay.cpp.o"

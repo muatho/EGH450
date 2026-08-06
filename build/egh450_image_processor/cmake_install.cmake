@@ -1,8 +1,8 @@
-# Install script for directory: /home/uavteam6/catkin_ws/src/egh450_image_processor
+# Install script for directory: /home/uavteam6/catkin_ws_G6/src/egh450_image_processor
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/uavteam6/catkin_ws_G6/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,31 +43,31 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/uavteam6/catkin_ws/build/egh450_image_processor/catkin_generated/safe_execute_install.cmake")
+  include("/home/uavteam6/catkin_ws_G6/build/egh450_image_processor/catkin_generated/safe_execute_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws/build/egh450_image_processor/catkin_generated/installspace/egh450_image_processor.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/build/egh450_image_processor/catkin_generated/installspace/egh450_image_processor.pc")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/egh450_image_processor/cmake" TYPE FILE FILES
-    "/home/uavteam6/catkin_ws/build/egh450_image_processor/catkin_generated/installspace/egh450_image_processorConfig.cmake"
-    "/home/uavteam6/catkin_ws/build/egh450_image_processor/catkin_generated/installspace/egh450_image_processorConfig-version.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/egh450_image_processor/catkin_generated/installspace/egh450_image_processorConfig.cmake"
+    "/home/uavteam6/catkin_ws_G6/build/egh450_image_processor/catkin_generated/installspace/egh450_image_processorConfig-version.cmake"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/egh450_image_processor" TYPE FILE FILES "/home/uavteam6/catkin_ws/src/egh450_image_processor/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/egh450_image_processor" TYPE FILE FILES "/home/uavteam6/catkin_ws_G6/src/egh450_image_processor/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/egh450_image_processor" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws/src/egh450_image_processor/scripts/processor")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/egh450_image_processor" TYPE PROGRAM FILES "/home/uavteam6/catkin_ws_G6/src/egh450_image_processor/scripts/processor")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/uavteam6/catkin_ws/build/egh450_image_processor/install_local_manifest.txt"
+  file(WRITE "/home/uavteam6/catkin_ws_G6/build/egh450_image_processor/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

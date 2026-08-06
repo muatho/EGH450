@@ -1,7 +1,7 @@
 depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/param_handlers/feature_tracker_param_handler.cpp.o: \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/src/param_handlers/feature_tracker_param_handler.cpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/src/param_handlers/feature_tracker_param_handler.cpp \
  /usr/include/stdc-predef.h \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/feature_tracker_param_handler.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/feature_tracker_param_handler.hpp \
  /usr/include/c++/9/memory /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/9/bits/os_defines.h \
@@ -251,9 +251,9 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/para
  /opt/ros/noetic/include/depthai/pipeline/datatype/ADatatype.hpp \
  /opt/ros/noetic/include/depthai/pipeline/datatype/FeatureTrackerConfig.hpp \
  /opt/ros/noetic/include/depthai-shared/datatype/RawFeatureTrackerConfig.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/base_param_handler.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/param_handlers/base_param_handler.hpp \
  /opt/ros/noetic/include/depthai-shared/common/CameraBoardSocket.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/sensor_helpers.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/dai_nodes/sensors/sensor_helpers.hpp \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_deque.h \
  /usr/include/c++/9/bits/deque.tcc \
  /opt/ros/noetic/include/depthai-shared/common/CameraSensorType.hpp \
@@ -1190,7 +1190,7 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/para
  /opt/ros/noetic/include/sensor_msgs/RegionOfInterest.h \
  /opt/ros/noetic/include/image_transport/single_subscriber_publisher.h \
  /opt/ros/noetic/include/image_transport/exports.h \
- /home/uavteam6/catkin_ws/devel/include/depthai_ros_driver/parametersConfig.h \
+ /home/uavteam6/catkin_ws_G6/devel/include/depthai_ros_driver/parametersConfig.h \
  /opt/ros/noetic/include/dynamic_reconfigure/config_tools.h \
  /opt/ros/noetic/include/dynamic_reconfigure/Config.h \
  /opt/ros/noetic/include/dynamic_reconfigure/BoolParameter.h \
@@ -1216,5 +1216,5 @@ depthai-ros/depthai_ros_driver/CMakeFiles/depthai_ros_driver_common.dir/src/para
  /usr/include/aarch64-linux-gnu/c++/9/bits/c++io.h \
  /usr/include/c++/9/bits/fstream.tcc \
  /opt/ros/noetic/include/depthai-shared/properties/FeatureTrackerProperties.hpp \
- /home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/utils.hpp \
+ /home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/include/depthai_ros_driver/utils.hpp \
  /opt/ros/noetic/include/depthai/common/CameraExposureOffset.hpp

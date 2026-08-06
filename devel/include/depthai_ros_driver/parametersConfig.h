@@ -410,137 +410,137 @@ int rgb_r_auto_exp_region_height;
 
 
 
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool camera_i_enable_ir;
-//#line 14 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 14 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       double camera_i_floodlight_brightness;
-//#line 15 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 15 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       double camera_i_laser_dot_brightness;
-//#line 16 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 16 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool left_r_keep_preview_aspect_ratio;
-//#line 17 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 17 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_exposure;
-//#line 18 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 18 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_focus;
-//#line 19 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 19 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_iso;
-//#line 20 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 20 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool left_r_set_man_exposure;
-//#line 21 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 21 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool left_r_set_man_focus;
-//#line 22 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 22 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool left_r_set_man_whitebalance;
-//#line 23 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 23 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_whitebalance;
-//#line 24 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 24 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool left_r_set_auto_exposure_limit;
-//#line 25 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 25 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_auto_exposure_limit;
-//#line 26 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 26 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool left_r_set_sharpness;
-//#line 27 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 27 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_sharpness;
-//#line 28 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 28 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool left_r_set_chroma_denoise;
-//#line 29 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_chroma_denoise;
-//#line 30 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 30 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool left_r_set_luma_denoise;
-//#line 31 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 31 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_luma_denoise;
-//#line 32 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool left_r_set_auto_exp_region;
-//#line 33 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_auto_exp_region_start_x;
-//#line 34 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_auto_exp_region_start_y;
-//#line 35 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_auto_exp_region_width;
-//#line 36 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int left_r_auto_exp_region_height;
-//#line 38 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 38 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool right_r_keep_preview_aspect_ratio;
-//#line 39 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_exposure;
-//#line 40 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_focus;
-//#line 41 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_iso;
-//#line 42 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 42 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool right_r_set_man_exposure;
-//#line 43 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 43 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool right_r_set_man_focus;
-//#line 44 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 44 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool right_r_set_man_whitebalance;
-//#line 45 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 45 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_whitebalance;
-//#line 46 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 46 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool right_r_set_auto_exposure_limit;
-//#line 47 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 47 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_auto_exposure_limit;
-//#line 48 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 48 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool right_r_set_sharpness;
-//#line 49 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 49 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_sharpness;
-//#line 50 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 50 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool right_r_set_chroma_denoise;
-//#line 51 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 51 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_chroma_denoise;
-//#line 52 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 52 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool right_r_set_luma_denoise;
-//#line 53 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 53 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_luma_denoise;
-//#line 54 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 54 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool right_r_set_auto_exp_region;
-//#line 55 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 55 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_auto_exp_region_start_x;
-//#line 56 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 56 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_auto_exp_region_start_y;
-//#line 57 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 57 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_auto_exp_region_width;
-//#line 58 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 58 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int right_r_auto_exp_region_height;
-//#line 60 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 60 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool rgb_r_keep_preview_aspect_ratio;
-//#line 61 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 61 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_exposure;
-//#line 62 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 62 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_focus;
-//#line 63 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 63 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_iso;
-//#line 64 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 64 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool rgb_r_set_man_exposure;
-//#line 65 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 65 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool rgb_r_set_man_focus;
-//#line 66 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 66 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool rgb_r_set_man_whitebalance;
-//#line 67 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 67 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_whitebalance;
-//#line 68 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 68 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool rgb_r_set_auto_exposure_limit;
-//#line 69 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 69 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_auto_exposure_limit;
-//#line 70 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 70 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool rgb_r_set_sharpness;
-//#line 71 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 71 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_sharpness;
-//#line 72 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 72 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool rgb_r_set_chroma_denoise;
-//#line 73 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 73 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_chroma_denoise;
-//#line 74 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 74 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool rgb_r_set_luma_denoise;
-//#line 75 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 75 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_luma_denoise;
-//#line 76 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 76 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       bool rgb_r_set_auto_exp_region;
-//#line 77 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 77 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_auto_exp_region_start_x;
-//#line 78 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 78 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_auto_exp_region_start_y;
-//#line 79 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 79 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_auto_exp_region_width;
-//#line 80 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 80 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       int rgb_r_auto_exp_region_height;
 //#line 231 "/opt/ros/noetic/share/dynamic_reconfigure/cmake/../templates/ConfigType.h.template"
 
@@ -681,665 +681,665 @@ int rgb_r_auto_exp_region_height;
     {
 parametersConfig::GroupDescription<parametersConfig::DEFAULT, parametersConfig> Default("Default", "", 0, 0, true, &parametersConfig::groups);
 parametersConfig::GroupDescription<parametersConfig::DEFAULT::CAMERA, parametersConfig::DEFAULT> camera("camera", "", 0, 1, true, &parametersConfig::DEFAULT::camera);
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.camera_i_enable_ir = 0;
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.camera_i_enable_ir = 1;
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.camera_i_enable_ir = 1;
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("camera_i_enable_ir", "bool", 0, "Enabling IR", "", &parametersConfig::camera_i_enable_ir)));
-//#line 13 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 13 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("camera_i_enable_ir", "bool", 0, "Enabling IR", "", &parametersConfig::camera_i_enable_ir)));
-//#line 14 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 14 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.camera_i_floodlight_brightness = 0.0;
-//#line 14 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 14 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.camera_i_floodlight_brightness = 1500.0;
-//#line 14 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 14 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.camera_i_floodlight_brightness = 0.0;
-//#line 14 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 14 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<double>("camera_i_floodlight_brightness", "double", 0, "Floodlight brightness", "", &parametersConfig::camera_i_floodlight_brightness)));
-//#line 14 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 14 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<double>("camera_i_floodlight_brightness", "double", 0, "Floodlight brightness", "", &parametersConfig::camera_i_floodlight_brightness)));
-//#line 15 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 15 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.camera_i_laser_dot_brightness = 0.0;
-//#line 15 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 15 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.camera_i_laser_dot_brightness = 1200.0;
-//#line 15 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 15 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.camera_i_laser_dot_brightness = 800.0;
-//#line 15 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 15 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<double>("camera_i_laser_dot_brightness", "double", 0, "Laser dot brightness", "", &parametersConfig::camera_i_laser_dot_brightness)));
-//#line 15 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 15 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<double>("camera_i_laser_dot_brightness", "double", 0, "Laser dot brightness", "", &parametersConfig::camera_i_laser_dot_brightness)));
-//#line 16 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 16 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_keep_preview_aspect_ratio = 0;
-//#line 16 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 16 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_keep_preview_aspect_ratio = 1;
-//#line 16 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 16 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_keep_preview_aspect_ratio = 1;
-//#line 16 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 16 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_keep_preview_aspect_ratio", "bool", 0, "Keep preview aspect ratio", "", &parametersConfig::left_r_keep_preview_aspect_ratio)));
-//#line 16 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 16 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_keep_preview_aspect_ratio", "bool", 0, "Keep preview aspect ratio", "", &parametersConfig::left_r_keep_preview_aspect_ratio)));
-//#line 17 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 17 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_exposure = 1;
-//#line 17 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 17 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_exposure = 33000;
-//#line 17 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 17 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_exposure = 1000;
-//#line 17 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 17 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_exposure", "int", 0, "Sensor exposure", "", &parametersConfig::left_r_exposure)));
-//#line 17 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 17 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_exposure", "int", 0, "Sensor exposure", "", &parametersConfig::left_r_exposure)));
-//#line 18 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 18 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_focus = 0;
-//#line 18 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 18 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_focus = 255;
-//#line 18 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 18 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_focus = 1;
-//#line 18 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 18 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_focus", "int", 0, "Focus", "", &parametersConfig::left_r_focus)));
-//#line 18 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 18 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_focus", "int", 0, "Focus", "", &parametersConfig::left_r_focus)));
-//#line 19 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 19 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_iso = 100;
-//#line 19 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 19 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_iso = 1600;
-//#line 19 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 19 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_iso = 800;
-//#line 19 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 19 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_iso", "int", 0, "Sensor iso", "", &parametersConfig::left_r_iso)));
-//#line 19 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 19 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_iso", "int", 0, "Sensor iso", "", &parametersConfig::left_r_iso)));
-//#line 20 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 20 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_set_man_exposure = 0;
-//#line 20 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 20 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_set_man_exposure = 1;
-//#line 20 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 20 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_set_man_exposure = 0;
-//#line 20 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 20 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_man_exposure", "bool", 0, "Enable manual exposure", "", &parametersConfig::left_r_set_man_exposure)));
-//#line 20 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 20 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_man_exposure", "bool", 0, "Enable manual exposure", "", &parametersConfig::left_r_set_man_exposure)));
-//#line 21 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 21 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_set_man_focus = 0;
-//#line 21 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 21 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_set_man_focus = 1;
-//#line 21 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 21 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_set_man_focus = 0;
-//#line 21 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 21 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_man_focus", "bool", 0, "Enable manual focus", "", &parametersConfig::left_r_set_man_focus)));
-//#line 21 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 21 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_man_focus", "bool", 0, "Enable manual focus", "", &parametersConfig::left_r_set_man_focus)));
-//#line 22 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 22 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_set_man_whitebalance = 0;
-//#line 22 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 22 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_set_man_whitebalance = 1;
-//#line 22 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 22 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_set_man_whitebalance = 0;
-//#line 22 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 22 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_man_whitebalance", "bool", 0, "Enable manual whitebalance", "", &parametersConfig::left_r_set_man_whitebalance)));
-//#line 22 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 22 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_man_whitebalance", "bool", 0, "Enable manual whitebalance", "", &parametersConfig::left_r_set_man_whitebalance)));
-//#line 23 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 23 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_whitebalance = 1000;
-//#line 23 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 23 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_whitebalance = 12000;
-//#line 23 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 23 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_whitebalance = 3300;
-//#line 23 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 23 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_whitebalance", "int", 0, "Whitebalance", "", &parametersConfig::left_r_whitebalance)));
-//#line 23 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 23 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_whitebalance", "int", 0, "Whitebalance", "", &parametersConfig::left_r_whitebalance)));
-//#line 24 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 24 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_set_auto_exposure_limit = 0;
-//#line 24 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 24 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_set_auto_exposure_limit = 1;
-//#line 24 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 24 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_set_auto_exposure_limit = 0;
-//#line 24 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 24 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_auto_exposure_limit", "bool", 0, "Enable auto exposure limit", "", &parametersConfig::left_r_set_auto_exposure_limit)));
-//#line 24 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 24 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_auto_exposure_limit", "bool", 0, "Enable auto exposure limit", "", &parametersConfig::left_r_set_auto_exposure_limit)));
-//#line 25 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 25 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_auto_exposure_limit = 1;
-//#line 25 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 25 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_auto_exposure_limit = 33000;
-//#line 25 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 25 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_auto_exposure_limit = 1000;
-//#line 25 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 25 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exposure_limit", "int", 0, "Auto exposure limit", "", &parametersConfig::left_r_auto_exposure_limit)));
-//#line 25 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 25 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exposure_limit", "int", 0, "Auto exposure limit", "", &parametersConfig::left_r_auto_exposure_limit)));
-//#line 26 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 26 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_set_sharpness = 0;
-//#line 26 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 26 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_set_sharpness = 1;
-//#line 26 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 26 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_set_sharpness = 0;
-//#line 26 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 26 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_sharpness", "bool", 0, "Enable sharpness", "", &parametersConfig::left_r_set_sharpness)));
-//#line 26 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 26 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_sharpness", "bool", 0, "Enable sharpness", "", &parametersConfig::left_r_set_sharpness)));
-//#line 27 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 27 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_sharpness = 0;
-//#line 27 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 27 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_sharpness = 4;
-//#line 27 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 27 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_sharpness = 0;
-//#line 27 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 27 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_sharpness", "int", 0, "Sharpness", "", &parametersConfig::left_r_sharpness)));
-//#line 27 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 27 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_sharpness", "int", 0, "Sharpness", "", &parametersConfig::left_r_sharpness)));
-//#line 28 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 28 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_set_chroma_denoise = 0;
-//#line 28 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 28 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_set_chroma_denoise = 1;
-//#line 28 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 28 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_set_chroma_denoise = 0;
-//#line 28 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 28 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_chroma_denoise", "bool", 0, "Enable chroma denoise", "", &parametersConfig::left_r_set_chroma_denoise)));
-//#line 28 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 28 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_chroma_denoise", "bool", 0, "Enable chroma denoise", "", &parametersConfig::left_r_set_chroma_denoise)));
-//#line 29 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_chroma_denoise = 0;
-//#line 29 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_chroma_denoise = 4;
-//#line 29 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_chroma_denoise = 0;
-//#line 29 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_chroma_denoise", "int", 0, "Chroma denoise", "", &parametersConfig::left_r_chroma_denoise)));
-//#line 29 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 29 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_chroma_denoise", "int", 0, "Chroma denoise", "", &parametersConfig::left_r_chroma_denoise)));
-//#line 30 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 30 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_set_luma_denoise = 0;
-//#line 30 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 30 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_set_luma_denoise = 1;
-//#line 30 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 30 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_set_luma_denoise = 0;
-//#line 30 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 30 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_luma_denoise", "bool", 0, "Enable luma denoise", "", &parametersConfig::left_r_set_luma_denoise)));
-//#line 30 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 30 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_luma_denoise", "bool", 0, "Enable luma denoise", "", &parametersConfig::left_r_set_luma_denoise)));
-//#line 31 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 31 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_luma_denoise = 0;
-//#line 31 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 31 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_luma_denoise = 4;
-//#line 31 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 31 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_luma_denoise = 0;
-//#line 31 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 31 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_luma_denoise", "int", 0, "Luma denoise", "", &parametersConfig::left_r_luma_denoise)));
-//#line 31 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 31 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_luma_denoise", "int", 0, "Luma denoise", "", &parametersConfig::left_r_luma_denoise)));
-//#line 32 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_set_auto_exp_region = 0;
-//#line 32 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_set_auto_exp_region = 1;
-//#line 32 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_set_auto_exp_region = 0;
-//#line 32 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_auto_exp_region", "bool", 0, "Enable auto exposure region", "", &parametersConfig::left_r_set_auto_exp_region)));
-//#line 32 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 32 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("left_r_set_auto_exp_region", "bool", 0, "Enable auto exposure region", "", &parametersConfig::left_r_set_auto_exp_region)));
-//#line 33 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_auto_exp_region_start_x = 0;
-//#line 33 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_auto_exp_region_start_x = 2147483647;
-//#line 33 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_auto_exp_region_start_x = 0;
-//#line 33 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exp_region_start_x", "int", 0, "Auto exposure region start x", "", &parametersConfig::left_r_auto_exp_region_start_x)));
-//#line 33 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 33 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exp_region_start_x", "int", 0, "Auto exposure region start x", "", &parametersConfig::left_r_auto_exp_region_start_x)));
-//#line 34 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_auto_exp_region_start_y = 0;
-//#line 34 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_auto_exp_region_start_y = 2147483647;
-//#line 34 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_auto_exp_region_start_y = 0;
-//#line 34 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exp_region_start_y", "int", 0, "Auto exposure region start y", "", &parametersConfig::left_r_auto_exp_region_start_y)));
-//#line 34 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 34 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exp_region_start_y", "int", 0, "Auto exposure region start y", "", &parametersConfig::left_r_auto_exp_region_start_y)));
-//#line 35 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_auto_exp_region_width = 0;
-//#line 35 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_auto_exp_region_width = 2147483647;
-//#line 35 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_auto_exp_region_width = 0;
-//#line 35 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exp_region_width", "int", 0, "Auto exposure region width", "", &parametersConfig::left_r_auto_exp_region_width)));
-//#line 35 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 35 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exp_region_width", "int", 0, "Auto exposure region width", "", &parametersConfig::left_r_auto_exp_region_width)));
-//#line 36 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.left_r_auto_exp_region_height = 0;
-//#line 36 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.left_r_auto_exp_region_height = 2147483647;
-//#line 36 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.left_r_auto_exp_region_height = 0;
-//#line 36 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exp_region_height", "int", 0, "Auto exposure region height", "", &parametersConfig::left_r_auto_exp_region_height)));
-//#line 36 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 36 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("left_r_auto_exp_region_height", "int", 0, "Auto exposure region height", "", &parametersConfig::left_r_auto_exp_region_height)));
-//#line 38 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 38 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_keep_preview_aspect_ratio = 0;
-//#line 38 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 38 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_keep_preview_aspect_ratio = 1;
-//#line 38 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 38 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_keep_preview_aspect_ratio = 1;
-//#line 38 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 38 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_keep_preview_aspect_ratio", "bool", 0, "Keep preview aspect ratio", "", &parametersConfig::right_r_keep_preview_aspect_ratio)));
-//#line 38 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 38 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_keep_preview_aspect_ratio", "bool", 0, "Keep preview aspect ratio", "", &parametersConfig::right_r_keep_preview_aspect_ratio)));
-//#line 39 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_exposure = 1;
-//#line 39 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_exposure = 33000;
-//#line 39 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_exposure = 1000;
-//#line 39 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_exposure", "int", 0, "Sensor exposure", "", &parametersConfig::right_r_exposure)));
-//#line 39 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 39 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_exposure", "int", 0, "Sensor exposure", "", &parametersConfig::right_r_exposure)));
-//#line 40 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_focus = 0;
-//#line 40 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_focus = 255;
-//#line 40 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_focus = 1;
-//#line 40 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_focus", "int", 0, "Focus", "", &parametersConfig::right_r_focus)));
-//#line 40 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 40 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_focus", "int", 0, "Focus", "", &parametersConfig::right_r_focus)));
-//#line 41 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_iso = 100;
-//#line 41 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_iso = 1600;
-//#line 41 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_iso = 800;
-//#line 41 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_iso", "int", 0, "Sensor iso", "", &parametersConfig::right_r_iso)));
-//#line 41 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 41 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_iso", "int", 0, "Sensor iso", "", &parametersConfig::right_r_iso)));
-//#line 42 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 42 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_set_man_exposure = 0;
-//#line 42 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 42 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_set_man_exposure = 1;
-//#line 42 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 42 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_set_man_exposure = 0;
-//#line 42 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 42 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_man_exposure", "bool", 0, "Enable manual exposure", "", &parametersConfig::right_r_set_man_exposure)));
-//#line 42 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 42 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_man_exposure", "bool", 0, "Enable manual exposure", "", &parametersConfig::right_r_set_man_exposure)));
-//#line 43 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 43 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_set_man_focus = 0;
-//#line 43 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 43 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_set_man_focus = 1;
-//#line 43 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 43 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_set_man_focus = 0;
-//#line 43 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 43 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_man_focus", "bool", 0, "Enable manual focus", "", &parametersConfig::right_r_set_man_focus)));
-//#line 43 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 43 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_man_focus", "bool", 0, "Enable manual focus", "", &parametersConfig::right_r_set_man_focus)));
-//#line 44 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 44 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_set_man_whitebalance = 0;
-//#line 44 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 44 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_set_man_whitebalance = 1;
-//#line 44 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 44 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_set_man_whitebalance = 0;
-//#line 44 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 44 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_man_whitebalance", "bool", 0, "Enable manual whitebalance", "", &parametersConfig::right_r_set_man_whitebalance)));
-//#line 44 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 44 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_man_whitebalance", "bool", 0, "Enable manual whitebalance", "", &parametersConfig::right_r_set_man_whitebalance)));
-//#line 45 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 45 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_whitebalance = 1000;
-//#line 45 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 45 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_whitebalance = 12000;
-//#line 45 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 45 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_whitebalance = 3300;
-//#line 45 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 45 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_whitebalance", "int", 0, "Whitebalance", "", &parametersConfig::right_r_whitebalance)));
-//#line 45 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 45 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_whitebalance", "int", 0, "Whitebalance", "", &parametersConfig::right_r_whitebalance)));
-//#line 46 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 46 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_set_auto_exposure_limit = 0;
-//#line 46 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 46 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_set_auto_exposure_limit = 1;
-//#line 46 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 46 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_set_auto_exposure_limit = 0;
-//#line 46 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 46 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_auto_exposure_limit", "bool", 0, "Enable auto exposure limit", "", &parametersConfig::right_r_set_auto_exposure_limit)));
-//#line 46 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 46 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_auto_exposure_limit", "bool", 0, "Enable auto exposure limit", "", &parametersConfig::right_r_set_auto_exposure_limit)));
-//#line 47 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 47 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_auto_exposure_limit = 1;
-//#line 47 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 47 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_auto_exposure_limit = 33000;
-//#line 47 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 47 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_auto_exposure_limit = 1000;
-//#line 47 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 47 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exposure_limit", "int", 0, "Auto exposure limit", "", &parametersConfig::right_r_auto_exposure_limit)));
-//#line 47 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 47 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exposure_limit", "int", 0, "Auto exposure limit", "", &parametersConfig::right_r_auto_exposure_limit)));
-//#line 48 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 48 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_set_sharpness = 0;
-//#line 48 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 48 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_set_sharpness = 1;
-//#line 48 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 48 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_set_sharpness = 0;
-//#line 48 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 48 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_sharpness", "bool", 0, "Enable sharpness", "", &parametersConfig::right_r_set_sharpness)));
-//#line 48 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 48 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_sharpness", "bool", 0, "Enable sharpness", "", &parametersConfig::right_r_set_sharpness)));
-//#line 49 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 49 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_sharpness = 0;
-//#line 49 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 49 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_sharpness = 4;
-//#line 49 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 49 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_sharpness = 0;
-//#line 49 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 49 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_sharpness", "int", 0, "Sharpness", "", &parametersConfig::right_r_sharpness)));
-//#line 49 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 49 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_sharpness", "int", 0, "Sharpness", "", &parametersConfig::right_r_sharpness)));
-//#line 50 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 50 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_set_chroma_denoise = 0;
-//#line 50 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 50 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_set_chroma_denoise = 1;
-//#line 50 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 50 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_set_chroma_denoise = 0;
-//#line 50 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 50 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_chroma_denoise", "bool", 0, "Enable chroma denoise", "", &parametersConfig::right_r_set_chroma_denoise)));
-//#line 50 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 50 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_chroma_denoise", "bool", 0, "Enable chroma denoise", "", &parametersConfig::right_r_set_chroma_denoise)));
-//#line 51 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 51 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_chroma_denoise = 0;
-//#line 51 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 51 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_chroma_denoise = 4;
-//#line 51 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 51 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_chroma_denoise = 0;
-//#line 51 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 51 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_chroma_denoise", "int", 0, "Chroma denoise", "", &parametersConfig::right_r_chroma_denoise)));
-//#line 51 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 51 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_chroma_denoise", "int", 0, "Chroma denoise", "", &parametersConfig::right_r_chroma_denoise)));
-//#line 52 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 52 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_set_luma_denoise = 0;
-//#line 52 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 52 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_set_luma_denoise = 1;
-//#line 52 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 52 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_set_luma_denoise = 0;
-//#line 52 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 52 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_luma_denoise", "bool", 0, "Enable luma denoise", "", &parametersConfig::right_r_set_luma_denoise)));
-//#line 52 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 52 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_luma_denoise", "bool", 0, "Enable luma denoise", "", &parametersConfig::right_r_set_luma_denoise)));
-//#line 53 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 53 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_luma_denoise = 0;
-//#line 53 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 53 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_luma_denoise = 4;
-//#line 53 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 53 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_luma_denoise = 0;
-//#line 53 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 53 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_luma_denoise", "int", 0, "Luma denoise", "", &parametersConfig::right_r_luma_denoise)));
-//#line 53 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 53 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_luma_denoise", "int", 0, "Luma denoise", "", &parametersConfig::right_r_luma_denoise)));
-//#line 54 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 54 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_set_auto_exp_region = 0;
-//#line 54 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 54 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_set_auto_exp_region = 1;
-//#line 54 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 54 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_set_auto_exp_region = 0;
-//#line 54 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 54 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_auto_exp_region", "bool", 0, "Enable auto exposure region", "", &parametersConfig::right_r_set_auto_exp_region)));
-//#line 54 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 54 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("right_r_set_auto_exp_region", "bool", 0, "Enable auto exposure region", "", &parametersConfig::right_r_set_auto_exp_region)));
-//#line 55 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 55 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_auto_exp_region_start_x = 0;
-//#line 55 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 55 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_auto_exp_region_start_x = 2147483647;
-//#line 55 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 55 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_auto_exp_region_start_x = 0;
-//#line 55 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 55 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exp_region_start_x", "int", 0, "Auto exposure region start x", "", &parametersConfig::right_r_auto_exp_region_start_x)));
-//#line 55 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 55 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exp_region_start_x", "int", 0, "Auto exposure region start x", "", &parametersConfig::right_r_auto_exp_region_start_x)));
-//#line 56 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 56 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_auto_exp_region_start_y = 0;
-//#line 56 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 56 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_auto_exp_region_start_y = 2147483647;
-//#line 56 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 56 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_auto_exp_region_start_y = 0;
-//#line 56 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 56 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exp_region_start_y", "int", 0, "Auto exposure region start y", "", &parametersConfig::right_r_auto_exp_region_start_y)));
-//#line 56 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 56 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exp_region_start_y", "int", 0, "Auto exposure region start y", "", &parametersConfig::right_r_auto_exp_region_start_y)));
-//#line 57 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 57 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_auto_exp_region_width = 0;
-//#line 57 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 57 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_auto_exp_region_width = 2147483647;
-//#line 57 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 57 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_auto_exp_region_width = 0;
-//#line 57 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 57 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exp_region_width", "int", 0, "Auto exposure region width", "", &parametersConfig::right_r_auto_exp_region_width)));
-//#line 57 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 57 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exp_region_width", "int", 0, "Auto exposure region width", "", &parametersConfig::right_r_auto_exp_region_width)));
-//#line 58 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 58 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.right_r_auto_exp_region_height = 0;
-//#line 58 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 58 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.right_r_auto_exp_region_height = 2147483647;
-//#line 58 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 58 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.right_r_auto_exp_region_height = 0;
-//#line 58 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 58 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exp_region_height", "int", 0, "Auto exposure region height", "", &parametersConfig::right_r_auto_exp_region_height)));
-//#line 58 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 58 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("right_r_auto_exp_region_height", "int", 0, "Auto exposure region height", "", &parametersConfig::right_r_auto_exp_region_height)));
-//#line 60 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 60 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_keep_preview_aspect_ratio = 0;
-//#line 60 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 60 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_keep_preview_aspect_ratio = 1;
-//#line 60 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 60 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_keep_preview_aspect_ratio = 1;
-//#line 60 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 60 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_keep_preview_aspect_ratio", "bool", 0, "Keep preview aspect ratio", "", &parametersConfig::rgb_r_keep_preview_aspect_ratio)));
-//#line 60 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 60 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_keep_preview_aspect_ratio", "bool", 0, "Keep preview aspect ratio", "", &parametersConfig::rgb_r_keep_preview_aspect_ratio)));
-//#line 61 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 61 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_exposure = 1;
-//#line 61 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 61 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_exposure = 33000;
-//#line 61 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 61 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_exposure = 1000;
-//#line 61 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 61 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_exposure", "int", 0, "Sensor exposure", "", &parametersConfig::rgb_r_exposure)));
-//#line 61 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 61 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_exposure", "int", 0, "Sensor exposure", "", &parametersConfig::rgb_r_exposure)));
-//#line 62 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 62 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_focus = 0;
-//#line 62 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 62 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_focus = 255;
-//#line 62 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 62 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_focus = 1;
-//#line 62 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 62 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_focus", "int", 0, "Focus", "", &parametersConfig::rgb_r_focus)));
-//#line 62 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 62 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_focus", "int", 0, "Focus", "", &parametersConfig::rgb_r_focus)));
-//#line 63 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 63 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_iso = 100;
-//#line 63 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 63 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_iso = 1600;
-//#line 63 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 63 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_iso = 800;
-//#line 63 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 63 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_iso", "int", 0, "Sensor iso", "", &parametersConfig::rgb_r_iso)));
-//#line 63 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 63 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_iso", "int", 0, "Sensor iso", "", &parametersConfig::rgb_r_iso)));
-//#line 64 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 64 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_set_man_exposure = 0;
-//#line 64 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 64 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_set_man_exposure = 1;
-//#line 64 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 64 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_set_man_exposure = 0;
-//#line 64 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 64 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_man_exposure", "bool", 0, "Enable manual exposure", "", &parametersConfig::rgb_r_set_man_exposure)));
-//#line 64 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 64 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_man_exposure", "bool", 0, "Enable manual exposure", "", &parametersConfig::rgb_r_set_man_exposure)));
-//#line 65 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 65 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_set_man_focus = 0;
-//#line 65 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 65 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_set_man_focus = 1;
-//#line 65 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 65 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_set_man_focus = 0;
-//#line 65 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 65 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_man_focus", "bool", 0, "Enable manual focus", "", &parametersConfig::rgb_r_set_man_focus)));
-//#line 65 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 65 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_man_focus", "bool", 0, "Enable manual focus", "", &parametersConfig::rgb_r_set_man_focus)));
-//#line 66 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 66 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_set_man_whitebalance = 0;
-//#line 66 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 66 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_set_man_whitebalance = 1;
-//#line 66 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 66 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_set_man_whitebalance = 0;
-//#line 66 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 66 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_man_whitebalance", "bool", 0, "Enable manual whitebalance", "", &parametersConfig::rgb_r_set_man_whitebalance)));
-//#line 66 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 66 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_man_whitebalance", "bool", 0, "Enable manual whitebalance", "", &parametersConfig::rgb_r_set_man_whitebalance)));
-//#line 67 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 67 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_whitebalance = 1000;
-//#line 67 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 67 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_whitebalance = 12000;
-//#line 67 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 67 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_whitebalance = 3300;
-//#line 67 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 67 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_whitebalance", "int", 0, "Whitebalance", "", &parametersConfig::rgb_r_whitebalance)));
-//#line 67 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 67 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_whitebalance", "int", 0, "Whitebalance", "", &parametersConfig::rgb_r_whitebalance)));
-//#line 68 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 68 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_set_auto_exposure_limit = 0;
-//#line 68 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 68 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_set_auto_exposure_limit = 1;
-//#line 68 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 68 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_set_auto_exposure_limit = 0;
-//#line 68 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 68 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_auto_exposure_limit", "bool", 0, "Enable auto exposure limit", "", &parametersConfig::rgb_r_set_auto_exposure_limit)));
-//#line 68 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 68 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_auto_exposure_limit", "bool", 0, "Enable auto exposure limit", "", &parametersConfig::rgb_r_set_auto_exposure_limit)));
-//#line 69 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 69 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_auto_exposure_limit = 1;
-//#line 69 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 69 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_auto_exposure_limit = 33000;
-//#line 69 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 69 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_auto_exposure_limit = 1000;
-//#line 69 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 69 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exposure_limit", "int", 0, "Auto exposure limit", "", &parametersConfig::rgb_r_auto_exposure_limit)));
-//#line 69 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 69 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exposure_limit", "int", 0, "Auto exposure limit", "", &parametersConfig::rgb_r_auto_exposure_limit)));
-//#line 70 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 70 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_set_sharpness = 0;
-//#line 70 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 70 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_set_sharpness = 1;
-//#line 70 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 70 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_set_sharpness = 0;
-//#line 70 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 70 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_sharpness", "bool", 0, "Enable sharpness", "", &parametersConfig::rgb_r_set_sharpness)));
-//#line 70 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 70 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_sharpness", "bool", 0, "Enable sharpness", "", &parametersConfig::rgb_r_set_sharpness)));
-//#line 71 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 71 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_sharpness = 0;
-//#line 71 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 71 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_sharpness = 4;
-//#line 71 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 71 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_sharpness = 0;
-//#line 71 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 71 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_sharpness", "int", 0, "Sharpness", "", &parametersConfig::rgb_r_sharpness)));
-//#line 71 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 71 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_sharpness", "int", 0, "Sharpness", "", &parametersConfig::rgb_r_sharpness)));
-//#line 72 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 72 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_set_chroma_denoise = 0;
-//#line 72 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 72 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_set_chroma_denoise = 1;
-//#line 72 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 72 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_set_chroma_denoise = 0;
-//#line 72 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 72 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_chroma_denoise", "bool", 0, "Enable chroma denoise", "", &parametersConfig::rgb_r_set_chroma_denoise)));
-//#line 72 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 72 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_chroma_denoise", "bool", 0, "Enable chroma denoise", "", &parametersConfig::rgb_r_set_chroma_denoise)));
-//#line 73 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 73 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_chroma_denoise = 0;
-//#line 73 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 73 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_chroma_denoise = 4;
-//#line 73 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 73 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_chroma_denoise = 0;
-//#line 73 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 73 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_chroma_denoise", "int", 0, "Chroma denoise", "", &parametersConfig::rgb_r_chroma_denoise)));
-//#line 73 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 73 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_chroma_denoise", "int", 0, "Chroma denoise", "", &parametersConfig::rgb_r_chroma_denoise)));
-//#line 74 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 74 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_set_luma_denoise = 0;
-//#line 74 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 74 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_set_luma_denoise = 1;
-//#line 74 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 74 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_set_luma_denoise = 0;
-//#line 74 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 74 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_luma_denoise", "bool", 0, "Enable luma denoise", "", &parametersConfig::rgb_r_set_luma_denoise)));
-//#line 74 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 74 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_luma_denoise", "bool", 0, "Enable luma denoise", "", &parametersConfig::rgb_r_set_luma_denoise)));
-//#line 75 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 75 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_luma_denoise = 0;
-//#line 75 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 75 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_luma_denoise = 4;
-//#line 75 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 75 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_luma_denoise = 0;
-//#line 75 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 75 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_luma_denoise", "int", 0, "Luma denoise", "", &parametersConfig::rgb_r_luma_denoise)));
-//#line 75 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 75 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_luma_denoise", "int", 0, "Luma denoise", "", &parametersConfig::rgb_r_luma_denoise)));
-//#line 76 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 76 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_set_auto_exp_region = 0;
-//#line 76 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 76 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_set_auto_exp_region = 1;
-//#line 76 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 76 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_set_auto_exp_region = 0;
-//#line 76 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 76 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_auto_exp_region", "bool", 0, "Enable auto exposure region", "", &parametersConfig::rgb_r_set_auto_exp_region)));
-//#line 76 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 76 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<bool>("rgb_r_set_auto_exp_region", "bool", 0, "Enable auto exposure region", "", &parametersConfig::rgb_r_set_auto_exp_region)));
-//#line 77 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 77 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_auto_exp_region_start_x = 0;
-//#line 77 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 77 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_auto_exp_region_start_x = 2147483647;
-//#line 77 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 77 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_auto_exp_region_start_x = 0;
-//#line 77 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 77 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exp_region_start_x", "int", 0, "Auto exposure region start x", "", &parametersConfig::rgb_r_auto_exp_region_start_x)));
-//#line 77 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 77 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exp_region_start_x", "int", 0, "Auto exposure region start x", "", &parametersConfig::rgb_r_auto_exp_region_start_x)));
-//#line 78 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 78 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_auto_exp_region_start_y = 0;
-//#line 78 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 78 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_auto_exp_region_start_y = 2147483647;
-//#line 78 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 78 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_auto_exp_region_start_y = 0;
-//#line 78 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 78 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exp_region_start_y", "int", 0, "Auto exposure region start y", "", &parametersConfig::rgb_r_auto_exp_region_start_y)));
-//#line 78 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 78 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exp_region_start_y", "int", 0, "Auto exposure region start y", "", &parametersConfig::rgb_r_auto_exp_region_start_y)));
-//#line 79 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 79 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_auto_exp_region_width = 0;
-//#line 79 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 79 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_auto_exp_region_width = 2147483647;
-//#line 79 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 79 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_auto_exp_region_width = 0;
-//#line 79 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 79 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exp_region_width", "int", 0, "Auto exposure region width", "", &parametersConfig::rgb_r_auto_exp_region_width)));
-//#line 79 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 79 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exp_region_width", "int", 0, "Auto exposure region width", "", &parametersConfig::rgb_r_auto_exp_region_width)));
-//#line 80 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 80 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __min__.rgb_r_auto_exp_region_height = 0;
-//#line 80 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 80 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __max__.rgb_r_auto_exp_region_height = 2147483647;
-//#line 80 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 80 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __default__.rgb_r_auto_exp_region_height = 0;
-//#line 80 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 80 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       camera.abstract_parameters.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exp_region_height", "int", 0, "Auto exposure region height", "", &parametersConfig::rgb_r_auto_exp_region_height)));
-//#line 80 "/home/uavteam6/catkin_ws/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
+//#line 80 "/home/uavteam6/catkin_ws_G6/src/depthai-ros/depthai_ros_driver/cfg/parameters.cfg"
       __param_descriptions__.push_back(parametersConfig::AbstractParamDescriptionConstPtr(new parametersConfig::ParamDescription<int>("rgb_r_auto_exp_region_height", "int", 0, "Auto exposure region height", "", &parametersConfig::rgb_r_auto_exp_region_height)));
 //#line 125 "/opt/ros/noetic/lib/python3/dist-packages/dynamic_reconfigure/parameter_generator_catkin.py"
       camera.convertParams();
