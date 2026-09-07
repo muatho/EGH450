@@ -1,0 +1,326 @@
+#!/usr/bin/env python3
+# Shebang: run this file with whatever 'python3' points to on your system (ROS-friendly).
+
+## Imports
+# --------
+
+import sys
+from math import *
+
+# import roslib
+# roslib.load_manifest('spar_node')
+
+import rospy
+
+# rospy = ROS 1's Python client library (allows this script to act as a ROS node,
+#        access parameters, log to console, sleep, and register shutdown hooks).
+
+import actionlib
+
+# actionlib = ROS 1's Python library for creating and using *Action* interfaces.
+#             Provides SimpleActionClient (used here) to send goals to an Action Server,
+#             receive feedback during execution, and get the final result or status.
+#             Handles the low-level goal/feedback/result topic communication automatically.
+
+from actionlib_msgs.msg import GoalStatus
+
+# The GoalStatus message contains:
+#   - goal_id  : unique identifier for the goal
+#   - status   : numeric code indicating the goal's state (see constants below)
+#
+# The constants are:
+#   PENDING   (0) — Goal accepted, waiting to start.
+#   ACTIVE    (1) — Goal is in progress.
+#   PREEMPTED (2) — Goal was cancelled after it started, now finished. (Terminal)
+#   SUCCEEDED (3) — Goal completed successfully. (Terminal)
+#   ABORTED   (4) — Goal failed during execution. (Terminal)
+#   REJECTED  (5) — Goal was never run because it was invalid/unattainable. (Terminal)
+#   PREEMPTING(6) — Cancellation requested after start, but not finished yet.
+#   RECALLING (7) — Cancellation requested before start, not confirmed yet.
+#   RECALLED  (8) — Goal cancelled before start and confirmed. (Terminal)
+#   LOST      (9) — Client detects goal is lost (should not be sent by server).
+#
+# These codes let you write logic like:
+#     if result.status == GoalStatus.SUCCEEDED:
+#         print("Reached the waypoint!")
+
+from spar_msgs.msg import FlightMotionAction, FlightMotionGoal
+
+# Import the SPAR flight motion action interface:
+# - FlightMotionAction = the *action wrapper* (bundles goal, result, and feedback types so actionlib can manage them as one action).
+# - FlightMotionGoal   = the goal message you fill in with motion parameters (type, position, yaw, speeds, convergence) and send to the action server (Spar_Node).
+
+
+def send_wp(spar_client, index, x, y, z, yaw):
+    """
+    Send a single 'go to (x, y, z, yaw)' waypoint by creating a FlightMotionGoal
+    and sending it to the SPAR action server (spar_node) via the action client (spar_client).
+    Blocks until spar_node reports the goal as finished.
+    Returns True if the action SUCCEEDED, otherwise False.
+    """
+
+    speed = rospy.get_param("~speed", 1.0)
+    # Read node-private param 'speed' (double). Default = 1.0 if not set.
+    # '~' means private namespace: /<node_name>/speed
+
+    accuracy = rospy.get_param("~accuracy", 0.1)
+    # Read node-private param 'accuracy' (double). Default = 0.1.
+    # Used for both position radius and yaw acceptance range below.
+
+    goal = FlightMotionGoal()
+    # Construct an empty goal message of type spar_msgs/FlightMotionGoal.
+
+    goal.motion = FlightMotionGoal.MOTION_GOTO
+    # Select motion mode: 'go to' a pose (as opposed to, say, takeoff/land/velocity mode if those exist).
+
+    goal.position.x = x
+    goal.position.y = y
+    goal.position.z = z
+    # Target position in SPAR's local frame.
+
+    goal.yaw = yaw
+    # Target yaw (radians). Convention: typically yaw=0 aligns with +X axis of the local frame.
+
+    goal.velocity_vertical = speed
+    goal.velocity_horizontal = speed
+    goal.yawrate = speed
+    # Commanded limits: vertical climb/descend speed, horizontal speed, and yaw rate.
+    # Here we just set them all to the same 'speed' param for simplicity.
+
+    goal.wait_for_convergence = True
+    # Tell SPAR to only declare success when we are within the acceptance thresholds below.
+
+    goal.position_radius = accuracy
+    goal.yaw_range = accuracy
+    # Acceptance thresholds:
+    # - position_radius (meters): how close to (x,y,z) we must be.
+    # - yaw_range (radians): how close to target yaw we must be.
+
+    spar_client.send_goal(goal)
+    # Asynchronously send the goal to the SPAR action server.
+
+    # Register a shutdown hook: if this node is asked to stop (Ctrl+C, ROS shutdown, etc.),
+    # automatically send a cancel request for the current goal to the action server (spar_node).
+    # This prevents the drone from continuing the mission after this node exits.
+    rospy.on_shutdown(lambda: spar_client.cancel_goal())
+
+    # Block this node's execution until spar_node finishes processing the current goal.
+    # The rest of the ROS system keeps running; only this node waits here until a terminal GoalStatus
+    # (e.g., SUCCEEDED, ABORTED, PREEMPTED) is received for the goal.
+    spar_client.wait_for_result()
+
+    # Pause this node for 2 seconds after the goal completes.
+    # This lets the drone hold position briefly at the waypoint before sending the next command.
+    # Other ROS nodes keep running normally during this pause.
+    rospy.loginfo("Hovering at waypoint...")
+    if index == 2:
+        rospy.loginfo("Hovering at waypoint 3 for 10 seconds...")
+        rospy.loginfo("Manually deploy payload now!")
+        rospy.sleep(10)
+    else:
+        rospy.loginfo("Hovering at waypoint...")
+        rospy.sleep(2)
+
+    # Output some feedback for our motion
+    return spar_client.get_state() == GoalStatus.SUCCEEDED
+
+
+def send_wps(spar_client):
+    success = True
+
+    # List of waypoints
+    # [X, Y, Z, Yaw]
+    wps = [
+        [-1.0, -1.0, 1.0, 0.0],  # Start (Assuming starting at -1,-1)
+        [0.0, 2.0, 1.0, 0.0],  # Waypoint 1
+        [2.0, 2.0, 1.0, 0.0],  # Waypoint 2
+        [1.0, 0.0, 1.0, 0.0],  # Waypoint 3
+        [2.0, -2.0, 1.0, 0.0],  # Waypoint 4
+        [-2.0, -2.0, 1.0, 0.0],  # Waypoint 5
+        [-2.0, 2.0, 1.0, 0.0],  # Waypoint 6
+        [-1.0, -1.0, 1.0, 0.0],
+    ]  # Return to start
+
+    # Loop through each waypoint in our list of waypoints (wps).
+    # Each element of 'wps' is expected to be a tuple/list of 4 values: (x, y, z, yaw).
+    i = 0
+    for wp in wps:
+        # Log to the ROS console which waypoint we’re about to send (1-based index for readability).
+        rospy.loginfo("Sending waypoint %i..." % (i + 1))
+
+        # Call send_wp(), passing:
+        #   - spar_client (the action client connected to spar_node)
+        #   - wp[0], wp[1], wp[2], wp[3] = the x, y, z, yaw for this waypoint
+        # This sends the goal to spar_node and blocks until spar_node reports it is finished.
+        # 'success' will be True if the goal finished with GoalStatus.SUCCEEDED, otherwise False.
+        success = send_wp(spar_client, i, wp[0], wp[1], wp[2], wp[3])
+
+        # Increment waypoint counter.
+        i += 1
+
+        # If this waypoint failed (aborted, preempted, or any non-success status),
+        # log an error and stop sending further waypoints.
+        if not success:
+            rospy.logerr("Waypoints failed!")
+            break
+
+    # If the loop completed and the last waypoint succeeded, log mission completion.
+    if success:
+        rospy.loginfo("Waypoints complete!")
+
+
+def send_takeoff_motion(spar_client):
+    """
+    Send a takeoff command to the SPAR action server.
+    This creates and sends a FlightMotionGoal with MOTION_TAKEOFF mode,
+    waits for the drone to reach the specified height, and reports the result.
+
+    Parameters:
+                    spar_client (SimpleActionClient): The action client connected to spar_node.
+    """
+
+    # Create and Configure Takeoff Goal
+    goal = FlightMotionGoal()
+    goal.motion = FlightMotionGoal.MOTION_TAKEOFF  # Select takeoff motion mode
+    goal.position.z = rospy.get_param("~height", 1.0)  # Target height in meters
+    #   Note: X and Y are ignored for takeoff — only Z height is used
+
+    goal.velocity_vertical = rospy.get_param("~speed", 0.2)  # Ascent speed in m/s
+    #   Note: Horizontal speed and yaw rate are ignored in takeoff mode
+
+    goal.wait_for_convergence = True  # Wait until target height reached
+    goal.position_radius = rospy.get_param(
+        "~position_radius", 0.1
+    )  # Acceptable height tolerance
+    goal.yaw_range = rospy.get_param("~yaw_range", 0.1)  # Acceptable yaw tolerance
+
+    # Send the goal to action Server
+    rospy.loginfo("Sending goal motion...")
+    spar_client.send_goal(goal)
+
+    # If ROS shuts down (e.g., Ctrl+C), cancel the takeoff goal to prevent unsafe flight
+    rospy.on_shutdown(lambda: spar_client.cancel_goal())
+
+    # Block until the action server reports the goal as complete (success/failure)
+    spar_client.wait_for_result()
+
+    # Evaluate the result
+    result = spar_client.get_state()
+    if result == GoalStatus.SUCCEEDED:
+        rospy.loginfo("Take-off complete!")
+    else:
+        rospy.logerr("Take-off failed!")
+
+        # Detailed Feedback
+        if result != GoalStatus.SUCCEEDED:
+            if (result == GoalStatus.PENDING) or (result == GoalStatus.ACTIVE):
+                rospy.loginfo("Sent command to cancel current mission")
+            elif result == GoalStatus.PREEMPTED:
+                rospy.logwarn("The current mission was cancelled")
+            elif result == GoalStatus.ABORTED:
+                rospy.logwarn("The current mission was aborted")
+            elif result == GoalStatus.RECALLED:
+                rospy.logerr("Error: The current mission was recalled")
+            elif result == GoalStatus.REJECTED:
+                rospy.logerr("Error: The current mission was rejected")
+            else:
+                rospy.logerr("Error: An unknown goal status was recieved")
+
+
+def send_landing_motion(spar_client):
+    """
+    Send a landing command to the SPAR action server.
+    This creates and sends a FlightMotionGoal with MOTION_LAND mode,
+    waits for the drone to land, and reports the result.
+
+    Parameters:
+                    spar_client (SimpleActionClient): The action client connected to spar_node.
+    """
+
+    # Create and configure the landing goal
+    goal = FlightMotionGoal()
+    goal.motion = FlightMotionGoal.MOTION_LAND  # Select landing motion mode
+    goal.velocity_vertical = rospy.get_param("~speed", 0.2)  # Descent speed in m/s
+    #   Note: No other fields (position, yaw, horizontal velocity) are used for landing
+
+    # Send the goal to action Server
+    rospy.loginfo("Sending goal motion...")
+    spar_client.send_goal(goal)
+
+    # If ROS shuts down (e.g., Ctrl+C), cancel the takeoff goal to prevent unsafe flight
+    rospy.on_shutdown(lambda: spar_client.cancel_goal())
+
+    # Block until the action server reports the goal as complete (success/failure)
+    spar_client.wait_for_result()
+
+    # Evaluate the result
+    result = spar_client.get_state()
+    if result == GoalStatus.SUCCEEDED:
+        rospy.loginfo("Landing complete!")
+    else:
+        rospy.logerr("Landing failed!")
+
+        # Detailed Feedback
+        if result != GoalStatus.SUCCEEDED:
+            if (result == GoalStatus.PENDING) or (result == GoalStatus.ACTIVE):
+                rospy.loginfo("Sent command to cancel current mission")
+            elif result == GoalStatus.PREEMPTED:
+                rospy.logwarn("The current mission was cancelled")
+            elif result == GoalStatus.ABORTED:
+                rospy.logwarn("The current mission was aborted")
+            elif result == GoalStatus.RECALLED:
+                rospy.logerr("Error: The current mission was recalled")
+            elif result == GoalStatus.REJECTED:
+                rospy.logerr("Error: The current mission was rejected")
+            else:
+                rospy.logerr("Error: An unknown goal status was recieved")
+
+
+def main(args):
+    # Initialise this script as a ROS node named 'flight'.
+    # 'anonymous=True' ensures a unique name by appending random numbers if another node
+    # with the same name is already running.
+    rospy.init_node("flight", anonymous=True)
+
+    # Retrieve the ROS parameter "~action_topic" from the parameter server.
+    # This is the name (namespace) of the action server topic we will send flight commands to.
+    # If the parameter is not set, default to 'spar/flight'.
+    action_ns = rospy.get_param("~action_topic", "spar/flight")
+
+    # Create the action client object (spar_client) for communicating with the SPAR action server.
+    #   - action_ns = the name of the action server ('spar_node' listens here).
+    #   - FlightMotionAction = the action definition type (wrapper for goal/result/feedback).
+    spar_client = actionlib.SimpleActionClient(action_ns, FlightMotionAction)
+
+    # Log a message indicating we’re waiting for the action server to become available.
+    rospy.loginfo("Waiting for spar...")
+
+    # Block until the action server (spar_node) is ready to accept goals.
+    spar_client.wait_for_server()
+
+    # Before sending waypoints, ensure this node is still running and not shutting down.
+    # This prevents sending commands if the user pressed Ctrl+C while we were waiting above.
+    if not rospy.is_shutdown():
+
+        # Call send_takeoff_motion(), passing the action client.
+        # This will execute the takeoff procedure
+        send_takeoff_motion(spar_client)
+
+        # Call send_wps(), passing the action client.
+        # This will send the list of waypoints to spar_node and handle execution.
+        send_wps(spar_client)
+
+        # Call send_landing_motion(), passing the action client.
+        # This will execute the lalnding procedure
+        send_landing_motion(spar_client)
+
+
+# If this file is executed directly (not imported as a module), run main().
+# Pass in command-line arguments, and exit quietly if ROS is interrupted (e.g., Ctrl+C).
+if __name__ == "__main__":
+    try:
+        main(sys.argv)
+    except rospy.ROSInterruptException:
+        pass
+
+    print("")
