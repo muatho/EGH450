@@ -1,0 +1,29 @@
+<launch>
+
+    <!-- YOLO runs by default; disable it to isolate camera/ArUco testing. -->
+    <arg name="enable_yolo" default="true"/>
+
+    <!-- Real flight uses PX4's fused local pose. Select emulator explicitly
+         when testing the global ArUco transform against /uavasr/pose. -->
+    <arg name="pose_source" default="real"/>
+    <arg name="pose_topic"
+         default="$(eval '/uavasr/pose' if arg('pose_source') == 'emulator' else '/mavros/local_position/pose')"/>
+
+
+    <node
+        pkg="depthai_publisher"
+        type="dai_publisher"
+        name="dai_publisher"
+        output="screen">
+        <param name="enable_yolo" value="$(arg enable_yolo)"/>
+    </node>
+
+    <node
+        pkg="depthai_publisher"
+        type="aruco_subscriber"
+        name="aruco_subscriber"
+        output="screen">
+        <remap from="/mavros/local_position/pose" to="$(arg pose_topic)"/>
+    </node>
+
+</launch>

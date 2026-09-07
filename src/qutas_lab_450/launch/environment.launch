@@ -8,7 +8,7 @@
 	<!-- Configure for each system Setup -->
 	<arg name="vicon" default="false" />
 	<arg name="optitrack" default="true" />
-	<arg name="vrpn_object_name" default="uavteam6" />
+	<arg name="vrpn_object_name" default="uavteam4" />
 
 	<!-- VRPN Clinet (VICON) -->
 	<group if="$(arg vicon)">

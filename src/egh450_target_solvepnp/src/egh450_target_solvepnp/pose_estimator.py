@@ -178,12 +178,3 @@ class PoseEstimator():
 		mask_image = cv2.morphologyEx(mask_image, cv2.MORPH_OPEN, kernel)
 
 		return mask_image
-
-
-
-
-
-
-
-
-

@@ -22,7 +22,7 @@ pipeline = None
 cam_source = 'rgb'  # 'rgb', 'left', 'right'
 syncNN = True
 
-modelsPath = "/home/uavteam6/catkin_ws/src/depthai_publisher/src/depthai_publisher/models"
+modelsPath = "/home/uavteam6/catkin_ws_G6/src/depthai_publisher/src/depthai_publisher/models"
 modelName = 'best_openvino_2022.1_6shave'
 confJson = 'best.json'
 

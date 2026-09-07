@@ -9,6 +9,7 @@ Example use:  python3 bags2images.py '/home/user/2023-07-31-14-30-34.bag' ~/Desk
 
 import os
 import argparse
+import numpy as np
 
 import cv2
 
@@ -32,8 +33,26 @@ def main():
     bag = rosbag.Bag(args.bag_file, "r")
     bridge = CvBridge()
     count = 0
+    start_time = 90
+    end_time = 91
+    bag_start = None
+    
     for topic, msg, t in bag.read_messages(topics=[args.image_topic]):
-        cv_img = bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
+
+        if bag_start is None:
+            bag_start = t.to_sec()
+
+        elapsed = t.to_sec() - bag_start
+
+        if elapsed < start_time:
+            continue
+
+        if elapsed > end_time:
+            break
+
+
+        np_arr = np.frombuffer(msg.data, np.uint8)
+        cv_img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
 
         cv2.imwrite(os.path.join(args.output_dir, "frame%06i.png" % count), cv_img)
         print ("Wrote image %i" % count)

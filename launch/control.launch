@@ -10,6 +10,10 @@
 	<arg name="log_output" default="screen" />
 	<arg name="fcu_protocol" default="v2.0" />
 	<arg name="respawn_mavros" default="false" />
+	<!-- Team-specific MAVROS YAML files live beside this launch file. These
+	     arguments remain overridable without depending on a user's home path. -->
+	<arg name="pluginlists_yaml" default="$(dirname)/px4_pluginlists.yaml" />
+	<arg name="config_yaml" default="$(dirname)/px4_config.yaml" />
 
 	<!-- Spar Node -->
 	<remap from="spar/mav_state" to="mavros/state"/>
@@ -19,8 +23,8 @@
 
 	<!-- MAVROS Node -->
 	<include file="$(find mavros)/launch/node.launch">
-		<arg name="pluginlists_yaml" value="/home/uavteam6/catkin_ws/launch/px4_pluginlists.yaml" />
-		<arg name="config_yaml" value="/home/uavteam6/catkin_ws/launch/px4_config.yaml" />
+		<arg name="pluginlists_yaml" value="$(arg pluginlists_yaml)" />
+		<arg name="config_yaml" value="$(arg config_yaml)" />
 
 		<arg name="fcu_url" value="$(arg fcu_url)" />
 		<arg name="gcs_url" value="$(arg gcs_url)" />
