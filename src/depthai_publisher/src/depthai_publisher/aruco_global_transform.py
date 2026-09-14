@@ -3,10 +3,10 @@
 import cv2
 import numpy as np
 
-from scipy.spatial.transform import Rotation as R
+from depthai_publisher.camera_to_map import CameraToMap
 
 
-class ArucoGlobalTransformer:
+class ArucoGlobalTransformer(CameraToMap):
     """Compose camera PnP and vehicle pose into a map-frame marker pose.
 
     Transform notation follows T_A_B: it maps coordinates expressed in frame B
@@ -20,93 +20,6 @@ class ArucoGlobalTransformer:
             @ T_drone_camera
             @ T_camera_marker
     """
-
-    # ============================================================
-    # Camera mounting parameters
-    # ============================================================
-
-    # Camera origin expressed in the drone body frame, in metres. Body axes are
-    # assumed to follow ROS FLU: +X forward, +Y left, +Z upward.
-    CAMERA_X = 0.00      # +forward
-    CAMERA_Y = 0.00      # +left
-    CAMERA_Z = -0.08     # below body origin
-
-    # OpenCV optical axes are +X image-right, +Y image-down, +Z through the
-    # lens. For the measured downward-facing mounting on this drone:
-    # body X (forward) = -camera Y (image up)
-    # body Y (left)    = -camera X (image left)
-    # body Z (up)      = -camera Z (opposite the downward optical axis)
-
-    CAMERA_ROTATION = np.array([
-
-        [0, -1, 0],
-        [-1, 0, 0],
-        [0, 0, -1]
-
-    ], dtype=float)
-
-    # ============================================================
-
-    def build_map_drone_transform(self, pose_msg):
-        """Build T_map_drone from the synchronized MAVROS PoseStamped.
-
-        The synchronizer in aruco_subscriber supplies this message explicitly;
-        this class no longer owns an asynchronous "latest pose" subscriber.
-        MAVROS position is the body origin expressed in map; its quaternion
-        rotates body-frame vectors into map-frame vectors.
-        """
-        if pose_msg is None:
-            return None
-
-        position = np.array([
-            pose_msg.pose.position.x,
-            pose_msg.pose.position.y,
-            pose_msg.pose.position.z,
-        ])
-        orientation = np.array([
-            pose_msg.pose.orientation.x,
-            pose_msg.pose.orientation.y,
-            pose_msg.pose.orientation.z,
-            pose_msg.pose.orientation.w,
-        ])
-
-        # scipy expects quaternion components in ROS order: x, y, z, w.
-        R_map_drone = R.from_quat(
-            orientation
-        ).as_matrix()
-
-        # A homogeneous transform stores rotation in its upper-left 3 x 3 and
-        # translation in its upper-right 3 x 1 column.
-        T = np.eye(4)
-
-        T[:3, :3] = R_map_drone
-        T[:3, 3] = position
-
-        return T
-
-
-    def build_drone_camera_transform(self):
-        """Build fixed T_drone_camera from the measured camera mounting.
-
-        Despite the readable name "drone_camera", this matrix maps a point
-        from camera coordinates into drone coordinates. Its translation is the
-        camera origin expressed in the drone body frame.
-        """
-
-        R_drone_camera = self.CAMERA_ROTATION
-
-        T = np.eye(4)
-
-        T[:3, :3] = R_drone_camera
-
-        T[:3, 3] = np.array([
-            self.CAMERA_X,
-            self.CAMERA_Y,
-            self.CAMERA_Z
-        ])
-
-        return T
-
 
     def build_camera_marker_transform(
         self,

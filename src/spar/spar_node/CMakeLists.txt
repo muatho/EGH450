@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   geometry_msgs
   spar_msgs
+  vision_msgs
 )
 
 ## System dependencies are found with CMake's conventions

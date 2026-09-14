@@ -1,0 +1,9 @@
+train: Train.txt
+val: Validation.txt
+test: Test.txt
+
+names:
+  0: person
+  1: backpack
+
+path: "/Users/lucasbrankovich/Downloads/EGH450 local/EGH450_prelim_dataset"

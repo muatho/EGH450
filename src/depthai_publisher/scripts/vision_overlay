@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+from depthai_publisher import vision_overlay
+
+
+if __name__ == '__main__':
+    vision_overlay.main()

@@ -14,6 +14,13 @@
 		<param name="action_topic" type="string" value="spar/flight" />
 		<param name="pose_source" type="string" value="$(arg pose_source)" />
 
+		<!-- Require repeated, nearby map-frame backpack observations before
+		     interrupting the survey, then suppress repeat service nearby. -->
+		<param name="backpack_confidence_threshold" type="double" value="0.60" />
+		<param name="backpack_confirmations_required" type="int" value="3" />
+		<param name="backpack_confirmation_radius" type="double" value="0.75" />
+		<param name="backpack_serviced_radius" type="double" value="1.00" />
+
 		<!-- Remappings -->
 		<remap from="~/pose" to="/mavros/local_position/pose" />
 		<!--remap from="~/roi" to="target_detection/roi" /-->

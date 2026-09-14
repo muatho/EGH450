@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+from depthai_publisher import object_position_estimator
+
+
+if __name__ == '__main__':
+    object_position_estimator.main()

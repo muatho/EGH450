@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import json
+from datetime import timedelta
 from pathlib import Path
 
 import cv2
@@ -34,9 +35,11 @@ class DepthaiCamera():
         # YOLO is normally enabled, but can be disabled from the launch file
         # to isolate camera and ArUco behaviour during diagnosis.
         self.enable_yolo = rospy.get_param("~enable_yolo", True)
+        self.enable_depth = rospy.get_param("~enable_depth", True)
         self.yolo_topic = "/yolo/detections"
 
-        # This YOLOv5 model is temporary while YOLOv8 is being trained.
+        # Launch parameters keep the deployed blob and its decoder metadata
+        # replaceable without changing the publisher implementation.
         package_dir = Path(__file__).resolve().parent
         model_dir = package_dir / "models" / "best_openvino_2022.1_6shave"
         self.yolo_config_path = Path(rospy.get_param(
@@ -58,11 +61,19 @@ class DepthaiCamera():
         self.pub_topic = '/depthai_node/image/compressed'
         self.pub_topic_raw = '/depthai_node/image/raw'
         self.pub_topic_cam_info = '/depthai_node/camera/camera_info'
+        self.depth_topic = '/depthai_node/depth/aligned'
 
         # queue_size=1 favours the newest frame if a subscriber falls behind.
         self.pub_image = rospy.Publisher(self.pub_topic, CompressedImage, queue_size=1)
         self.pub_image_raw = rospy.Publisher(self.pub_topic_raw, Image, queue_size=1)
         self.pub_cam_info = rospy.Publisher(self.pub_topic_cam_info, CameraInfo, queue_size=1)
+        self.pub_depth = None
+        if self.enable_depth:
+            self.pub_depth = rospy.Publisher(
+                self.depth_topic,
+                Image,
+                queue_size=1,
+            )
         self.pub_yolo = None
         if self.enable_yolo:
             self.pub_yolo = rospy.Publisher(
@@ -96,10 +107,10 @@ class DepthaiCamera():
         rospy.on_shutdown(self.shutdown)
 
     def read_yolo_config(self):
-        """Read the temporary YOLOv5 model's DepthAI decoder settings.
+        """Read the deployed model's DepthAI decoder settings.
 
-        These anchors are specific to this old model. A future YOLOv8 export
-        needs its own compatible output and decoder configuration.
+        The blob and JSON form one versioned deployment unit: class order,
+        anchors, masks and input dimensions must describe that exact blob.
         """
         if not self.yolo_config_path.is_file():
             raise FileNotFoundError(
@@ -141,6 +152,7 @@ class DepthaiCamera():
         ``video``; run() opens a queue with that same name.
         """
         cam_rgb = self.pipeline.createColorCamera()
+        self.cam_rgb = cam_rgb
 
         # Select the sensor operating mode.
         cam_rgb.setResolution(
@@ -156,10 +168,56 @@ class DepthaiCamera():
         xout_rgb = self.pipeline.createXLinkOut()
         xout_rgb.setStreamName("video")
 
-        cam_rgb.preview.link(xout_rgb.input)
+        if self.enable_depth:
+            self.configure_depth_pipeline(cam_rgb, xout_rgb)
+        else:
+            cam_rgb.preview.link(xout_rgb.input)
 
         if self.enable_yolo:
             self.configure_yolo_pipeline(cam_rgb)
+
+    def configure_depth_pipeline(self, cam_rgb, xout_rgb):
+        """Create RGB-aligned stereo depth and synchronize it with RGB.
+
+        Mono cameras B and C generate stereo depth in millimetres. StereoDepth
+        aligns that depth geometrically to CAM_A and scales it to the same
+        640 x 360 pixel grid as the published RGB preview. The device-side Sync
+        node then groups frames by capture timestamp before USB transfer.
+        """
+        mono_left = self.pipeline.createMonoCamera()
+        mono_right = self.pipeline.createMonoCamera()
+        stereo = self.pipeline.createStereoDepth()
+
+        mono_resolution = (
+            dai.MonoCameraProperties.SensorResolution.THE_400_P
+        )
+        mono_left.setResolution(mono_resolution)
+        mono_left.setBoardSocket(dai.CameraBoardSocket.CAM_B)
+        mono_left.setFps(self.fps)
+        mono_right.setResolution(mono_resolution)
+        mono_right.setBoardSocket(dai.CameraBoardSocket.CAM_C)
+        mono_right.setFps(self.fps)
+
+        stereo.setDefaultProfilePreset(
+            dai.node.StereoDepth.PresetMode.HIGH_DENSITY
+        )
+        # Left-right checking removes many occlusion-edge mismatches and is
+        # required for reliable alignment into the RGB camera viewpoint.
+        stereo.setLeftRightCheck(True)
+        stereo.setDepthAlign(self.rgb_socket)
+        stereo.setOutputSize(self.width, self.height)
+
+        mono_left.out.link(stereo.left)
+        mono_right.out.link(stereo.right)
+
+        sync = self.pipeline.create(dai.node.Sync)
+        sync.setSyncThreshold(
+            timedelta(seconds=1.0 / (2.0 * self.fps))
+        )
+        sync.setSyncAttempts(-1)
+        cam_rgb.preview.link(sync.inputs["rgb"])
+        stereo.depth.link(sync.inputs["depth"])
+        sync.out.link(xout_rgb.input)
 
     def configure_yolo_pipeline(self, cam_rgb):
         """Create the letterboxed 640x360 camera-to-YOLO branch."""
@@ -269,9 +327,26 @@ class DepthaiCamera():
 
     def run(self):
         """Open the OAK, read calibration once, then publish incoming frames."""
-        # EEPROM cannot be read until the physical device has been opened.
-        with dai.Device(self.pipeline) as device:
+        # Open the device before starting the prepared pipeline so the RGB lens
+        # can be fixed at the EEPROM calibration position. Autofocus movement
+        # would otherwise change RGB geometry after depth-to-RGB calibration.
+        with dai.Device() as device:
             self.camera_info = self.read_camera_info(device)
+            calibration = device.readCalibration()
+            lens_position = calibration.getLensPosition(self.rgb_socket)
+            if lens_position:
+                self.cam_rgb.initialControl.setManualFocus(lens_position)
+                rospy.loginfo(
+                    "Locked RGB focus to calibration position %d",
+                    lens_position,
+                )
+            else:
+                rospy.logwarn(
+                    "No stored RGB lens position; depth alignment may vary "
+                    "if autofocus moves"
+                )
+
+            device.startPipeline(self.pipeline)
 
             # Retain the newest host-bound frame rather than accumulating old
             # frames when the host temporarily cannot keep up.
@@ -287,15 +362,26 @@ class DepthaiCamera():
 
             while not rospy.is_shutdown():
                 packet = video.get()
-                frame = packet.getCvFrame()
+                depth_frame = None
+                if self.enable_depth:
+                    # Sync guarantees these frames were captured within half
+                    # a frame interval and depth uses RGB pixel coordinates.
+                    rgb_packet = packet["rgb"]
+                    depth_packet = packet["depth"]
+                    depth_frame = depth_packet.getFrame()
+                else:
+                    rgb_packet = packet
+                frame = rgb_packet.getCvFrame()
 
                 # One timestamp is shared by raw Image, CompressedImage, and
                 # CameraInfo. This replaces the old independent 10 Hz timer.
                 stamp = rospy.Time.now()
                 self.publish_to_ros(frame, stamp)
+                if depth_frame is not None:
+                    self.publish_depth_to_ros(depth_frame, stamp)
 
                 if self.enable_yolo:
-                    sequence = packet.getSequenceNum()
+                    sequence = rgb_packet.getSequenceNum()
                     stamps_by_sequence[sequence] = stamp
                     stamps_by_sequence = {
                         key: value
@@ -312,6 +398,16 @@ class DepthaiCamera():
                             detections, detection_stamp
                         )
                         detections = yolo_queue.tryGet()
+
+    def publish_depth_to_ros(self, depth_frame, stamp):
+        """Publish RGB-aligned unsigned 16-bit depth in millimetres."""
+        depth_msg = self.bridge.cv2_to_imgmsg(
+            depth_frame,
+            encoding="16UC1",
+        )
+        depth_msg.header.stamp = stamp
+        depth_msg.header.frame_id = self.image_frame
+        self.pub_depth.publish(depth_msg)
 
     def publish_yolo_detections(self, packet, stamp):
         """Publish boxes in the original 640x360 image coordinates."""

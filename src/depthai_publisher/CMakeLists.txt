@@ -8,6 +8,8 @@ project(depthai_publisher)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  geometry_msgs
+  message_generation
   roscpp
   rospy
   std_msgs
@@ -47,11 +49,11 @@ catkin_python_setup()
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  ArucoDetection.msg
+  ArucoDetectionArray.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -68,10 +70,11 @@ catkin_python_setup()
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  geometry_msgs
+  std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -105,7 +108,7 @@ catkin_python_setup()
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES depthai_publisher
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+  CATKIN_DEPENDS geometry_msgs message_runtime roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -160,7 +163,11 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
-  scripts/dai_publisher scripts/dai_publisher_yolov5_runner scripts/aruco_subscriber
+  scripts/dai_publisher
+  scripts/dai_publisher_yolov5_runner
+  scripts/aruco_subscriber
+  scripts/vision_overlay
+  scripts/object_position_estimator
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

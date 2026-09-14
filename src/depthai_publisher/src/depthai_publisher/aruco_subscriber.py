@@ -10,6 +10,7 @@ from scipy.spatial.transform import Rotation as R
 
 from depthai_publisher.aruco_pose_estimator_PnP import ArucoPoseEstimator
 from depthai_publisher.aruco_global_transform import ArucoGlobalTransformer
+from depthai_publisher.msg import ArucoDetection, ArucoDetectionArray
 
 from visualization_msgs.msg import Marker
 from visualization_msgs.msg import MarkerArray
@@ -18,7 +19,8 @@ from visualization_msgs.msg import MarkerArray
 class ArucoDetector():
     """Detect, locate, annotate, and publish ArUco marker observations.
 
-    Every compressed OAK image is detected and republished independently.
+    Every compressed OAK image is detected and represented by one timestamped
+    observation array, including frames on which no markers were found.
     MAVROS pose is optional: when a sufficiently recent pose is available it
     is used to transform marker observations into the map frame.
 
@@ -42,9 +44,14 @@ class ArucoDetector():
 
     def __init__(self):
         """Create publishers and independent image, pose, and info inputs."""
-        # Human-readable JPEG containing borders, IDs, axes, and PnP values.
-        self.aruco_pub = rospy.Publisher(
-            '/processed_aruco/image/compressed', CompressedImage, queue_size=1)
+        # Image-space observations are consumed by the presentation-only
+        # vision_overlay node. Publishing an empty array for every empty frame
+        # prevents that node from reusing detections from an older image.
+        self.observation_pub = rospy.Publisher(
+            '/aruco/observations',
+            ArucoDetectionArray,
+            queue_size=1,
+        )
 
         # Machine/RViz-readable global marker locations in the map frame.
         self.marker_pub = rospy.Publisher(
@@ -217,31 +224,30 @@ class ArucoDetector():
                 "updating map-frame marker locations",
             )
 
-        aruco = self.find_aruco(
+        observations = self.find_aruco(
             frame,
             pose_msg,
             image_msg.header.stamp,
         )
-        self.publish_to_ros(aruco, image_msg.header)
-
-        # cv2.imshow('aruco', aruco)
-        # cv2.waitKey(1)
+        observations.header = image_msg.header
+        self.observation_pub.publish(observations)
 
     def info_callback(self, msg):
         """Replace the PnP estimator's calibration with the latest CameraInfo."""
         self.pose_estimator.set_camera_info(msg)
 
     def find_aruco(self, frame, pose_msg, image_stamp):
-        """Detect all markers and estimate each one's map-frame transform.
+        """Return image observations and update accepted map-frame landmarks.
 
         Detection supplies ordered 2D corner pixels. ArucoPoseEstimator combines
         those pixels with marker geometry, K, and D to produce T_camera_marker.
         ArucoGlobalTransformer then combines it with a recent MAVROS pose and
-        fixed camera mount to produce T_map_marker. If pose_msg is unavailable,
-        detection and PnP overlays continue but the map marker is not updated.
+        fixed camera mount to produce T_map_marker. Drawing is deliberately not
+        performed here; vision_overlay consumes this function's ROS output.
         """
         detector = cv2.aruco.ArucoDetector(self.aruco_dict, self.aruco_params)
         corners, ids, _ = detector.detectMarkers(frame)
+        observation_array = ArucoDetectionArray()
 
 
         if len(corners) > 0:
@@ -249,18 +255,29 @@ class ArucoDetector():
 
             for (marker_corner, marker_ID) in zip(corners, ids):
                 pts = marker_corner.reshape((4, 2))
-                (top_left, top_right, bottom_right, bottom_left) = pts
-
-                top_right = (int(top_right[0]), int(top_right[1]))
-                bottom_right = (int(bottom_right[0]), int(bottom_right[1]))
-                bottom_left = (int(bottom_left[0]), int(bottom_left[1]))
-                top_left = (int(top_left[0]), int(top_left[1]))
+                observation = ArucoDetection()
+                observation.id = int(marker_ID)
+                for point_index, point in enumerate(pts):
+                    observation.corners[point_index].x = float(point[0])
+                    observation.corners[point_index].y = float(point[1])
+                    observation.corners[point_index].z = 0.0
+                observation.pose_valid = False
 
                 # Detection can begin before CameraInfo arrives, but PnP cannot.
                 if self.pose_estimator.got_camera_info:
                     success, rvec, tvec = self.pose_estimator.estimate_pose(marker_corner)
 
                     if success:
+                        observation.pose_valid = True
+                        observation.rvec.x = float(rvec[0, 0])
+                        observation.rvec.y = float(rvec[1, 0])
+                        observation.rvec.z = float(rvec[2, 0])
+                        observation.tvec.x = float(tvec[0, 0])
+                        observation.tvec.y = float(tvec[1, 0])
+                        observation.tvec.z = float(tvec[2, 0])
+                        observation.reprojection_error = float(
+                            self.pose_estimator.last_reprojection_error
+                        )
 
                         T = None
                         if pose_msg is not None:
@@ -280,50 +297,11 @@ class ArucoDetector():
                                 image_stamp,
                             )
 
-                        self.pose_estimator.draw_pose_overlay(
-                            frame,
-                            rvec,
-                            tvec,
-                            top_left
-                        )
+                # Append every decoded marker, even when PnP was unavailable
+                # or rejected. The overlay can still show its border and ID.
+                observation_array.detections.append(observation)
 
-                cv2.line(frame, top_left, top_right, (0, 255, 0), 2)
-                cv2.line(frame, top_right, bottom_right, (0, 255, 0), 2)
-                cv2.line(frame, bottom_right, bottom_left, (0, 255, 0), 2)
-                cv2.line(frame, bottom_left, top_left, (0, 255, 0), 2)
-
-                # rospy.loginfo("Aruco detected, ID: {}".format(marker_ID))
-
-                self.pose_estimator.draw_text_180(
-                    frame,
-                    str(marker_ID),
-                    (top_left[0], top_right[1] - 15),
-                    cv2.FONT_HERSHEY_COMPLEX,
-                    0.5,
-                    (0, 255, 0),
-                    2,
-                )
-
-        return frame
-
-    def publish_to_ros(self, frame, source_header):
-        """JPEG-encode the overlay while preserving its source image header.
-
-        Copying the header retains both the optical frame ID and the timestamp
-        used to select pose_msg. A new publication-time stamp would break the
-        traceability between this overlay and its original observation.
-        """
-        success, encoded = cv2.imencode('.jpg', frame)
-        if not success:
-            rospy.logwarn("Failed to encode processed ArUco image")
-            return
-
-        msg_out = CompressedImage()
-        msg_out.header = source_header
-        msg_out.format = "jpeg"
-        msg_out.data = encoded.tobytes()
-
-        self.aruco_pub.publish(msg_out)
+        return observation_array
 
 
 def main():

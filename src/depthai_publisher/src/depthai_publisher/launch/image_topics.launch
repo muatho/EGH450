@@ -2,6 +2,15 @@
 
     <!-- YOLO runs by default; disable it to isolate camera/ArUco testing. -->
     <arg name="enable_yolo" default="true"/>
+    <!-- RGB-aligned stereo depth supplies range for 3D object positions. -->
+    <arg name="enable_depth" default="true"/>
+    <!-- One JSON is the source of decoder settings and human-readable labels
+         for both on-device inference and the presentation overlay. -->
+    <arg name="yolo_config_path"
+         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5/best.json"/>
+    <!-- Keep the blob and decoder configuration explicit and paired. -->
+    <arg name="yolo_blob_path"
+         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5/best_openvino_2022.1_6shave.blob"/>
 
     <!-- Real flight uses PX4's fused local pose. Select emulator explicitly
          when testing the global ArUco transform against /uavasr/pose. -->
@@ -16,6 +25,9 @@
         name="dai_publisher"
         output="screen">
         <param name="enable_yolo" value="$(arg enable_yolo)"/>
+        <param name="enable_depth" value="$(arg enable_depth)"/>
+        <param name="yolo_config_path" value="$(arg yolo_config_path)"/>
+        <param name="yolo_blob_path" value="$(arg yolo_blob_path)"/>
     </node>
 
     <node
@@ -24,6 +36,29 @@
         name="aruco_subscriber"
         output="screen">
         <remap from="/mavros/local_position/pose" to="$(arg pose_topic)"/>
+    </node>
+
+    <!-- Presentation is isolated from detection and world-model updates. A
+         visualization failure therefore cannot interrupt navigation data. -->
+    <node
+        pkg="depthai_publisher"
+        type="vision_overlay"
+        name="vision_overlay"
+        output="screen">
+        <!-- Keep visualization optional in exactly the same way as inference. -->
+        <param name="enable_yolo" value="$(arg enable_yolo)"/>
+        <param name="yolo_config_path" value="$(arg yolo_config_path)"/>
+    </node>
+
+    <!-- A 3D observation requires both a YOLO box and aligned depth. This node
+         remains absent for RGB-only or ArUco-only diagnostic launches. -->
+    <node
+        if="$(eval arg('enable_yolo') and arg('enable_depth'))"
+        pkg="depthai_publisher"
+        type="object_position_estimator"
+        name="object_position_estimator"
+        output="screen">
+        <param name="pose_topic" value="$(arg pose_topic)"/>
     </node>
 
 </launch>
