@@ -1,18 +1,20 @@
 <?xml version='1.0'?>
 <launch>
 	<arg name="pose_source" default="real" />
+	<arg name="deploy" default="true" />
 	<node name="guidance" pkg="spar_node" type="test_breadcrumb_camera" respawn="false" output="screen">
 		<!-- Linear and yaw motion velocities -->
-		<param name="vel_linear" type="double" value="0.5" />
+		<param name="vel_linear" type="double" value="0.4" />
 		<param name="vel_yaw" type="double" value="0.2" />
 
 		<!-- Position and yaw waypoint accuracies -->
-		<param name="acc_pos" type="double" value="0.1" />
-		<param name="acc_yaw" type="double" value="0.1" />
+		<param name="acc_pos" type="double" value="0.3" />
+		<param name="acc_yaw" type="double" value="0.3" />
 
 		<!-- Spar parameters -->
 		<param name="action_topic" type="string" value="spar/flight" />
 		<param name="pose_source" type="string" value="$(arg pose_source)" />
+		<param name="deploy" type="bool" value="$(arg deploy)" />
 
 		<!-- Require repeated, nearby map-frame backpack observations before
 		     interrupting the survey, then suppress repeat service nearby. -->
@@ -30,7 +32,8 @@
         pkg="spar_node"
         type="payload-v1.2.py"
         name="payload_controller"
-        output="screen" />
+        output="screen"
+        if="$(arg deploy)" />
     
 
 </launch>

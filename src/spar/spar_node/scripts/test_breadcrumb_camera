@@ -58,6 +58,9 @@ class Guidance():
         # Keep track of which payload has been deployed
         self.payload_a_deployed = False
         self.payload_b_deployed = False
+        # When false, object detections cannot interrupt the survey and this
+        # node will refuse to publish either payload actuator command.
+        self.deployment_enabled = rospy.get_param("~deploy", True)
 
         # =============================================================
         # ARUCO MARKER STATES
@@ -91,12 +94,24 @@ class Guidance():
         )
 
         # =============================================================
-        # BACKPACK DIVERSION STATES
+        # PERSON/BACKPACK DIVERSION STATES
         # =============================================================
         # The deployed YOLO model uses class 0 for person and class 1 for
         # backpack. Object observations already contain map-frame positions,
         # so navigation does not consume the camera-only 2D detection topic.
+        self.person_class_id = 0
         self.backpack_class_id = 1
+        self.target_class_names = {
+            self.person_class_id: "PERSON",
+            self.backpack_class_id: "BACKPACK",
+        }
+        # Physical payload mapping. If the payload team confirms the opposite
+        # arrangement, swap only these two values.
+        self.payload_actuator_by_class = {
+            self.person_class_id: "a",
+            self.backpack_class_id: "b",
+        }
+        self.person_confidence_threshold = 0.60
         self.backpack_confidence_threshold = rospy.get_param(
             "~backpack_confidence_threshold",
             0.60
@@ -114,9 +129,14 @@ class Guidance():
             1.00
         )
 
-        self.backpack_candidate = None
-        self.backpack_candidate_count = 0
-        self.serviced_backpack_locations = []
+        self.target_candidate = None
+        self.target_candidate_class_id = None
+        self.target_candidate_count = 0
+        self.serviced_target_locations = {
+            self.person_class_id: [],
+            self.backpack_class_id: [],
+        }
+        self.pending_payload_class_id = None
         self.object_subscriber = None
 
         # =============================================================
@@ -167,7 +187,7 @@ class Guidance():
 
         self.vel_linear = rospy.get_param(
             "~vel_linear",
-            0.5
+            0.4
         )
 
         self.vel_yaw = rospy.get_param(
@@ -186,7 +206,7 @@ class Guidance():
 
         self.accuracy_yaw = rospy.get_param(
             "~acc_yaw",
-            0.1
+            0.3
         )
 
         # =============================================================
@@ -292,6 +312,15 @@ class Guidance():
             self.callback_object_observations,
             queue_size=1
         )
+        if self.deployment_enabled:
+            rospy.loginfo(
+                "Object diversion and payload deployment are ENABLED"
+            )
+        else:
+            rospy.logwarn(
+                "Object detection remains active; diversion and payload "
+                "deployment are DISABLED"
+            )
 
         # =============================================================
         # START MISSION
@@ -410,12 +439,11 @@ class Guidance():
         )
 
     def callback_object_observations(self, msg_in):
-        """Confirm a new backpack before starting the existing ROI diversion.
+        """Confirm a person or backpack before starting the ROI diversion.
 
         Raw object observations arrive once per processed image. Requiring
         several nearby observations suppresses one-frame false positives, and
-        retaining serviced positions prevents the same physical backpack from
-        consuming both payloads after the first diversion finishes.
+        retaining per-class serviced positions prevents repeated service.
         """
         if self.performing_roi or self.search_complete:
             return
@@ -426,21 +454,34 @@ class Guidance():
         if msg_in.header.frame_id not in ("map", "/map"):
             rospy.logwarn_throttle(
                 5.0,
-                "[BACKPACK] Ignoring observations in frame '%s'; expected map",
+                "[OBJECT] Ignoring observations in frame '%s'; expected map",
                 msg_in.header.frame_id
             )
             return
 
-        backpack_observations = []
+        target_observations = []
 
         for detection in msg_in.detections:
             if not detection.results:
                 continue
 
             result = detection.results[0]
-            if result.id != self.backpack_class_id:
+            class_id = result.id
+            if class_id not in self.target_class_names:
                 continue
-            if result.score < self.backpack_confidence_threshold:
+            confidence_threshold = (
+                self.person_confidence_threshold
+                if class_id == self.person_class_id
+                else self.backpack_confidence_threshold
+            )
+            if result.score < confidence_threshold:
+                continue
+
+            actuator = self.payload_actuator_by_class[class_id]
+            if (
+                (actuator == "a" and self.payload_a_deployed)
+                or (actuator == "b" and self.payload_b_deployed)
+            ):
                 continue
 
             position = result.pose.pose.position
@@ -451,65 +492,91 @@ class Guidance():
             ):
                 continue
 
-            backpack_observations.append((
+            target_observations.append((
                 result.score,
+                class_id,
                 position.x,
                 position.y,
                 position.z
             ))
 
-        if not backpack_observations:
-            self.backpack_candidate = None
-            self.backpack_candidate_count = 0
+        if not target_observations:
+            self.target_candidate = None
+            self.target_candidate_class_id = None
+            self.target_candidate_count = 0
             return
 
-        # Process only the strongest backpack observation in this image.
-        _, x, y, z = max(backpack_observations, key=lambda item: item[0])
+        # Only one diversion can be initiated at a time, so confirm the
+        # strongest supported target observation in this image.
+        _, class_id, x, y, z = max(
+            target_observations, key=lambda item: item[0]
+        )
 
-        for serviced in self.serviced_backpack_locations:
+        for serviced in self.serviced_target_locations[class_id]:
             distance = hypot(x - serviced[0], y - serviced[1])
             if distance <= self.backpack_serviced_radius:
-                self.backpack_candidate = None
-                self.backpack_candidate_count = 0
+                self.target_candidate = None
+                self.target_candidate_class_id = None
+                self.target_candidate_count = 0
                 return
 
-        if self.backpack_candidate is None:
-            self.backpack_candidate = [x, y, z]
-            self.backpack_candidate_count = 1
+        if (
+            self.target_candidate is None
+            or self.target_candidate_class_id != class_id
+        ):
+            self.target_candidate = [x, y, z]
+            self.target_candidate_class_id = class_id
+            self.target_candidate_count = 1
         else:
             distance = hypot(
-                x - self.backpack_candidate[0],
-                y - self.backpack_candidate[1]
+                x - self.target_candidate[0],
+                y - self.target_candidate[1]
             )
 
             if distance > self.backpack_confirmation_radius:
-                self.backpack_candidate = [x, y, z]
-                self.backpack_candidate_count = 1
+                self.target_candidate = [x, y, z]
+                self.target_candidate_count = 1
             else:
-                count = self.backpack_candidate_count
-                self.backpack_candidate = [
-                    (self.backpack_candidate[0] * count + x) / (count + 1),
-                    (self.backpack_candidate[1] * count + y) / (count + 1),
-                    (self.backpack_candidate[2] * count + z) / (count + 1)
+                count = self.target_candidate_count
+                self.target_candidate = [
+                    (self.target_candidate[0] * count + x) / (count + 1),
+                    (self.target_candidate[1] * count + y) / (count + 1),
+                    (self.target_candidate[2] * count + z) / (count + 1)
                 ]
-                self.backpack_candidate_count += 1
+                self.target_candidate_count += 1
 
         if (
-            self.backpack_candidate_count
+            self.target_candidate_count
             < self.backpack_confirmations_required
         ):
             return
 
-        target = list(self.backpack_candidate)
-        self.serviced_backpack_locations.append(target)
-        self.backpack_candidate = None
-        self.backpack_candidate_count = 0
+        target = list(self.target_candidate)
+        self.target_candidate = None
+        self.target_candidate_class_id = None
+        self.target_candidate_count = 0
+
+        if not self.deployment_enabled:
+            rospy.loginfo(
+                "[%s] Confirmed at (%.2f, %.2f, %.2f); "
+                "diversion and deployment are disabled",
+                self.target_class_names[class_id],
+                target[0],
+                target[1],
+                target[2],
+            )
+            return
+
+        self.serviced_target_locations[class_id].append(target)
 
         rospy.loginfo(
-            "[BACKPACK] Confirmed at (%.2f, %.2f, %.2f); starting diversion",
+            "[%s] Confirmed at (%.2f, %.2f, %.2f); "
+            "starting diversion with payload %s",
+            self.target_class_names[class_id],
             target[0],
             target[1],
-            target[2]
+            target[2],
+            self.payload_actuator_by_class[class_id].upper(),
         )
 
         roi = PoseStamped()
@@ -519,7 +586,9 @@ class Guidance():
         roi.pose.position.z = target[2]
         roi.pose.orientation.w = 1.0
 
+        self.pending_payload_class_id = class_id
         self.callback_inspect_roi(roi)
+        self.pending_payload_class_id = None
 
 
     def begin_manual_selection(self):
@@ -694,35 +763,42 @@ class Guidance():
                 "[LAND] Landing failed"
             )
 
-    # This function defines the payload deployment process, currently deploys both payloads in sequence
-    def deploy_payload(self):
-        # Deploy payload A first
-        if not self.payload_a_deployed:
-            rospy.loginfo("Deploying Payload A")
-
-            rospy.sleep(rospy.Duration(5.0)) # Wait 5 seconds
-            self.servo_b_pub.publish(Bool(data=True))
-            rospy.sleep(rospy.Duration(1.0)) # Wait 1 second to give servos time
-
-            self.payload_b_deployed = True # Update deployment state for A
-
-            rospy.loginfo("Payload A deployed")
+    def deploy_payload(self, class_id):
+        """Release the payload assigned to a confirmed target class."""
+        if not self.deployment_enabled:
+            rospy.logwarn("Payload deployment is disabled")
             return
 
-        # If A has already been used, deploy B
-        if not self.payload_b_deployed:
-            rospy.loginfo("Deploying Payload B")
+        if class_id not in self.payload_actuator_by_class:
+            rospy.logerr("Refusing payload deployment without a target class")
+            return
 
-            rospy.sleep(rospy.Duration(5.0)) # Wait 5 seconds
-            self.servo_a_pub.publish(Bool(data=True))
-            rospy.sleep(rospy.Duration(1.0)) # Wait 1 second to give servos time
+        actuator = self.payload_actuator_by_class[class_id]
+        if actuator == "a":
+            if self.payload_a_deployed:
+                rospy.logwarn("Payload A has already been deployed")
+                return
+            publisher = self.servo_a_pub
+        else:
+            if self.payload_b_deployed:
+                rospy.logwarn("Payload B has already been deployed")
+                return
+            publisher = self.servo_b_pub
 
+        rospy.loginfo(
+            "Deploying Payload %s for %s",
+            actuator.upper(),
+            self.target_class_names[class_id],
+        )
+        rospy.sleep(rospy.Duration(5.0))
+        publisher.publish(Bool(data=True))
+        rospy.sleep(rospy.Duration(1.0))
+
+        if actuator == "a":
             self.payload_a_deployed = True
-
-            rospy.loginfo("Payload B deployed")
-            return
-
-        rospy.logwarn("No payloads remaining!")
+        else:
+            self.payload_b_deployed = True
+        rospy.loginfo("Payload %s deployed", actuator.upper())
 
     def publish_camera_coverage(self):
 
@@ -978,6 +1054,15 @@ class Guidance():
 
     def callback_inspect_roi(self, msg_in):
 
+        if not self.deployment_enabled:
+
+            rospy.logwarn_throttle(
+                5.0,
+                "Ignoring ROI diversion because deployment is disabled"
+            )
+
+            return
+
         # -------------------------------------------------------------
         # Don't start another ROI while one is already happening
         # -------------------------------------------------------------
@@ -1121,7 +1206,7 @@ class Guidance():
             "DEPLOY PAYLOAD NOW"
         )
 
-        self.deploy_payload() # deployment function
+        self.deploy_payload(self.pending_payload_class_id)
 
         rospy.loginfo(
             "Payload deployment period finished"
