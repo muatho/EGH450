@@ -164,7 +164,6 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
   scripts/dai_publisher
-  scripts/dai_publisher_yolov5_runner
   scripts/aruco_subscriber
   scripts/vision_overlay
   scripts/object_position_estimator

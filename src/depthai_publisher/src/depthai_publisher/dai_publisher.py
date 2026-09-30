@@ -41,7 +41,7 @@ class DepthaiCamera():
         # Launch parameters keep the deployed blob and its decoder metadata
         # replaceable without changing the publisher implementation.
         package_dir = Path(__file__).resolve().parent
-        model_dir = package_dir / "models" / "best_openvino_2022.1_6shave"
+        model_dir = package_dir / "models" / "egh450_yolo5"
         self.yolo_config_path = Path(rospy.get_param(
             "~yolo_config_path", str(model_dir / "best.json")
         )).expanduser()

@@ -128,7 +128,7 @@ class VisionOverlay:
         default_config = (
             package_dir
             / "models"
-            / "best_openvino_2022.1_6shave"
+            / "egh450_yolo5"
             / "best.json"
         )
         config_path = Path(rospy.get_param(
@@ -286,10 +286,10 @@ class VisionOverlay:
             frame,
             label,
             (top_left[0], max(top_left[1] - 5, 15)),
-            cv2.FONT_HERSHEY_COMPLEX,
-            0.5,
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
             (255, 0, 0),
-            2,
+            1,
         )
 
     def draw_aruco_observation(self, frame, observation):
@@ -318,10 +318,10 @@ class VisionOverlay:
             frame,
             str(observation.id),
             (top_left[0], top_right[1] - 15),
-            cv2.FONT_HERSHEY_COMPLEX,
-            0.5,
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
             (0, 255, 0),
-            2,
+            1,
         )
 
         if not observation.pose_valid:
@@ -365,10 +365,10 @@ class VisionOverlay:
                 frame,
                 pose_text,
                 (top_left[0], first_y + line_number * 18),
-                cv2.FONT_HERSHEY_COMPLEX,
-                0.5,
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
                 (0, 255, 255),
-                2,
+                1,
             )
 
     @staticmethod
