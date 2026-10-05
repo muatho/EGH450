@@ -4,6 +4,8 @@ import sys
 from math import *
 
 import threading
+import time
+from sensor_msgs.msg import BatteryState
 import rospy
 import actionlib
 from visualization_msgs.msg import Marker
@@ -26,6 +28,20 @@ from breadcrumb.srv import RequestPathRequest
 class Guidance():
 
     def __init__(self, waypoints):
+        self.safety_lock = threading.RLock()
+        self.mission_aborted = False
+        self.landing_in_progress = False
+        self.battery_subscriber = None
+        self.battery_percentage = None
+        self.battery_received_at = None
+        self.battery_timeout = 5.0
+        self.flight_started = False
+        self.reached_min_altitude = False
+        self.pose_source = rospy.get_param("~pose_source", "real")
+        self.pose_received_at = None
+        self.pose_stamp = None
+        self.pose_timeout = 1.0
+        self.pose_event = threading.Event()
 
         # Camera coverage publisher
         self.pub_camera_coverage = rospy.Publisher(
@@ -143,10 +159,22 @@ class Guidance():
         # SAFE RANGES
         # =============================================================
 
-        self.safeBoundary = rospy.get_param("~safeBoundary", 1)
-        self.safeRangeX = rospy.get_param("~safeRangeX", 2)
-        self.safeRangeY = rospy.get_param("~safeRangeY", 2)
-        self.safeRangeZ = rospy.get_param("~safeRangeZ", 2)
+        # Temporary bypass; set ~boundary_checks_enabled:=true to restore.
+        self.boundary_checks_enabled = rospy.get_param(
+            "~boundary_checks_enabled", False)
+        if not self.boundary_checks_enabled:
+            rospy.logwarn("[SAFETY] Mission boundary checks are DISABLED")
+        self.x_min = rospy.get_param("~x_min", -4.0)
+        self.x_max = rospy.get_param("~x_max", 4.0)
+        self.y_min = rospy.get_param("~y_min", -3.2)
+        self.y_max = rospy.get_param("~y_max", 2.0)
+        self.z_min = rospy.get_param("~z_min", 0.5)
+        self.z_max = rospy.get_param("~z_max", 4.0)
+        for low, high in ((self.x_min, self.x_max),
+                          (self.y_min, self.y_max),
+                          (self.z_min, self.z_max)):
+            if not (isfinite(low) and isfinite(high) and low < high):
+                raise ValueError("Invalid safety boundary parameters")
 
         # =============================================================
         # CHECK WAYPOINTS
@@ -206,7 +234,7 @@ class Guidance():
 
         self.accuracy_yaw = rospy.get_param(
             "~acc_yaw",
-            0.3
+            0.2
         )
 
         # =============================================================
@@ -303,6 +331,25 @@ class Guidance():
 
         self.spar_client.wait_for_server()
 
+        # Do not start without a valid battery reading. BatteryState uses 0..1.
+        battery_topic = rospy.get_param(
+            "~battery_topic",
+            "/uavasr/battery" if self.pose_source == "emulator"
+            else "/mavros/battery")
+        try:
+            initial_battery = rospy.wait_for_message(
+                battery_topic, BatteryState, timeout=10.0)
+        except rospy.ROSException:
+            raise RuntimeError("No battery telemetry; refusing to start mission")
+        self.callback_battery(initial_battery)
+        if self.mission_aborted:
+            raise RuntimeError("Battery is low or invalid; refusing to start mission")
+        self.battery_subscriber = rospy.Subscriber(
+            battery_topic, BatteryState, self.callback_battery, queue_size=1)
+
+        # Subscribe and verify real position BEFORE any motion or detection.
+        self.start_pose_input()
+
         # Subscribe only after diversion state and the flight-action client
         # exist, so an immediately arriving observation cannot race node
         # initialization.
@@ -340,9 +387,11 @@ class Guidance():
                 "Doing first waypoint / maybe takeoff"
             )
 
-            self.send_wp(
-                self.waypoints[0]
-            )
+            with self.safety_lock:
+                if not self.pose_ready():
+                    raise RuntimeError("Position became stale; refusing to start mission")
+                if not self.send_wp(self.waypoints[0]):
+                    raise RuntimeError("Mission startup rejected by safety checks")
 
             self.nextWaypointIndex += 1
 
@@ -354,41 +403,6 @@ class Guidance():
                 rospy.Duration(1.0 / 20.0),
                 self.check_waypoint_status
             )
-
-            # ---------------------------------------------------------
-            # Current UAV pose
-            #
-            # Same script can be used in both environments:
-            #
-            # Emulator:
-            #   rosrun spar_node test_breadcrumb_camera _pose_source:=emulator
-            #
-            # Real UAV:
-            #   rosrun spar_node test_breadcrumb_camera _pose_source:=real
-            #
-            # "real" keeps the original ~pose PoseStamped interface so
-            # your existing launch-file remap can remain unchanged.
-            # ---------------------------------------------------------
-
-            self.pose_source = rospy.get_param("~pose_source", "real")
-
-            if self.pose_source == "emulator":
-                rospy.loginfo("[POSE] Using emulator pose source: /uavasr/odom")
-
-                self.sub_pose = rospy.Subscriber(
-                    "/uavasr/odom",
-                    Odometry,
-                    self.callback_odom
-                )
-
-            else:
-                rospy.loginfo("[POSE] Using real UAV pose source: ~pose")
-
-                self.sub_pose = rospy.Subscriber(
-                    "~pose",
-                    PoseStamped,
-                    self.callback_pose
-                )
 
             # ---------------------------------------------------------
             # ROI
@@ -445,7 +459,9 @@ class Guidance():
         several nearby observations suppresses one-frame false positives, and
         retaining per-class serviced positions prevents repeated service.
         """
-        if self.performing_roi or self.search_complete:
+        if not self.flight_started or not self.pose_ready():
+            return
+        if self.mission_aborted or self.performing_roi or self.search_complete:
             return
 
         if self.payload_a_deployed and self.payload_b_deployed:
@@ -592,6 +608,8 @@ class Guidance():
 
 
     def begin_manual_selection(self):
+        if self.mission_aborted:
+            return
         if self.waiting_for_landing_selection:
             return
 
@@ -611,7 +629,7 @@ class Guidance():
 
 
     def wait_for_landing_selection(self):
-        while not rospy.is_shutdown():
+        while not rospy.is_shutdown() and not self.mission_aborted:
 
             try:
                 marker_id = int(
@@ -635,6 +653,8 @@ class Guidance():
 
 
     def fly_landing_location(self, marker_id):
+        if self.mission_aborted:
+            return
         marker = self.aruco_locations[marker_id]
 
         target_x = marker[0]
@@ -683,7 +703,8 @@ class Guidance():
             ]
 
             self.send_wp(wp)
-            self.spar_client.wait_for_result()
+            if not self.wait_for_motion():
+                return
 
             if (
                 self.spar_client.get_state()
@@ -710,7 +731,8 @@ class Guidance():
             approach_wp
         )
 
-        self.spar_client.wait_for_result()
+        if not self.wait_for_motion():
+            return
 
         if (
             self.spar_client.get_state()
@@ -730,6 +752,8 @@ class Guidance():
 
 
     def send_land_motion(self):
+        if self.mission_aborted:
+            return
         goal = FlightMotionGoal()
 
         goal.motion = FlightMotionGoal.MOTION_LAND
@@ -740,11 +764,14 @@ class Guidance():
         # =============================================================
         goal.velocity_vertical = 0.2
 
-        self.spar_client.send_goal(
-            goal
-        )
+        with self.safety_lock:
+            if not self.battery_ready():
+                return
+            self.landing_in_progress = True
+            self.spar_client.send_goal(goal)
 
-        self.spar_client.wait_for_result()
+        if not self.wait_for_motion():
+            return
 
         if (
             self.spar_client.get_state()
@@ -791,14 +818,27 @@ class Guidance():
             self.target_class_names[class_id],
         )
         rospy.sleep(rospy.Duration(5.0))
-        publisher.publish(Bool(data=True))
+        with self.safety_lock:
+            if not self.deployment_enabled or not self.battery_ready():
+                return
+            if not self.pose_ready():
+                rospy.logerr("[POSE] Payload release blocked: position missing or stale; no landing commanded")
+                return
+            if not self.check_waypoint([self.current_location.x,
+                                        self.current_location.y,
+                                        self.current_location.z, 0.0]):
+                self.abort_mission("Payload position outside safety boundary")
+                return
+            if ((actuator == "a" and self.payload_a_deployed) or
+                    (actuator == "b" and self.payload_b_deployed)):
+                return
+            publisher.publish(Bool(data=True))
+            if actuator == "a":
+                self.payload_a_deployed = True
+            else:
+                self.payload_b_deployed = True
         rospy.sleep(rospy.Duration(1.0))
-
-        if actuator == "a":
-            self.payload_a_deployed = True
-        else:
-            self.payload_b_deployed = True
-        rospy.loginfo("Payload %s deployed", actuator.upper())
+        rospy.loginfo("Payload %s command sent", actuator.upper())
 
     def publish_camera_coverage(self):
 
@@ -863,8 +903,94 @@ class Guidance():
     # =================================================================
 
     def check_waypoint(self, wp):
+        try:
+            if len(wp) != 4 or not all(isfinite(v) for v in wp):
+                return False
+            if not self.boundary_checks_enabled:
+                return True
+            return (self.x_min <= wp[0] <= self.x_max
+                    and self.y_min <= wp[1] <= self.y_max
+                    and self.z_min <= wp[2] <= self.z_max)
+        except (TypeError, ValueError):
+            return False
 
+    def callback_battery(self, msg):
+        with self.safety_lock:
+            value = msg.percentage
+            if not isfinite(value) or not 0.0 <= value <= 1.0:
+                self.abort_mission("Invalid battery percentage")
+                return
+            self.battery_percentage = value
+            self.battery_received_at = time.monotonic()
+            # Accommodate float32 representation of exactly 20 percent.
+            if value <= 0.20 + 1e-7:
+                self.abort_mission("Battery at or below 20 percent")
+
+    def battery_ready(self):
+        if self.mission_aborted:
+            return False
+        if (self.battery_received_at is None or
+                time.monotonic() - self.battery_received_at > self.battery_timeout):
+            self.abort_mission("Battery telemetry missing or stale")
+            return False
         return True
+
+    def abort_mission(self, reason):
+        with self.safety_lock:
+            if self.mission_aborted:
+                return
+            self.mission_aborted = True
+            self.deployment_enabled = False
+            self.search_complete = True
+            rospy.logerr("[SAFETY] Mission aborted: %s", reason)
+            # Before the first flight goal, simply prevent mission startup.
+            if not self.flight_started or self.landing_in_progress:
+                return
+            self.spar_client.cancel_goal()
+            goal = FlightMotionGoal()
+            goal.motion = FlightMotionGoal.MOTION_LAND
+            goal.velocity_vertical = 0.2
+            self.landing_in_progress = True
+            self.spar_client.send_goal(goal, done_cb=self.abort_landing_done)
+            rospy.logwarn("[SAFETY] Landing in place; mission will not resume")
+
+    def abort_landing_done(self, state, result):
+        with self.safety_lock:
+            self.landing_in_progress = False
+        if state == GoalStatus.SUCCEEDED:
+            rospy.loginfo("[SAFETY] Abort landing complete")
+        else:
+            rospy.logerr("[SAFETY] Landing did not succeed (state %s); operator intervention required", state)
+
+    def wait_for_motion(self):
+        # Poll so an abort can interrupt every diversion/landing workflow.
+        while not rospy.is_shutdown():
+            with self.safety_lock:
+                if not self.battery_ready():
+                    return False
+            if self.spar_client.wait_for_result(rospy.Duration(0.1)):
+                with self.safety_lock:
+                    return not self.mission_aborted
+        return False
+
+    def check_live_boundary(self):
+        with self.safety_lock:
+            if not self.flight_started or self.mission_aborted or self.landing_in_progress:
+                return
+            p = self.current_location
+            if not all(isfinite(v) for v in (p.x, p.y, p.z)):
+                self.abort_mission("Invalid current position")
+                return
+            if not self.boundary_checks_enabled:
+                return
+            if p.z >= self.z_min:
+                self.reached_min_altitude = True
+            # Allow initial takeoff through z_min; LAND bypasses these bounds.
+            if (not self.x_min <= p.x <= self.x_max or
+                    not self.y_min <= p.y <= self.y_max or
+                    p.z > self.z_max or
+                    (self.reached_min_altitude and p.z < self.z_min)):
+                self.abort_mission("Current position outside safety boundary")
 
 
     # =================================================================
@@ -888,7 +1014,11 @@ class Guidance():
         if self.object_subscriber is not None:
             self.object_subscriber.unregister()
 
-        self.spar_client.cancel_goal()
+        if self.battery_subscriber is not None:
+            self.battery_subscriber.unregister()
+        with self.safety_lock:
+            if not self.landing_in_progress:
+                self.spar_client.cancel_goal()
 
         rospy.loginfo(
             "Guidance stopped"
@@ -899,39 +1029,57 @@ class Guidance():
     # CURRENT UAV POSE
     # =================================================================
 
+    def start_pose_input(self):
+        if self.pose_source not in ("real", "emulator"):
+            raise ValueError("pose_source must be real or emulator")
+        topic = rospy.get_param(
+            "~pose_topic", "/uavasr/odom" if self.pose_source == "emulator"
+            else "/mavros/local_position/pose")
+        message_type = Odometry if self.pose_source == "emulator" else PoseStamped
+        callback = self.callback_odom if self.pose_source == "emulator" else self.callback_pose
+        rospy.loginfo("[POSE] Waiting for fresh position on %s", topic)
+        self.sub_pose = rospy.Subscriber(topic, message_type, callback, queue_size=1)
+        deadline = time.monotonic() + 10.0
+        while not rospy.is_shutdown() and time.monotonic() < deadline:
+            if self.pose_ready():
+                rospy.loginfo("[POSE] Fresh position received; startup permitted")
+                return
+            self.pose_event.wait(0.1)
+            self.pose_event.clear()
+        self.sub_pose.unregister()
+        raise RuntimeError("No fresh valid position within 10 seconds; refusing to start mission")
+
+    def pose_ready(self):
+        with self.safety_lock:
+            if self.pose_received_at is None or self.pose_stamp is None:
+                return False
+            age = (rospy.Time.now() - self.pose_stamp).to_sec()
+            return (time.monotonic() - self.pose_received_at <= self.pose_timeout
+                    and -0.5 <= age <= self.pose_timeout)
+
+    def accept_pose(self, position, stamp):
+        with self.safety_lock:
+            age = (rospy.Time.now() - stamp).to_sec()
+            if (not all(isfinite(v) for v in (position.x, position.y, position.z))
+                    or not -0.5 <= age <= self.pose_timeout):
+                self.pose_received_at = None
+                self.pose_stamp = None
+                rospy.logwarn_throttle(2.0, "[POSE] Ignoring invalid or stale position")
+                return
+            self.current_location = position
+            self.pose_stamp = stamp
+            self.pose_received_at = time.monotonic()
+            self.pose_event.set()
+            self.check_live_boundary()
+        self.update_camera_coverage(position.x, position.y)
+
     def callback_pose(self, msg_in):
-        """
-        Real-UAV pose callback.
-
-        Expected message type:
-            geometry_msgs/PoseStamped
-
-        The existing private topic ~pose can still be remapped in the
-        real-UAV launch file exactly as before.
-        """
-        self.current_location = msg_in.pose.position
-
-        self.update_camera_coverage(
-            msg_in.pose.position.x,
-            msg_in.pose.position.y
-        )
-
+        """Real UAV: PoseStamped from the configured explicit pose topic."""
+        self.accept_pose(msg_in.pose.position, msg_in.header.stamp)
 
     def callback_odom(self, msg_in):
-        """
-        Emulator pose callback.
-
-        Expected message type:
-            nav_msgs/Odometry
-
-        The UAV position in Odometry is stored under pose.pose.position.
-        """
-        self.current_location = msg_in.pose.pose.position
-
-        self.update_camera_coverage(
-            msg_in.pose.pose.position.x,
-            msg_in.pose.pose.position.y
-        )
+        """Emulator: Odometry from the configured explicit pose topic."""
+        self.accept_pose(msg_in.pose.pose.position, msg_in.header.stamp)
 
 
     def update_camera_coverage(self, x, y):
@@ -1053,6 +1201,17 @@ class Guidance():
     # =================================================================
 
     def callback_inspect_roi(self, msg_in):
+        with self.safety_lock:
+            if self.mission_aborted or self.search_complete:
+                return
+            if not self.flight_started or not self.pose_ready():
+                rospy.logwarn("[POSE] Ignoring diversion without fresh position")
+                return
+            p = msg_in.pose.position
+            if not (self.check_waypoint([p.x, p.y, self.surveyAltitude, 0.0])
+                    and self.check_waypoint([p.x, p.y, 0.8, 0.0])):
+                rospy.logwarn("Ignoring target outside safety boundary")
+                return
 
         if not self.deployment_enabled:
 
@@ -1085,7 +1244,10 @@ class Guidance():
         # Cancel current search waypoint
         # -------------------------------------------------------------
 
-        self.spar_client.cancel_goal()
+        with self.safety_lock:
+            if not self.battery_ready():
+                return
+            self.spar_client.cancel_goal()
 
         # -------------------------------------------------------------
         # Detected target X/Y
@@ -1117,7 +1279,7 @@ class Guidance():
         target_deploy = [
             target_x,
             target_y,
-            1.0,
+            0.8,
             0.0
         ]
 
@@ -1144,7 +1306,8 @@ class Guidance():
             target_above
         )
 
-        self.spar_client.wait_for_result()
+        if not self.wait_for_motion():
+            return
 
         if (
             self.spar_client.get_state()
@@ -1155,9 +1318,9 @@ class Guidance():
                 "Failed to reach target"
             )
 
-            rospy.signal_shutdown(
-                "cancelled"
-            )
+            with self.safety_lock:
+                if not self.mission_aborted:
+                    rospy.signal_shutdown("cancelled")
 
             return
 
@@ -1177,7 +1340,8 @@ class Guidance():
             target_deploy
         )
 
-        self.spar_client.wait_for_result()
+        if not self.wait_for_motion():
+            return
 
         if (
             self.spar_client.get_state()
@@ -1188,14 +1352,14 @@ class Guidance():
                 "Failed to reach deployment altitude"
             )
 
-            rospy.signal_shutdown(
-                "cancelled"
-            )
+            with self.safety_lock:
+                if not self.mission_aborted:
+                    rospy.signal_shutdown("cancelled")
 
             return
 
         rospy.loginfo(
-            "Reached deployment altitude: 1 m"
+            "Reached deployment altitude: 0.8 m"
         )
 
         # =============================================================
@@ -1224,7 +1388,8 @@ class Guidance():
             target_above
         )
 
-        self.spar_client.wait_for_result()
+        if not self.wait_for_motion():
+            return
 
         if (
             self.spar_client.get_state()
@@ -1235,9 +1400,9 @@ class Guidance():
                 "Failed to climb back to search altitude"
             )
 
-            rospy.signal_shutdown(
-                "cancelled"
-            )
+            with self.safety_lock:
+                if not self.mission_aborted:
+                    rospy.signal_shutdown("cancelled")
 
             return
 
@@ -1257,7 +1422,8 @@ class Guidance():
             rwp
         )
 
-        self.spar_client.wait_for_result()
+        if not self.wait_for_motion():
+            return
 
         if (
             self.spar_client.get_state()
@@ -1268,9 +1434,9 @@ class Guidance():
                 "Return waypoint failed"
             )
 
-            rospy.signal_shutdown(
-                "cancelled"
-            )
+            with self.safety_lock:
+                if not self.mission_aborted:
+                    rospy.signal_shutdown("cancelled")
 
             return
 
@@ -1324,9 +1490,8 @@ class Guidance():
             wp
         ):
 
-            raise ValueError(
-                "Invalid waypoint input!"
-            )
+            self.abort_mission("Rejected waypoint outside safety boundary")
+            return False
 
         goal = FlightMotionGoal()
 
@@ -1382,9 +1547,12 @@ class Guidance():
         # Send goal
         # -------------------------------------------------------------
 
-        self.spar_client.send_goal(
-            goal
-        )
+        with self.safety_lock:
+            if not self.battery_ready():
+                return False
+            self.flight_started = True
+            self.spar_client.send_goal(goal)
+            return True
 
 
     # =================================================================
@@ -1408,6 +1576,9 @@ class Guidance():
         timer_event
     ):
 
+        with self.safety_lock:
+            if not self.battery_ready():
+                return
         if self.search_complete:
             return
 
@@ -1771,13 +1942,9 @@ class Guidance():
                 "Mission cancelled!"
             )
 
-            rospy.signal_shutdown(
-                "cancelled"
-            )
-
-
-
-
+            with self.safety_lock:
+                if not self.mission_aborted:
+                    rospy.signal_shutdown("cancelled")
 
 
 
@@ -1812,40 +1979,16 @@ def main(args):
 
     waypoints = [
         [ 0.0,  0.0, surveyAltitude, 0.0],
-        [1.9, -1.0, surveyAltitude, 0.0],
-
-        [3.5, -2.1, surveyAltitude, 0.0],
-    [1.75, -2.1, surveyAltitude, 0.0],
-    [0.0, -2.1, surveyAltitude, 0.0],
-    [-1.75, -2.1, surveyAltitude, 0.0],
-    [-3.5, -2.1, surveyAltitude, 0.0],
-
-    [ -3.5, -1.1, surveyAltitude, 0.0],
-    [-1.75, -1.1, surveyAltitude, 0.0],
-    [0.0, -1.1, surveyAltitude, 0.0],
-    [1.75, -1.1, surveyAltitude, 0.0],
-    [3.5, -1.1, surveyAltitude, 0.0],
-
-    [ 3.5, 0.1, surveyAltitude, 0.0],
-    [1.75, 0.1, surveyAltitude, 0.0],
-    [0.0, 0.1, surveyAltitude, 0.0],
-    [-1.75, 0.1, surveyAltitude, 0.0],
-    [-3.5, 0.1, surveyAltitude, 0.0],
-
-    [ -3.5, 1.1, surveyAltitude, 0.0],
-    [-1.75, 1.1, surveyAltitude, 0.0],
-    [0.0,  1.1, surveyAltitude, 0.0],
-    [1.75,  1.1, surveyAltitude, 0.0],
-    [3.5,  1.1, surveyAltitude, 0.0],
-
-    [ 3.5, 2.1, surveyAltitude, 0.0],
-    [-1.75, 2.1, surveyAltitude, 0.0],
-    [0.0,  2.1, surveyAltitude, 0.0],
-    [-1.75,  2.1, surveyAltitude, 0.0],
-    [-3.75,  2.1, surveyAltitude, 0.0],
-
-    
-
+        [-3.5, -2.5, surveyAltitude, 0.0],
+        [ 3.5, -2.5, surveyAltitude, 0.0],
+        [ 3.5, -1.5, surveyAltitude, 0.0],
+        [-3.5, -1.5, surveyAltitude, 0.0],
+        [-3.5, -0.5, surveyAltitude, 0.0],
+        [ 3.5, -0.5, surveyAltitude, 0.0],
+        [ 3.5,  0.5, surveyAltitude, 0.0],
+        [-3.5,  0.5, surveyAltitude, 0.0],
+        [-3.5,  1.5, surveyAltitude, 0.0],
+        [ 3.5,  1.5, surveyAltitude, 0.0],
     ]
 
     # =============================================================

@@ -1,0 +1,1880 @@
+#!/usr/bin/env python3
+
+import sys
+from math import *
+
+import threading
+import rospy
+import actionlib
+from visualization_msgs.msg import Marker
+from visualization_msgs.msg import MarkerArray
+
+from actionlib_msgs.msg import GoalStatus
+from geometry_msgs.msg import Point, PoseStamped
+from nav_msgs.msg import Path, Odometry
+from vision_msgs.msg import Detection3DArray
+from vision_msgs.msg import Detection3DArray
+
+from spar_msgs.msg import FlightMotionAction, FlightMotionGoal
+
+from std_msgs.msg import Bool
+
+from breadcrumb.srv import RequestPath
+from breadcrumb.srv import RequestPathRequest
+
+
+class Guidance():
+
+    def __init__(self, waypoints):
+
+        # Camera coverage publisher
+        self.pub_camera_coverage = rospy.Publisher(
+            "/guidance/cameraCoverage",
+            Marker,
+            queue_size=10,
+            latch=True
+        )
+
+        # Store all camera footprint centres
+        self.camera_coverage_points = []
+
+        # Used so we don't add a rectangle every single pose callback
+        self.last_coverage_x = None
+        self.last_coverage_y = None
+
+        # Payload deployment publishers
+        self.servo_a_pub = rospy.Publisher(
+            '/actuator_control/actuator_a',
+            Bool,
+            queue_size=1
+        )
+
+        self.servo_b_pub = rospy.Publisher(
+            '/actuator_control/actuator_b',
+            Bool,
+            queue_size=1
+        )
+
+        # Keep track of which payload has been deployed
+        self.payload_a_deployed = False
+        self.payload_b_deployed = False
+        # When false, object detections cannot interrupt the survey and this
+        # node will refuse to publish either payload actuator command.
+        self.deployment_enabled = rospy.get_param("~deploy", True)
+
+        # =============================================================
+        # ARUCO MARKER STATES
+        # =============================================================
+        # Persistent map-frame positions indexed by ArUco ID. The manual
+        # landing-selection workflow below reads this dictionary after the
+        # survey and is unchanged by the MarkerArray subscription format.
+        self.aruco_locations = {}
+        self.aruco_subscriber = None
+        self.search_complete = False
+        self.waiting_for_landing_selection = False
+
+        # =============================================================
+        # >>> CHANGE THIS IF NEEDED <<<
+        # Altitude above the selected ArUco before MOTION_LAND
+        # =============================================================
+        self.landing_altitude = 0.8
+
+        # =============================================================
+        # The vision node publishes every discovered persistent landmark in one
+        # visualization_msgs/MarkerArray. Each element carries its ArUco ID in
+        # marker.id and its global location in marker.pose.position.
+        # =============================================================
+        self.aruco_topic = "/world_model/aruco_markers"
+
+        self.aruco_subscriber = rospy.Subscriber(
+            self.aruco_topic,
+            MarkerArray,
+            self.callback_aruco_markers,
+            queue_size=1
+        )
+
+        # =============================================================
+        # PERSON/BACKPACK DIVERSION STATES
+        # =============================================================
+        # The deployed YOLO model uses class 0 for person and class 1 for
+        # backpack. Object observations already contain map-frame positions,
+        # so navigation does not consume the camera-only 2D detection topic.
+        self.person_class_id = 0
+        self.backpack_class_id = 1
+        self.target_class_names = {
+            self.person_class_id: "PERSON",
+            self.backpack_class_id: "BACKPACK",
+        }
+        # Physical payload mapping. If the payload team confirms the opposite
+        # arrangement, swap only these two values.
+        self.payload_actuator_by_class = {
+            self.person_class_id: "a",
+            self.backpack_class_id: "b",
+        }
+        self.person_confidence_threshold = 0.60
+        self.backpack_confidence_threshold = rospy.get_param(
+            "~backpack_confidence_threshold",
+            0.60
+        )
+        self.backpack_confirmations_required = rospy.get_param(
+            "~backpack_confirmations_required",
+            3
+        )
+        self.backpack_confirmation_radius = rospy.get_param(
+            "~backpack_confirmation_radius",
+            0.75
+        )
+        self.backpack_serviced_radius = rospy.get_param(
+            "~backpack_serviced_radius",
+            1.00
+        )
+
+        self.target_candidate = None
+        self.target_candidate_class_id = None
+        self.target_candidate_count = 0
+        self.serviced_target_locations = {
+            self.person_class_id: [],
+            self.backpack_class_id: [],
+        }
+        self.pending_payload_class_id = None
+        self.object_subscriber = None
+
+        # =============================================================
+        # SAFE RANGES
+        # =============================================================
+
+        self.safeBoundary = rospy.get_param("~safeBoundary", 1)
+        self.safeRangeX = rospy.get_param("~safeRangeX", 2)
+        self.safeRangeY = rospy.get_param("~safeRangeY", 2)
+        self.safeRangeZ = rospy.get_param("~safeRangeZ", 2)
+
+        # =============================================================
+        # CHECK WAYPOINTS
+        # =============================================================
+
+        if not self.check_waypoints(waypoints):
+            raise ValueError("Invalid waypoint list input!")
+
+        # =============================================================
+        # HIGH-LEVEL WAYPOINT COUNTER
+        #
+        # This represents the NEXT high-level waypoint.
+        # =============================================================
+
+        self.nextWaypointIndex = 0
+
+        # =============================================================
+        # ROI FLAG
+        # =============================================================
+
+        self.performing_roi = False
+
+        # =============================================================
+        # SAVE HIGH-LEVEL WAYPOINTS
+        # =============================================================
+
+        self.waypoints = waypoints
+
+        # =============================================================
+        # CURRENT UAV POSITION
+        # =============================================================
+
+        self.current_location = Point()
+
+        # =============================================================
+        # FLIGHT VELOCITIES
+        # =============================================================
+
+        self.vel_linear = rospy.get_param(
+            "~vel_linear",
+            0.4
+        )
+
+        self.vel_yaw = rospy.get_param(
+            "~vel_yaw",
+            0.2
+        )
+
+        # =============================================================
+        # WAYPOINT ACCURACY
+        # =============================================================
+
+        self.accuracy_pos = rospy.get_param(
+            "~acc_pos",
+            0.3
+        )
+
+        self.accuracy_yaw = rospy.get_param(
+            "~acc_yaw",
+            0.2
+        )
+
+        # =============================================================
+        # SURVEY ALTITUDE
+        # =============================================================
+
+        self.surveyAltitude = rospy.get_param(
+            "~surveyAlt",
+            2
+        )
+
+        # =============================================================
+        # RVIZ PATH PUBLISHERS
+        #
+        # IMPORTANT:
+        #
+        # These are now created ONCE and stored as class variables.
+        # This keeps the publishers alive.
+        #
+        # /guidance/fullPath
+        #     = original high-level search path
+        #
+        # /guidance/pathBreadcrumb
+        #     = currently calculated Breadcrumb path
+        # =============================================================
+
+        self.pub_full_path = rospy.Publisher(
+            "/guidance/fullPath",
+            Path,
+            queue_size=10,
+            latch=True
+        )
+
+        self.pub_breadcrumb_path = rospy.Publisher(
+            "/guidance/pathBreadcrumb",
+            Path,
+            queue_size=10,
+            latch=True
+        )
+
+        # =============================================================
+        # DISPLAY ORIGINAL HIGH-LEVEL PATH
+        # =============================================================
+
+        self.display_path(
+            self.waypoints,
+            "/guidance/fullPath"
+        )
+
+        # =============================================================
+        # BREADCRUMB SERVICE
+        # =============================================================
+
+        rospy.loginfo(
+            "Waiting for Breadcrumb service..."
+        )
+
+        rospy.wait_for_service(
+            "/breadcrumb/request_path"
+        )
+
+        self.srvc_bc = rospy.ServiceProxy(
+            "/breadcrumb/request_path",
+            RequestPath
+        )
+
+        # =============================================================
+        # BREADCRUMB VARIABLES
+        # =============================================================
+
+        self.breadcrumbWPSnextIndex = 0
+
+        self.breadcrumbMode = False
+
+        self.breadcrumbWPS = []
+
+        # =============================================================
+        # SPAR ACTION CLIENT
+        # =============================================================
+
+        action_ns = rospy.get_param(
+            "~action_topic",
+            "spar/flight"
+        )
+
+        self.spar_client = actionlib.SimpleActionClient(
+            action_ns,
+            FlightMotionAction
+        )
+
+        rospy.loginfo(
+            "Waiting for spar..."
+        )
+
+        self.spar_client.wait_for_server()
+
+        # Subscribe only after diversion state and the flight-action client
+        # exist, so an immediately arriving observation cannot race node
+        # initialization.
+        self.object_subscriber = rospy.Subscriber(
+            "/objects/observations",
+            Detection3DArray,
+            self.callback_object_observations,
+            queue_size=1
+        )
+        if self.deployment_enabled:
+            rospy.loginfo(
+                "Object diversion and payload deployment are ENABLED"
+            )
+        else:
+            rospy.logwarn(
+                "Object detection remains active; diversion and payload "
+                "deployment are DISABLED"
+            )
+
+        # =============================================================
+        # START MISSION
+        # =============================================================
+
+        if not rospy.is_shutdown():
+
+            rospy.loginfo(
+                "Starting waypoint mission"
+            )
+
+            # ---------------------------------------------------------
+            # Send first high-level waypoint
+            # ---------------------------------------------------------
+
+            rospy.loginfo(
+                "Doing first waypoint / maybe takeoff"
+            )
+
+            self.send_wp(
+                self.waypoints[0]
+            )
+
+            self.nextWaypointIndex += 1
+
+            # ---------------------------------------------------------
+            # Timer checks flight state at 20 Hz
+            # ---------------------------------------------------------
+
+            self.timer = rospy.Timer(
+                rospy.Duration(1.0 / 20.0),
+                self.check_waypoint_status
+            )
+
+            # ---------------------------------------------------------
+            # Current UAV pose
+            #
+            # Same script can be used in both environments:
+            #
+            # Emulator:
+            #   rosrun spar_node test_breadcrumb_camera _pose_source:=emulator
+            #
+            # Real UAV:
+            #   rosrun spar_node test_breadcrumb_camera _pose_source:=real
+            #
+            # "real" keeps the original ~pose PoseStamped interface so
+            # your existing launch-file remap can remain unchanged.
+            # ---------------------------------------------------------
+
+            self.pose_source = rospy.get_param("~pose_source", "real")
+
+            if self.pose_source == "emulator":
+                rospy.loginfo("[POSE] Using emulator pose source: /uavasr/odom")
+
+                self.sub_pose = rospy.Subscriber(
+                    "/uavasr/odom",
+                    Odometry,
+                    self.callback_odom
+                )
+
+            else:
+                rospy.loginfo("[POSE] Using real UAV pose source: ~pose")
+
+                self.sub_pose = rospy.Subscriber(
+                    "~pose",
+                    PoseStamped,
+                    self.callback_pose
+                )
+
+            # ---------------------------------------------------------
+            # ROI
+            # ---------------------------------------------------------
+
+            self.sub_roi = rospy.Subscriber(
+                "~roi",
+                PoseStamped,
+                self.callback_inspect_roi
+            )
+
+            # ---------------------------------------------------------
+            # Shutdown
+            # ---------------------------------------------------------
+
+            rospy.on_shutdown(
+                lambda: self.shutdown()
+            )
+    def callback_aruco_markers(self, msg_in):
+        """Update persistent landing locations from the vision MarkerArray.
+
+        The vision node republishes all ArUcos discovered during the survey, so
+        this callback refreshes the same ID-keyed dictionary used later by
+        wait_for_landing_selection(). Changing the ROS transport format does
+        not change the tutor's command or the landing-selection behaviour.
+        """
+        for marker in msg_in.markers:
+            marker_id = marker.id
+
+            self.aruco_locations[marker_id] = [
+                marker.pose.position.x,
+                marker.pose.position.y,
+                marker.pose.position.z
+            ]
+
+            rospy.logdebug(
+                "[ARUCO] Marker %i stored at (%.2f, %.2f, %.2f)",
+                marker_id,
+                marker.pose.position.x,
+                marker.pose.position.y,
+                marker.pose.position.z
+            )
+
+        rospy.loginfo_throttle(
+            5.0,
+            "[ARUCO] %i persistent landing marker(s) available",
+            len(self.aruco_locations)
+        )
+
+    def callback_object_observations(self, msg_in):
+        """Confirm a person or backpack before starting the ROI diversion.
+
+        Raw object observations arrive once per processed image. Requiring
+        several nearby observations suppresses one-frame false positives, and
+        retaining per-class serviced positions prevents repeated service.
+        """
+        if self.performing_roi or self.search_complete:
+            return
+
+        if self.payload_a_deployed and self.payload_b_deployed:
+            return
+
+        if msg_in.header.frame_id not in ("map", "/map"):
+            rospy.logwarn_throttle(
+                5.0,
+                "[OBJECT] Ignoring observations in frame '%s'; expected map",
+                msg_in.header.frame_id
+            )
+            return
+
+        target_observations = []
+
+        for detection in msg_in.detections:
+            if not detection.results:
+                continue
+
+            result = detection.results[0]
+            class_id = result.id
+            if class_id not in self.target_class_names:
+                continue
+            confidence_threshold = (
+                self.person_confidence_threshold
+                if class_id == self.person_class_id
+                else self.backpack_confidence_threshold
+            )
+            if result.score < confidence_threshold:
+                continue
+
+            actuator = self.payload_actuator_by_class[class_id]
+            if (
+                (actuator == "a" and self.payload_a_deployed)
+                or (actuator == "b" and self.payload_b_deployed)
+            ):
+                continue
+
+            position = result.pose.pose.position
+            if not (
+                isfinite(position.x)
+                and isfinite(position.y)
+                and isfinite(position.z)
+            ):
+                continue
+
+            target_observations.append((
+                result.score,
+                class_id,
+                position.x,
+                position.y,
+                position.z
+            ))
+
+        if not target_observations:
+            self.target_candidate = None
+            self.target_candidate_class_id = None
+            self.target_candidate_count = 0
+            return
+
+        # Only one diversion can be initiated at a time, so confirm the
+        # strongest supported target observation in this image.
+        _, class_id, x, y, z = max(
+            target_observations, key=lambda item: item[0]
+        )
+
+        for serviced in self.serviced_target_locations[class_id]:
+            distance = hypot(x - serviced[0], y - serviced[1])
+            if distance <= self.backpack_serviced_radius:
+                self.target_candidate = None
+                self.target_candidate_class_id = None
+                self.target_candidate_count = 0
+                return
+
+        if (
+            self.target_candidate is None
+            or self.target_candidate_class_id != class_id
+        ):
+            self.target_candidate = [x, y, z]
+            self.target_candidate_class_id = class_id
+            self.target_candidate_count = 1
+        else:
+            distance = hypot(
+                x - self.target_candidate[0],
+                y - self.target_candidate[1]
+            )
+
+            if distance > self.backpack_confirmation_radius:
+                self.target_candidate = [x, y, z]
+                self.target_candidate_count = 1
+            else:
+                count = self.target_candidate_count
+                self.target_candidate = [
+                    (self.target_candidate[0] * count + x) / (count + 1),
+                    (self.target_candidate[1] * count + y) / (count + 1),
+                    (self.target_candidate[2] * count + z) / (count + 1)
+                ]
+                self.target_candidate_count += 1
+
+        if (
+            self.target_candidate_count
+            < self.backpack_confirmations_required
+        ):
+            return
+
+        target = list(self.target_candidate)
+        self.target_candidate = None
+        self.target_candidate_class_id = None
+        self.target_candidate_count = 0
+
+        if not self.deployment_enabled:
+            rospy.loginfo(
+                "[%s] Confirmed at (%.2f, %.2f, %.2f); "
+                "diversion and deployment are disabled",
+                self.target_class_names[class_id],
+                target[0],
+                target[1],
+                target[2],
+            )
+            return
+
+        self.serviced_target_locations[class_id].append(target)
+
+        rospy.loginfo(
+            "[%s] Confirmed at (%.2f, %.2f, %.2f); "
+            "starting diversion with payload %s",
+            self.target_class_names[class_id],
+            target[0],
+            target[1],
+            target[2],
+            self.payload_actuator_by_class[class_id].upper(),
+        )
+
+        roi = PoseStamped()
+        roi.header = msg_in.header
+        roi.pose.position.x = target[0]
+        roi.pose.position.y = target[1]
+        roi.pose.position.z = target[2]
+        roi.pose.orientation.w = 1.0
+
+        self.pending_payload_class_id = class_id
+        self.callback_inspect_roi(roi)
+        self.pending_payload_class_id = None
+
+
+    def begin_manual_selection(self):
+        if self.waiting_for_landing_selection:
+            return
+
+        self.search_complete = True
+        self.waiting_for_landing_selection = True
+
+        rospy.loginfo(
+            "[LAND] Search complete. Waiting for landing marker selection."
+        )
+
+        input_thread = threading.Thread(
+            target=self.wait_for_landing_selection
+        )
+
+        input_thread.daemon = True
+        input_thread.start()
+
+
+    def wait_for_landing_selection(self):
+        while not rospy.is_shutdown():
+
+            try:
+                marker_id = int(
+                    input("Enter landing ArUco ID: ")
+                )
+
+            except ValueError:
+                print("Please enter a numeric ArUco ID.")
+                continue
+
+            if marker_id not in self.aruco_locations:
+                print(
+                    "ArUco {} has not been detected yet.".format(
+                        marker_id
+                    )
+                )
+                continue
+
+            self.fly_landing_location(marker_id)
+            return
+
+
+    def fly_landing_location(self, marker_id):
+        marker = self.aruco_locations[marker_id]
+
+        target_x = marker[0]
+        target_y = marker[1]
+
+        rospy.loginfo(
+            "[LAND] Flying to ArUco %i at (%.2f, %.2f)",
+            marker_id,
+            target_x,
+            target_y
+        )
+
+        req = RequestPathRequest()
+
+        req.start.x = self.current_location.x
+        req.start.y = self.current_location.y
+        req.start.z = self.current_location.z
+
+        req.end.x = target_x
+        req.end.y = target_y
+        req.end.z = self.surveyAltitude
+
+        try:
+            res = self.srvc_bc(req)
+
+        except rospy.ServiceException as error:
+            rospy.logerr(
+                "[LAND] Breadcrumb failed: %s",
+                str(error)
+            )
+            return
+
+        if len(res.path.poses) == 0:
+            rospy.logerr(
+                "[LAND] No safe path to ArUco %i",
+                marker_id
+            )
+            return
+
+        for pose in res.path.poses:
+            wp = [
+                pose.position.x,
+                pose.position.y,
+                pose.position.z,
+                0.0
+            ]
+
+            self.send_wp(wp)
+            self.spar_client.wait_for_result()
+
+            if (
+                self.spar_client.get_state()
+                != GoalStatus.SUCCEEDED
+            ):
+                rospy.logerr(
+                    "[LAND] Failed while travelling to ArUco"
+                )
+                return
+
+        approach_wp = [
+            target_x,
+            target_y,
+            self.landing_altitude,
+            0.0
+        ]
+
+        rospy.loginfo(
+            "[LAND] Descending above ArUco %i...",
+            marker_id
+        )
+
+        self.send_wp(
+            approach_wp
+        )
+
+        self.spar_client.wait_for_result()
+
+        if (
+            self.spar_client.get_state()
+            != GoalStatus.SUCCEEDED
+        ):
+            rospy.logerr(
+                "[LAND] Failed to reach landing approach altitude"
+            )
+            return
+
+        rospy.loginfo(
+            "[LAND] Landing on ArUco %i...",
+            marker_id
+        )
+
+        self.send_land_motion()
+
+
+    def send_land_motion(self):
+        goal = FlightMotionGoal()
+
+        goal.motion = FlightMotionGoal.MOTION_LAND
+
+        # =============================================================
+        # >>> CHANGE THIS IF NEEDED <<<
+        # Landing descent speed in m/s
+        # =============================================================
+        goal.velocity_vertical = 0.2
+
+        self.spar_client.send_goal(
+            goal
+        )
+
+        self.spar_client.wait_for_result()
+
+        if (
+            self.spar_client.get_state()
+            == GoalStatus.SUCCEEDED
+        ):
+            rospy.loginfo(
+                "[LAND] Landing complete!"
+            )
+
+            rospy.signal_shutdown(
+                "complete"
+            )
+
+        else:
+            rospy.logerr(
+                "[LAND] Landing failed"
+            )
+
+    def deploy_payload(self, class_id):
+        """Release the payload assigned to a confirmed target class."""
+        if not self.deployment_enabled:
+            rospy.logwarn("Payload deployment is disabled")
+            return
+
+        if class_id not in self.payload_actuator_by_class:
+            rospy.logerr("Refusing payload deployment without a target class")
+            return
+
+        actuator = self.payload_actuator_by_class[class_id]
+        if actuator == "a":
+            if self.payload_a_deployed:
+                rospy.logwarn("Payload A has already been deployed")
+                return
+            publisher = self.servo_a_pub
+        else:
+            if self.payload_b_deployed:
+                rospy.logwarn("Payload B has already been deployed")
+                return
+            publisher = self.servo_b_pub
+
+        rospy.loginfo(
+            "Deploying Payload %s for %s",
+            actuator.upper(),
+            self.target_class_names[class_id],
+        )
+        rospy.sleep(rospy.Duration(5.0))
+        publisher.publish(Bool(data=True))
+        rospy.sleep(rospy.Duration(1.0))
+
+        if actuator == "a":
+            self.payload_a_deployed = True
+        else:
+            self.payload_b_deployed = True
+        rospy.loginfo("Payload %s deployed", actuator.upper())
+
+    def publish_camera_coverage(self):
+
+        marker = Marker()
+
+        marker.header.frame_id = "world"
+        marker.header.stamp = rospy.Time.now()
+
+        marker.ns = "camera_coverage"
+        marker.id = 0
+
+        # Draw multiple rectangular boxes
+        marker.type = Marker.CUBE_LIST
+        marker.action = Marker.ADD
+
+        # Camera ground footprint:
+        # 1.4 m vertical x 2.3 m horizontal
+        # Very small Z thickness so it looks like an area on the floor
+        marker.scale.x = 1.4
+        marker.scale.y = 2.3
+        marker.scale.z = 0.02
+
+        # Marker orientation
+        marker.pose.orientation.w = 1.0
+
+        # Make the coverage visible but transparent
+        marker.color.r = 0.0
+        marker.color.g = 1.0
+        marker.color.b = 0.0
+        marker.color.a = 0.20
+
+        # Add all previously visited camera positions
+        marker.points = self.camera_coverage_points
+
+        self.pub_camera_coverage.publish(marker)
+
+
+    # =================================================================
+    # CHECK ALL WAYPOINTS
+    # =================================================================
+
+    def check_waypoints(self, wps):
+
+        for i in range(len(wps)):
+
+            if not self.check_waypoint(
+                wps[i]
+            ):
+
+                rospy.logwarn(
+                    "Waypoint %i did not pass check"
+                    % (i + 1)
+                )
+
+                return False
+
+        return True
+
+
+    # =================================================================
+    # CHECK ONE WAYPOINT
+    # =================================================================
+
+    def check_waypoint(self, wp):
+
+        return True
+
+
+    # =================================================================
+    # SHUTDOWN
+    # =================================================================
+
+    def shutdown(self):
+
+        if hasattr(self, "timer"):
+            self.timer.shutdown()
+
+        if hasattr(self, "sub_pose"):
+            self.sub_pose.unregister()
+
+        if hasattr(self, "sub_roi"):
+            self.sub_roi.unregister()
+
+        if self.aruco_subscriber is not None:
+            self.aruco_subscriber.unregister()
+
+        if self.object_subscriber is not None:
+            self.object_subscriber.unregister()
+
+        self.spar_client.cancel_goal()
+
+        rospy.loginfo(
+            "Guidance stopped"
+        )
+
+
+    # =================================================================
+    # CURRENT UAV POSE
+    # =================================================================
+
+    def callback_pose(self, msg_in):
+        """
+        Real-UAV pose callback.
+
+        Expected message type:
+            geometry_msgs/PoseStamped
+
+        The existing private topic ~pose can still be remapped in the
+        real-UAV launch file exactly as before.
+        """
+        self.current_location = msg_in.pose.position
+
+        self.update_camera_coverage(
+            msg_in.pose.position.x,
+            msg_in.pose.position.y
+        )
+
+
+    def callback_odom(self, msg_in):
+        """
+        Emulator pose callback.
+
+        Expected message type:
+            nav_msgs/Odometry
+
+        The UAV position in Odometry is stored under pose.pose.position.
+        """
+        self.current_location = msg_in.pose.pose.position
+
+        self.update_camera_coverage(
+            msg_in.pose.pose.position.x,
+            msg_in.pose.pose.position.y
+        )
+
+
+    def update_camera_coverage(self, x, y):
+        """
+        Add a 1.4 m x 2.3 m camera-footprint sample whenever the UAV
+        has travelled at least 0.20 m from the previous sample.
+        """
+
+        # First footprint is always added
+        if self.last_coverage_x is None:
+            add_coverage = True
+
+        else:
+            dx = x - self.last_coverage_x
+            dy = y - self.last_coverage_y
+
+            distance = sqrt(
+                dx * dx +
+                dy * dy
+            )
+
+            add_coverage = distance >= 0.20
+
+        if add_coverage:
+            point = Point()
+
+            point.x = x
+            point.y = y
+
+            # Slightly above the RViz ground plane
+            point.z = 0.05
+
+            self.camera_coverage_points.append(
+                point
+            )
+
+            self.last_coverage_x = x
+            self.last_coverage_y = y
+
+            self.publish_camera_coverage()
+
+
+    # =================================================================
+    # DISPLAY PATH IN RVIZ
+    # =================================================================
+
+    def display_path(self, wps, name):
+
+        rospy.loginfo(
+            "Displaying path..."
+        )
+
+        # -------------------------------------------------------------
+        # Create Path message
+        # -------------------------------------------------------------
+
+        msg = Path()
+
+        msg.header.frame_id = "/map"
+
+        msg.header.stamp = (
+            rospy.Time.now()
+        )
+
+        # -------------------------------------------------------------
+        # Convert every [X,Y,Z,Yaw] waypoint into PoseStamped
+        # -------------------------------------------------------------
+
+        for wp in wps:
+
+            pose = PoseStamped()
+
+            pose.header.frame_id = "/map"
+            pose.header.stamp = msg.header.stamp
+
+            pose.pose.position.x = wp[0]
+            pose.pose.position.y = wp[1]
+            pose.pose.position.z = wp[2]
+
+            pose.pose.orientation.w = 1.0
+            pose.pose.orientation.x = 0.0
+            pose.pose.orientation.y = 0.0
+            pose.pose.orientation.z = 0.0
+
+            msg.poses.append(
+                pose
+            )
+
+        rospy.loginfo(
+            "Publishing path..."
+        )
+
+        # -------------------------------------------------------------
+        # Publish to correct persistent publisher
+        # -------------------------------------------------------------
+
+        if name == "/guidance/fullPath":
+
+            self.pub_full_path.publish(
+                msg
+            )
+
+        elif name == "/guidance/pathBreadcrumb":
+
+            self.pub_breadcrumb_path.publish(
+                msg
+            )
+
+        else:
+
+            rospy.logwarn(
+                "Unknown path topic: %s",
+                name
+            )
+
+
+    # =================================================================
+    # ROI DIVERSION
+    # =================================================================
+
+    def callback_inspect_roi(self, msg_in):
+
+        if not self.deployment_enabled:
+
+            rospy.logwarn_throttle(
+                5.0,
+                "Ignoring ROI diversion because deployment is disabled"
+            )
+
+            return
+
+        # -------------------------------------------------------------
+        # Don't start another ROI while one is already happening
+        # -------------------------------------------------------------
+
+        if self.performing_roi:
+
+            rospy.logwarn(
+                "Ignoring ROI because diversion is already running"
+            )
+
+            return
+
+        self.performing_roi = True
+
+        rospy.loginfo(
+            "Starting diversion to ROI..."
+        )
+
+        # -------------------------------------------------------------
+        # Cancel current search waypoint
+        # -------------------------------------------------------------
+
+        self.spar_client.cancel_goal()
+
+        # -------------------------------------------------------------
+        # Detected target X/Y
+        # -------------------------------------------------------------
+
+        target_x = (
+            msg_in.pose.position.x
+        )
+
+        target_y = (
+            msg_in.pose.position.y
+        )
+
+        # -------------------------------------------------------------
+        # Target directly above object
+        # -------------------------------------------------------------
+
+        target_above = [
+            target_x,
+            target_y,
+            self.surveyAltitude,
+            0.0
+        ]
+
+        # -------------------------------------------------------------
+        # Deployment altitude
+        # -------------------------------------------------------------
+
+        target_deploy = [
+            target_x,
+            target_y,
+            0.8,
+            0.0
+        ]
+
+        # -------------------------------------------------------------
+        # Save where UAV was when diversion occurred
+        # -------------------------------------------------------------
+
+        rwp = [
+            self.current_location.x,
+            self.current_location.y,
+            self.current_location.z,
+            0.0
+        ]
+
+        # =============================================================
+        # 1. FLY ABOVE TARGET
+        # =============================================================
+
+        rospy.loginfo(
+            "Flying above detected target..."
+        )
+
+        self.send_wp(
+            target_above
+        )
+
+        self.spar_client.wait_for_result()
+
+        if (
+            self.spar_client.get_state()
+            != GoalStatus.SUCCEEDED
+        ):
+
+            rospy.logerr(
+                "Failed to reach target"
+            )
+
+            rospy.signal_shutdown(
+                "cancelled"
+            )
+
+            return
+
+        rospy.loginfo(
+            "Reached position above target!"
+        )
+
+        # =============================================================
+        # 2. DESCEND TO DEPLOYMENT ALTITUDE
+        # =============================================================
+
+        rospy.loginfo(
+            "Descending to payload deployment altitude..."
+        )
+
+        self.send_wp(
+            target_deploy
+        )
+
+        self.spar_client.wait_for_result()
+
+        if (
+            self.spar_client.get_state()
+            != GoalStatus.SUCCEEDED
+        ):
+
+            rospy.logerr(
+                "Failed to reach deployment altitude"
+            )
+
+            rospy.signal_shutdown(
+                "cancelled"
+            )
+
+            return
+
+        rospy.loginfo(
+            "Reached deployment altitude: 0.8 m"
+        )
+
+        # =============================================================
+        # 3. PAYLOAD PLACEHOLDER
+        # =============================================================
+
+        rospy.loginfo(
+            "DEPLOY PAYLOAD NOW"
+        )
+
+        self.deploy_payload(self.pending_payload_class_id)
+
+        rospy.loginfo(
+            "Payload deployment period finished"
+        )
+
+        # =============================================================
+        # 4. CLIMB BACK TO SEARCH ALTITUDE
+        # =============================================================
+
+        rospy.loginfo(
+            "Climbing back to search altitude..."
+        )
+
+        self.send_wp(
+            target_above
+        )
+
+        self.spar_client.wait_for_result()
+
+        if (
+            self.spar_client.get_state()
+            != GoalStatus.SUCCEEDED
+        ):
+
+            rospy.logerr(
+                "Failed to climb back to search altitude"
+            )
+
+            rospy.signal_shutdown(
+                "cancelled"
+            )
+
+            return
+
+        rospy.loginfo(
+            "Returned to search altitude"
+        )
+
+        # =============================================================
+        # 5. RETURN TO INTERRUPTION LOCATION
+        # =============================================================
+
+        rospy.loginfo(
+            "Returning to flight plan..."
+        )
+
+        self.send_wp(
+            rwp
+        )
+
+        self.spar_client.wait_for_result()
+
+        if (
+            self.spar_client.get_state()
+            != GoalStatus.SUCCEEDED
+        ):
+
+            rospy.logerr(
+                "Return waypoint failed"
+            )
+
+            rospy.signal_shutdown(
+                "cancelled"
+            )
+
+            return
+
+        # =============================================================
+        # 6. RESUME INTERRUPTED BREADCRUMB WAYPOINT
+        # =============================================================
+
+        if (
+            self.breadcrumbMode
+            and self.breadcrumbWPSnextIndex > 0
+        ):
+
+            rospy.loginfo(
+                "Resuming interrupted Breadcrumb waypoint..."
+            )
+
+            self.send_wp(
+                self.breadcrumbWPS[
+                    self.breadcrumbWPSnextIndex - 1
+                ]
+            )
+
+        else:
+
+            rospy.loginfo(
+                "Resuming high-level waypoint..."
+            )
+
+            if self.nextWaypointIndex > 0:
+
+                self.send_wp(
+                    self.waypoints[
+                        self.nextWaypointIndex - 1
+                    ]
+                )
+
+        self.performing_roi = False
+
+        rospy.loginfo(
+            "ROI diversion complete"
+        )
+
+
+    # =================================================================
+    # SEND WAYPOINT TO SPAR
+    # =================================================================
+
+    def send_wp(self, wp):
+
+        if not self.check_waypoint(
+            wp
+        ):
+
+            raise ValueError(
+                "Invalid waypoint input!"
+            )
+
+        goal = FlightMotionGoal()
+
+        goal.motion = (
+            FlightMotionGoal.MOTION_GOTO
+        )
+
+        # -------------------------------------------------------------
+        # Position
+        # -------------------------------------------------------------
+
+        goal.position.x = wp[0]
+        goal.position.y = wp[1]
+        goal.position.z = wp[2]
+
+        # -------------------------------------------------------------
+        # Yaw
+        # -------------------------------------------------------------
+
+        goal.yaw = wp[3]
+
+        # -------------------------------------------------------------
+        # Velocities
+        # -------------------------------------------------------------
+
+        goal.velocity_vertical = (
+            self.vel_linear
+        )
+
+        goal.velocity_horizontal = (
+            self.vel_linear
+        )
+
+        goal.yawrate = (
+            self.vel_yaw
+        )
+
+        # -------------------------------------------------------------
+        # Wait for convergence
+        # -------------------------------------------------------------
+
+        goal.wait_for_convergence = True
+
+        goal.position_radius = (
+            self.accuracy_pos
+        )
+
+        goal.yaw_range = (
+            self.accuracy_yaw
+        )
+
+        # -------------------------------------------------------------
+        # Send goal
+        # -------------------------------------------------------------
+
+        self.spar_client.send_goal(
+            goal
+        )
+
+
+    # =================================================================
+    # CHECK WAYPOINT STATUS
+    #
+    # This is where online Breadcrumb planning happens.
+    #
+    # Breadcrumb does NOT calculate the whole mission beforehand.
+    #
+    # It calculates:
+    #
+    # current high-level waypoint
+    #             ↓
+    # next high-level waypoint
+    #
+    # one segment at a time.
+    # =================================================================
+
+    def check_waypoint_status(
+        self,
+        timer_event
+    ):
+
+        if self.search_complete:
+            return
+
+        # -------------------------------------------------------------
+        # ROI has control
+        # -------------------------------------------------------------
+
+        if self.performing_roi:
+            return
+
+        state = (
+            self.spar_client.get_state()
+        )
+
+        # =============================================================
+        # CURRENT GOAL SUCCEEDED
+        # =============================================================
+
+        if state == GoalStatus.SUCCEEDED:
+
+            # ---------------------------------------------------------
+            # Do we still have another high-level waypoint?
+            # ---------------------------------------------------------
+
+            if (
+                self.nextWaypointIndex
+                < len(self.waypoints)
+            ):
+
+                # =====================================================
+                # NOT CURRENTLY FOLLOWING BREADCRUMB
+                # =====================================================
+
+                if not self.breadcrumbMode:
+
+                    # -------------------------------------------------
+                    # Create Breadcrumb request
+                    # -------------------------------------------------
+
+                    req = RequestPathRequest()
+
+                    # -------------------------------------------------
+                    # START =
+                    # previous high-level waypoint
+                    # -------------------------------------------------
+
+                    req.start.x = (
+                        self.waypoints[
+                            self.nextWaypointIndex - 1
+                        ][0]
+                    )
+
+                    req.start.y = (
+                        self.waypoints[
+                            self.nextWaypointIndex - 1
+                        ][1]
+                    )
+
+                    req.start.z = (
+                        self.waypoints[
+                            self.nextWaypointIndex - 1
+                        ][2]
+                    )
+
+                    # -------------------------------------------------
+                    # END =
+                    # next high-level waypoint
+                    # -------------------------------------------------
+
+                    req.end.x = (
+                        self.waypoints[
+                            self.nextWaypointIndex
+                        ][0]
+                    )
+
+                    req.end.y = (
+                        self.waypoints[
+                            self.nextWaypointIndex
+                        ][1]
+                    )
+
+                    req.end.z = (
+                        self.waypoints[
+                            self.nextWaypointIndex
+                        ][2]
+                    )
+
+                    rospy.loginfo(
+                        "REQUESTING BREADCRUMB: "
+                        "[%.2f, %.2f, %.2f] -> "
+                        "[%.2f, %.2f, %.2f]",
+
+                        req.start.x,
+                        req.start.y,
+                        req.start.z,
+
+                        req.end.x,
+                        req.end.y,
+                        req.end.z
+                    )
+
+                    # =================================================
+                    # CALL BREADCRUMB SERVICE
+                    # =================================================
+
+                    try:
+
+                        res = self.srvc_bc(
+                            req
+                        )
+
+                    except rospy.ServiceException as error:
+
+                        rospy.logerr(
+                            "Breadcrumb service call failed: %s",
+                            str(error)
+                        )
+
+                        return
+
+                    # =================================================
+                    # DEBUG OUTPUT
+                    # =================================================
+
+                    rospy.loginfo(
+                        "NORMAL PATH = %i poses, "
+                        "SPARSE PATH = %i poses",
+
+                        len(res.path.poses),
+
+                        len(res.path_sparse.poses)
+                    )
+
+                    # =================================================
+                    # SELECT PATH
+                    #
+                    # Prefer sparse path.
+                    # =================================================
+
+                    if (
+                        len(res.path_sparse.poses)
+                        > 0
+                    ):
+
+                        rospy.loginfo(
+                            "Using sparse Breadcrumb path"
+                        )
+
+                        path_poses = (
+                            res.path_sparse.poses
+                        )
+
+                    # -------------------------------------------------
+                    # Sparse empty:
+                    # use normal Breadcrumb path
+                    # -------------------------------------------------
+
+                    elif (
+                        len(res.path.poses)
+                        > 0
+                    ):
+
+                        rospy.loginfo(
+                            "Sparse path empty - "
+                            "using normal Breadcrumb path"
+                        )
+
+                        path_poses = (
+                            res.path.poses
+                        )
+
+                    # -------------------------------------------------
+                    # Neither exists
+                    # -------------------------------------------------
+
+                    else:
+
+                        rospy.logerr(
+                            "solution not found"
+                        )
+
+                        return
+
+                    # =================================================
+                    # BUILD BREADCRUMB WAYPOINT LIST
+                    # =================================================
+
+                    breadcrumbWPS = []
+
+                    rospy.loginfo(
+                        "Segment {} to {}:".format(
+                            self.nextWaypointIndex - 1,
+                            self.nextWaypointIndex
+                        )
+                    )
+
+                    rospy.loginfo(
+                        "[%0.2f;%0.2f;%0.2f] => "
+                        "[%0.2f;%0.2f;%0.2f]",
+
+                        req.start.x,
+                        req.start.y,
+                        req.start.z,
+
+                        req.end.x,
+                        req.end.y,
+                        req.end.z
+                    )
+
+                    # -------------------------------------------------
+                    # Convert Breadcrumb poses into SPAR waypoint format
+                    # -------------------------------------------------
+
+                    for i in range(
+                        len(path_poses)
+                    ):
+
+                        rospy.loginfo(
+                            "    [%0.2f;%0.2f;%0.2f]",
+
+                            path_poses[
+                                i
+                            ].position.x,
+
+                            path_poses[
+                                i
+                            ].position.y,
+
+                            path_poses[
+                                i
+                            ].position.z
+                        )
+
+                        breadcrumbWPS.append([
+                            path_poses[
+                                i
+                            ].position.x,
+
+                            path_poses[
+                                i
+                            ].position.y,
+
+                            path_poses[
+                                i
+                            ].position.z,
+
+                            0.0
+                        ])
+
+                    # =================================================
+                    # SAVE BREADCRUMB PATH
+                    # =================================================
+
+                    self.breadcrumbWPS = (
+                        breadcrumbWPS
+                    )
+
+                    # =================================================
+                    # PUBLISH BREADCRUMB PATH TO RVIZ
+                    # =================================================
+
+                    self.display_path(
+                        self.breadcrumbWPS,
+                        "/guidance/pathBreadcrumb"
+                    )
+
+                    # =================================================
+                    # ENTER BREADCRUMB MODE
+                    # =================================================
+
+                    self.breadcrumbMode = True
+
+                    self.breadcrumbWPSnextIndex = 0
+
+                    # =================================================
+                    # SEND FIRST BREADCRUMB WAYPOINT
+                    # =================================================
+
+                    self.send_wp(
+                        self.breadcrumbWPS[
+                            self.breadcrumbWPSnextIndex
+                        ]
+                    )
+
+                    self.breadcrumbWPSnextIndex += 1
+
+
+                # =====================================================
+                # ALREADY IN BREADCRUMB MODE
+                # =====================================================
+
+                else:
+
+                    # -------------------------------------------------
+                    # More Breadcrumb waypoints remain
+                    # -------------------------------------------------
+
+                    if (
+                        self.breadcrumbWPSnextIndex
+                        < len(self.breadcrumbWPS)
+                    ):
+
+                        self.send_wp(
+                            self.breadcrumbWPS[
+                                self.breadcrumbWPSnextIndex
+                            ]
+                        )
+
+                        self.breadcrumbWPSnextIndex += 1
+
+                    # -------------------------------------------------
+                    # Current Breadcrumb segment finished
+                    # -------------------------------------------------
+
+                    else:
+
+                        rospy.loginfo(
+                            "Breadcrumb segment complete"
+                        )
+
+                        # ---------------------------------------------
+                        # Move to next HIGH-LEVEL waypoint
+                        # ---------------------------------------------
+
+                        self.nextWaypointIndex += 1
+
+                        # ---------------------------------------------
+                        # Exit Breadcrumb mode
+                        #
+                        # On the next successful timer cycle,
+                        # Breadcrumb plans the NEXT segment.
+                        # ---------------------------------------------
+
+                        self.breadcrumbMode = False
+
+
+            # =========================================================
+            # ALL HIGH-LEVEL WAYPOINTS FINISHED
+            # =========================================================
+
+            else:
+
+                rospy.loginfo(
+                    "Search mission complete!"
+                )
+
+                self.begin_manual_selection()
+
+
+        # =============================================================
+        # FAILED / CANCELLED GOAL
+        # =============================================================
+
+        elif (
+            state == GoalStatus.PREEMPTED
+            or state == GoalStatus.ABORTED
+            or state == GoalStatus.REJECTED
+        ):
+
+            rospy.loginfo(
+                "Mission cancelled!"
+            )
+
+            rospy.signal_shutdown(
+                "cancelled"
+            )
+
+
+
+
+
+
+
+def main(args):
+
+    # =============================================================
+    # INITIALISE ROS NODE
+    # =============================================================
+
+    rospy.init_node(
+        "guidance"
+    )
+
+    # =============================================================
+    # SURVEY ALTITUDE
+    # =============================================================
+
+    surveyAltitude = rospy.get_param(
+        "~surveyAlt",
+        2
+    )
+
+    # =============================================================
+    # HIGH-LEVEL SEARCH WAYPOINTS
+    #
+    # Breadcrumb does NOT get calculated here.
+    #
+    # These are only the high-level points that describe the search.
+    #
+    # Breadcrumb calculates the route between each pair while flying.
+    # =============================================================
+
+    waypoints = [
+        [ 0.0,  0.0, surveyAltitude, 0.0],
+        [1.9, -1.0, surveyAltitude, 0.0],
+
+        [3.5, -2.1, surveyAltitude, 0.0],
+    [1.75, -2.1, surveyAltitude, 0.0],
+    [0.0, -2.1, surveyAltitude, 0.0],
+    [-1.75, -2.1, surveyAltitude, 0.0],
+    [-3.5, -2.1, surveyAltitude, 0.0],
+
+    [ -3.5, -1.1, surveyAltitude, 0.0],
+    [-1.75, -1.1, surveyAltitude, 0.0],
+    [0.0, -1.1, surveyAltitude, 0.0],
+    [1.75, -1.1, surveyAltitude, 0.0],
+    [3.5, -1.1, surveyAltitude, 0.0],
+
+    [ 3.5, 0.1, surveyAltitude, 0.0],
+    [1.75, 0.1, surveyAltitude, 0.0],
+    [0.0, 0.1, surveyAltitude, 0.0],
+    [-1.75, 0.1, surveyAltitude, 0.0],
+    [-3.5, 0.1, surveyAltitude, 0.0],
+
+    [ -3.5, 1.1, surveyAltitude, 0.0],
+    [-1.75, 1.1, surveyAltitude, 0.0],
+    [0.0,  1.1, surveyAltitude, 0.0],
+    [1.75,  1.1, surveyAltitude, 0.0],
+    [3.5,  1.1, surveyAltitude, 0.0],
+
+    [ 3.5, 2.1, surveyAltitude, 0.0],
+    [-1.75, 2.1, surveyAltitude, 0.0],
+    [0.0,  2.1, surveyAltitude, 0.0],
+    [-1.75,  2.1, surveyAltitude, 0.0],
+    [-3.75,  2.1, surveyAltitude, 0.0],
+
+    
+
+    ]
+
+    # =============================================================
+    # CREATE GUIDANCE
+    # =============================================================
+
+    guide = Guidance(
+        waypoints
+    )
+
+    # =============================================================
+    # KEEP ROS NODE RUNNING
+    # =============================================================
+
+    rospy.spin()
+
+
+
+
+if __name__ == "__main__":
+
+    try:
+
+        main(
+            sys.argv
+        )
+
+    except rospy.ROSInterruptException:
+
+        pass
+
+    print("")
