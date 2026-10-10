@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+from depthai_publisher import mission_announcer
+
+
+if __name__ == "__main__":
+    mission_announcer.main()

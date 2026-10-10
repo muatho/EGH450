@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 import sys
+from collections import deque
 from math import *
+from statistics import median
 
 import threading
 import time
@@ -15,7 +17,6 @@ from actionlib_msgs.msg import GoalStatus
 from geometry_msgs.msg import Point, PoseStamped
 from nav_msgs.msg import Path, Odometry
 from vision_msgs.msg import Detection3DArray
-from vision_msgs.msg import Detection3DArray
 
 from spar_msgs.msg import FlightMotionAction, FlightMotionGoal
 
@@ -24,6 +25,114 @@ from std_msgs.msg import Bool
 from breadcrumb.srv import RequestPath
 from breadcrumb.srv import RequestPathRequest
 
+from depthai_publisher.msg import TargetObservationArray
+
+
+class TargetEvidenceWindow:
+
+    def __init__(
+        self,
+        required_frames,
+        window_size,
+        minimum_confidence_by_class,
+        match_radius,
+    ):
+        self.required_frames = required_frames
+        self.frames = deque(maxlen=window_size)
+        self.minimum_confidence_by_class = minimum_confidence_by_class
+        self.match_radius = match_radius
+
+    def reset(self):
+        self.frames.clear()
+
+    def add_frame(self, observations):
+        accepted_observations = []
+
+        for observation in observations:
+            minimum_confidence = self.minimum_confidence_by_class.get(
+                observation.class_id
+            )
+
+            if minimum_confidence is None:
+                continue
+            if observation.confidence < minimum_confidence:
+                continue
+            if not observation.map_position_valid:
+                continue
+
+            accepted_observations.append(observation)
+
+        self.frames.append(accepted_observations)
+        return self.find_confirmed_target()
+
+    def find_confirmed_target(self):
+        best_target = None
+        best_rank = None
+
+        for frame in self.frames:
+            for anchor in frame:
+                supporting_observations = []
+
+                for comparison_frame in self.frames:
+                    matches = [
+                        observation
+                        for observation in comparison_frame
+                        if (
+                            observation.class_id == anchor.class_id
+                            and self.distance(anchor, observation)
+                            <= self.match_radius
+                        )
+                    ]
+
+                    if matches:
+                        supporting_observations.append(
+                            min(
+                                matches,
+                                key=lambda observation: self.distance(
+                                    anchor,
+                                    observation,
+                                ),
+                            )
+                        )
+
+                if len(supporting_observations) < self.required_frames:
+                    continue
+
+                confidence = median([
+                    observation.confidence
+                    for observation in supporting_observations
+                ])
+                rank = (len(supporting_observations), confidence)
+
+                if best_rank is None or rank > best_rank:
+                    best_rank = rank
+                    best_target = {
+                        "class_id": anchor.class_id,
+                        "confidence": confidence,
+                        "position": [
+                            median([
+                                observation.map_position.x
+                                for observation in supporting_observations
+                            ]),
+                            median([
+                                observation.map_position.y
+                                for observation in supporting_observations
+                            ]),
+                            median([
+                                observation.map_position.z
+                                for observation in supporting_observations
+                            ]),
+                        ],
+                    }
+
+        return best_target
+
+    @staticmethod
+    def distance(first, second):
+        return hypot(
+            first.map_position.x - second.map_position.x,
+            first.map_position.y - second.map_position.y,
+        )
 
 class Guidance():
 
@@ -132,22 +241,23 @@ class Guidance():
             "~backpack_confidence_threshold",
             0.60
         )
-        self.backpack_confirmations_required = rospy.get_param(
-            "~backpack_confirmations_required",
-            3
-        )
         self.backpack_confirmation_radius = rospy.get_param(
             "~backpack_confirmation_radius",
             0.75
+        )
+        self.target_evidence = TargetEvidenceWindow(
+            required_frames=3,  # M: detected frames required for confirmation
+            window_size=5,  # N: recent frames retained
+            minimum_confidence_by_class={
+                self.person_class_id: self.person_confidence_threshold,
+                self.backpack_class_id: self.backpack_confidence_threshold,
+            },
+            match_radius=self.backpack_confirmation_radius,
         )
         self.backpack_serviced_radius = rospy.get_param(
             "~backpack_serviced_radius",
             1.00
         )
-
-        self.target_candidate = None
-        self.target_candidate_class_id = None
-        self.target_candidate_count = 0
         self.serviced_target_locations = {
             self.person_class_id: [],
             self.backpack_class_id: [],
@@ -354,8 +464,8 @@ class Guidance():
         # exist, so an immediately arriving observation cannot race node
         # initialization.
         self.object_subscriber = rospy.Subscriber(
-            "/objects/observations",
-            Detection3DArray,
+            "/objects/target_observations",
+            TargetObservationArray,
             self.callback_object_observations,
             queue_size=1
         )
@@ -453,44 +563,29 @@ class Guidance():
         )
 
     def callback_object_observations(self, msg_in):
-        """Confirm a person or backpack before starting the ROI diversion.
+        """Confirm a target before starting the existing ROI diversion."""
 
-        Raw object observations arrive once per processed image. Requiring
-        several nearby observations suppresses one-frame false positives, and
-        retaining per-class serviced positions prevents repeated service.
-        """
         if not self.flight_started or not self.pose_ready():
             return
         if self.mission_aborted or self.performing_roi or self.search_complete:
             return
-
         if self.payload_a_deployed and self.payload_b_deployed:
             return
 
-        if msg_in.header.frame_id not in ("map", "/map"):
+        if msg_in.map_frame_id not in ("map", "/map"):
             rospy.logwarn_throttle(
                 5.0,
-                "[OBJECT] Ignoring observations in frame '%s'; expected map",
-                msg_in.header.frame_id
+                "[OBJECT] Ignoring map positions in frame '%s'; expected map",
+                msg_in.map_frame_id,
             )
             return
 
-        target_observations = []
+        eligible_observations = []
 
-        for detection in msg_in.detections:
-            if not detection.results:
-                continue
+        for observation in msg_in.observations:
+            class_id = observation.class_id
 
-            result = detection.results[0]
-            class_id = result.id
             if class_id not in self.target_class_names:
-                continue
-            confidence_threshold = (
-                self.person_confidence_threshold
-                if class_id == self.person_class_id
-                else self.backpack_confidence_threshold
-            )
-            if result.score < confidence_threshold:
                 continue
 
             actuator = self.payload_actuator_by_class[class_id]
@@ -500,77 +595,39 @@ class Guidance():
             ):
                 continue
 
-            position = result.pose.pose.position
-            if not (
-                isfinite(position.x)
-                and isfinite(position.y)
-                and isfinite(position.z)
-            ):
-                continue
+            if observation.map_position_valid:
+                position = observation.map_position
 
-            target_observations.append((
-                result.score,
-                class_id,
-                position.x,
-                position.y,
-                position.z
-            ))
+                if not (
+                    isfinite(position.x)
+                    and isfinite(position.y)
+                    and isfinite(position.z)
+                ):
+                    continue
 
-        if not target_observations:
-            self.target_candidate = None
-            self.target_candidate_class_id = None
-            self.target_candidate_count = 0
-            return
+                already_serviced = any(
+                    hypot(
+                        position.x - serviced[0],
+                        position.y - serviced[1],
+                    ) <= self.backpack_serviced_radius
+                    for serviced in self.serviced_target_locations[class_id]
+                )
 
-        # Only one diversion can be initiated at a time, so confirm the
-        # strongest supported target observation in this image.
-        _, class_id, x, y, z = max(
-            target_observations, key=lambda item: item[0]
+                if already_serviced:
+                    continue
+
+            eligible_observations.append(observation)
+
+        confirmed_target = self.target_evidence.add_frame(
+            eligible_observations
         )
 
-        for serviced in self.serviced_target_locations[class_id]:
-            distance = hypot(x - serviced[0], y - serviced[1])
-            if distance <= self.backpack_serviced_radius:
-                self.target_candidate = None
-                self.target_candidate_class_id = None
-                self.target_candidate_count = 0
-                return
-
-        if (
-            self.target_candidate is None
-            or self.target_candidate_class_id != class_id
-        ):
-            self.target_candidate = [x, y, z]
-            self.target_candidate_class_id = class_id
-            self.target_candidate_count = 1
-        else:
-            distance = hypot(
-                x - self.target_candidate[0],
-                y - self.target_candidate[1]
-            )
-
-            if distance > self.backpack_confirmation_radius:
-                self.target_candidate = [x, y, z]
-                self.target_candidate_count = 1
-            else:
-                count = self.target_candidate_count
-                self.target_candidate = [
-                    (self.target_candidate[0] * count + x) / (count + 1),
-                    (self.target_candidate[1] * count + y) / (count + 1),
-                    (self.target_candidate[2] * count + z) / (count + 1)
-                ]
-                self.target_candidate_count += 1
-
-        if (
-            self.target_candidate_count
-            < self.backpack_confirmations_required
-        ):
+        if confirmed_target is None:
             return
 
-        target = list(self.target_candidate)
-        self.target_candidate = None
-        self.target_candidate_class_id = None
-        self.target_candidate_count = 0
+        class_id = confirmed_target["class_id"]
+        target = confirmed_target["position"]
+        self.target_evidence.reset()
 
         if not self.deployment_enabled:
             rospy.loginfo(
@@ -596,7 +653,8 @@ class Guidance():
         )
 
         roi = PoseStamped()
-        roi.header = msg_in.header
+        roi.header.stamp = msg_in.header.stamp
+        roi.header.frame_id = msg_in.map_frame_id
         roi.pose.position.x = target[0]
         roi.pose.position.y = target[1]
         roi.pose.position.z = target[2]
@@ -605,7 +663,6 @@ class Guidance():
         self.pending_payload_class_id = class_id
         self.callback_inspect_roi(roi)
         self.pending_payload_class_id = None
-
 
     def begin_manual_selection(self):
         if self.mission_aborted:

@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="depthai_publisher"
+        type="mission_voice_announcer"
+        name="mission_voice_announcer"
+        output="screen" />
+</launch>

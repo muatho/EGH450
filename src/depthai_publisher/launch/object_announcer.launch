@@ -1,0 +1,23 @@
+<launch>
+  <arg name="object_topic" default="/objects/observations" />
+  <arg name="aruco_topic" default="/world_model/aruco_markers" />
+  <arg name="minimum_confidence" default="0.8" />
+  <arg name="object_confirmation_frames" default="3" />
+  <arg name="aruco_confirmation_frames" default="2" />
+  <arg name="match_radius" default="1.0" />
+  <arg name="announcement_cooldown" default="60.0" />
+
+  <node pkg="depthai_publisher"
+        type="object_announcer"
+        name="object_announcer"
+        output="screen">
+    <param name="object_topic" value="$(arg object_topic)" />
+    <param name="aruco_topic" value="$(arg aruco_topic)" />
+    <param name="minimum_confidence" value="$(arg minimum_confidence)" />
+    <param name="object_confirmation_frames" value="$(arg object_confirmation_frames)" />
+    <param name="aruco_confirmation_frames" value="$(arg aruco_confirmation_frames)" />
+    <param name="match_radius" value="$(arg match_radius)" />
+    <param name="announcement_cooldown" value="$(arg announcement_cooldown)" />
+    <rosparam param="labels">[person, backpack]</rosparam>
+  </node>
+</launch>

@@ -47,8 +47,10 @@ UAVASREmulator::UAVASREmulator() :
 	bool start_mode_offboard = false;
 	nhp_.param("start_armed", start_armed, start_armed);
 	nhp_.param("start_mode_offboard", start_mode_offboard, start_mode_offboard);
+	nhp_.param("deplete_battery", param_deplete_battery_, param_deplete_battery_);
 
 	system_armed_ = start_armed;
+	battery_last_update_ = ros::Time::now();
 	system_mode_ = start_mode_offboard ? "OFFBOARD" : "CMODE(0)";
 
 	//TODO: Starting location and yaw
@@ -200,6 +202,7 @@ void UAVASREmulator::callback_pose(const ros::TimerEvent& e) {
 		if( (param_auto_disarm_ > 0.0) && (height_max_ >= param_auto_disarm_) ) {
 			//...And we are currently grounded
 			height_max_ = 0.0;
+			update_simulated_battery();
 			system_armed_ = false;
 			ROS_INFO("Landing detected! automatic disarm activated.");
 		}
@@ -293,21 +296,41 @@ void UAVASREmulator::callback_state(const ros::TimerEvent& e) {
 	pub_state_.publish(msg_out_state);
 }
 
+void UAVASREmulator::update_simulated_battery() {
+	const ros::Time now = ros::Time::now();
+	const double elapsed = std::max(0.0, (now - battery_last_update_).toSec());
+	if (!param_deplete_battery_) {
+		battery_fraction_ = 1.0;
+		battery_armed_seconds_ = 0.0;
+		battery_last_update_ = now;
+		return;
+	}
+	if (system_armed_) {
+		battery_armed_seconds_ += elapsed;
+	}
+	battery_fraction_ = std::max(
+		0.0, 1.0 - (0.8 / 200.0) * battery_armed_seconds_);
+	battery_last_update_ = now;
+}
+
 void UAVASREmulator::callback_battery(const ros::TimerEvent& e) {
 	sensor_msgs::BatteryState msg_out_battery;
 
-	//random voltages around the 4.0V mark
-	double v1 = 0.02*((rand() % 10) - 5) + 4;
-	double v2 = 0.02*((rand() % 10) - 5) + 4;
-	double v3 = 0.02*((rand() % 10) - 5) + 4;
+	// Hold at 100%, or deplete to 20% over 200 armed seconds when enabled.
+	update_simulated_battery();
+	double cell_voltage = (11.1 + 1.5 * battery_fraction_) / 3.0;
+	double v1 = cell_voltage, v2 = cell_voltage, v3 = cell_voltage;
 	msg_out_battery.header.stamp = e.current_real;
 	msg_out_battery.header.frame_id = param_frame_id_;
 	msg_out_battery.voltage = v1 + v2 + v3;
 	msg_out_battery.current = NAN;
 	msg_out_battery.capacity = NAN;
 	msg_out_battery.design_capacity = 4.2;
-	msg_out_battery.percentage = (msg_out_battery.voltage - 11.1) / (1.5);
-	msg_out_battery.power_supply_status = msg_out_battery.POWER_SUPPLY_STATUS_DISCHARGING;
+	msg_out_battery.percentage = battery_fraction_;
+	msg_out_battery.present = true;
+	msg_out_battery.power_supply_status = system_armed_
+		? msg_out_battery.POWER_SUPPLY_STATUS_DISCHARGING
+		: msg_out_battery.POWER_SUPPLY_STATUS_NOT_CHARGING;
 	msg_out_battery.power_supply_health = msg_out_battery.POWER_SUPPLY_HEALTH_GOOD;
 	msg_out_battery.power_supply_technology = msg_out_battery.POWER_SUPPLY_TECHNOLOGY_LIPO;
 	msg_out_battery.cell_voltage.push_back(v1);
@@ -320,6 +343,7 @@ void UAVASREmulator::callback_battery(const ros::TimerEvent& e) {
 }
 
 bool UAVASREmulator::callback_arming(mavros_msgs::CommandBool::Request &req, mavros_msgs::CommandBool::Response &res) {
+	update_simulated_battery();
 	system_armed_ = req.value;
 
 	ROS_INFO("System %s!", system_armed_ ? "armed" : "disarmed");

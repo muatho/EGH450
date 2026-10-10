@@ -6,6 +6,9 @@ import cv2
 import message_filters
 import numpy as np
 import rospy
+import threading
+from collections import deque
+
 
 from cv_bridge import CvBridge, CvBridgeError
 from geometry_msgs.msg import PoseStamped
@@ -18,17 +21,24 @@ from vision_msgs.msg import (
 )
 
 from depthai_publisher.camera_to_map import CameraToMap
+from depthai_publisher.msg import TargetObservation, TargetObservationArray
 
 
 class ObjectPositionEstimator:
     """Publish independent 3D observations without tracking or persistence."""
+
+    DEPTH_PATCH_SIZE = 7
 
     def __init__(self):
         """Create synchronized perception inputs and independent pose state."""
         self.bridge = CvBridge()
         self.camera_matrix = None
         self.distortion_coefficients = None
-        self.latest_pose = None
+
+        # Retain recent aircraft poses so each detection can use the pose recorded
+        # closest to the source image rather than the newest pose available later.
+        self.pose_history = deque(maxlen=200)
+        self.pose_lock = threading.Lock()
         self.camera_to_map = CameraToMap()
 
         self.detection_topic = rospy.get_param(
@@ -43,10 +53,10 @@ class ObjectPositionEstimator:
         self.output_topic = rospy.get_param(
             "~output_topic", "/objects/observations"
         )
+        self.target_output_topic = rospy.get_param(
+            "~target_output_topic", "/objects/target_observations"
+        )
 
-        # Use the central half of each box to reduce contamination by the
-        # background immediately outside an imperfect detector boundary.
-        self.inner_box_scale = rospy.get_param("~inner_box_scale", 0.50)
         self.minimum_depth = rospy.get_param("~minimum_depth", 0.20)
         self.maximum_depth = rospy.get_param("~maximum_depth", 10.0)
         self.minimum_depth_samples = rospy.get_param(
@@ -57,6 +67,11 @@ class ObjectPositionEstimator:
         self.output_publisher = rospy.Publisher(
             self.output_topic,
             Detection3DArray,
+            queue_size=1,
+        )
+        self.target_output_publisher = rospy.Publisher(
+            self.target_output_topic,
+            TargetObservationArray,
             queue_size=1,
         )
         self.camera_info_subscriber = rospy.Subscriber(
@@ -94,10 +109,11 @@ class ObjectPositionEstimator:
         self.depth_subscriber = depth_subscriber
 
         rospy.loginfo(
-            "Object position estimator: %s + %s -> %s",
+            "Object position estimator: %s + %s -> %s and %s",
             self.detection_topic,
             self.depth_topic,
             self.output_topic,
+            self.target_output_topic,
         )
 
     def camera_info_callback(self, message):
@@ -108,105 +124,191 @@ class ObjectPositionEstimator:
         )
 
     def pose_callback(self, message):
-        """Retain the newest vehicle pose for an explicit age check."""
-        self.latest_pose = message
+        """Store recent aircraft poses for timestamp-aligned lookup."""
+
+        with self.pose_lock:
+            self.pose_history.append(message)
+
+    def pose_for_stamp(self, source_stamp):
+        """Return the aircraft pose closest to the source-image timestamp."""
+
+        with self.pose_lock:
+            poses = tuple(self.pose_history)
+
+        if not poses:
+            return None
+
+        pose = min(
+            poses,
+            key=lambda candidate: abs(
+                (source_stamp - candidate.header.stamp).to_sec()
+            ),
+        )
+        pose_age = abs((source_stamp - pose.header.stamp).to_sec())
+
+        if pose_age > self.max_pose_age:
+            return None
+
+        return pose
+
+    def publish_outputs(self, detection_output, target_output):
+        """Publish both observation formats for one source image."""
+
+        self.output_publisher.publish(detection_output)
+        self.target_output_publisher.publish(target_output)
 
     def perception_callback(self, detections, depth_message):
-        """Transform all valid observations from one synchronized frame."""
-        output = Detection3DArray()
-        output.header.stamp = detections.header.stamp
-        output.header.frame_id = "map"
+        """Combine one detection frame with aligned depth and aircraft pose."""
 
-        if self.camera_matrix is None:
-            rospy.logwarn_throttle(
-                5.0, "CameraInfo unavailable: no global object observations"
-            )
-            self.output_publisher.publish(output)
-            return
+        detection_output = Detection3DArray()
+        detection_output.header.stamp = detections.header.stamp
+        detection_output.header.frame_id = "map"
 
-        pose = self.latest_pose
-        if pose is not None:
-            pose_age = abs(
-                (detections.header.stamp - pose.header.stamp).to_sec()
-            )
-            if pose_age > self.max_pose_age:
-                pose = None
-        if pose is None:
-            rospy.logwarn_throttle(
-                5.0,
-                "No recent vehicle pose: no global object observations",
-            )
-            self.output_publisher.publish(output)
-            return
+        target_output = TargetObservationArray()
+        target_output.header = detections.header
+        target_output.map_frame_id = detection_output.header.frame_id
+        target_output.image_width = depth_message.width
+        target_output.image_height = depth_message.height
 
-        try:
-            depth_mm = self.bridge.imgmsg_to_cv2(
-                depth_message, desired_encoding="16UC1"
-            )
-        except CvBridgeError as error:
-            rospy.logerr("Could not decode aligned depth image: %s", error)
-            self.output_publisher.publish(output)
-            return
+        observation_pairs = []
 
         for detection_2d in detections.detections:
             if not detection_2d.results:
                 continue
-            camera_point = self.estimate_camera_point(depth_mm, detection_2d)
+
+            target_observation = self.build_target_observation(detection_2d)
+            target_output.observations.append(target_observation)
+            observation_pairs.append((detection_2d, target_observation))
+
+        if self.camera_matrix is None:
+            rospy.logwarn_throttle(
+                5.0,
+                "CameraInfo unavailable: target map positions are invalid",
+            )
+            self.publish_outputs(detection_output, target_output)
+            return
+
+        pose = self.pose_for_stamp(detections.header.stamp)
+
+        if pose is None:
+            rospy.logwarn_throttle(
+                5.0,
+                "No aircraft pose near the image timestamp: target map positions are invalid",
+            )
+            self.publish_outputs(detection_output, target_output)
+            return
+
+        try:
+            depth_mm = self.bridge.imgmsg_to_cv2(
+                depth_message,
+                desired_encoding="16UC1",
+            )
+        except CvBridgeError as error:
+            rospy.logerr("Could not decode aligned depth image: %s", error)
+            self.publish_outputs(detection_output, target_output)
+            return
+
+        for detection_2d, target_observation in observation_pairs:
+            camera_point = self.estimate_camera_point(
+                depth_mm,
+                detection_2d,
+            )
             if camera_point is None:
                 continue
+
             map_point = self.camera_to_map.camera_point_to_map(
-                camera_point, pose
+                camera_point,
+                pose,
             )
             if map_point is None:
                 continue
-            output.detections.append(
-                self.build_detection_3d(detection_2d, map_point, output.header)
+
+            target_observation.map_position_valid = True
+            target_observation.map_position.x = float(map_point[0])
+            target_observation.map_position.y = float(map_point[1])
+            target_observation.map_position.z = float(map_point[2])
+
+            detection_output.detections.append(
+                self.build_detection_3d(
+                    detection_2d,
+                    map_point,
+                    detection_output.header,
+                )
             )
 
-        self.output_publisher.publish(output)
+        self.publish_outputs(detection_output, target_output)
 
     def estimate_camera_point(self, depth_mm, detection):
-        """Return robust optical XYZ from valid pixels inside one inner box."""
+        """Estimate optical XYZ from depth near the detection centre."""
+
         image_height, image_width = depth_mm.shape[:2]
         centre_x = float(detection.bbox.center.x)
         centre_y = float(detection.bbox.center.y)
-        half_width = 0.5 * float(detection.bbox.size_x) * self.inner_box_scale
-        half_height = 0.5 * float(detection.bbox.size_y) * self.inner_box_scale
 
-        x_min = max(0, int(np.floor(centre_x - half_width)))
-        x_max = min(image_width, int(np.ceil(centre_x + half_width)))
-        y_min = max(0, int(np.floor(centre_y - half_height)))
-        y_max = min(image_height, int(np.ceil(centre_y + half_height)))
-        if x_max <= x_min or y_max <= y_min:
+        centre_column = int(round(centre_x))
+        centre_row = int(round(centre_y))
+        half_patch = self.DEPTH_PATCH_SIZE // 2
+
+        x_min = max(
+            0,
+            min(
+                centre_column - half_patch,
+                image_width - self.DEPTH_PATCH_SIZE,
+            ),
+        )
+        y_min = max(
+            0,
+            min(
+                centre_row - half_patch,
+                image_height - self.DEPTH_PATCH_SIZE,
+            ),
+        )
+        x_max = x_min + self.DEPTH_PATCH_SIZE
+        y_max = y_min + self.DEPTH_PATCH_SIZE
+
+        depth_patch = depth_mm[y_min:y_max, x_min:x_max]
+        valid_depths = depth_patch[
+            (depth_patch >= self.minimum_depth * 1000.0)
+            & (depth_patch <= self.maximum_depth * 1000.0)
+        ]
+
+        if valid_depths.size < self.minimum_depth_samples:
             return None
 
-        roi = depth_mm[y_min:y_max, x_min:x_max]
-        valid = (
-            (roi >= self.minimum_depth * 1000.0)
-            & (roi <= self.maximum_depth * 1000.0)
-        )
-        rows, columns = np.nonzero(valid)
-        if rows.size < self.minimum_depth_samples:
-            return None
+        median_depth = float(np.median(valid_depths)) / 1000.0
 
-        # Deproject every valid pixel, then take coordinate-wise medians. This
-        # is more robust than trusting one centre pixel and preserves the
-        # rational distortion model used by the RGB stream.
-        pixels = np.column_stack((columns + x_min, rows + y_min)).astype(
-            np.float64
+        centre_pixel = np.array(
+            [[[centre_x, centre_y]]],
+            dtype=np.float64,
         )
-        normalized = cv2.undistortPoints(
-            pixels.reshape(-1, 1, 2),
+        normalized_ray = cv2.undistortPoints(
+            centre_pixel,
             self.camera_matrix,
             self.distortion_coefficients,
-        ).reshape(-1, 2)
-        z_metres = roi[valid].astype(np.float64) / 1000.0
-        camera_points = np.column_stack((
-            normalized[:, 0] * z_metres,
-            normalized[:, 1] * z_metres,
-            z_metres,
-        ))
-        return np.median(camera_points, axis=0)
+        )[0, 0]
+
+        return np.array([
+            normalized_ray[0] * median_depth,
+            normalized_ray[1] * median_depth,
+            median_depth,
+        ])
+
+    @staticmethod
+    def build_target_observation(detection_2d):
+        """Copy one raw YOLO result into a target observation."""
+
+        result = detection_2d.results[0]
+
+        observation = TargetObservation()
+        observation.class_id = int(result.id)
+        observation.confidence = float(result.score)
+        observation.bbox_center_x = float(detection_2d.bbox.center.x)
+        observation.bbox_center_y = float(detection_2d.bbox.center.y)
+        observation.bbox_width = float(detection_2d.bbox.size_x)
+        observation.bbox_height = float(detection_2d.bbox.size_y)
+        observation.map_position_valid = False
+
+        return observation
 
     @staticmethod
     def build_detection_3d(detection_2d, map_point, header):

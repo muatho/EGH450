@@ -68,6 +68,10 @@
   <exec_depend>vision_msgs</exec_depend>
   <exec_depend>cv_bridge</exec_depend>
   <exec_depend>message_filters</exec_depend>
+  <exec_depend>mavros_msgs</exec_depend>
+  <exec_depend>rosgraph_msgs</exec_depend>
+  <exec_depend>speech-dispatcher</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

@@ -7,10 +7,10 @@
     <!-- One JSON is the source of decoder settings and human-readable labels
          for both on-device inference and the presentation overlay. -->
     <arg name="yolo_config_path"
-         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5/best.json"/>
+         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5_exp009_f1/candidate.json"/>
     <!-- Keep the blob and decoder configuration explicit and paired. -->
     <arg name="yolo_blob_path"
-         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5/best_openvino_2022.1_6shave.blob"/>
+         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5_exp009_f1/candidate.blob"/>
 
     <!-- Real flight uses PX4's fused local pose. Select emulator explicitly
          when testing the global ArUco transform against /uavasr/pose. -->

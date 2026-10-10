@@ -89,6 +89,10 @@ class UAVASREmulator {
 
 
 		bool system_armed_;
+		bool param_deplete_battery_ = false;
+		double battery_fraction_ = 1.0;
+		double battery_armed_seconds_ = 0.0;
+		ros::Time battery_last_update_;
 		std::string system_mode_;
 		double param_auto_disarm_;
 		double height_max_;
@@ -104,6 +108,7 @@ class UAVASREmulator {
 
 		void callback_pose(const ros::TimerEvent& e);
 		void callback_state(const ros::TimerEvent& e);
+		void update_simulated_battery();
 		void callback_battery(const ros::TimerEvent& e);
 
 		void callback_position_target(const mavros_msgs::PositionTarget::ConstPtr& msg_in);

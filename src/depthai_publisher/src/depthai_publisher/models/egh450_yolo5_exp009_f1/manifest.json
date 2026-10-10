@@ -1,0 +1,23 @@
+{
+  "created_utc": "2026-10-06T02:00:44.309660+00:00",
+  "source_checkpoint": "/Users/lucasbrankovich/Library/Mobile Documents/com~apple~CloudDocs/Downloads/EGH450 Unmanned Aircraft Systems/modelling/queue_derived_20261005/jobs/EXP-009_F1/attempt_001/training/weights/last.pt",
+  "checkpoint_sha256": "ae81b4fd67a68b6a12c254b24ebf5743584da2361942479c30ab4d2eb78e76c7",
+  "onnx_sha256": "df03efbee6fba7e269f853cab05503b806954477d927852fc82b520d09d49394",
+  "blob_sha256": "ca9501466f53cf7ae8efa4a849dd032d50e1de405b29702c96a46bfd5fcf537c",
+  "config_sha256": "5387e0cfb2bcccc75f70b9623ec2df5499c1dec5a3919782e63db10ae8928b7e",
+  "openvino": "2022.1",
+  "shaves": 6,
+  "precision": "FP16",
+  "input_size": 416,
+  "input": "RGB planar; compiler embeds division by 255",
+  "status": "COMPILED_NOT_HARDWARE_VERIFIED",
+  "final_test_evaluated": "NOT_CHECKED_BY_PACKAGER",
+  "note": "Final-test status not established by this packaging script; consult experiment records.",
+  "onboard_checks": [
+    "Preserve old blob/config for rollback; do not auto-deploy.",
+    "Confirm JSON schema and model path match active ROS loader.",
+    "Match RGB planar input, resize policy, input size and OpenVINO 2022.1.",
+    "Verify load, output heads, class mapping, frame rate and detections on OAK-D.",
+    "Compare raw detections against PyTorch; navigation smoothing is separate."
+  ]
+}

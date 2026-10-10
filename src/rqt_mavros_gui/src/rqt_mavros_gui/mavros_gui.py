@@ -219,10 +219,10 @@ class MAVROSGUI(Plugin):
 
 		if msg_in.armed:
 			self._widget.label_status_live_armed.setText("Armed")
-			self._widget.label_status_live_armed.setStyleSheet("QLabel{color: rgb(255, 255, 255);background-color: rgb(25, 116, 2);}")
+			self._widget.label_status_live_armed.setStyleSheet("QLabel{color: rgb(0, 0, 0);background-color: rgb(25, 116, 2);}")
 		else:
 			self._widget.label_status_live_armed.setText("Disarmed")
-			self._widget.label_status_live_armed.setStyleSheet("QLabel{color: rgb(255, 255, 255);background-color: rgb(116,2,25);}")
+			self._widget.label_status_live_armed.setStyleSheet("QLabel{color: rgb(0, 0, 0);background-color: rgb(116,2,25);}")
 
 		if msg_in.mode == "CMODE(0)":
 			self._widget.label_status_live_mode.setText("UNKNOWN")
@@ -250,4 +250,3 @@ class MAVROSGUI(Plugin):
 		#Timer should trigger immidiately
 		self.timer_state = rospy.Timer(rospy.Duration(1), self._state_monitor)
 		self.sub_state = rospy.Subscriber(self.mavros_namespace + "/state", State, self._cb_state)
-

@@ -53,6 +53,8 @@ add_message_files(
   FILES
   ArucoDetection.msg
   ArucoDetectionArray.msg
+  TargetObservation.msg
+  TargetObservationArray.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -167,7 +169,13 @@ catkin_install_python(PROGRAMS
   scripts/aruco_subscriber
   scripts/vision_overlay
   scripts/object_position_estimator
+  scripts/object_announcer
+  scripts/mission_voice_announcer
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY launch/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
 
 ## Mark executables for installation

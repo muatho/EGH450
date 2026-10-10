@@ -57,3 +57,25 @@ OR
 ```
 rviz
 ```
+
+## GCS voice announcements
+
+The target announcer reports confirmed map-frame YOLO and ArUco observations.
+It publishes the same text on `/gcs/target_alert` and generates speech locally
+on the GCS through `spd-say`.
+
+```bash
+roslaunch depthai_publisher object_announcer.launch
+```
+
+The independent mission announcer reports arming changes, mission start,
+payload commands, landing-marker selection and successful landing. It publishes
+the same text on `/gcs/mission_alert`.
+
+```bash
+roslaunch depthai_publisher mission_announcer.launch
+```
+
+These nodes are GCS presentation components. They do not command navigation,
+payload hardware or the detector, and they are not started by the onboard
+mission launch files.
