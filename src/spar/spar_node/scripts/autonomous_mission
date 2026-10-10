@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+
+"""
+ROS entry point for the autonomous mission.
+
+The executable intentionally contains no mission behaviour. Its only job is
+to initialise ROS, construct the authoritative MissionController and keep it
+running. This keeps ROS startup separate from state-machine implementation.
+
+Legacy successor:
+    The startup section at the bottom of test_breadcrumb_camera.
+"""
+
+import rospy
+
+from spar_node.mission_controller import MissionController
+from spar_node.flight_interface import FlightInterface
+from spar_node.breadcrumb_interface import BreadcrumbInterface
+from spar_node.vehicle_state import VehicleState
+from spar_node.target_observations import TargetObservationBuffer
+from spar_node.target_evidence import TargetEvidenceAccumulator
+from spar_node.operator_interface import OperatorInterface
+from spar_node.payload_interface import PayloadInterface
+from spar_node.landing_marker_interface import LandingMarkerInterface
+from spar_node.test_target_interface import TestTargetInterface
+from spar_node.target_marker_publisher import TargetMarkerPublisher
+
+
+def main():
+    rospy.init_node("autonomous_mission")
+
+    # Assemble external interfaces in one visible location. Construction does
+    # not command the aircraft or request a Breadcrumb path.
+    flight = FlightInterface()
+    breadcrumb = BreadcrumbInterface()
+    vehicle = VehicleState()
+    target_observations = TargetObservationBuffer()
+    operator = OperatorInterface()
+    payload = PayloadInterface()
+    landing_markers = LandingMarkerInterface()
+    test_targets = TestTargetInterface()
+
+    # Coverage weighting remains neutral until the Avenue 1 evaluator provides
+    # separate measured reliability results for people and backpacks.
+    neutral_coverage_weights = (
+        1.0,
+    ) * TargetEvidenceAccumulator.COVERAGE_BAND_COUNT
+
+    target_evidence = TargetEvidenceAccumulator(
+        cluster_radius=rospy.get_param("~target_cluster_radius", 0.75),
+        evidence_half_life=rospy.get_param("~target_evidence_half_life", 2.0),
+        minimum_observation_interval=rospy.get_param("~target_evidence_minimum_interval", 0.25),
+        maximum_observation_contribution=rospy.get_param("~target_evidence_maximum_contribution", 1.0),
+        coverage_weights={
+            TargetObservationBuffer.PERSON_CLASS_ID: neutral_coverage_weights,
+            TargetObservationBuffer.BACKPACK_CLASS_ID: neutral_coverage_weights,
+        },
+    )
+
+    # TargetMarkerPublisher exposes the mission's target memory to RViz. It
+    # receives read-only candidate snapshots and cannot alter mission evidence
+    # or authorise navigation behaviour.
+    target_markers = TargetMarkerPublisher()
+
+    controller = MissionController(
+        flight=flight,
+        breadcrumb=breadcrumb,
+        vehicle=vehicle,
+        target_observations=target_observations,
+        target_evidence=target_evidence,
+        operator=operator,
+        payload=payload,
+        landing_markers=landing_markers,
+        test_targets=test_targets,
+        target_markers=target_markers,
+    )
+    controller.run()
+
+
+if __name__ == "__main__":
+    main()

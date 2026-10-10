@@ -2,6 +2,7 @@
 <launch>
 	<!-- Emulator Parameters -->
 	<arg name="uav_name" default="emulated_uav"/>
+	<arg name="deplete_battery" default="false"/>
 	<arg name="topic_grid" default="/grid" />
 	<arg name="frame_id" default="map" />
 
@@ -20,6 +21,7 @@
 
 		<param name="start_armed" value="true" type="bool"/>
 		<param name="start_mode_offboard" value="true" type="bool"/>
+		<param name="deplete_battery" value="$(arg deplete_battery)" type="bool"/>
 
 		<param name="update_rate_pose" value="50.0" type="double"/>
 		<param name="update_rate_battery" value="1.0" type="double"/>

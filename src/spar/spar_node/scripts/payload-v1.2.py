@@ -6,6 +6,8 @@ from std_msgs.msg import Bool
 
 s1 = None
 s2 = None
+status_a_pub = None
+status_b_pub = None
 channels = [12,13] # GPIO12 (PWM0)    GPIO13 (PWM1)
 t_low = 0.0005 # 500us ------ 0 degrees
 t_high = 0.003 # 3000us -- 180 degrees
@@ -23,11 +25,13 @@ def callback_a(msg_in):
         s1.ChangeDutyCycle(duty_high/2) # Set servo pos to 90 degrees
         time.sleep(0.5) # Wait for servo rotation
         s1.ChangeDutyCycle(0) # Prevent the servo from attempting to continue rotating in order to stop jitters
+        status_a_pub.publish(Bool(data=True))
     else:
         rospy.loginfo("[PDD] Actuating Servo A to Closed Position")
         s1.ChangeDutyCycle(duty_low) # Repeat steps from before
         time.sleep(0.5)
         s1.ChangeDutyCycle(0)
+        status_a_pub.publish(Bool(data=False))
 
 
 # Servo B ROS Callback
@@ -38,11 +42,13 @@ def callback_b(msg_in):
         s2.ChangeDutyCycle(duty_high/2) # Set servo pos to 90 degrees
         time.sleep(0.5) # Wait for servo rotation
         s2.ChangeDutyCycle(0) # Prevent the servo from attempting to continue rotating in order to stop jitters
+        status_b_pub.publish(Bool(data=True))
     else:
         rospy.loginfo("[PDD] Actuating Servo B to Closed Position")
         s2.ChangeDutyCycle(duty_low) # Repeat steps from before
         time.sleep(0.5)
         s2.ChangeDutyCycle(0)
+        status_b_pub.publish(Bool(data=False))
 
 
 def shutdown():
@@ -63,10 +69,6 @@ if __name__ == '__main__':
     # Setup the ROS backend for this node
     rospy.init_node('servo_controller', anonymous=True)
     
-    # Setup the subscribers for both servos
-    sub_a = rospy.Subscriber('/actuator_control/actuator_a', Bool, callback_a)
-    sub_b = rospy.Subscriber('/actuator_control/actuator_b', Bool, callback_b)
-
     # Set board numbering mode
     GPIO.setmode(GPIO.BCM)
 
@@ -78,6 +80,22 @@ if __name__ == '__main__':
     # Start PWM, but with 0% duty cycle (no pulse)
     s1.start(0)
     s2.start(0)
+
+    # Latched status allows a mission interface that starts later to recover
+    # the latest acknowledged physical payload state.
+    status_a_pub = rospy.Publisher(
+        '/actuator_control/actuator_a/deployed', Bool, queue_size=1, latch=True
+    )
+    status_b_pub = rospy.Publisher(
+        '/actuator_control/actuator_b/deployed', Bool, queue_size=1, latch=True
+    )
+    status_a_pub.publish(Bool(data=False))
+    status_b_pub.publish(Bool(data=False))
+
+    # Subscribe only after GPIO and publishers are ready so an early command
+    # cannot race servo initialisation.
+    sub_a = rospy.Subscriber('/actuator_control/actuator_a', Bool, callback_a)
+    sub_b = rospy.Subscriber('/actuator_control/actuator_b', Bool, callback_b)
 
     # Perform cleanup on shutdown
     rospy.on_shutdown(shutdown)

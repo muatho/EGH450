@@ -53,6 +53,8 @@ add_message_files(
   FILES
   ArucoDetection.msg
   ArucoDetectionArray.msg
+  TargetObservation.msg
+  TargetObservationArray.msg
 )
 
 ## Generate services in the 'srv' folder

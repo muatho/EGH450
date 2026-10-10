@@ -137,9 +137,12 @@ class DepthaiCamera():
         self.yolo_anchors = metadata["anchors"]
         self.yolo_anchor_masks = metadata["anchor_masks"]
         self.yolo_iou_threshold = float(metadata["iou_threshold"])
-        self.yolo_confidence_threshold = float(
-            metadata["confidence_threshold"]
+        confidence_threshold = metadata.get(
+            "confidence_threshold", nn_config.get("confidence_threshold")
         )
+        if confidence_threshold is None:
+            raise ValueError("YOLO config does not define confidence_threshold")
+        self.yolo_confidence_threshold = float(confidence_threshold)
         self.yolo_labels = config["mappings"]["labels"]
         if len(self.yolo_labels) != self.yolo_classes:
             raise ValueError("YOLO label count does not match class count")
@@ -376,12 +379,24 @@ class DepthaiCamera():
                 # One timestamp is shared by raw Image, CompressedImage, and
                 # CameraInfo. This replaces the old independent 10 Hz timer.
                 stamp = rospy.Time.now()
-                self.publish_to_ros(frame, stamp)
+                sequence = int(
+                    rgb_packet.getSequenceNum()
+                )
+
+                self.publish_to_ros(
+                    frame,
+                    stamp,
+                    sequence,
+                )
+
                 if depth_frame is not None:
-                    self.publish_depth_to_ros(depth_frame, stamp)
+                    self.publish_depth_to_ros(
+                        depth_frame,
+                        stamp,
+                        sequence,
+                    )
 
                 if self.enable_yolo:
-                    sequence = rgb_packet.getSequenceNum()
                     stamps_by_sequence[sequence] = stamp
                     stamps_by_sequence = {
                         key: value
@@ -399,19 +414,21 @@ class DepthaiCamera():
                         )
                         detections = yolo_queue.tryGet()
 
-    def publish_depth_to_ros(self, depth_frame, stamp):
+    def publish_depth_to_ros(self,depth_frame,stamp,sequence,):
         """Publish RGB-aligned unsigned 16-bit depth in millimetres."""
         depth_msg = self.bridge.cv2_to_imgmsg(
             depth_frame,
             encoding="16UC1",
         )
+        depth_msg.header.seq = sequence
         depth_msg.header.stamp = stamp
         depth_msg.header.frame_id = self.image_frame
         self.pub_depth.publish(depth_msg)
 
-    def publish_yolo_detections(self, packet, stamp):
+    def publish_yolo_detections(self, packet, stamp,):
         """Publish boxes in the original 640x360 image coordinates."""
         output = Detection2DArray()
+        output.header.seq = int(packet.getSequenceNum())
         output.header.stamp = stamp
         output.header.frame_id = self.image_frame
 
@@ -460,7 +477,7 @@ class DepthaiCamera():
 
         self.pub_yolo.publish(output)
 
-    def publish_to_ros(self, frame, stamp):
+    def publish_to_ros(self, frame, stamp, sequence,):
         """Publish a frame in raw and JPEG form with matching CameraInfo."""
         # JPEG saves transport bandwidth; the raw message below retains the
         # original pixels for local computer-vision consumers.
@@ -472,6 +489,7 @@ class DepthaiCamera():
 
         compressed_msg = CompressedImage()
         compressed_msg.header.stamp = stamp
+        compressed_msg.header.seq = sequence
         compressed_msg.format = "jpeg"
         compressed_msg.header.frame_id = self.image_frame
         compressed_msg.data = encoded.tobytes()
@@ -481,11 +499,13 @@ class DepthaiCamera():
             frame,
             encoding="bgr8",
         )
+        raw_msg.header.seq = sequence
         raw_msg.header.stamp = stamp
         raw_msg.header.frame_id = self.image_frame
 
         # K, D, R, and P remain constant. Updating this header associates that
         # calibration explicitly with the current frame.
+        self.camera_info.header.seq = sequence
         self.camera_info.header.stamp = stamp
         self.camera_info.header.frame_id = self.image_frame
 

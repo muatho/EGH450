@@ -1,39 +1,96 @@
 <?xml version='1.0'?>
 <launch>
 	<arg name="pose_source" default="real" />
+    <arg name="pose_topic" default="$(eval '/uavasr/odom' if arg('pose_source') == 'emulator' else '/mavros/local_position/pose')" />
+	<!-- deploy controls physical actuation policy. launch_payload controls only
+	     whether this launch file starts the otherwise separate payload node. -->
 	<arg name="deploy" default="true" />
-	<node name="guidance" pkg="spar_node" type="test_breadcrumb_camera" respawn="false" output="screen">
+	<arg name="launch_payload" default="true" />
+	<!-- Deliberately off by default. When enabled, the test service can command
+	     aircraft movement and class-specific physical payload deployment. -->
+	<arg name="enable_test_target_injection" default="false" />
+	<arg name="boundary_checks_enabled" default="true" />
+    <arg name="battery_topic" default="$(eval '/uavasr/battery' if arg('pose_source') == 'emulator' else '/mavros/battery')" />
+	<node name="autonomous_mission" pkg="spar_node" type="autonomous_mission" respawn="false" output="screen">
 		<!-- Linear and yaw motion velocities -->
 		<param name="vel_linear" type="double" value="0.4" />
 		<param name="vel_yaw" type="double" value="0.2" />
 
 		<!-- Position and yaw waypoint accuracies -->
 		<param name="acc_pos" type="double" value="0.3" />
-		<param name="acc_yaw" type="double" value="0.3" />
+		<param name="acc_yaw" type="double" value="0.2" />
+
+        <!-- Mission boundary in the same coordinate frame as the waypoints. -->
+        <param name="x_min" value="-4.0" type="double" />
+        <param name="x_max" value="4.0" type="double" />
+        <param name="y_min" value="-3.2" type="double" />
+        <param name="y_max" value="2.0" type="double" />
+        <param name="z_min" value="0.5" type="double" />
+		<param name="z_max" value="4.0" type="double" />
+		<param name="boundary_checks_enabled" value="$(arg boundary_checks_enabled)" type="bool" />
+        <param name="battery_topic" value="$(arg battery_topic)" />
 
 		<!-- Spar parameters -->
 		<param name="action_topic" type="string" value="spar/flight" />
 		<param name="pose_source" type="string" value="$(arg pose_source)" />
+        <param name="pose_topic" type="string" value="$(arg pose_topic)" />
 		<param name="deploy" type="bool" value="$(arg deploy)" />
+		<param name="enable_test_target_injection" type="bool" value="$(arg enable_test_target_injection)" />
+		<param name="test_target_grid_topic" type="string" value="/grid" />
+		<param name="test_target_obstacle_clearance" type="double" value="0.3" />
+		<param name="test_target_maximum_distance" type="double" value="2.0" />
+		<param name="surveyAlt" type="double" value="2.0" />
 
-		<!-- Require repeated, nearby map-frame backpack observations before
-		     interrupting the survey, then suppress repeat service nearby. -->
-		<param name="backpack_confidence_threshold" type="double" value="0.60" />
-		<param name="backpack_confirmations_required" type="int" value="3" />
-		<param name="backpack_confirmation_radius" type="double" value="0.75" />
-		<param name="backpack_serviced_radius" type="double" value="1.00" />
+		<!-- Operator-selected ArUco landing approach. The aircraft holds after
+		     searching, routes to the selected marker, then descends before LAND. -->
+		<param name="landing_marker_topic" type="string" value="/world_model/aruco_markers" />
+		<param name="landing_approach_altitude" type="double" value="0.8" />
+
+		<!-- Evidence accumulation. Coverage weights remain neutral in code until
+		     the Avenue 1 evaluator provides class-specific measured values. -->
+		<param name="target_cluster_radius" type="double" value="0.75" />
+		<param name="target_evidence_half_life" type="double" value="2.0" />
+		<param name="target_evidence_minimum_interval" type="double" value="0.25" />
+		<param name="target_evidence_maximum_contribution" type="double" value="1.0" />
+		<param name="person_initial_evidence_threshold" type="double" value="3.5" />
+		<param name="backpack_initial_evidence_threshold" type="double" value="2.5" />
+		<param name="target_minimum_observations" type="int" value="3" />
+		<param name="target_candidate_freshness" type="double" value="1.0" />
+
+		<!-- Investigation, centring and final autonomous confirmation. -->
+		<param name="target_diversion_timeout" type="double" value="20.0" />
+		<param name="target_centre_tolerance_x" type="double" value="0.10" />
+		<param name="target_centre_tolerance_y" type="double" value="0.10" />
+		<param name="target_centre_hold_time" type="double" value="1.0" />
+		<param name="target_centre_observation_freshness" type="double" value="0.5" />
+		<param name="target_centre_timeout" type="double" value="10.0" />
+		<param name="person_final_evidence_threshold" type="double" value="3.5" />
+		<param name="backpack_final_evidence_threshold" type="double" value="3.5" />
+		<param name="target_reassessment_minimum_observations" type="int" value="3" />
+		<param name="target_reassessment_hold_time" type="double" value="1.0" />
+		<param name="target_reassessment_timeout" type="double" value="5.0" />
+
+		<!-- RViz world-model display. People and backpacks share one
+			 MarkerArray topic but use separate marker namespaces. -->
+        <param name="target_marker_topic" type="string" value="/world_model/target_markers" />
+
+		<!-- Optional GCS veto and candidate suppression. -->
+		<param name="gcs_image_freshness" type="double" value="1.0" />
+		<param name="operator_veto_timeout" type="double" value="5.0" />
+		<param name="target_blacklist_radius" type="double" value="1.0" />
+		<param name="target_retry_delay" type="double" value="5.0" />
+
+		<!-- Payload motion and acknowledgement. -->
+		<param name="deployment_altitude" type="double" value="0.8" />
+		<param name="payload_ack_timeout" type="double" value="3.0" />
 
 		<!-- Remappings -->
-		<remap from="~/pose" to="/mavros/local_position/pose" />
 		<!--remap from="~/roi" to="target_detection/roi" /-->
 	</node>
 
-	<node
-        pkg="spar_node"
-        type="payload-v1.2.py"
-        name="payload_controller"
-        output="screen"
-        if="$(arg deploy)" />
+	<group if="$(arg launch_payload)">
+		<node pkg="spar_node" type="payload-v1.2.py" name="payload_controller" output="screen" if="$(arg deploy)" />
+	</group>
     
 
 </launch>

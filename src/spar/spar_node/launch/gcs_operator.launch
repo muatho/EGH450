@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Run this launch file on Ground Control, never on the aircraft. -->
+  <arg name="compressed_image_topic" default="/depthai_node/image/compressed" />
+
+  <node pkg="spar_node" type="gcs_operator_bridge" name="gcs_operator_bridge" output="screen" launch-prefix="xterm -e">
+    <param name="compressed_image_topic" value="$(arg compressed_image_topic)" />
+  </node>
+</launch>

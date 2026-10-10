@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+
+"""Ground Control image acknowledgement and optional terminal veto helper."""
+
+import select
+import sys
+import threading
+
+import rospy
+
+from sensor_msgs.msg import CompressedImage
+from std_msgs.msg import Header
+from spar_node.msg import DeploymentVetoRequest, DeploymentVetoResponse
+
+
+class GcsOperatorBridge:
+    """Acknowledge displayed-image transport and collect optional decisions."""
+
+    def __init__(self):
+        self._lock = threading.RLock()
+        self._active_request = None
+
+        image_topic = rospy.get_param(
+            "~compressed_image_topic", "/depthai_node/image/compressed"
+        )
+        receipt_topic = rospy.get_param(
+            "~gcs_image_receipt_topic", "/mission/gcs/image_receipt"
+        )
+        request_topic = rospy.get_param(
+            "~deployment_veto_request_topic", "/mission/deployment_veto_request"
+        )
+        response_topic = rospy.get_param(
+            "~deployment_veto_response_topic", "/mission/deployment_veto_response"
+        )
+
+        self._receipt_publisher = rospy.Publisher(
+            receipt_topic, Header, queue_size=1
+        )
+        self._response_publisher = rospy.Publisher(
+            response_topic, DeploymentVetoResponse, queue_size=1
+        )
+        self._image_subscriber = rospy.Subscriber(
+            image_topic, CompressedImage, self._image_callback, queue_size=1
+        )
+        self._request_subscriber = rospy.Subscriber(
+            request_topic,
+            DeploymentVetoRequest,
+            self._request_callback,
+            queue_size=1,
+        )
+
+        rospy.loginfo("GCS operator bridge acknowledging images from %s", image_topic)
+
+    def _image_callback(self, message: CompressedImage):
+        """Acknowledge the exact source image received by Ground Control."""
+        self._receipt_publisher.publish(message.header)
+
+    def _request_callback(self, message: DeploymentVetoRequest):
+        """Start one non-blocking terminal prompt for a new candidate request."""
+        request_key = (int(message.candidate_id), int(message.class_id))
+
+        with self._lock:
+            if request_key == self._active_request:
+                return
+
+            self._active_request = request_key
+
+        timeout = message.response_timeout.to_sec()
+        thread = threading.Thread(
+            target=self._prompt_for_decision,
+            args=(request_key, timeout),
+            daemon=True,
+        )
+        thread.start()
+
+    def _prompt_for_decision(self, request_key, timeout: float):
+        """Publish deploy or veto only when the operator answers in time."""
+        candidate_id, class_id = request_key
+        class_name = "person" if class_id == 0 else "backpack"
+
+        try:
+            print(
+                "\nCandidate {} ({}) passed autonomous confirmation. Enter y to deploy or n to veto within {:.1f} seconds: ".format(
+                    candidate_id, class_name, timeout
+                ),
+                end="",
+                flush=True,
+            )
+
+            readable, _, _ = select.select([sys.stdin], [], [], timeout)
+
+            if not readable:
+                print("no response; aircraft autonomy continues")
+                return
+
+            answer = sys.stdin.readline().strip().lower()
+
+            if answer in ("y", "yes", "d", "deploy"):
+                decision = DeploymentVetoResponse.DEPLOY
+            elif answer in ("n", "no", "v", "veto"):
+                decision = DeploymentVetoResponse.VETO
+            else:
+                print("unrecognised response; aircraft autonomy continues")
+                return
+
+            with self._lock:
+                if self._active_request != request_key:
+                    return
+
+            response = DeploymentVetoResponse()
+            response.header.stamp = rospy.Time.now()
+            response.candidate_id = candidate_id
+            response.class_id = class_id
+            response.decision = decision
+            self._response_publisher.publish(response)
+        finally:
+            with self._lock:
+                if self._active_request == request_key:
+                    self._active_request = None
+
+
+def main():
+    rospy.init_node("gcs_operator_bridge")
+    GcsOperatorBridge()
+    rospy.spin()
+
+
+if __name__ == "__main__":
+    main()
