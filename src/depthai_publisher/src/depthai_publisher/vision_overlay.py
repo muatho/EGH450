@@ -14,8 +14,6 @@ stream or affecting machine-readable navigation data.
 """
 
 from collections import OrderedDict
-import json
-from pathlib import Path
 import threading
 import time
 
@@ -26,6 +24,7 @@ import rospy
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import CameraInfo, CompressedImage
 from vision_msgs.msg import Detection2DArray
+from std_msgs.msg import String
 
 from depthai_publisher.msg import ArucoDetectionArray
 
@@ -53,7 +52,7 @@ class VisionOverlay:
         )
         self.output_topic = rospy.get_param(
             "~output_topic",
-            "/processed_aruco/image/compressed",
+            "/processed_image/compressed",
         )
         self.camera_info_topic = rospy.get_param(
             "~camera_info_topic",
@@ -108,6 +107,14 @@ class VisionOverlay:
                 queue_size=1,
             )
 
+        # Display target-detection events alongside the processed imagery.
+        self.target_event_subscriber = rospy.Subscriber(
+            "/target/events",
+            String,
+            self.target_event_callback,
+            queue_size=10,
+        )
+
         # Detector callbacks may arrive after their image callback. The timer
         # gives them a bounded opportunity to join by exact source timestamp,
         # then publishes the image regardless of which results arrived.
@@ -122,32 +129,18 @@ class VisionOverlay:
             self.overlay_delay,
         )
 
+    # -----------------------------------------------------------------
+    # INPUT CALLBACKS AND TIMESTAMP CACHES
+    # -----------------------------------------------------------------
+
+    def target_event_callback(self, message):
+        """Display a target-detection event in the imagery pane."""
+
+        rospy.loginfo("%s", message.data)
+
     def read_yolo_labels(self):
-        """Read display names from the same model JSON used by DepthAI."""
-        package_dir = Path(__file__).resolve().parent
-        default_config = (
-            package_dir
-            / "models"
-            / "egh450_yolo5"
-            / "best.json"
-        )
-        config_path = Path(rospy.get_param(
-            "~yolo_config_path",
-            str(default_config),
-        )).expanduser()
-
-        try:
-            with config_path.open("r") as config_file:
-                labels = json.load(config_file)["mappings"]["labels"]
-        except (OSError, KeyError, TypeError, ValueError) as error:
-            rospy.logwarn(
-                "Could not read YOLO display labels from %s: %s; showing IDs",
-                config_path,
-                error,
-            )
-            return []
-
-        return [str(label) for label in labels]
+        """Return labels for the detector publisher's two-class output."""
+        return ["person", "backpack"]
 
     def camera_info_callback(self, message):
         """Retain K and D used by PnP so axes project onto the same pixels."""
@@ -191,13 +184,19 @@ class VisionOverlay:
         with self.lock:
             self.store_bounded(self.yolo_by_stamp, key, message)
 
+    # -----------------------------------------------------------------
+    # TIMESTAMP MATCHING AND OUTPUT
+    # -----------------------------------------------------------------
+
     def flush_ready_images(self, _event):
-        """Publish every image whose detector-wait deadline has elapsed."""
+        """Publish the newest image whose detector-wait deadline has elapsed."""
+
         now = time.monotonic()
-        ready = []
+        selected_key = None
+        selected_image = None
 
         with self.lock:
-            for key, (image, arrival_time) in list(self.pending_images.items()):
+            for key, (image, arrival_time) in self.pending_images.items():
                 aruco_ready = key in self.aruco_by_stamp
                 yolo_ready = (
                     not self.enable_yolo
@@ -205,20 +204,37 @@ class VisionOverlay:
                 )
                 deadline_reached = now - arrival_time >= self.overlay_delay
 
-                # Publish immediately when every enabled detector has answered
-                # for this exact image. Otherwise publish at the deadline so a
-                # missing or failed detector cannot hide the camera stream.
                 if not (aruco_ready and yolo_ready) and not deadline_reached:
                     continue
-                ready.append((
-                    image,
-                    self.aruco_by_stamp.pop(key, None),
-                    self.yolo_by_stamp.pop(key, None),
-                ))
-                del self.pending_images[key]
 
-        for image, aruco, yolo in ready:
-            self.publish_overlay(image, aruco, yolo)
+                # Select the newest publishable frame so an older delayed frame
+                # can never be displayed after a newer frame.
+                if selected_key is None or key > selected_key:
+                    selected_key = key
+                    selected_image = image
+
+            if selected_key is None:
+                return
+
+            selected_aruco = self.aruco_by_stamp.get(selected_key)
+            selected_yolo = self.yolo_by_stamp.get(selected_key)
+
+            # Frames older than the selected image are stale presentation data.
+            # Dropping them keeps the displayed stream current and monotonic.
+            for key in list(self.pending_images):
+                if key <= selected_key:
+                    del self.pending_images[key]
+
+            for cache in (self.aruco_by_stamp, self.yolo_by_stamp):
+                for key in list(cache):
+                    if key <= selected_key:
+                        del cache[key]
+
+        self.publish_overlay(
+            selected_image,
+            selected_aruco,
+            selected_yolo,
+        )
 
     def publish_overlay(self, image_message, aruco_array, yolo_array):
         """Draw available results and preserve the source image header."""
@@ -246,6 +262,10 @@ class VisionOverlay:
         output.format = "jpeg"
         output.data = encoded.tobytes()
         self.overlay_publisher.publish(output)
+
+    # -----------------------------------------------------------------
+    # OVERLAY DRAWING
+    # -----------------------------------------------------------------
 
     def draw_yolo_detection(self, frame, detection):
         """Draw one YOLO box, configured class name and confidence score."""
@@ -282,7 +302,7 @@ class VisionOverlay:
         else:
             label = "object"
 
-        self.draw_text_180(
+        self.draw_text(
             frame,
             label,
             (top_left[0], max(top_left[1] - 5, 15)),
@@ -314,7 +334,7 @@ class VisionOverlay:
         cv2.line(frame, bottom_right, bottom_left, (0, 255, 0), 2)
         cv2.line(frame, bottom_left, top_left, (0, 255, 0), 2)
 
-        self.draw_text_180(
+        self.draw_text(
             frame,
             str(observation.id),
             (top_left[0], top_right[1] - 15),
@@ -361,7 +381,7 @@ class VisionOverlay:
         )
         first_y = max(top_left[1] - 70, 15)
         for line_number, pose_text in enumerate(pose_lines):
-            self.draw_text_180(
+            self.draw_text(
                 frame,
                 pose_text,
                 (top_left[0], first_y + line_number * 18),
@@ -372,19 +392,22 @@ class VisionOverlay:
             )
 
     @staticmethod
-    def draw_text_180(frame, text, origin, font, scale, color, thickness):
-        """Draw one text line rotated 180 degrees inside its local box."""
+    def draw_text(frame, text, origin, font, scale, color, thickness):
+        """Draw one readable text line inside its local box."""
+
         (width, height), baseline = cv2.getTextSize(
             text,
             font,
             scale,
             thickness,
         )
+
         padding = 2
         mask = np.zeros(
             (height + baseline + 2 * padding, width + 2 * padding),
             dtype=np.uint8,
         )
+
         cv2.putText(
             mask,
             text,
@@ -395,7 +418,6 @@ class VisionOverlay:
             thickness,
             cv2.LINE_AA,
         )
-        mask = cv2.rotate(mask, cv2.ROTATE_180)
 
         x_start = origin[0]
         y_start = origin[1] - height
@@ -407,6 +429,7 @@ class VisionOverlay:
         clipped_y_start = max(y_start, 0)
         clipped_x_end = min(x_end, frame_width)
         clipped_y_end = min(y_end, frame_height)
+
         if clipped_x_start >= clipped_x_end or clipped_y_start >= clipped_y_end:
             return
 
@@ -423,6 +446,7 @@ class VisionOverlay:
             clipped_y_start:clipped_y_end,
             clipped_x_start:clipped_x_end,
         ]
+
         region[clipped_mask > 0] = color
 
 

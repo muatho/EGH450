@@ -7,10 +7,13 @@ import threading
 
 import rospy
 from std_msgs.msg import String
-from vision_msgs.msg import Detection3DArray
-from visualization_msgs.msg import MarkerArray
+from visualization_msgs.msg import Marker, MarkerArray
 
-from depthai_publisher.object_announcer_core import TargetAnnouncementGate, announcement_text
+from depthai_publisher.object_announcer_core import (
+    TargetAnnouncementGate,
+    announcement_text,
+    target_event_announcement,
+)
 
 
 class SpeechWorker:
@@ -62,19 +65,13 @@ class SpeechWorker:
 
 
 class ObjectAnnouncer:
-    """Report confirmed global targets audibly and on a GCS text topic."""
+    """Report onboard target decisions and global ArUco markers at the GCS."""
 
     def __init__(self):
-        self.object_topic = rospy.get_param("~object_topic", "/objects/observations")
+        self.target_event_topic = rospy.get_param("~target_event_topic", "/target/events")
         self.aruco_topic = rospy.get_param("~aruco_topic", "/world_model/aruco_markers")
-        self.labels = [str(item) for item in rospy.get_param("~labels", ["person", "backpack"])]
-        self.minimum_confidence = float(rospy.get_param("~minimum_confidence", 0.8))
         radius = float(rospy.get_param("~match_radius", 1.0))
         cooldown = float(rospy.get_param("~announcement_cooldown", 60.0))
-        self.object_gate = TargetAnnouncementGate(
-            rospy.get_param("~object_confirmation_frames", 3), radius,
-            cooldown_seconds=cooldown,
-        )
         self.aruco_gate = TargetAnnouncementGate(
             rospy.get_param("~aruco_confirmation_frames", 2), radius,
             deduplicate_by_type=True,
@@ -93,14 +90,18 @@ class ObjectAnnouncer:
         self.alert_publisher = rospy.Publisher(
             "/gcs/target_alert", String, queue_size=10, latch=True
         )
-        self.object_subscriber = rospy.Subscriber(
-            self.object_topic, Detection3DArray, self.object_callback, queue_size=1
+        self.target_event_subscriber = rospy.Subscriber(
+            self.target_event_topic, String, self.target_event_callback, queue_size=10
         )
         self.aruco_subscriber = rospy.Subscriber(
             self.aruco_topic, MarkerArray, self.aruco_callback, queue_size=1
         )
         rospy.on_shutdown(self.speech.shutdown)
-        rospy.loginfo("GCS target announcer listening on %s and %s", self.object_topic, self.aruco_topic)
+        rospy.loginfo(
+            "GCS target announcer listening on %s and %s",
+            self.target_event_topic,
+            self.aruco_topic,
+        )
 
     def report(self, target_type, position):
         phrase = announcement_text(target_type, position)
@@ -111,27 +112,18 @@ class ObjectAnnouncer:
         self.alert_publisher.publish(String(data=phrase))
         self.speech.say(phrase)
 
-    def object_callback(self, message):
-        if message.header.frame_id not in ("map", "/map"):
-            rospy.logwarn_throttle(5.0, "Ignoring object frame '%s'; expected map", message.header.frame_id)
-            return
-        observations = []
-        for detection in message.detections:
-            if not detection.results:
-                continue
-            result = max(detection.results, key=lambda item: item.score)
-            class_id = int(result.id)
-            if result.score < self.minimum_confidence:
-                continue
-            if class_id < 0 or class_id >= len(self.labels):
-                rospy.logwarn_throttle(5.0, "Ignoring unknown target class ID %d", class_id)
-                continue
-            point = result.pose.pose.position
-            observations.append((self.labels[class_id], (point.x, point.y, point.z)))
-        for target_type, position in self.object_gate.update(observations):
-            self.report(target_type, position)
+    def target_event_callback(self, message):
+        phrase = target_event_announcement(message.data)
+
+        if phrase is not None:
+            self.announce(phrase)
 
     def aruco_callback(self, message):
+        if any(marker.action == Marker.DELETEALL for marker in message.markers):
+            self.aruco_gate.reset()
+            self.aruco_stamps.clear()
+            return
+
         fresh = []
         for marker in message.markers:
             if marker.header.frame_id not in ("map", "/map"):

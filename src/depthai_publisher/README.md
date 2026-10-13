@@ -60,7 +60,8 @@ rviz
 
 ## GCS voice announcements
 
-The target announcer reports confirmed map-frame YOLO and ArUco observations.
+The target announcer reports the mission's detected, confirmed, rejected and
+ignored target decisions, plus confirmed map-frame ArUco observations.
 It publishes the same text on `/gcs/target_alert` and generates speech locally
 on the GCS through `spd-say`.
 

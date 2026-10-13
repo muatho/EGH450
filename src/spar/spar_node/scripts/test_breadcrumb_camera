@@ -4,23 +4,32 @@ import sys
 from collections import deque
 from math import *
 from statistics import median
+import random
+import select
+import termios
+import tty
 
 import threading
 import time
-from sensor_msgs.msg import BatteryState
+from sensor_msgs.msg import BatteryState, CameraInfo
 import rospy
 import actionlib
-from visualization_msgs.msg import Marker
-from visualization_msgs.msg import MarkerArray
 
 from actionlib_msgs.msg import GoalStatus
 from geometry_msgs.msg import Point, PoseStamped
-from nav_msgs.msg import Path, Odometry
-from vision_msgs.msg import Detection3DArray
+from mavros_msgs.srv import CommandBool
+from nav_msgs.msg import OccupancyGrid, Path, Odometry
+from vision_msgs.msg import (
+    Detection3D,
+    Detection3DArray,
+    ObjectHypothesisWithPose,
+)
+from visualization_msgs.msg import Marker, MarkerArray
 
 from spar_msgs.msg import FlightMotionAction, FlightMotionGoal
 
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, String
+from std_srvs.srv import Trigger, TriggerResponse
 
 from breadcrumb.srv import RequestPath
 from breadcrumb.srv import RequestPathRequest
@@ -28,115 +37,16 @@ from breadcrumb.srv import RequestPathRequest
 from depthai_publisher.msg import TargetObservationArray
 
 
-class TargetEvidenceWindow:
-
-    def __init__(
-        self,
-        required_frames,
-        window_size,
-        minimum_confidence_by_class,
-        match_radius,
-    ):
-        self.required_frames = required_frames
-        self.frames = deque(maxlen=window_size)
-        self.minimum_confidence_by_class = minimum_confidence_by_class
-        self.match_radius = match_radius
-
-    def reset(self):
-        self.frames.clear()
-
-    def add_frame(self, observations):
-        accepted_observations = []
-
-        for observation in observations:
-            minimum_confidence = self.minimum_confidence_by_class.get(
-                observation.class_id
-            )
-
-            if minimum_confidence is None:
-                continue
-            if observation.confidence < minimum_confidence:
-                continue
-            if not observation.map_position_valid:
-                continue
-
-            accepted_observations.append(observation)
-
-        self.frames.append(accepted_observations)
-        return self.find_confirmed_target()
-
-    def find_confirmed_target(self):
-        best_target = None
-        best_rank = None
-
-        for frame in self.frames:
-            for anchor in frame:
-                supporting_observations = []
-
-                for comparison_frame in self.frames:
-                    matches = [
-                        observation
-                        for observation in comparison_frame
-                        if (
-                            observation.class_id == anchor.class_id
-                            and self.distance(anchor, observation)
-                            <= self.match_radius
-                        )
-                    ]
-
-                    if matches:
-                        supporting_observations.append(
-                            min(
-                                matches,
-                                key=lambda observation: self.distance(
-                                    anchor,
-                                    observation,
-                                ),
-                            )
-                        )
-
-                if len(supporting_observations) < self.required_frames:
-                    continue
-
-                confidence = median([
-                    observation.confidence
-                    for observation in supporting_observations
-                ])
-                rank = (len(supporting_observations), confidence)
-
-                if best_rank is None or rank > best_rank:
-                    best_rank = rank
-                    best_target = {
-                        "class_id": anchor.class_id,
-                        "confidence": confidence,
-                        "position": [
-                            median([
-                                observation.map_position.x
-                                for observation in supporting_observations
-                            ]),
-                            median([
-                                observation.map_position.y
-                                for observation in supporting_observations
-                            ]),
-                            median([
-                                observation.map_position.z
-                                for observation in supporting_observations
-                            ]),
-                        ],
-                    }
-
-        return best_target
-
-    @staticmethod
-    def distance(first, second):
-        return hypot(
-            first.map_position.x - second.map_position.x,
-            first.map_position.y - second.map_position.y,
-        )
-
 class Guidance():
+    """Run the search mission and integrate accepted perception targets."""
 
     def __init__(self, waypoints):
+        """Initialise mission state, dependencies and perception interfaces."""
+
+        # =============================================================
+        # MISSION STATE AND SAFETY
+        # =============================================================
+
         self.safety_lock = threading.RLock()
         self.mission_aborted = False
         self.landing_in_progress = False
@@ -152,20 +62,37 @@ class Guidance():
         self.pose_timeout = 1.0
         self.pose_event = threading.Event()
 
-        # Camera coverage publisher
-        self.pub_camera_coverage = rospy.Publisher(
-            "/guidance/cameraCoverage",
+        # =============================================================
+        # NAVIGATION VISUALISATION
+        # =============================================================
+
+        # Publish the aircraft's travelled path independently of RViz's local
+        # Odometry history so a new mission can clear it reliably.
+        self.pub_drone_trail = rospy.Publisher(
+            "/guidance/droneTrail",
             Marker,
             queue_size=10,
             latch=True
         )
 
-        # Store all camera footprint centres
-        self.camera_coverage_points = []
+        cleared_drone_trail = Marker()
+        cleared_drone_trail.header.frame_id = "map"
+        cleared_drone_trail.header.stamp = rospy.Time.now()
+        cleared_drone_trail.ns = "drone_trail"
+        cleared_drone_trail.id = 0
+        cleared_drone_trail.action = Marker.DELETE
+        self.pub_drone_trail.publish(cleared_drone_trail)
 
-        # Used so we don't add a rectangle every single pose callback
-        self.last_coverage_x = None
-        self.last_coverage_y = None
+        self.drone_trail_points = []
+        self.last_trail_point = None
+
+        # =============================================================
+        # PAYLOAD CONTROL
+        # =============================================================
+
+        # When false, object detections cannot interrupt the survey and this
+        # node will not wait for or command the physical payload controller.
+        self.deployment_enabled = rospy.get_param("~deploy", True)
 
         # Payload deployment publishers
         self.servo_a_pub = rospy.Publisher(
@@ -180,98 +107,42 @@ class Guidance():
             queue_size=1
         )
 
-        # Keep track of which payload has been deployed
+        if self.deployment_enabled:
+            # Initialise both payload servos to closed positions.
+            rospy.loginfo("[PDD] Initialising payload servos to CLOSED")
+
+            # Wait for the payload control node to subscribe.
+            for pub in [self.servo_a_pub, self.servo_b_pub]:
+                while pub.get_num_connections() == 0 and not rospy.is_shutdown():
+                    rospy.sleep(0.1)
+
+            if rospy.is_shutdown():
+                raise rospy.ROSInterruptException(
+                    "Shutdown during servo initialisation"
+                )
+
+            # False = closed, True = open.
+            self.servo_a_pub.publish(Bool(data=False))
+            self.servo_b_pub.publish(Bool(data=False))
+
+            rospy.sleep(1.0)
+            rospy.loginfo("[PDD] Both servo CLOSE commands sent")
+        else:
+            rospy.loginfo(
+                "[PDD] Physical payload disabled; skipping servo reset"
+            )
+
+        # Track payload availability for the current mission.
         self.payload_a_deployed = False
         self.payload_b_deployed = False
-        # When false, object detections cannot interrupt the survey and this
-        # node will refuse to publish either payload actuator command.
-        self.deployment_enabled = rospy.get_param("~deploy", True)
-
-        # =============================================================
-        # ARUCO MARKER STATES
-        # =============================================================
-        # Persistent map-frame positions indexed by ArUco ID. The manual
-        # landing-selection workflow below reads this dictionary after the
-        # survey and is unchanged by the MarkerArray subscription format.
-        self.aruco_locations = {}
-        self.aruco_subscriber = None
-        self.search_complete = False
-        self.waiting_for_landing_selection = False
-
-        # =============================================================
-        # >>> CHANGE THIS IF NEEDED <<<
-        # Altitude above the selected ArUco before MOTION_LAND
-        # =============================================================
-        self.landing_altitude = 0.8
-
-        # =============================================================
-        # The vision node publishes every discovered persistent landmark in one
-        # visualization_msgs/MarkerArray. Each element carries its ArUco ID in
-        # marker.id and its global location in marker.pose.position.
-        # =============================================================
-        self.aruco_topic = "/world_model/aruco_markers"
-
-        self.aruco_subscriber = rospy.Subscriber(
-            self.aruco_topic,
-            MarkerArray,
-            self.callback_aruco_markers,
-            queue_size=1
-        )
-
-        # =============================================================
-        # PERSON/BACKPACK DIVERSION STATES
-        # =============================================================
-        # The deployed YOLO model uses class 0 for person and class 1 for
-        # backpack. Object observations already contain map-frame positions,
-        # so navigation does not consume the camera-only 2D detection topic.
-        self.person_class_id = 0
-        self.backpack_class_id = 1
-        self.target_class_names = {
-            self.person_class_id: "PERSON",
-            self.backpack_class_id: "BACKPACK",
-        }
-        # Physical payload mapping. If the payload team confirms the opposite
-        # arrangement, swap only these two values.
-        self.payload_actuator_by_class = {
-            self.person_class_id: "a",
-            self.backpack_class_id: "b",
-        }
-        self.person_confidence_threshold = 0.60
-        self.backpack_confidence_threshold = rospy.get_param(
-            "~backpack_confidence_threshold",
-            0.60
-        )
-        self.backpack_confirmation_radius = rospy.get_param(
-            "~backpack_confirmation_radius",
-            0.75
-        )
-        self.target_evidence = TargetEvidenceWindow(
-            required_frames=3,  # M: detected frames required for confirmation
-            window_size=5,  # N: recent frames retained
-            minimum_confidence_by_class={
-                self.person_class_id: self.person_confidence_threshold,
-                self.backpack_class_id: self.backpack_confidence_threshold,
-            },
-            match_radius=self.backpack_confirmation_radius,
-        )
-        self.backpack_serviced_radius = rospy.get_param(
-            "~backpack_serviced_radius",
-            1.00
-        )
-        self.serviced_target_locations = {
-            self.person_class_id: [],
-            self.backpack_class_id: [],
-        }
-        self.pending_payload_class_id = None
-        self.object_subscriber = None
 
         # =============================================================
         # SAFE RANGES
         # =============================================================
 
-        # Temporary bypass; set ~boundary_checks_enabled:=true to restore.
+        # Boundary checks are enabled unless explicitly disabled for a test.
         self.boundary_checks_enabled = rospy.get_param(
-            "~boundary_checks_enabled", False)
+            "~boundary_checks_enabled", True)
         if not self.boundary_checks_enabled:
             rospy.logwarn("[SAFETY] Mission boundary checks are DISABLED")
         self.x_min = rospy.get_param("~x_min", -4.0)
@@ -361,8 +232,8 @@ class Guidance():
         #
         # IMPORTANT:
         #
-        # These are now created ONCE and stored as class variables.
-        # This keeps the publishers alive.
+        # Persistent class attributes keep both publishers alive for the
+        # complete mission.
         #
         # /guidance/fullPath
         #     = original high-level search path
@@ -435,6 +306,17 @@ class Guidance():
             FlightMotionAction
         )
 
+        # The emulator auto-disarms after landing. Restore its armed state so
+        # SPAR can accept the first flight goal of a restarted mission.
+        if self.pose_source == "emulator":
+            arming_service = "/uavasr/cmd/arming"
+            rospy.loginfo("Arming emulator for mission start...")
+            rospy.wait_for_service(arming_service)
+            arm_emulator = rospy.ServiceProxy(arming_service, CommandBool)
+            arm_response = arm_emulator(True)
+            if not arm_response.success:
+                raise RuntimeError("Emulator rejected the arming request")
+
         rospy.loginfo(
             "Waiting for spar..."
         )
@@ -457,18 +339,311 @@ class Guidance():
         self.battery_subscriber = rospy.Subscriber(
             battery_topic, BatteryState, self.callback_battery, queue_size=1)
 
+        # -------------------------------------------------------------
+        # IMAGE PROCESSING: CAMERA COVERAGE SETUP
+        #
+        # Pose callbacks add coverage samples, so this state must exist before
+        # the vehicle-pose subscriber is started.
+        # -------------------------------------------------------------
+
+        self.pub_camera_coverage = rospy.Publisher(
+            "/guidance/cameraCoverage",
+            Marker,
+            queue_size=10,
+            latch=True
+        )
+
+        # CameraInfo supplies image dimensions and focal lengths from the OAK-D
+        # calibration so the displayed footprint can scale with height.
+        self.camera_intrinsics = None
+
+        # Remove the previous mission's latched RViz coverage trail before new
+        # pose samples begin building this mission's trail.
+        cleared_coverage = Marker()
+        cleared_coverage.header.frame_id = "map"
+        cleared_coverage.header.stamp = rospy.Time.now()
+        cleared_coverage.ns = "camera_coverage"
+        cleared_coverage.id = 0
+        cleared_coverage.action = Marker.DELETE
+        self.pub_camera_coverage.publish(cleared_coverage)
+
+        # Each footprint uses two triangles so samples taken at different
+        # heights can retain different dimensions.
+        self.camera_coverage_triangles = []
+        self.camera_coverage_enabled = False
+
+        # A new footprint is added only after sufficient horizontal movement.
+        self.last_coverage_x = None
+        self.last_coverage_y = None
+
+        self.camera_info_subscriber = rospy.Subscriber(
+            "/depthai_node/camera/camera_info",
+            CameraInfo,
+            self.camera_info_callback,
+            queue_size=1
+        )
+
         # Subscribe and verify real position BEFORE any motion or detection.
         self.start_pose_input()
 
-        # Subscribe only after diversion state and the flight-action client
-        # exist, so an immediately arriving observation cannot race node
-        # initialization.
+        # =============================================================
+        # IMAGE PROCESSING INTEGRATION
+        #
+        # Target and landmark interfaces are initialised after the navigation,
+        # safety and pose inputs they depend on are ready.
+        # =============================================================
+
+        # =============================================================
+        # ARUCO MARKER STATES
+        # =============================================================
+        # Persistent map-frame positions indexed by ArUco ID. The manual
+        # landing-selection workflow reads this dictionary after the survey.
+        self.aruco_locations = {}
+        self.aruco_subscriber = None
+        self.search_complete = False
+        self.waiting_for_landing_selection = False
+
+        # =============================================================
+        # LANDING CONFIGURATION
+        # Altitude above the selected ArUco before MOTION_LAND.
+        # =============================================================
+        self.landing_altitude = 0.8
+
+        # =============================================================
+        # The vision node publishes every discovered persistent landmark in one
+        # visualization_msgs/MarkerArray. Each element carries its ArUco ID in
+        # marker.id and its global location in marker.pose.position.
+        # =============================================================
+        self.aruco_topic = "/world_model/aruco_markers"
+
+        self.aruco_subscriber = rospy.Subscriber(
+            self.aruco_topic,
+            MarkerArray,
+            self.callback_aruco_markers,
+            queue_size=1
+        )
+
+        # =============================================================
+        # PERSON/BACKPACK TARGET POLICY
+        # =============================================================
+        # The deployed YOLO model uses class 0 for person and class 1 for
+        # backpack. Object observations already contain map-frame positions,
+        # so navigation does not consume the camera-only 2D detection topic.
+        self.person_class_id = 0
+        self.backpack_class_id = 1
+        self.target_class_names = {
+            self.person_class_id: "PERSON",
+            self.backpack_class_id: "BACKPACK",
+        }
+        # Physical payload mapping. If the payload team confirms the opposite
+        # arrangement, swap only these two values.
+        self.payload_actuator_by_class = {
+            self.person_class_id: "a",
+            self.backpack_class_id: "b",
+        }
+        # Human-readable payload names used in mission messages.
+        self.payload_name_by_class = {
+            self.person_class_id: "EpiPen",
+            self.backpack_class_id: "Tracker",
+        }
+        # Target events are displayed by the imagery-side event reporter.
+        self.target_event_publisher = rospy.Publisher(
+            "/target/events",
+            String,
+            queue_size=10,
+        )
+        # Notify the independent world model when an operator rejects one
+        # location so its persistent RViz marker can be removed.
+        self.rejected_target_publisher = rospy.Publisher(
+            "/objects/rejected_target",
+            Detection3D,
+            queue_size=10,
+        )
+        # Freeze the world-model marker when navigation stops refining a target.
+        self.locked_target_publisher = rospy.Publisher(
+            "/objects/locked_target",
+            Detection3D,
+            queue_size=10,
+        )
+
+        # Confidence required for observations supporting the active target.
+        self.target_confidence_thresholds = {
+            self.person_class_id: rospy.get_param(
+                "/target_policy/person_confidence_threshold"
+            ),
+            self.backpack_class_id: rospy.get_param(
+                "/target_policy/backpack_confidence_threshold"
+            ),
+        }
+
+        # Detections smaller than the class threshold remain visible to the
+        # operator but cannot support any mission decision.
+        self.target_minimum_coverage_percent = {
+            self.person_class_id: rospy.get_param(
+                "/target_policy/person_min_coverage_percent"
+            ),
+            self.backpack_class_id: rospy.get_param(
+                "/target_policy/backpack_min_coverage_percent"
+            ),
+        }
+
+        for class_id, threshold in self.target_minimum_coverage_percent.items():
+            if not 0.0 <= threshold <= 100.0:
+                raise ValueError(
+                    "%s minimum coverage must be between 0 and 100 percent"
+                    % self.target_class_names[class_id]
+                )
+
+        # Three detections from the five most recent frames are required during
+        # both the rolling approach and final reassessment.
+        self.required_confirmation_frames = 3
+
+        # Observations within this radius may represent the active target.
+        self.target_association_radius = rospy.get_param(
+            "~target_association_radius",
+            0.30,
+        )
+
+        # Final confirmation must complete while holding above the target.
+        self.final_confirmation_timeout = 3.0
+
+        # Dynamic location refinement lasts for a bounded period before the
+        # latest median is frozen as the navigation destination.
+        self.target_dynamic_refinement_duration = 3.0
+
+        # Every pair of accepted final positions must be within this distance.
+        self.target_convergence_tolerance = 0.30
+
+        # An observation becomes stale after this many seconds.
+        self.target_observation_freshness = 0.5
+
+        # Normalised tolerance of 0.15 accepts the central 30% of each image axis.
+        self.final_center_tolerance = 0.15
+
+        # A deployed location within this radius is considered already serviced.
+        self.serviced_target_radius = rospy.get_param(
+            "~serviced_target_radius",
+            1.00,
+        )
+        self.serviced_target_locations = {
+            self.person_class_id: [],
+            self.backpack_class_id: [],
+        }
+
+        # One failed final check permits one later investigation after cooldown.
+        self.target_retry_cooldown = 10.0
+        self.target_retry_locations = {
+            self.person_class_id: [],
+            self.backpack_class_id: [],
+        }
+
+        # A second failed investigation is ignored for the rest of this mission.
+        self.rejected_target_locations = {
+            self.person_class_id: [],
+            self.backpack_class_id: [],
+        }
+
+        # Each entry represents one camera frame: its matched target or None.
+        self.active_target = None
+        self.active_target_frames = deque(maxlen=5)
+        self.active_target_updated = threading.Event()
+        self.pending_payload_class_id = None
+
+        # Prevent repeated imagery messages while an unavailable class remains visible.
+        self.ignored_target_active = {
+            self.person_class_id: False,
+            self.backpack_class_id: False,
+        }
+
+        # Retain the previous confirmed set so a continuous confirmation
+        # triggers one diversion rather than a new diversion every frame.
+        self.previous_confirmed_locations = {
+            self.person_class_id: [],
+            self.backpack_class_id: [],
+        }
+
+        # -------------------------------------------------------------
+        # Test-target injection
+        # -------------------------------------------------------------
+
+        # Test targets are accepted only when explicitly enabled for this run.
+        self.test_target_injection_enabled = rospy.get_param(
+            "~enable_test_target_injection",
+            True,
+        )
+
+        # Test locations must be nearby and clear of occupied map cells.
+        self.test_target_maximum_distance = 2.0
+        self.test_target_obstacle_clearance = 0.3
+        self.test_target_grid = None
+        self.test_target_random = random.SystemRandom()
+
+        self.test_target_grid_subscriber = None
+        self.inject_person_service = None
+        self.inject_backpack_service = None
+
+        # Injected targets are forwarded to the world model for RViz display.
+        self.injected_target_publisher = rospy.Publisher(
+            "/objects/injected_test_target",
+            Detection3DArray,
+            queue_size=1,
+            latch=True,
+        )
+
+        self.object_subscriber = None
+        self.confirmed_target_subscriber = None
+
+        if self.test_target_injection_enabled:
+            rospy.logwarn(
+                "Test-target injection is ENABLED; person or backpack commands "
+                "can initiate diversion and deployment"
+            )
+        else:
+            rospy.loginfo("Test-target injection is disabled")
+
+        # -------------------------------------------------------------
+        # Perception subscriptions and test services
+        # -------------------------------------------------------------
+
+        # Raw observations provide bounding boxes and image dimensions for final
+        # centring after the mission has accepted a confirmed target.
         self.object_subscriber = rospy.Subscriber(
             "/objects/target_observations",
             TargetObservationArray,
             self.callback_object_observations,
             queue_size=1
         )
+
+        # Confirmed targets initiate diversion without duplicating confirmation
+        # or persistent world-model storage inside the navigation mission.
+        self.confirmed_target_subscriber = rospy.Subscriber(
+            "/objects/confirmed_targets",
+            Detection3DArray,
+            self.callback_confirmed_targets,
+            queue_size=1
+        )
+
+        # Test services are advertised after boundaries, search waypoints and
+        # current-position input have all been initialized.
+        self.test_target_grid_subscriber = rospy.Subscriber(
+            "/grid",
+            OccupancyGrid,
+            self.callback_test_target_grid,
+            queue_size=1,
+        )
+
+        self.inject_person_service = rospy.Service(
+            "/mission/inject_person",
+            Trigger,
+            self.callback_inject_person,
+        )
+
+        self.inject_backpack_service = rospy.Service(
+            "/mission/inject_backpack",
+            Trigger,
+            self.callback_inject_backpack,
+        )
+
         if self.deployment_enabled:
             rospy.loginfo(
                 "Object diversion and payload deployment are ENABLED"
@@ -494,7 +669,7 @@ class Guidance():
             # ---------------------------------------------------------
 
             rospy.loginfo(
-                "Doing first waypoint / maybe takeoff"
+                "Sending initial high-level waypoint"
             )
 
             with self.safety_lock:
@@ -531,410 +706,9 @@ class Guidance():
             rospy.on_shutdown(
                 lambda: self.shutdown()
             )
-    def callback_aruco_markers(self, msg_in):
-        """Update persistent landing locations from the vision MarkerArray.
-
-        The vision node republishes all ArUcos discovered during the survey, so
-        this callback refreshes the same ID-keyed dictionary used later by
-        wait_for_landing_selection(). Changing the ROS transport format does
-        not change the tutor's command or the landing-selection behaviour.
-        """
-        for marker in msg_in.markers:
-            marker_id = marker.id
-
-            self.aruco_locations[marker_id] = [
-                marker.pose.position.x,
-                marker.pose.position.y,
-                marker.pose.position.z
-            ]
-
-            rospy.logdebug(
-                "[ARUCO] Marker %i stored at (%.2f, %.2f, %.2f)",
-                marker_id,
-                marker.pose.position.x,
-                marker.pose.position.y,
-                marker.pose.position.z
-            )
-
-        rospy.loginfo_throttle(
-            5.0,
-            "[ARUCO] %i persistent landing marker(s) available",
-            len(self.aruco_locations)
-        )
-
-    def callback_object_observations(self, msg_in):
-        """Confirm a target before starting the existing ROI diversion."""
-
-        if not self.flight_started or not self.pose_ready():
-            return
-        if self.mission_aborted or self.performing_roi or self.search_complete:
-            return
-        if self.payload_a_deployed and self.payload_b_deployed:
-            return
-
-        if msg_in.map_frame_id not in ("map", "/map"):
-            rospy.logwarn_throttle(
-                5.0,
-                "[OBJECT] Ignoring map positions in frame '%s'; expected map",
-                msg_in.map_frame_id,
-            )
-            return
-
-        eligible_observations = []
-
-        for observation in msg_in.observations:
-            class_id = observation.class_id
-
-            if class_id not in self.target_class_names:
-                continue
-
-            actuator = self.payload_actuator_by_class[class_id]
-            if (
-                (actuator == "a" and self.payload_a_deployed)
-                or (actuator == "b" and self.payload_b_deployed)
-            ):
-                continue
-
-            if observation.map_position_valid:
-                position = observation.map_position
-
-                if not (
-                    isfinite(position.x)
-                    and isfinite(position.y)
-                    and isfinite(position.z)
-                ):
-                    continue
-
-                already_serviced = any(
-                    hypot(
-                        position.x - serviced[0],
-                        position.y - serviced[1],
-                    ) <= self.backpack_serviced_radius
-                    for serviced in self.serviced_target_locations[class_id]
-                )
-
-                if already_serviced:
-                    continue
-
-            eligible_observations.append(observation)
-
-        confirmed_target = self.target_evidence.add_frame(
-            eligible_observations
-        )
-
-        if confirmed_target is None:
-            return
-
-        class_id = confirmed_target["class_id"]
-        target = confirmed_target["position"]
-        self.target_evidence.reset()
-
-        if not self.deployment_enabled:
-            rospy.loginfo(
-                "[%s] Confirmed at (%.2f, %.2f, %.2f); "
-                "diversion and deployment are disabled",
-                self.target_class_names[class_id],
-                target[0],
-                target[1],
-                target[2],
-            )
-            return
-
-        self.serviced_target_locations[class_id].append(target)
-
-        rospy.loginfo(
-            "[%s] Confirmed at (%.2f, %.2f, %.2f); "
-            "starting diversion with payload %s",
-            self.target_class_names[class_id],
-            target[0],
-            target[1],
-            target[2],
-            self.payload_actuator_by_class[class_id].upper(),
-        )
-
-        roi = PoseStamped()
-        roi.header.stamp = msg_in.header.stamp
-        roi.header.frame_id = msg_in.map_frame_id
-        roi.pose.position.x = target[0]
-        roi.pose.position.y = target[1]
-        roi.pose.position.z = target[2]
-        roi.pose.orientation.w = 1.0
-
-        self.pending_payload_class_id = class_id
-        self.callback_inspect_roi(roi)
-        self.pending_payload_class_id = None
-
-    def begin_manual_selection(self):
-        if self.mission_aborted:
-            return
-        if self.waiting_for_landing_selection:
-            return
-
-        self.search_complete = True
-        self.waiting_for_landing_selection = True
-
-        rospy.loginfo(
-            "[LAND] Search complete. Waiting for landing marker selection."
-        )
-
-        input_thread = threading.Thread(
-            target=self.wait_for_landing_selection
-        )
-
-        input_thread.daemon = True
-        input_thread.start()
-
-
-    def wait_for_landing_selection(self):
-        while not rospy.is_shutdown() and not self.mission_aborted:
-
-            try:
-                marker_id = int(
-                    input("Enter landing ArUco ID: ")
-                )
-
-            except ValueError:
-                print("Please enter a numeric ArUco ID.")
-                continue
-
-            if marker_id not in self.aruco_locations:
-                print(
-                    "ArUco {} has not been detected yet.".format(
-                        marker_id
-                    )
-                )
-                continue
-
-            self.fly_landing_location(marker_id)
-            return
-
-
-    def fly_landing_location(self, marker_id):
-        if self.mission_aborted:
-            return
-        marker = self.aruco_locations[marker_id]
-
-        target_x = marker[0]
-        target_y = marker[1]
-
-        rospy.loginfo(
-            "[LAND] Flying to ArUco %i at (%.2f, %.2f)",
-            marker_id,
-            target_x,
-            target_y
-        )
-
-        req = RequestPathRequest()
-
-        req.start.x = self.current_location.x
-        req.start.y = self.current_location.y
-        req.start.z = self.current_location.z
-
-        req.end.x = target_x
-        req.end.y = target_y
-        req.end.z = self.surveyAltitude
-
-        try:
-            res = self.srvc_bc(req)
-
-        except rospy.ServiceException as error:
-            rospy.logerr(
-                "[LAND] Breadcrumb failed: %s",
-                str(error)
-            )
-            return
-
-        if len(res.path.poses) == 0:
-            rospy.logerr(
-                "[LAND] No safe path to ArUco %i",
-                marker_id
-            )
-            return
-
-        for pose in res.path.poses:
-            wp = [
-                pose.position.x,
-                pose.position.y,
-                pose.position.z,
-                0.0
-            ]
-
-            self.send_wp(wp)
-            if not self.wait_for_motion():
-                return
-
-            if (
-                self.spar_client.get_state()
-                != GoalStatus.SUCCEEDED
-            ):
-                rospy.logerr(
-                    "[LAND] Failed while travelling to ArUco"
-                )
-                return
-
-        approach_wp = [
-            target_x,
-            target_y,
-            self.landing_altitude,
-            0.0
-        ]
-
-        rospy.loginfo(
-            "[LAND] Descending above ArUco %i...",
-            marker_id
-        )
-
-        self.send_wp(
-            approach_wp
-        )
-
-        if not self.wait_for_motion():
-            return
-
-        if (
-            self.spar_client.get_state()
-            != GoalStatus.SUCCEEDED
-        ):
-            rospy.logerr(
-                "[LAND] Failed to reach landing approach altitude"
-            )
-            return
-
-        rospy.loginfo(
-            "[LAND] Landing on ArUco %i...",
-            marker_id
-        )
-
-        self.send_land_motion()
-
-
-    def send_land_motion(self):
-        if self.mission_aborted:
-            return
-        goal = FlightMotionGoal()
-
-        goal.motion = FlightMotionGoal.MOTION_LAND
-
-        # =============================================================
-        # >>> CHANGE THIS IF NEEDED <<<
-        # Landing descent speed in m/s
-        # =============================================================
-        goal.velocity_vertical = 0.2
-
-        with self.safety_lock:
-            if not self.battery_ready():
-                return
-            self.landing_in_progress = True
-            self.spar_client.send_goal(goal)
-
-        if not self.wait_for_motion():
-            return
-
-        if (
-            self.spar_client.get_state()
-            == GoalStatus.SUCCEEDED
-        ):
-            rospy.loginfo(
-                "[LAND] Landing complete!"
-            )
-
-            rospy.signal_shutdown(
-                "complete"
-            )
-
-        else:
-            rospy.logerr(
-                "[LAND] Landing failed"
-            )
-
-    def deploy_payload(self, class_id):
-        """Release the payload assigned to a confirmed target class."""
-        if not self.deployment_enabled:
-            rospy.logwarn("Payload deployment is disabled")
-            return
-
-        if class_id not in self.payload_actuator_by_class:
-            rospy.logerr("Refusing payload deployment without a target class")
-            return
-
-        actuator = self.payload_actuator_by_class[class_id]
-        if actuator == "a":
-            if self.payload_a_deployed:
-                rospy.logwarn("Payload A has already been deployed")
-                return
-            publisher = self.servo_a_pub
-        else:
-            if self.payload_b_deployed:
-                rospy.logwarn("Payload B has already been deployed")
-                return
-            publisher = self.servo_b_pub
-
-        rospy.loginfo(
-            "Deploying Payload %s for %s",
-            actuator.upper(),
-            self.target_class_names[class_id],
-        )
-        rospy.sleep(rospy.Duration(5.0))
-        with self.safety_lock:
-            if not self.deployment_enabled or not self.battery_ready():
-                return
-            if not self.pose_ready():
-                rospy.logerr("[POSE] Payload release blocked: position missing or stale; no landing commanded")
-                return
-            if not self.check_waypoint([self.current_location.x,
-                                        self.current_location.y,
-                                        self.current_location.z, 0.0]):
-                self.abort_mission("Payload position outside safety boundary")
-                return
-            if ((actuator == "a" and self.payload_a_deployed) or
-                    (actuator == "b" and self.payload_b_deployed)):
-                return
-            publisher.publish(Bool(data=True))
-            if actuator == "a":
-                self.payload_a_deployed = True
-            else:
-                self.payload_b_deployed = True
-        rospy.sleep(rospy.Duration(1.0))
-        rospy.loginfo("Payload %s command sent", actuator.upper())
-
-    def publish_camera_coverage(self):
-
-        marker = Marker()
-
-        marker.header.frame_id = "world"
-        marker.header.stamp = rospy.Time.now()
-
-        marker.ns = "camera_coverage"
-        marker.id = 0
-
-        # Draw multiple rectangular boxes
-        marker.type = Marker.CUBE_LIST
-        marker.action = Marker.ADD
-
-        # Camera ground footprint:
-        # 1.4 m vertical x 2.3 m horizontal
-        # Very small Z thickness so it looks like an area on the floor
-        marker.scale.x = 1.4
-        marker.scale.y = 2.3
-        marker.scale.z = 0.02
-
-        # Marker orientation
-        marker.pose.orientation.w = 1.0
-
-        # Make the coverage visible but transparent
-        marker.color.r = 0.0
-        marker.color.g = 1.0
-        marker.color.b = 0.0
-        marker.color.a = 0.20
-
-        # Add all previously visited camera positions
-        marker.points = self.camera_coverage_points
-
-        self.pub_camera_coverage.publish(marker)
-
 
     # =================================================================
-    # CHECK ALL WAYPOINTS
+    # MISSION SAFETY AND VEHICLE STATE
     # =================================================================
 
     def check_waypoints(self, wps):
@@ -953,11 +727,6 @@ class Guidance():
                 return False
 
         return True
-
-
-    # =================================================================
-    # CHECK ONE WAYPOINT
-    # =================================================================
 
     def check_waypoint(self, wp):
         try:
@@ -1049,9 +818,8 @@ class Guidance():
                     (self.reached_min_altitude and p.z < self.z_min)):
                 self.abort_mission("Current position outside safety boundary")
 
-
     # =================================================================
-    # SHUTDOWN
+    # NODE SHUTDOWN
     # =================================================================
 
     def shutdown(self):
@@ -1081,9 +849,11 @@ class Guidance():
             "Guidance stopped"
         )
 
-
     # =================================================================
-    # CURRENT UAV POSE
+    # VEHICLE POSITION AND MISSION TRAIL
+    #
+    # Pose callbacks update navigation state first. Camera-coverage
+    # sampling is the image-processing hand-off at the end of accept_pose().
     # =================================================================
 
     def start_pose_input(self):
@@ -1128,7 +898,8 @@ class Guidance():
             self.pose_received_at = time.monotonic()
             self.pose_event.set()
             self.check_live_boundary()
-        self.update_camera_coverage(position.x, position.y)
+        self.update_camera_coverage(position.x, position.y, position.z)
+        self.update_drone_trail(position.x, position.y, position.z)
 
     def callback_pose(self, msg_in):
         """Real UAV: PoseStamped from the configured explicit pose topic."""
@@ -1138,49 +909,44 @@ class Guidance():
         """Emulator: Odometry from the configured explicit pose topic."""
         self.accept_pose(msg_in.pose.pose.position, msg_in.header.stamp)
 
-
-    def update_camera_coverage(self, x, y):
-        """
-        Add a 1.4 m x 2.3 m camera-footprint sample whenever the UAV
-        has travelled at least 0.20 m from the previous sample.
-        """
-
-        # First footprint is always added
-        if self.last_coverage_x is None:
-            add_coverage = True
-
+    def update_drone_trail(self, x, y, z):
+        """Add a trail point after the aircraft has moved at least 0.20 m."""
+        if self.last_trail_point is None:
+            add_point = True
         else:
-            dx = x - self.last_coverage_x
-            dy = y - self.last_coverage_y
+            dx = x - self.last_trail_point.x
+            dy = y - self.last_trail_point.y
+            dz = z - self.last_trail_point.z
+            add_point = sqrt(dx * dx + dy * dy + dz * dz) >= 0.20
 
-            distance = sqrt(
-                dx * dx +
-                dy * dy
-            )
+        if not add_point:
+            return
 
-            add_coverage = distance >= 0.20
+        point = Point(x=x, y=y, z=z)
+        self.drone_trail_points.append(point)
+        self.last_trail_point = point
+        self.publish_drone_trail()
 
-        if add_coverage:
-            point = Point()
-
-            point.x = x
-            point.y = y
-
-            # Slightly above the RViz ground plane
-            point.z = 0.05
-
-            self.camera_coverage_points.append(
-                point
-            )
-
-            self.last_coverage_x = x
-            self.last_coverage_y = y
-
-            self.publish_camera_coverage()
-
+    def publish_drone_trail(self):
+        """Publish the aircraft positions collected during this mission."""
+        marker = Marker()
+        marker.header.frame_id = "map"
+        marker.header.stamp = rospy.Time.now()
+        marker.ns = "drone_trail"
+        marker.id = 0
+        marker.type = Marker.LINE_STRIP
+        marker.action = Marker.ADD
+        marker.pose.orientation.w = 1.0
+        marker.scale.x = 0.04
+        marker.color.r = 0.0
+        marker.color.g = 0.6
+        marker.color.b = 1.0
+        marker.color.a = 1.0
+        marker.points = self.drone_trail_points
+        self.pub_drone_trail.publish(marker)
 
     # =================================================================
-    # DISPLAY PATH IN RVIZ
+    # SEARCH AND BREADCRUMB NAVIGATION
     # =================================================================
 
     def display_path(self, wps, name):
@@ -1252,296 +1018,110 @@ class Guidance():
                 name
             )
 
-
-    # =================================================================
-    # ROI DIVERSION
-    # =================================================================
-
-    def callback_inspect_roi(self, msg_in):
-        with self.safety_lock:
-            if self.mission_aborted or self.search_complete:
-                return
-            if not self.flight_started or not self.pose_ready():
-                rospy.logwarn("[POSE] Ignoring diversion without fresh position")
-                return
-            p = msg_in.pose.position
-            if not (self.check_waypoint([p.x, p.y, self.surveyAltitude, 0.0])
-                    and self.check_waypoint([p.x, p.y, 0.8, 0.0])):
-                rospy.logwarn("Ignoring target outside safety boundary")
-                return
-
-        if not self.deployment_enabled:
-
-            rospy.logwarn_throttle(
-                5.0,
-                "Ignoring ROI diversion because deployment is disabled"
-            )
-
-            return
-
-        # -------------------------------------------------------------
-        # Don't start another ROI while one is already happening
-        # -------------------------------------------------------------
-
-        if self.performing_roi:
-
-            rospy.logwarn(
-                "Ignoring ROI because diversion is already running"
-            )
-
-            return
-
-        self.performing_roi = True
-
-        rospy.loginfo(
-            "Starting diversion to ROI..."
-        )
-
-        # -------------------------------------------------------------
-        # Cancel current search waypoint
-        # -------------------------------------------------------------
+    def request_breadcrumb_path(self, destination, purpose):
+        """Plan one obstacle-safe route from the aircraft to a destination."""
 
         with self.safety_lock:
-            if not self.battery_ready():
-                return
-            self.spar_client.cancel_goal()
+            start_position = [
+                self.current_location.x,
+                self.current_location.y,
+                self.current_location.z,
+            ]
 
-        # -------------------------------------------------------------
-        # Detected target X/Y
-        # -------------------------------------------------------------
+        request = RequestPathRequest()
+        request.start.x = start_position[0]
+        request.start.y = start_position[1]
+        request.start.z = start_position[2]
+        request.end.x = destination[0]
+        request.end.y = destination[1]
+        request.end.z = self.surveyAltitude
 
-        target_x = (
-            msg_in.pose.position.x
-        )
+        try:
+            response = self.srvc_bc(request)
+        except rospy.ServiceException as error:
+            rospy.logerr("%s Breadcrumb request failed: %s", purpose, error)
+            return None
 
-        target_y = (
-            msg_in.pose.position.y
-        )
-
-        # -------------------------------------------------------------
-        # Target directly above object
-        # -------------------------------------------------------------
-
-        target_above = [
-            target_x,
-            target_y,
-            self.surveyAltitude,
-            0.0
-        ]
-
-        # -------------------------------------------------------------
-        # Deployment altitude
-        # -------------------------------------------------------------
-
-        target_deploy = [
-            target_x,
-            target_y,
-            0.8,
-            0.0
-        ]
-
-        # -------------------------------------------------------------
-        # Save where UAV was when diversion occurred
-        # -------------------------------------------------------------
-
-        rwp = [
-            self.current_location.x,
-            self.current_location.y,
-            self.current_location.z,
-            0.0
-        ]
-
-        # =============================================================
-        # 1. FLY ABOVE TARGET
-        # =============================================================
-
-        rospy.loginfo(
-            "Flying above detected target..."
-        )
-
-        self.send_wp(
-            target_above
-        )
-
-        if not self.wait_for_motion():
-            return
-
-        if (
-            self.spar_client.get_state()
-            != GoalStatus.SUCCEEDED
-        ):
-
-            rospy.logerr(
-                "Failed to reach target"
-            )
-
-            with self.safety_lock:
-                if not self.mission_aborted:
-                    rospy.signal_shutdown("cancelled")
-
-            return
-
-        rospy.loginfo(
-            "Reached position above target!"
-        )
-
-        # =============================================================
-        # 2. DESCEND TO DEPLOYMENT ALTITUDE
-        # =============================================================
-
-        rospy.loginfo(
-            "Descending to payload deployment altitude..."
-        )
-
-        self.send_wp(
-            target_deploy
-        )
-
-        if not self.wait_for_motion():
-            return
-
-        if (
-            self.spar_client.get_state()
-            != GoalStatus.SUCCEEDED
-        ):
-
-            rospy.logerr(
-                "Failed to reach deployment altitude"
-            )
-
-            with self.safety_lock:
-                if not self.mission_aborted:
-                    rospy.signal_shutdown("cancelled")
-
-            return
-
-        rospy.loginfo(
-            "Reached deployment altitude: 0.8 m"
-        )
-
-        # =============================================================
-        # 3. PAYLOAD PLACEHOLDER
-        # =============================================================
-
-        rospy.loginfo(
-            "DEPLOY PAYLOAD NOW"
-        )
-
-        self.deploy_payload(self.pending_payload_class_id)
-
-        rospy.loginfo(
-            "Payload deployment period finished"
-        )
-
-        # =============================================================
-        # 4. CLIMB BACK TO SEARCH ALTITUDE
-        # =============================================================
-
-        rospy.loginfo(
-            "Climbing back to search altitude..."
-        )
-
-        self.send_wp(
-            target_above
-        )
-
-        if not self.wait_for_motion():
-            return
-
-        if (
-            self.spar_client.get_state()
-            != GoalStatus.SUCCEEDED
-        ):
-
-            rospy.logerr(
-                "Failed to climb back to search altitude"
-            )
-
-            with self.safety_lock:
-                if not self.mission_aborted:
-                    rospy.signal_shutdown("cancelled")
-
-            return
-
-        rospy.loginfo(
-            "Returned to search altitude"
-        )
-
-        # =============================================================
-        # 5. RETURN TO INTERRUPTION LOCATION
-        # =============================================================
-
-        rospy.loginfo(
-            "Returning to flight plan..."
-        )
-
-        self.send_wp(
-            rwp
-        )
-
-        if not self.wait_for_motion():
-            return
-
-        if (
-            self.spar_client.get_state()
-            != GoalStatus.SUCCEEDED
-        ):
-
-            rospy.logerr(
-                "Return waypoint failed"
-            )
-
-            with self.safety_lock:
-                if not self.mission_aborted:
-                    rospy.signal_shutdown("cancelled")
-
-            return
-
-        # =============================================================
-        # 6. RESUME INTERRUPTED BREADCRUMB WAYPOINT
-        # =============================================================
-
-        if (
-            self.breadcrumbMode
-            and self.breadcrumbWPSnextIndex > 0
-        ):
-
-            rospy.loginfo(
-                "Resuming interrupted Breadcrumb waypoint..."
-            )
-
-            self.send_wp(
-                self.breadcrumbWPS[
-                    self.breadcrumbWPSnextIndex - 1
-                ]
-            )
-
+        if response.path_sparse.poses:
+            path_poses = response.path_sparse.poses
+        elif response.path.poses:
+            path_poses = response.path.poses
         else:
+            rospy.logerr("Breadcrumb found no safe %s route", purpose.lower())
+            return None
 
-            rospy.loginfo(
-                "Resuming high-level waypoint..."
-            )
+        route = [
+            [
+                pose.position.x,
+                pose.position.y,
+                pose.position.z,
+                0.0,
+            ]
+            for pose in path_poses
+        ]
 
-            if self.nextWaypointIndex > 0:
+        if not all(self.check_waypoint(waypoint) for waypoint in route):
+            rospy.logerr("Breadcrumb returned a %s route outside the safety boundary", purpose.lower())
+            return None
 
-                self.send_wp(
-                    self.waypoints[
-                        self.nextWaypointIndex - 1
-                    ]
-                )
+        self.display_path(route, "/guidance/pathBreadcrumb")
+        return route
 
-        self.performing_roi = False
+    def follow_breadcrumb_route(self, route):
+        """Complete one finite Breadcrumb route."""
 
-        rospy.loginfo(
-            "ROI diversion complete"
+        for waypoint in route:
+            if not self.send_wp(waypoint):
+                return False, "Breadcrumb waypoint rejected"
+            if not self.wait_for_motion():
+                return False, "mission stopped during Breadcrumb route"
+            if self.spar_client.get_state() != GoalStatus.SUCCEEDED:
+                return False, "Breadcrumb flight goal failed"
+
+        return True, None
+
+    def return_to_interruption_point(self, return_waypoint):
+        """Rejoin the saved search position through an obstacle-safe route."""
+
+        return_route = self.request_breadcrumb_path(
+            return_waypoint,
+            "Return",
         )
 
+        if return_route is None:
+            return False
+
+        route_succeeded, route_status = self.follow_breadcrumb_route(
+            return_route
+        )
+
+        if not route_succeeded:
+            rospy.logerr("Failed to return to the interrupted search position: %s", route_status)
+            return False
+
+        # Breadcrumb may finish near the requested point because its waypoints
+        # are aligned to the occupancy grid. Rejoin the saved position itself.
+        if not self.send_wp(return_waypoint, position_radius=0.10):
+            return False
+        if not self.wait_for_motion():
+            return False
+        if self.spar_client.get_state() != GoalStatus.SUCCEEDED:
+            rospy.logerr("Failed to reach the interrupted search position")
+            return False
+
+        rospy.loginfo(
+            "Rejoined interrupted search at (%.2f, %.2f, %.2f)",
+            return_waypoint[0],
+            return_waypoint[1],
+            return_waypoint[2],
+        )
+        return True
 
     # =================================================================
-    # SEND WAYPOINT TO SPAR
+    # SPAR WAYPOINT EXECUTION
     # =================================================================
 
-    def send_wp(self, wp):
+    def send_wp(self, wp, position_radius=None):
 
         if not self.check_waypoint(
             wp
@@ -1594,6 +1174,8 @@ class Guidance():
 
         goal.position_radius = (
             self.accuracy_pos
+            if position_radius is None
+            else position_radius
         )
 
         goal.yaw_range = (
@@ -1610,23 +1192,6 @@ class Guidance():
             self.flight_started = True
             self.spar_client.send_goal(goal)
             return True
-
-
-    # =================================================================
-    # CHECK WAYPOINT STATUS
-    #
-    # This is where online Breadcrumb planning happens.
-    #
-    # Breadcrumb does NOT calculate the whole mission beforehand.
-    #
-    # It calculates:
-    #
-    # current high-level waypoint
-    #             ↓
-    # next high-level waypoint
-    #
-    # one segment at a time.
-    # =================================================================
 
     def check_waypoint_status(
         self,
@@ -1956,6 +1521,14 @@ class Guidance():
                             "Breadcrumb segment complete"
                         )
 
+                        # Segment 0 -> 1 ends at the first sweep waypoint.
+                        # Coverage begins here, excluding takeoff and transit.
+                        if self.nextWaypointIndex == 1:
+                            self.camera_coverage_enabled = True
+                            self.last_coverage_x = None
+                            self.last_coverage_y = None
+                            rospy.loginfo("[COVERAGE] Sweep started; camera coverage recording enabled")
+
                         # ---------------------------------------------
                         # Move to next HIGH-LEVEL waypoint
                         # ---------------------------------------------
@@ -2003,6 +1576,2116 @@ class Guidance():
                 if not self.mission_aborted:
                     rospy.signal_shutdown("cancelled")
 
+    # =================================================================
+    # IMAGE PROCESSING INTEGRATION
+    #
+    # The sections below consume or present perception outputs. Shared
+    # movement still uses the existing Breadcrumb and SPAR helpers above.
+    # =================================================================
+
+    # =================================================================
+    # IMAGE PROCESSING: CAMERA COVERAGE VISUALISATION
+    #
+    # Camera calibration defines each ground-footprint sample; aircraft
+    # pose supplies its map position and height.
+    # =================================================================
+
+    def camera_info_callback(self, msg_in):
+        """Store the calibrated image dimensions and focal lengths."""
+        fx = msg_in.K[0]
+        fy = msg_in.K[4]
+
+        if msg_in.width <= 0 or msg_in.height <= 0 or fx <= 0.0 or fy <= 0.0:
+            rospy.logwarn_throttle(5.0, "[COVERAGE] Ignoring invalid camera intrinsics")
+            return
+
+        first_camera_info = self.camera_intrinsics is None
+        self.camera_intrinsics = (msg_in.width, msg_in.height, fx, fy)
+
+        if first_camera_info:
+            rospy.loginfo(
+                "[COVERAGE] Camera intrinsics received: %dx%d, fx=%.1f, fy=%.1f",
+                msg_in.width, msg_in.height, fx, fy
+            )
+
+    def update_camera_coverage(self, x, y, height):
+        """
+        Add a height-scaled camera-footprint sample whenever the UAV has
+        travelled at least 0.20 m from the previous sample.
+        """
+
+        if not self.camera_coverage_enabled:
+            return
+
+        if self.camera_intrinsics is None:
+            rospy.logwarn_throttle(5.0, "[COVERAGE] Waiting for camera intrinsics")
+            return
+
+        if height <= 0.0:
+            return
+
+        # First footprint is always added
+        if self.last_coverage_x is None:
+            add_coverage = True
+
+        else:
+            dx = x - self.last_coverage_x
+            dy = y - self.last_coverage_y
+
+            distance = sqrt(
+                dx * dx +
+                dy * dy
+            )
+
+            add_coverage = distance >= 0.20
+
+        if add_coverage:
+            image_width, image_height, fx, fy = self.camera_intrinsics
+
+            # A downward-facing level camera projects the image onto the
+            # ground using the pinhole-camera relationship size = h * pixels/f.
+            footprint_x = height * image_height / fy
+            footprint_y = height * image_width / fx
+            half_x = footprint_x / 2.0
+            half_y = footprint_y / 2.0
+
+            corners = [
+                Point(x=x - half_x, y=y - half_y, z=0.05),
+                Point(x=x + half_x, y=y - half_y, z=0.05),
+                Point(x=x + half_x, y=y + half_y, z=0.05),
+                Point(x=x - half_x, y=y + half_y, z=0.05),
+            ]
+
+            # Two triangles form one filled rectangular footprint.
+            self.camera_coverage_triangles.extend([
+                corners[0], corners[1], corners[2],
+                corners[0], corners[2], corners[3],
+            ])
+
+            self.last_coverage_x = x
+            self.last_coverage_y = y
+
+            self.publish_camera_coverage()
+
+    def publish_camera_coverage(self):
+        """Publish all accumulated ground-footprint triangles as one marker."""
+
+        marker = Marker()
+
+        marker.header.frame_id = "map"
+        marker.header.stamp = rospy.Time.now()
+
+        marker.ns = "camera_coverage"
+        marker.id = 0
+
+        # Draw filled rectangles whose dimensions can differ by altitude.
+        marker.type = Marker.TRIANGLE_LIST
+        marker.action = Marker.ADD
+
+        marker.scale.x = 1.0
+        marker.scale.y = 1.0
+        marker.scale.z = 1.0
+
+        # Marker orientation
+        marker.pose.orientation.w = 1.0
+
+        # Make the coverage visible but transparent
+        marker.color.r = 0.0
+        marker.color.g = 1.0
+        marker.color.b = 0.0
+        marker.color.a = 0.20
+
+        marker.points = self.camera_coverage_triangles
+
+        self.pub_camera_coverage.publish(marker)
+
+    # =================================================================
+    # IMAGE PROCESSING: ARUCO LANDING TARGETS
+    #
+    # ArUco processing supplies persistent map positions. These methods
+    # store them and run the existing operator-selected landing workflow.
+    # =================================================================
+
+    def callback_aruco_markers(self, msg_in):
+        """Update persistent landing locations from the vision MarkerArray.
+
+        The vision node republishes all ArUcos discovered during the survey.
+        This callback stores their map positions by ID for operator selection.
+        """
+        for marker in msg_in.markers:
+            marker_id = marker.id
+
+            self.aruco_locations[marker_id] = [
+                marker.pose.position.x,
+                marker.pose.position.y,
+                marker.pose.position.z
+            ]
+
+            rospy.logdebug(
+                "[ARUCO] Marker %i stored at (%.2f, %.2f, %.2f)",
+                marker_id,
+                marker.pose.position.x,
+                marker.pose.position.y,
+                marker.pose.position.z
+            )
+
+        rospy.loginfo_throttle(
+            5.0,
+            "[ARUCO] %i persistent landing marker(s) available",
+            len(self.aruco_locations)
+        )
+
+    def begin_manual_selection(self):
+        """End the search phase and request an ArUco landing ID."""
+
+        if self.mission_aborted:
+            return
+        if self.waiting_for_landing_selection:
+            return
+
+        self.search_complete = True
+        self.waiting_for_landing_selection = True
+
+        rospy.loginfo(
+            "[LAND] Search complete. Waiting for landing marker selection."
+        )
+
+        input_thread = threading.Thread(
+            target=self.wait_for_landing_selection
+        )
+
+        input_thread.daemon = True
+        input_thread.start()
+
+    def wait_for_landing_selection(self):
+        """Wait until the operator selects an observed ArUco marker."""
+
+        while not rospy.is_shutdown() and not self.mission_aborted:
+
+            try:
+                marker_id = int(
+                    input("Enter landing ArUco ID: ")
+                )
+
+            except ValueError:
+                print("Please enter a numeric ArUco ID.")
+                continue
+
+            if marker_id not in self.aruco_locations:
+                print(
+                    "ArUco {} has not been detected yet.".format(
+                        marker_id
+                    )
+                )
+                continue
+
+            self.fly_landing_location(marker_id)
+            return
+
+    def fly_landing_location(self, marker_id):
+        """Follow Breadcrumb to the selected marker, then request landing."""
+
+        if self.mission_aborted:
+            return
+        marker = self.aruco_locations[marker_id]
+
+        target_x = marker[0]
+        target_y = marker[1]
+
+        rospy.loginfo(
+            "[LAND] Flying to ArUco %i at (%.2f, %.2f)",
+            marker_id,
+            target_x,
+            target_y
+        )
+
+        req = RequestPathRequest()
+
+        req.start.x = self.current_location.x
+        req.start.y = self.current_location.y
+        req.start.z = self.current_location.z
+
+        req.end.x = target_x
+        req.end.y = target_y
+        req.end.z = self.surveyAltitude
+
+        try:
+            res = self.srvc_bc(req)
+
+        except rospy.ServiceException as error:
+            rospy.logerr(
+                "[LAND] Breadcrumb failed: %s",
+                str(error)
+            )
+            return
+
+        if len(res.path.poses) == 0:
+            rospy.logerr(
+                "[LAND] No safe path to ArUco %i",
+                marker_id
+            )
+            return
+
+        for pose in res.path.poses:
+            wp = [
+                pose.position.x,
+                pose.position.y,
+                pose.position.z,
+                0.0
+            ]
+
+            self.send_wp(wp)
+            if not self.wait_for_motion():
+                return
+
+            if (
+                self.spar_client.get_state()
+                != GoalStatus.SUCCEEDED
+            ):
+                rospy.logerr(
+                    "[LAND] Failed while travelling to ArUco"
+                )
+                return
+
+        approach_wp = [
+            target_x,
+            target_y,
+            self.landing_altitude,
+            0.0
+        ]
+
+        rospy.loginfo(
+            "[LAND] Descending above ArUco %i...",
+            marker_id
+        )
+
+        self.send_wp(
+            approach_wp
+        )
+
+        if not self.wait_for_motion():
+            return
+
+        if (
+            self.spar_client.get_state()
+            != GoalStatus.SUCCEEDED
+        ):
+            rospy.logerr(
+                "[LAND] Failed to reach landing approach altitude"
+            )
+            return
+
+        rospy.loginfo(
+            "[LAND] Landing on ArUco %i...",
+            marker_id
+        )
+
+        self.send_land_motion()
+
+    def send_land_motion(self):
+        """Send the final SPAR landing action and monitor its result."""
+
+        if self.mission_aborted:
+            return
+        goal = FlightMotionGoal()
+
+        goal.motion = FlightMotionGoal.MOTION_LAND
+
+        # =============================================================
+        # >>> CHANGE THIS IF NEEDED <<<
+        # Landing descent speed in m/s
+        # =============================================================
+        goal.velocity_vertical = 0.2
+
+        with self.safety_lock:
+            if not self.battery_ready():
+                return
+            self.landing_in_progress = True
+            self.spar_client.send_goal(goal)
+
+        if not self.wait_for_motion():
+            return
+
+        if (
+            self.spar_client.get_state()
+            == GoalStatus.SUCCEEDED
+        ):
+            rospy.loginfo(
+                "[LAND] Landing complete!"
+            )
+
+            rospy.signal_shutdown(
+                "complete"
+            )
+
+        else:
+            rospy.logerr(
+                "[LAND] Landing failed"
+            )
+
+    # =================================================================
+    # IMAGE PROCESSING: TARGET EVIDENCE AND EVENTS
+    #
+    # These methods filter observations, maintain the rolling five-frame
+    # window and publish concise target status for operator interfaces.
+    # =================================================================
+
+    def publish_target_event(
+        self,
+        event_name,
+        class_id,
+        confidence,
+        position,
+        detail="",
+    ):
+        """Publish one consistently formatted target-detection event."""
+
+        message = (
+            f"[TARGET {event_name.upper()}]\n"
+            f"{self.target_class_names[class_id].title()}"
+            f" | Confidence: {100.0 * confidence:.0f}%"
+            f"\nWorld X: {position[0]:.2f}"
+            f" | World Y: {position[1]:.2f}"
+            f" | World Z: {position[2]:.2f}"
+        )
+
+        if detail:
+            message += f" | {detail}"
+
+        # Leave one empty terminal line before the next target event.
+        message += "\n"
+
+        self.target_event_publisher.publish(
+            String(data=message)
+        )
+
+    def publish_rejected_target_location(
+        self,
+        class_id,
+        confidence,
+        position,
+    ):
+        """Tell the world model to hide one rejected target location."""
+
+        self.publish_target_location(
+            self.rejected_target_publisher,
+            class_id,
+            confidence,
+            position,
+        )
+
+    def publish_locked_target_location(
+        self,
+        class_id,
+        confidence,
+        position,
+    ):
+        """Tell the world model to hold one marker at a fixed location."""
+
+        self.publish_target_location(
+            self.locked_target_publisher,
+            class_id,
+            confidence,
+            position,
+        )
+
+    @staticmethod
+    def publish_target_location(publisher, class_id, confidence, position):
+        """Publish one class-labelled map location."""
+
+        message = Detection3D()
+        message.header.stamp = rospy.Time.now()
+        message.header.frame_id = "map"
+
+        result = ObjectHypothesisWithPose()
+        result.id = class_id
+        result.score = confidence
+        result.pose.pose.position.x = position[0]
+        result.pose.pose.position.y = position[1]
+        result.pose.pose.position.z = position[2]
+        result.pose.pose.orientation.w = 1.0
+        message.results.append(result)
+
+        publisher.publish(message)
+
+    @staticmethod
+    def target_coverage_percent(observation, image_width, image_height):
+        """Return one bounding box's percentage of the source image."""
+
+        if image_width <= 0 or image_height <= 0:
+            return 0.0
+
+        box_width = min(max(observation.bbox_width, 0.0), image_width)
+        box_height = min(max(observation.bbox_height, 0.0), image_height)
+        return 100.0 * box_width * box_height / (
+            float(image_width) * float(image_height)
+        )
+
+    def target_observations_are_stable(self, observations):
+        """Return whether every pair of target positions is within tolerance."""
+
+        for first_index, first in enumerate(observations):
+            for second in observations[first_index + 1:]:
+                separation = hypot(
+                    first["position"][0] - second["position"][0],
+                    first["position"][1] - second["position"][1],
+                )
+
+                if separation > self.target_convergence_tolerance:
+                    return False
+
+        return True
+
+    def update_active_target(self, msg_in):
+        """Store fresh evidence for the target currently being investigated."""
+
+        with self.safety_lock:
+            active_target = self.active_target
+
+            if active_target is None:
+                return
+
+            if active_target.get("injected", False):
+                return
+
+            class_id = active_target["class_id"]
+            reference = active_target["filtered_position"]
+            minimum_confidence = self.target_confidence_thresholds[class_id]
+
+        if msg_in.image_width == 0 or msg_in.image_height == 0:
+            self.record_active_target_frame(active_target, None)
+            return
+
+        candidates = []
+
+        for observation in msg_in.observations:
+            if observation.class_id != class_id:
+                continue
+            if observation.confidence < minimum_confidence:
+                continue
+            if self.target_coverage_percent(
+                observation,
+                msg_in.image_width,
+                msg_in.image_height,
+            ) < self.target_minimum_coverage_percent[class_id]:
+                continue
+            if not observation.map_position_valid:
+                continue
+
+            position = observation.map_position
+
+            if not (
+                isfinite(position.x)
+                and isfinite(position.y)
+                and isfinite(position.z)
+            ):
+                continue
+
+            distance = hypot(
+                position.x - reference[0],
+                position.y - reference[1],
+            )
+
+            if distance <= self.target_association_radius:
+                candidates.append((distance, observation))
+
+        if not candidates:
+            self.record_active_target_frame(active_target, None)
+            return
+
+        observation = min(
+            candidates,
+            key=lambda candidate: candidate[0],
+        )[1]
+
+        sample = {
+            "received_at": time.monotonic(),
+            "confidence": observation.confidence,
+            "position": [
+                observation.map_position.x,
+                observation.map_position.y,
+                observation.map_position.z,
+            ],
+            "bbox_center": [
+                observation.bbox_center_x,
+                observation.bbox_center_y,
+            ],
+            "image_size": [
+                msg_in.image_width,
+                msg_in.image_height,
+            ],
+        }
+
+        self.record_active_target_frame(active_target, sample)
+
+    def record_active_target_frame(self, active_target, sample):
+        """Append one frame and update medians from detections still in the window."""
+
+        with self.safety_lock:
+            if self.active_target is not active_target:
+                return
+
+            self.active_target_frames.append(sample)
+            observations = [
+                frame
+                for frame in self.active_target_frames
+                if frame is not None
+            ]
+
+            if not observations:
+                active_target["last_observation_at"] = None
+                self.active_target_updated.set()
+                return
+
+            active_target["filtered_position"] = [
+                median(
+                    retained_sample["position"][axis]
+                    for retained_sample in observations
+                )
+                for axis in range(3)
+            ]
+
+            active_target["filtered_confidence"] = median(
+                retained_sample["confidence"]
+                for retained_sample in observations
+            )
+
+            active_target["filtered_bbox_center"] = [
+                median(
+                    retained_sample["bbox_center"][axis]
+                    for retained_sample in observations
+                )
+                for axis in range(2)
+            ]
+
+            active_target["image_size"] = observations[-1]["image_size"]
+            active_target["last_observation_at"] = observations[-1]["received_at"]
+
+            self.active_target_updated.set()
+
+    def latest_active_target_position(self):
+        """Return the fresh median from the active five-frame window."""
+
+        with self.safety_lock:
+            active_target = self.active_target
+
+            if active_target is None:
+                return None
+
+            observations = [
+                frame
+                for frame in self.active_target_frames
+                if frame is not None
+            ]
+            filtered_position = list(active_target["filtered_position"])
+            last_observation_at = active_target["last_observation_at"]
+
+        now = time.monotonic()
+
+        if (
+            last_observation_at is None
+            or now - last_observation_at > self.target_observation_freshness
+        ):
+            return None
+        if len(observations) < self.required_confirmation_frames:
+            return None
+
+        return filtered_position
+
+    def wait_for_final_target_confirmation(self):
+        """Wait for fresh, persistent, centred and spatially stable evidence."""
+
+        deadline = time.monotonic() + self.final_confirmation_timeout
+        failure_reason = "not tracked"
+
+        # Only observations received after reaching the target count towards the
+        # final deployment decision.
+        with self.safety_lock:
+            self.active_target_frames.clear()
+            self.active_target_updated.clear()
+
+        while not rospy.is_shutdown():
+            remaining_time = deadline - time.monotonic()
+
+            if remaining_time <= 0.0:
+                return None, failure_reason
+
+            self.active_target_updated.wait(remaining_time)
+            self.active_target_updated.clear()
+
+            with self.safety_lock:
+                active_target = self.active_target
+
+                if active_target is None:
+                    return None, "not tracked"
+
+                observations = [
+                    frame
+                    for frame in self.active_target_frames
+                    if frame is not None
+                ]
+
+                filtered_position = list(
+                    active_target["filtered_position"]
+                )
+                filtered_confidence = active_target[
+                    "filtered_confidence"
+                ]
+                filtered_bbox_center = active_target[
+                    "filtered_bbox_center"
+                ]
+                image_size = active_target["image_size"]
+                last_observation_at = active_target["last_observation_at"]
+                class_id = active_target["class_id"]
+            if (
+                len(observations)
+                < self.required_confirmation_frames
+            ):
+                failure_reason = "not tracked"
+                continue
+
+            if (
+                last_observation_at is None
+                or time.monotonic() - last_observation_at
+                > self.target_observation_freshness
+            ):
+                failure_reason = "not tracked"
+                continue
+
+            if filtered_bbox_center is None or image_size is None:
+                failure_reason = "not tracked"
+                continue
+
+            image_width = image_size[0]
+            image_height = image_size[1]
+
+            horizontal_offset = abs(
+                filtered_bbox_center[0] - image_width / 2.0
+            ) / image_width
+
+            vertical_offset = abs(
+                filtered_bbox_center[1] - image_height / 2.0
+            ) / image_height
+
+            if (
+                horizontal_offset > self.final_center_tolerance
+                or vertical_offset > self.final_center_tolerance
+            ):
+                failure_reason = "not centred"
+                continue
+
+            if not self.target_observations_are_stable(observations):
+                failure_reason = "global location inconsistent"
+                continue
+
+            return (
+                {
+                    "class_id": class_id,
+                    "confidence": filtered_confidence,
+                    "position": filtered_position,
+                },
+                None,
+            )
+
+        return None, "not tracked"
+
+    def callback_object_observations(self, msg_in):
+        """Update rolling target evidence while the aircraft investigates it."""
+
+        if self.active_target is None:
+            return
+        if not self.flight_started or not self.pose_ready():
+            return
+        if self.mission_aborted or self.search_complete:
+            return
+        if msg_in.map_frame_id not in ("map", "/map"):
+            rospy.logwarn_throttle(
+                5.0,
+                "[OBJECT] Ignoring map positions in frame '%s'; expected map",
+                msg_in.map_frame_id,
+            )
+            return
+
+        self.update_active_target(msg_in)
+
+    # =================================================================
+    # IMAGE PROCESSING: TEST TARGET INJECTION
+    #
+    # Injection uses the same target-diversion interface, but chooses a
+    # nearby free occupancy-grid cell instead of a camera observation.
+    # =================================================================
+
+    def callback_test_target_grid(self, msg_in):
+        """Retain the occupancy grid used to select safe test locations."""
+
+        with self.safety_lock:
+            self.test_target_grid = msg_in
+
+    @staticmethod
+    def test_grid_cell_is_clear(grid, cell_x, cell_y, clearance_cells):
+        """Return whether a grid cell and its surrounding clearance are free."""
+
+        width = grid.info.width
+        height = grid.info.height
+
+        for nearby_y in range(
+            cell_y - clearance_cells,
+            cell_y + clearance_cells + 1,
+        ):
+            for nearby_x in range(
+                cell_x - clearance_cells,
+                cell_x + clearance_cells + 1,
+            ):
+                if (
+                    nearby_x < 0
+                    or nearby_x >= width
+                    or nearby_y < 0
+                    or nearby_y >= height
+                ):
+                    return False
+
+                # Unknown and occupied cells are both unsuitable.
+                grid_value = grid.data[
+                    nearby_x + nearby_y * width
+                ]
+
+                if grid_value != 0:
+                    return False
+
+        return True
+
+    def select_test_target_location(self):
+        """Choose a nearby free map location inside the search footprint."""
+
+        with self.safety_lock:
+            grid = self.test_target_grid
+            current_x = self.current_location.x
+            current_y = self.current_location.y
+
+        if grid is None:
+            return None
+
+        if grid.header.frame_id not in ("map", "/map"):
+            rospy.logerr(
+                "Cannot inject a target from occupancy grid frame '%s'",
+                grid.header.frame_id,
+            )
+            return None
+
+        resolution = grid.info.resolution
+        width = grid.info.width
+        height = grid.info.height
+
+        if (
+            resolution <= 0.0
+            or width == 0
+            or height == 0
+            or len(grid.data) != width * height
+        ):
+            rospy.logerr("Cannot inject a target because /grid is malformed")
+            return None
+
+        search_x_min = max(
+            self.x_min,
+            min(waypoint[0] for waypoint in self.waypoints),
+        )
+        search_x_max = min(
+            self.x_max,
+            max(waypoint[0] for waypoint in self.waypoints),
+        )
+        search_y_min = max(
+            self.y_min,
+            min(waypoint[1] for waypoint in self.waypoints),
+        )
+        search_y_max = min(
+            self.y_max,
+            max(waypoint[1] for waypoint in self.waypoints),
+        )
+
+        origin_x = grid.info.origin.position.x
+        origin_y = grid.info.origin.position.y
+        clearance_cells = int(
+            ceil(self.test_target_obstacle_clearance / resolution)
+        )
+
+        free_locations = []
+
+        for cell_y in range(height):
+            y = origin_y + (cell_y + 0.5) * resolution
+
+            if y < search_y_min or y > search_y_max:
+                continue
+
+            for cell_x in range(width):
+                x = origin_x + (cell_x + 0.5) * resolution
+
+                if x < search_x_min or x > search_x_max:
+                    continue
+
+                if hypot(
+                    x - current_x,
+                    y - current_y,
+                ) > self.test_target_maximum_distance:
+                    continue
+
+                if self.test_grid_cell_is_clear(
+                    grid,
+                    cell_x,
+                    cell_y,
+                    clearance_cells,
+                ):
+                    free_locations.append((x, y))
+
+        if not free_locations:
+            return None
+
+        return self.test_target_random.choice(free_locations)
+
+    def callback_inject_person(self, request):
+        """Handle the terminal command for a person test target."""
+
+        del request
+        return self.inject_test_target(self.person_class_id)
+
+    def callback_inject_backpack(self, request):
+        """Handle the terminal command for a backpack test target."""
+
+        del request
+        return self.inject_test_target(self.backpack_class_id)
+
+    def inject_test_target(self, class_id):
+        """Validate and start an explicitly requested test diversion."""
+
+        target_name = self.target_class_names[class_id].title()
+        actuator = self.payload_actuator_by_class[class_id]
+
+        if not self.test_target_injection_enabled:
+            return TriggerResponse(
+                success=False,
+                message=(
+                    "Test-target injection is disabled; restart the mission "
+                    "with _enable_test_target_injection:=true"
+                ),
+            )
+
+        if not self.deployment_enabled:
+            return TriggerResponse(
+                success=False,
+                message=(
+                    "Deployment is disabled; restart the mission with "
+                    "_deploy:=true"
+                ),
+            )
+
+        if not self.flight_started or not self.pose_ready():
+            return TriggerResponse(
+                success=False,
+                message="The mission does not have a fresh flying position",
+            )
+
+        if self.mission_aborted or self.search_complete:
+            return TriggerResponse(
+                success=False,
+                message="The mission is not currently searching",
+            )
+
+        if self.performing_roi or self.active_target is not None:
+            return TriggerResponse(
+                success=False,
+                message="Another target diversion is already active",
+            )
+
+        payload_deployed = (
+            (actuator == "a" and self.payload_a_deployed)
+            or (actuator == "b" and self.payload_b_deployed)
+        )
+
+        if payload_deployed:
+            return TriggerResponse(
+                success=False,
+                message=(
+                    f"The {self.payload_name_by_class[class_id]} "
+                    "has already been deployed"
+                ),
+            )
+
+        location = self.select_test_target_location()
+
+        if location is None:
+            return TriggerResponse(
+                success=False,
+                message=(
+                    "No obstacle-free test location is available within "
+                    "2 m and inside the search footprint"
+                ),
+            )
+
+        target = [
+            location[0],
+            location[1],
+            0.0,
+        ]
+        timestamp = rospy.Time.now()
+
+        started = self.start_target_diversion(
+            class_id=class_id,
+            confidence=1.0,
+            target=target,
+            stamp=timestamp,
+            injected=True,
+        )
+
+        if not started:
+            return TriggerResponse(
+                success=False,
+                message="The mission rejected the test-target diversion",
+            )
+
+        self.publish_injected_test_target(
+            class_id,
+            target,
+            timestamp,
+        )
+
+        return TriggerResponse(
+            success=True,
+            message=(
+                f"Injected {target_name} at "
+                f"({target[0]:.2f}, {target[1]:.2f}, {target[2]:.2f})"
+            ),
+        )
+
+    def publish_injected_test_target(
+        self,
+        class_id,
+        target,
+        timestamp,
+    ):
+        """Forward an injected target to the RViz world model."""
+
+        message = Detection3DArray()
+        message.header.stamp = timestamp
+        message.header.frame_id = "map"
+
+        detection = Detection3D()
+        detection.header = message.header
+
+        result = ObjectHypothesisWithPose()
+        result.id = class_id
+        result.score = 1.0
+        result.pose.pose.position.x = target[0]
+        result.pose.pose.position.y = target[1]
+        result.pose.pose.position.z = target[2]
+        result.pose.pose.orientation.w = 1.0
+        detection.results.append(result)
+
+        detection.bbox.center.position.x = target[0]
+        detection.bbox.center.position.y = target[1]
+        detection.bbox.center.position.z = target[2]
+        detection.bbox.center.orientation.w = 1.0
+
+        message.detections.append(detection)
+        self.injected_target_publisher.publish(message)
+
+    # =================================================================
+    # IMAGE PROCESSING: TARGET SELECTION AND RETRY POLICY
+    #
+    # Confirmed world-model targets enter here. This section prevents
+    # duplicate diversions and applies the one-retry rejection policy.
+    # =================================================================
+
+    def start_target_diversion(
+        self,
+        class_id,
+        confidence,
+        target,
+        stamp,
+        injected=False,
+        retry_after_cooldown=False,
+    ):
+        """Reserve one target and start the existing diversion workflow."""
+
+        payload_name = self.payload_name_by_class[class_id]
+        target_name = self.target_class_names[class_id].title()
+        event_detail = (
+            "Explicit test target"
+            if injected
+            else "Retry after 10-second cooldown"
+            if retry_after_cooldown
+            else ""
+        )
+
+        self.publish_target_event(
+            "DETECTED",
+            class_id,
+            confidence,
+            target,
+            event_detail,
+        )
+
+        if not self.deployment_enabled:
+            rospy.loginfo(
+                "%s detected at (%.2f, %.2f, %.2f); diversion and %s deployment are disabled",
+                target_name,
+                target[0],
+                target[1],
+                target[2],
+                payload_name,
+            )
+            return False
+
+        roi = PoseStamped()
+        roi.header.stamp = stamp
+        roi.header.frame_id = "map"
+        roi.pose.position.x = target[0]
+        roi.pose.position.y = target[1]
+        roi.pose.position.z = target[2]
+        roi.pose.orientation.w = 1.0
+
+        with self.safety_lock:
+            if (
+                self.mission_aborted
+                or self.search_complete
+                or self.performing_roi
+                or self.active_target is not None
+            ):
+                return False
+
+            self.active_target = {
+                "class_id": class_id,
+                "acquired_position": list(target),
+                "filtered_position": list(target),
+                "filtered_confidence": confidence,
+                "filtered_bbox_center": None,
+                "image_size": None,
+                "last_observation_at": None,
+                "locked_position": None,
+                "injected": injected,
+                "retry_after_cooldown": retry_after_cooldown,
+            }
+
+            self.active_target_frames.clear()
+            self.active_target_updated.clear()
+            self.performing_roi = True
+
+            if retry_after_cooldown:
+                self.consume_target_retry(class_id, target)
+
+        if injected:
+            rospy.logwarn(
+                "Injected %s test target at (%.2f, %.2f, %.2f); diverting with %s",
+                target_name,
+                target[0],
+                target[1],
+                target[2],
+                payload_name,
+            )
+        else:
+            rospy.loginfo(
+                "%s detected at (%.2f, %.2f, %.2f); diverting to target location with %s",
+                target_name,
+                target[0],
+                target[1],
+                target[2],
+                payload_name,
+            )
+
+        diversion_thread = threading.Thread(
+            target=self.run_target_diversion,
+            args=(roi, class_id),
+            daemon=True,
+        )
+        diversion_thread.start()
+        return True
+
+    def target_location_rejected(self, class_id, position):
+        """Return whether this class and location was rejected this mission."""
+
+        with self.safety_lock:
+            return any(
+                hypot(
+                    position[0] - rejected_position[0],
+                    position[1] - rejected_position[1],
+                ) <= self.target_association_radius
+                for rejected_position in self.rejected_target_locations[class_id]
+            )
+
+    def reject_target_location(self, class_id, position):
+        """Prevent another diversion to this class and location."""
+
+        with self.safety_lock:
+            if not self.target_location_rejected(class_id, position):
+                self.rejected_target_locations[class_id].append(list(position))
+
+            self.consume_target_retry(class_id, position)
+
+    def target_retry_state(self, class_id, position):
+        """Return waiting, ready or None for a previously failed location."""
+
+        with self.safety_lock:
+            matching_records = [
+                record
+                for record in self.target_retry_locations[class_id]
+                if hypot(
+                    position[0] - record["position"][0],
+                    position[1] - record["position"][1],
+                ) <= self.target_association_radius
+            ]
+
+            if not matching_records:
+                return None
+
+            if time.monotonic() < matching_records[0]["available_at"]:
+                return "waiting"
+
+            return "ready"
+
+    def schedule_target_retry(self, class_id, position):
+        """Allow this location one later investigation after the cooldown."""
+
+        with self.safety_lock:
+            self.consume_target_retry(class_id, position)
+            self.target_retry_locations[class_id].append({
+                "position": list(position),
+                "available_at": time.monotonic() + self.target_retry_cooldown,
+            })
+
+    def consume_target_retry(self, class_id, position):
+        """Remove the pending retry associated with this location."""
+
+        with self.safety_lock:
+            self.target_retry_locations[class_id] = [
+                record
+                for record in self.target_retry_locations[class_id]
+                if hypot(
+                    position[0] - record["position"][0],
+                    position[1] - record["position"][1],
+                ) > self.target_association_radius
+            ]
+
+    def callback_confirmed_targets(self, msg_in):
+        """Start diversion from targets confirmed by the perception world model."""
+
+        if not self.flight_started or not self.pose_ready():
+            return
+        if self.mission_aborted or self.search_complete:
+            return
+        if msg_in.header.frame_id not in ("map", "/map"):
+            rospy.logwarn_throttle(
+                5.0,
+                "[OBJECT] Ignoring confirmed targets in frame '%s'; expected map",
+                msg_in.header.frame_id,
+            )
+            return
+        if self.active_target is not None or self.performing_roi:
+            return
+
+        confirmed_targets = []
+
+        for detection in msg_in.detections:
+            if not detection.results:
+                continue
+
+            result = max(
+                detection.results,
+                key=lambda hypothesis: hypothesis.score,
+            )
+            class_id = int(result.id)
+
+            if class_id not in self.target_class_names:
+                continue
+
+            position = result.pose.pose.position
+
+            if not (
+                isfinite(position.x)
+                and isfinite(position.y)
+                and isfinite(position.z)
+            ):
+                continue
+
+            confirmed_targets.append({
+                "class_id": class_id,
+                "confidence": result.score,
+                "position": [
+                    position.x,
+                    position.y,
+                    position.z,
+                ],
+            })
+
+        # A continuous confirmation starts one diversion. A rejected location
+        # remains unavailable for the rest of this mission.
+        current_confirmed_locations = {
+            self.person_class_id: [],
+            self.backpack_class_id: [],
+        }
+        candidate_targets = []
+
+        for target in confirmed_targets:
+            class_id = target["class_id"]
+            position = target["position"]
+            previous_locations = self.previous_confirmed_locations[class_id]
+
+            was_already_confirmed = any(
+                hypot(
+                    position[0] - previous_position[0],
+                    position[1] - previous_position[1],
+                ) <= self.target_association_radius
+                for previous_position in previous_locations
+            )
+
+            retry_state = self.target_retry_state(class_id, position)
+
+            if not was_already_confirmed or retry_state == "ready":
+                candidate_target = dict(target)
+                candidate_target["retry_state"] = retry_state
+                candidate_targets.append(candidate_target)
+
+            current_confirmed_locations[class_id].append(
+                list(position)
+            )
+
+        self.previous_confirmed_locations = current_confirmed_locations
+
+        present_classes = {
+            target["class_id"]
+            for target in confirmed_targets
+        }
+
+        # A later confirmed appearance may produce another ignored event after
+        # the class has first disappeared from the confirmed-target stream.
+        for class_id in self.ignored_target_active:
+            if class_id not in present_classes:
+                self.ignored_target_active[class_id] = False
+
+        eligible_targets = []
+
+        for target in candidate_targets:
+            class_id = target["class_id"]
+            position = target["position"]
+
+            if self.target_location_rejected(class_id, position):
+                continue
+
+            retry_state = self.target_retry_state(class_id, position)
+
+            if retry_state == "waiting":
+                continue
+
+            target["retry_after_cooldown"] = retry_state == "ready"
+
+            actuator = self.payload_actuator_by_class[class_id]
+
+            payload_deployed = (
+                (actuator == "a" and self.payload_a_deployed)
+                or (actuator == "b" and self.payload_b_deployed)
+            )
+
+            if payload_deployed:
+                if not self.ignored_target_active[class_id]:
+                    self.ignored_target_active[class_id] = True
+                    self.publish_target_event(
+                        "IGNORED",
+                        class_id,
+                        target["confidence"],
+                        position,
+                        f"{self.payload_name_by_class[class_id]} already deployed",
+                    )
+                continue
+
+            already_serviced = any(
+                hypot(
+                    position[0] - serviced[0],
+                    position[1] - serviced[1],
+                ) <= self.serviced_target_radius
+                for serviced in self.serviced_target_locations[class_id]
+            )
+
+            if already_serviced:
+                continue
+
+            eligible_targets.append(target)
+
+        if not eligible_targets:
+            return
+
+        # The mission can investigate one target at a time. Prefer the strongest
+        # currently confirmed candidate when several are available.
+        confirmed_target = max(
+            eligible_targets,
+            key=lambda target: target["confidence"],
+        )
+
+        self.start_target_diversion(
+            class_id=confirmed_target["class_id"],
+            confidence=confirmed_target["confidence"],
+            target=confirmed_target["position"],
+            stamp=msg_in.header.stamp,
+            injected=False,
+            retry_after_cooldown=confirmed_target["retry_after_cooldown"],
+        )
+
+    def run_target_diversion(self, roi, class_id):
+        """Run target diversion while observation callbacks remain available."""
+
+        self.pending_payload_class_id = class_id
+
+        try:
+            self.callback_inspect_roi(
+                roi,
+                diversion_reserved=True,
+            )
+        finally:
+            with self.safety_lock:
+                self.pending_payload_class_id = None
+                self.active_target = None
+                self.active_target_frames.clear()
+                self.active_target_updated.clear()
+                self.performing_roi = False
+
+    # =================================================================
+    # SHARED IMAGE PROCESSING AND NAVIGATION: TARGET DIVERSION
+    #
+    # Perception chooses and verifies the target location; Breadcrumb and
+    # SPAR perform the obstacle-safe approach, deployment and return.
+    # =================================================================
+
+    @staticmethod
+    def occupancy_grid_cell(grid, position):
+        """Return the occupancy-grid cell containing one map position."""
+
+        resolution = grid.info.resolution
+
+        if resolution <= 0.0:
+            return None
+
+        cell_x = int(
+            (position[0] - grid.info.origin.position.x) / resolution
+        )
+        cell_y = int(
+            (position[1] - grid.info.origin.position.y) / resolution
+        )
+
+        if (
+            cell_x < 0
+            or cell_x >= grid.info.width
+            or cell_y < 0
+            or cell_y >= grid.info.height
+        ):
+            return None
+
+        return cell_x, cell_y
+
+    def exact_target_is_in_route_endpoint_cell(self, route, target_position):
+        """Return whether Breadcrumb kept the target in its requested free cell."""
+
+        with self.safety_lock:
+            grid = self.test_target_grid
+
+        if grid is None or not route:
+            return None
+
+        target_cell = self.occupancy_grid_cell(grid, target_position)
+        endpoint_cell = self.occupancy_grid_cell(grid, route[-1])
+
+        if target_cell is None or endpoint_cell is None:
+            return None
+
+        return target_cell == endpoint_cell
+
+    def refine_target_while_flying(self, route):
+        """Follow the initial route while refining its destination for three seconds."""
+
+        deadline = time.monotonic() + self.target_dynamic_refinement_duration
+
+        for waypoint in route:
+            if not self.send_wp(waypoint):
+                return None, "target approach waypoint rejected"
+
+            while not rospy.is_shutdown():
+                with self.safety_lock:
+                    if self.mission_aborted:
+                        return None, "mission aborted"
+
+                if time.monotonic() >= deadline:
+                    return self.latest_active_target_position(), None
+
+                state = self.spar_client.get_state()
+
+                if state == GoalStatus.SUCCEEDED:
+                    break
+                if state in (
+                    GoalStatus.PREEMPTED,
+                    GoalStatus.ABORTED,
+                    GoalStatus.REJECTED,
+                ):
+                    return None, "target approach flight goal failed"
+
+                self.active_target_updated.wait(0.1)
+                self.active_target_updated.clear()
+
+        # If the initial route finishes early, hold until the full refinement
+        # period has supplied the provisional destination.
+        while not rospy.is_shutdown() and time.monotonic() < deadline:
+            with self.safety_lock:
+                if self.mission_aborted:
+                    return None, "mission aborted"
+
+            remaining_time = deadline - time.monotonic()
+            self.active_target_updated.wait(min(remaining_time, 0.1))
+            self.active_target_updated.clear()
+
+        if rospy.is_shutdown():
+            return None, "mission shutdown"
+
+        return self.latest_active_target_position(), None
+
+    def fly_to_rolling_target(self, initial_target):
+        """Refine briefly, then complete one route to a frozen target location."""
+
+        initial_route = self.request_breadcrumb_path(initial_target, "Target")
+
+        if initial_route is None:
+            return None, "no safe Breadcrumb route"
+
+        frozen_position, approach_status = self.refine_target_while_flying(
+            initial_route
+        )
+
+        if approach_status is not None:
+            return None, approach_status
+        if frozen_position is None:
+            return None, "target was not tracked during location refinement"
+
+        with self.safety_lock:
+            confidence = self.active_target["filtered_confidence"]
+            class_id = self.active_target["class_id"]
+            self.active_target["locked_position"] = list(frozen_position)
+
+        self.publish_locked_target_location(
+            class_id,
+            confidence,
+            frozen_position,
+        )
+
+        rospy.loginfo(
+            "Target location frozen at (%.2f, %.2f, %.2f); requesting final Breadcrumb route",
+            frozen_position[0],
+            frozen_position[1],
+            frozen_position[2],
+        )
+
+        fixed_route = self.request_breadcrumb_path(frozen_position, "Target")
+
+        if fixed_route is None:
+            self.spar_client.cancel_goal()
+            return None, "no safe Breadcrumb route to frozen target"
+
+        route_kept_requested_cell = self.exact_target_is_in_route_endpoint_cell(
+            fixed_route,
+            frozen_position,
+        )
+
+        if route_kept_requested_cell is None:
+            self.spar_client.cancel_goal()
+            return None, "occupancy grid unavailable for target safety check"
+        if not route_kept_requested_cell:
+            self.spar_client.cancel_goal()
+            return None, "Breadcrumb displaced the target endpoint for obstacle safety"
+
+        route_succeeded, route_status = self.follow_breadcrumb_route(
+            fixed_route
+        )
+
+        if not route_succeeded:
+            return None, route_status
+
+        return frozen_position, None
+
+    def callback_inspect_roi(self, msg_in, diversion_reserved=False,):
+        """Execute a direct ROI or perception-reserved target diversion.
+
+        A perception-reserved diversion refines and confirms the target before
+        deployment. A direct ROI follows the same safe approach and return
+        path without target evidence or payload selection.
+        """
+
+        with self.safety_lock:
+            if self.mission_aborted or self.search_complete:
+                return
+            if not self.flight_started or not self.pose_ready():
+                rospy.logwarn("[POSE] Ignoring diversion without fresh position")
+                return
+            p = msg_in.pose.position
+            if not (self.check_waypoint([p.x, p.y, self.surveyAltitude, 0.0])
+                    and self.check_waypoint([p.x, p.y, 0.8, 0.0])):
+                rospy.logwarn("Ignoring target outside safety boundary")
+                return
+
+        if not self.deployment_enabled:
+
+            rospy.logwarn_throttle(
+                5.0,
+                "Ignoring ROI diversion because deployment is disabled"
+            )
+
+            return
+
+        # -------------------------------------------------------------
+        # Don't start another ROI while one is already happening
+        # -------------------------------------------------------------
+
+        if self.performing_roi and not diversion_reserved:
+            rospy.logwarn(
+                "Ignoring ROI because diversion is already running"
+            )
+            return
+
+        if not diversion_reserved:
+            self.performing_roi = True
+
+        rospy.loginfo(
+            "Starting diversion to ROI..."
+        )
+
+        # -------------------------------------------------------------
+        # Cancel current search waypoint
+        # -------------------------------------------------------------
+
+        with self.safety_lock:
+            if not self.battery_ready():
+                return
+            self.spar_client.cancel_goal()
+
+        # -------------------------------------------------------------
+        # Detected target X/Y
+        # -------------------------------------------------------------
+
+        target_x = (
+            msg_in.pose.position.x
+        )
+
+        target_y = (
+            msg_in.pose.position.y
+        )
+
+        # -------------------------------------------------------------
+        # Target directly above object
+        # -------------------------------------------------------------
+
+        target_above = [
+            target_x,
+            target_y,
+            self.surveyAltitude,
+            0.0
+        ]
+
+        # -------------------------------------------------------------
+        # Deployment altitude
+        # -------------------------------------------------------------
+
+        target_deploy = [
+            target_x,
+            target_y,
+            0.8,
+            0.0
+        ]
+
+        # -------------------------------------------------------------
+        # Save where UAV was when diversion occurred
+        # -------------------------------------------------------------
+
+        rwp = [
+            self.current_location.x,
+            self.current_location.y,
+            self.current_location.z,
+            0.0
+        ]
+
+        final_confirmation = None
+        target_evidence_failed = False
+        rejection_reason = None
+        reject_location = False
+        injected_target = False
+        retry_after_cooldown = False
+
+        if diversion_reserved:
+            class_id = self.pending_payload_class_id
+            target_name = self.target_class_names[class_id].title()
+            payload_name = self.payload_name_by_class[class_id]
+
+            with self.safety_lock:
+                active_target = self.active_target
+                if active_target is not None:
+                    injected_target = active_target.get("injected", False)
+                    retry_after_cooldown = active_target.get(
+                        "retry_after_cooldown",
+                        False,
+                    )
+
+        # =============================================================
+        # 1. FLY ABOVE TARGET
+        # =============================================================
+
+        if diversion_reserved and not injected_target:
+            rospy.loginfo("Approaching detected target while refining its location...")
+            converged_position, rejection_reason = self.fly_to_rolling_target(
+                [target_x, target_y, msg_in.pose.position.z]
+            )
+
+            if converged_position is None:
+                target_evidence_failed = (
+                    rejection_reason
+                    == "target was not tracked during location refinement"
+                )
+            else:
+                target_above[0] = converged_position[0]
+                target_above[1] = converged_position[1]
+                target_deploy[0] = converged_position[0]
+                target_deploy[1] = converged_position[1]
+                rospy.loginfo("Holding above target for final confirmation")
+                final_confirmation, rejection_reason = self.wait_for_final_target_confirmation()
+                target_evidence_failed = final_confirmation is None
+
+            reject_location = (
+                target_evidence_failed
+                and retry_after_cooldown
+            )
+        else:
+            rospy.loginfo("Flying above detected target...")
+
+            if not self.send_wp(target_above):
+                return
+            if not self.wait_for_motion():
+                return
+            if self.spar_client.get_state() != GoalStatus.SUCCEEDED:
+                rospy.logerr("Failed to reach target")
+                with self.safety_lock:
+                    if not self.mission_aborted:
+                        rospy.signal_shutdown("cancelled")
+                return
+
+            rospy.loginfo("Reached position above target")
+
+            if not diversion_reserved:
+                # A direct ROI has no detector class or evidence to reassess.
+                rospy.loginfo("Direct ROI reached; returning to the interrupted search route")
+            else:
+                # A terminal-injected target is an explicit test instruction,
+                # so it does not depend on a matching camera observation.
+                final_confirmation = {
+                    "class_id": class_id,
+                    "confidence": 1.0,
+                    "position": list(active_target["filtered_position"]),
+                }
+                rospy.logwarn(
+                    "Injected %s reached; bypassing visual final confirmation",
+                    target_name,
+                )
+
+        if diversion_reserved and final_confirmation is None:
+            rejected_position = None
+            rejected_confidence = 0.0
+
+            with self.safety_lock:
+                active_target = self.active_target
+
+                if active_target is not None:
+                    rejected_position = list(
+                        active_target.get("locked_position")
+                        or active_target["filtered_position"]
+                    )
+                    rejected_confidence = active_target[
+                        "filtered_confidence"
+                    ]
+
+            if rejected_position is not None:
+                if reject_location:
+                    self.reject_target_location(class_id, rejected_position)
+                    self.publish_rejected_target_location(
+                        class_id,
+                        rejected_confidence,
+                        rejected_position,
+                    )
+                    rejection_policy = "location rejected after the failed retry"
+                elif target_evidence_failed:
+                    self.schedule_target_retry(
+                        class_id,
+                        rejected_position,
+                    )
+                    rospy.loginfo(
+                        "%s retry cooldown started for %.0f seconds",
+                        target_name,
+                        self.target_retry_cooldown,
+                    )
+                    rejection_policy = "one retry available after the 10-second cooldown"
+                else:
+                    rejection_policy = "approach ended before final confirmation"
+
+                self.publish_target_event(
+                    "REJECTED",
+                    class_id,
+                    rejected_confidence,
+                    rejected_position,
+                    "Reason: %s; %s"
+                    % (
+                        rejection_reason,
+                        rejection_policy,
+                    ),
+                )
+            else:
+                rejection_policy = "target location unavailable"
+
+            rospy.logwarn(
+                "%s rejected above target (%s); %s; resuming the search without deploying the %s",
+                target_name,
+                rejection_reason,
+                rejection_policy,
+                payload_name,
+            )
+
+        elif diversion_reserved:
+            confirmed_position = final_confirmation["position"]
+
+            # The final confirmed median replaces the provisional lock once,
+            # then remains fixed for deployment and the RViz world model.
+            self.publish_locked_target_location(
+                class_id,
+                final_confirmation["confidence"],
+                confirmed_position,
+            )
+
+            self.publish_target_event(
+                "CONFIRMED",
+                class_id,
+                final_confirmation["confidence"],
+                confirmed_position,
+                "Explicit test target" if injected_target else "",
+            )
+
+            rospy.loginfo(
+                "%s confirmed above target; lowering into position for %s deployment",
+                target_name,
+                payload_name,
+            )
+
+            # Use the stable final location for the deployment movement.
+            target_deploy[0] = confirmed_position[0]
+            target_deploy[1] = confirmed_position[1]
+            target_above[0] = confirmed_position[0]
+            target_above[1] = confirmed_position[1]
+
+            # =========================================================
+            # 2. DESCEND TO DEPLOYMENT ALTITUDE
+            # =========================================================
+
+            self.send_wp(target_deploy)
+
+            if not self.wait_for_motion():
+                return
+
+            if self.spar_client.get_state() != GoalStatus.SUCCEEDED:
+                rospy.logerr("Failed to reach deployment altitude")
+
+                with self.safety_lock:
+                    if not self.mission_aborted:
+                        rospy.signal_shutdown("cancelled")
+
+                return
+
+            rospy.loginfo("Reached deployment altitude: 0.8 m")
+
+            # =========================================================
+            # 3. DEPLOY PAYLOAD
+            # =========================================================
+
+            operator_rejected = self.wait_for_operator_rejection(
+                payload_name
+            )
+
+            if rospy.is_shutdown() or self.mission_aborted:
+                return
+
+            if operator_rejected:
+                self.reject_target_location(
+                    class_id,
+                    confirmed_position,
+                )
+                self.publish_rejected_target_location(
+                    class_id,
+                    final_confirmation["confidence"],
+                    confirmed_position,
+                )
+
+                self.publish_target_event(
+                    "REJECTED",
+                    class_id,
+                    final_confirmation["confidence"],
+                    confirmed_position,
+                    "Reason: operator rejection; location blacklisted",
+                )
+
+                rospy.logwarn(
+                    "%s deployment rejected by operator; target location blacklisted",
+                    payload_name,
+                )
+                deployment_succeeded = False
+            else:
+                deployment_succeeded = self.deploy_payload(class_id)
+
+            if deployment_succeeded:
+                # Prevent another diversion to this location after deployment.
+                with self.safety_lock:
+                    self.serviced_target_locations[class_id].append(
+                        list(confirmed_position)
+                    )
+                rospy.loginfo("%s deployment period finished", payload_name)
+            elif not operator_rejected:
+                rospy.logwarn(
+                    "%s deployment did not complete; target remains unserviced",
+                    payload_name,
+                )
+
+            # =========================================================
+            # 4. CLIMB BACK TO SEARCH ALTITUDE
+            # =========================================================
+
+            rospy.loginfo("Climbing back to search altitude...")
+            self.send_wp(target_above)
+
+            if not self.wait_for_motion():
+                return
+
+            if self.spar_client.get_state() != GoalStatus.SUCCEEDED:
+                rospy.logerr("Failed to climb back to search altitude")
+
+                with self.safety_lock:
+                    if not self.mission_aborted:
+                        rospy.signal_shutdown("cancelled")
+
+                return
+
+            rospy.loginfo("Returned to search altitude")
+
+        # =============================================================
+        # 5. RETURN TO INTERRUPTION LOCATION
+        # =============================================================
+
+        rospy.loginfo(
+            "Returning to flight plan..."
+        )
+
+        if not self.return_to_interruption_point(rwp):
+            with self.safety_lock:
+                if not self.mission_aborted:
+                    rospy.signal_shutdown("cancelled")
+            return
+
+        # =============================================================
+        # 6. RESUME INTERRUPTED BREADCRUMB WAYPOINT
+        # =============================================================
+
+        if (
+            self.breadcrumbMode
+            and self.breadcrumbWPSnextIndex > 0
+        ):
+
+            rospy.loginfo(
+                "Resuming interrupted Breadcrumb waypoint..."
+            )
+
+            # Restore the interrupted search path in RViz after the diversion
+            # and return routes temporarily replaced its display.
+            self.display_path(
+                self.breadcrumbWPS[
+                    self.breadcrumbWPSnextIndex - 1:
+                ],
+                "/guidance/pathBreadcrumb",
+            )
+
+            self.send_wp(
+                self.breadcrumbWPS[
+                    self.breadcrumbWPSnextIndex - 1
+                ]
+            )
+
+        else:
+
+            rospy.loginfo(
+                "Resuming high-level waypoint..."
+            )
+
+            if self.nextWaypointIndex > 0:
+
+                self.send_wp(
+                    self.waypoints[
+                        self.nextWaypointIndex - 1
+                    ]
+                )
+
+        self.performing_roi = False
+
+        rospy.loginfo(
+            "ROI diversion complete"
+        )
+
+    def wait_for_operator_rejection(self, payload_name):
+        """Run the deployment countdown and return True if R is pressed."""
+
+        keyboard_available = sys.stdin.isatty()
+        terminal_fd = None
+        original_terminal_settings = None
+
+        if keyboard_available:
+            try:
+                terminal_fd = sys.stdin.fileno()
+                original_terminal_settings = termios.tcgetattr(terminal_fd)
+
+                # Ignore characters entered before the countdown began.
+                termios.tcflush(terminal_fd, termios.TCIFLUSH)
+                tty.setcbreak(terminal_fd)
+            except termios.error:
+                keyboard_available = False
+                terminal_fd = None
+                original_terminal_settings = None
+
+        if not keyboard_available:
+            rospy.logwarn(
+                "No interactive mission terminal; operator rejection unavailable"
+            )
+
+        deadline = time.monotonic() + 5.0
+        last_displayed_second = None
+
+        try:
+            while not rospy.is_shutdown() and not self.mission_aborted:
+                remaining = deadline - time.monotonic()
+
+                if remaining <= 0.0:
+                    return False
+
+                seconds_remaining = max(1, int(remaining) + 1)
+
+                if seconds_remaining != last_displayed_second:
+                    sys.stdout.write(
+                        "\r\033[KPress R to reject | {} deployment in {}...".format(
+                            payload_name,
+                            seconds_remaining,
+                        )
+                    )
+                    sys.stdout.flush()
+                    last_displayed_second = seconds_remaining
+
+                wait_seconds = min(0.05, remaining)
+
+                if keyboard_available:
+                    readable, _, _ = select.select(
+                        [sys.stdin],
+                        [],
+                        [],
+                        wait_seconds,
+                    )
+
+                    if readable:
+                        key = sys.stdin.read(1)
+
+                        if key.lower() == "r":
+                            return True
+                else:
+                    time.sleep(wait_seconds)
+
+            return False
+
+        finally:
+            if original_terminal_settings is not None:
+                termios.tcsetattr(
+                    terminal_fd,
+                    termios.TCSADRAIN,
+                    original_terminal_settings,
+                )
+
+            # Clear the countdown before normal ROS logging resumes.
+            sys.stdout.write("\r\033[K")
+            sys.stdout.flush()
+
+    def deploy_payload(self, class_id):
+        """Release the payload assigned to a confirmed target class."""
+        if not self.deployment_enabled:
+            rospy.logwarn("Payload deployment is disabled")
+            return False
+
+        if class_id not in self.payload_actuator_by_class:
+            rospy.logerr("Refusing payload deployment without a target class")
+            return False
+
+        actuator = self.payload_actuator_by_class[class_id]
+        payload_name = self.payload_name_by_class[class_id]
+        if actuator == "a":
+            if self.payload_a_deployed:
+                rospy.logwarn("Payload A has already been deployed")
+                return False
+            publisher = self.servo_a_pub
+        else:
+            if self.payload_b_deployed:
+                rospy.logwarn("Payload B has already been deployed")
+                return False
+            publisher = self.servo_b_pub
+
+        with self.safety_lock:
+            if not self.deployment_enabled or not self.battery_ready():
+                return False
+            if not self.pose_ready():
+                rospy.logerr("[POSE] Payload release blocked: position missing or stale; no landing commanded")
+                return False
+            if not self.check_waypoint([self.current_location.x,
+                                        self.current_location.y,
+                                        self.current_location.z, 0.0]):
+                self.abort_mission("Payload position outside safety boundary")
+                return False
+            if ((actuator == "a" and self.payload_a_deployed) or
+                    (actuator == "b" and self.payload_b_deployed)):
+                return False
+            rospy.loginfo("Deploying %s", payload_name)
+            publisher.publish(Bool(data=True))
+            if actuator == "a":
+                self.payload_a_deployed = True
+            else:
+                self.payload_b_deployed = True
+        rospy.sleep(rospy.Duration(1.0))
+        rospy.loginfo("%s command sent using actuator %s", payload_name, actuator.upper())
+        return True
+
+
+
+def clear_previous_world_model():
+    """Request fresh ArUco and target memory for this mission run."""
+
+    reset_services = (
+        ("/world_model/clear_aruco", "ArUco"),
+        ("/world_model/clear_targets", "target"),
+    )
+
+    for service_name, memory_name in reset_services:
+        try:
+            rospy.wait_for_service(service_name, timeout=2.0)
+            response = rospy.ServiceProxy(service_name, Trigger)()
+        except (rospy.ROSException, rospy.ServiceException) as error:
+            rospy.logwarn(
+                "Could not clear previous %s memory: %s",
+                memory_name,
+                error,
+            )
+            continue
+
+        if response.success:
+            rospy.loginfo("%s", response.message)
+        else:
+            rospy.logwarn(
+                "Could not clear previous %s memory: %s",
+                memory_name,
+                response.message,
+            )
 
 
 def main(args):
@@ -2014,6 +3697,36 @@ def main(args):
     rospy.init_node(
         "guidance"
     )
+
+    # Each mission begins with an empty persistent object map. Live detections
+    # remain active and may repopulate it immediately after this reset.
+    clear_previous_world_model()
+
+    # A direct rosrun may leave private parameters on the ROS parameter server.
+    # Restore omitted runtime switches to their declared defaults on every call.
+    launched_by_roslaunch = any(
+        argument.startswith("__log:=")
+        for argument in sys.argv
+    )
+
+    if not launched_by_roslaunch:
+        runtime_defaults = {
+            "deploy": True,
+            "enable_test_target_injection": True,
+        }
+
+        for parameter_name, default_value in runtime_defaults.items():
+            command_line_prefix = "_{}:=".format(parameter_name)
+            parameter_was_supplied = any(
+                argument.startswith(command_line_prefix)
+                for argument in sys.argv
+            )
+
+            if not parameter_was_supplied:
+                rospy.set_param(
+                    "~{}".format(parameter_name),
+                    default_value,
+                )
 
     # =============================================================
     # SURVEY ALTITUDE

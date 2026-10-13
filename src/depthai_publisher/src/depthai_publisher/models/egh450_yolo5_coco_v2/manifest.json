@@ -1,0 +1,26 @@
+{
+  "created_utc": "2026-10-12T03:01:26.096515+00:00",
+  "source_checkpoint": "/Users/lucasbrankovich/Library/Mobile Documents/com~apple~CloudDocs/Downloads/EGH450 Unmanned Aircraft Systems/modelling/weights/yolov5-v7.0/yolov5s.pt",
+  "checkpoint_sha256": "8b3b748c1e592ddd8868022e8732fde20025197328490623cc16c6f24d0782ee",
+  "onnx_sha256": "48265e752f172439f2c9313ce156aa86dd7e59b10a8d079e3b8a9117ebe2d1c8",
+  "blob_sha256": "a0fa5213ba056bfe37e75e56a710e6c146d0c448af65ed1efa74dbabe4c6ddd4",
+  "config_sha256": "062d16f363d5b1140c2a1552acc854fbe50f824fa47f9dab81509f69089c2526",
+  "openvino": "2022.1",
+  "shaves": 6,
+  "precision": "FP16",
+  "input_size": 416,
+  "classes": 80,
+  "person_class_id": 0,
+  "backpack_class_id": 24,
+  "input": "RGB planar; compiler embeds division by 255",
+  "status": "COMPILED_NOT_HARDWARE_VERIFIED",
+  "final_test_evaluated": "NOT_CHECKED_BY_PACKAGER",
+  "note": "Final-test status not established by this packaging script; consult experiment records.",
+  "onboard_checks": [
+    "Preserve old blob/config for rollback; do not auto-deploy.",
+    "Confirm JSON schema and model path match active ROS loader.",
+    "Match RGB planar input, resize policy, input size and OpenVINO 2022.1.",
+    "Verify load, output heads, class mapping, frame rate and detections on OAK-D.",
+    "Compare raw detections against PyTorch; navigation smoothing is separate."
+  ]
+}

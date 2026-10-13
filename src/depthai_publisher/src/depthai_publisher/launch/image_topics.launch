@@ -4,13 +4,16 @@
     <arg name="enable_yolo" default="true"/>
     <!-- RGB-aligned stereo depth supplies range for 3D object positions. -->
     <arg name="enable_depth" default="true"/>
-    <!-- One JSON is the source of decoder settings and human-readable labels
-         for both on-device inference and the presentation overlay. -->
+    <!-- Diagnostic capture publishes the exact NN input and source-class
+         decoder output; leave disabled during normal operation. -->
+    <arg name="publish_nn_diagnostics" default="false"/>
+    <!-- The blob and JSON are one deployment unit. The publisher filters its
+         output to person/backpack and remaps those classes to IDs 0/1. -->
     <arg name="yolo_config_path"
-         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5_exp009_f1/candidate.json"/>
+         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5_coco_v2/candidate.json"/>
     <!-- Keep the blob and decoder configuration explicit and paired. -->
     <arg name="yolo_blob_path"
-         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5_exp009_f1/candidate.blob"/>
+         default="$(find depthai_publisher)/src/depthai_publisher/models/egh450_yolo5_coco_v2/candidate.blob"/>
 
     <!-- Real flight uses PX4's fused local pose. Select emulator explicitly
          when testing the global ArUco transform against /uavasr/pose. -->
@@ -18,14 +21,20 @@
     <arg name="pose_topic"
          default="$(eval '/uavasr/pose' if arg('pose_source') == 'emulator' else '/mavros/local_position/pose')"/>
 
+    <!-- Both perception and navigation read the same mission-decision values. -->
+    <rosparam command="load"
+              file="$(find depthai_publisher)/config/target_confidence.yaml"
+              ns="/target_policy"/>
 
     <node
         pkg="depthai_publisher"
         type="dai_publisher"
         name="dai_publisher"
+        clear_params="true"
         output="screen">
         <param name="enable_yolo" value="$(arg enable_yolo)"/>
         <param name="enable_depth" value="$(arg enable_depth)"/>
+        <param name="publish_nn_diagnostics" value="$(arg publish_nn_diagnostics)"/>
         <param name="yolo_config_path" value="$(arg yolo_config_path)"/>
         <param name="yolo_blob_path" value="$(arg yolo_blob_path)"/>
     </node>
@@ -34,6 +43,7 @@
         pkg="depthai_publisher"
         type="aruco_subscriber"
         name="aruco_subscriber"
+        clear_params="true"
         output="screen">
         <remap from="/mavros/local_position/pose" to="$(arg pose_topic)"/>
     </node>
@@ -44,10 +54,10 @@
         pkg="depthai_publisher"
         type="vision_overlay"
         name="vision_overlay"
+        clear_params="true"
         output="screen">
         <!-- Keep visualization optional in exactly the same way as inference. -->
         <param name="enable_yolo" value="$(arg enable_yolo)"/>
-        <param name="yolo_config_path" value="$(arg yolo_config_path)"/>
     </node>
 
     <!-- A 3D observation requires both a YOLO box and aligned depth. This node
@@ -57,8 +67,20 @@
         pkg="depthai_publisher"
         type="object_position_estimator"
         name="object_position_estimator"
+        clear_params="true"
         output="screen">
         <param name="pose_topic" value="$(arg pose_topic)"/>
+    </node>
+
+     <!-- Confirm spatially consistent detections and retain their map locations
+         independently of the navigation mission. -->
+    <node
+        if="$(eval arg('enable_yolo') and arg('enable_depth'))"
+        pkg="depthai_publisher"
+        type="target_world_model"
+        name="target_world_model"
+        clear_params="true"
+        output="screen">
     </node>
 
 </launch>

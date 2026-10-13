@@ -2,14 +2,13 @@
 
 """Estimate transient map-frame object positions from YOLO and depth."""
 
+import threading
+from collections import deque
+
 import cv2
 import message_filters
 import numpy as np
 import rospy
-import threading
-from collections import deque
-
-
 from cv_bridge import CvBridge, CvBridgeError
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import CameraInfo, Image
@@ -27,6 +26,7 @@ from depthai_publisher.msg import TargetObservation, TargetObservationArray
 class ObjectPositionEstimator:
     """Publish independent 3D observations without tracking or persistence."""
 
+    # An odd width keeps the patch centred; 7 x 7 provides redundant samples.
     DEPTH_PATCH_SIZE = 7
 
     def __init__(self):
@@ -116,6 +116,10 @@ class ObjectPositionEstimator:
             self.target_output_topic,
         )
 
+    # -----------------------------------------------------------------
+    # CALIBRATION, POSE HISTORY AND OUTPUT
+    # -----------------------------------------------------------------
+
     def camera_info_callback(self, message):
         """Retain calibration for distortion-aware pixel deprojection."""
         self.camera_matrix = np.asarray(message.K, dtype=np.float64).reshape(3, 3)
@@ -156,6 +160,10 @@ class ObjectPositionEstimator:
 
         self.output_publisher.publish(detection_output)
         self.target_output_publisher.publish(target_output)
+
+    # -----------------------------------------------------------------
+    # TIMESTAMP-ALIGNED DETECTION AND DEPTH FUSION
+    # -----------------------------------------------------------------
 
     def perception_callback(self, detections, depth_message):
         """Combine one detection frame with aligned depth and aircraft pose."""
@@ -238,6 +246,10 @@ class ObjectPositionEstimator:
 
         self.publish_outputs(detection_output, target_output)
 
+    # -----------------------------------------------------------------
+    # DEPTH SAMPLING AND CAMERA GEOMETRY
+    # -----------------------------------------------------------------
+
     def estimate_camera_point(self, depth_mm, detection):
         """Estimate optical XYZ from depth near the detection centre."""
 
@@ -292,6 +304,10 @@ class ObjectPositionEstimator:
             normalized_ray[1] * median_depth,
             median_depth,
         ])
+
+    # -----------------------------------------------------------------
+    # ROS MESSAGE CONSTRUCTION
+    # -----------------------------------------------------------------
 
     @staticmethod
     def build_target_observation(detection_2d):

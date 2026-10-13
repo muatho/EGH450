@@ -1,0 +1,10 @@
+# Confidence required before a person or backpack observation may support
+# mission diversion or final deployment confirmation.
+person_confidence_threshold: 0.60
+backpack_confidence_threshold: 0.40
+
+# Minimum percentage of the source image occupied by one detection before it
+# may contribute to target confirmation, tracking or deployment decisions.
+# Zero preserves the detector's existing size-independent behaviour.
+person_min_coverage_percent: 0.0
+backpack_min_coverage_percent: 0.0

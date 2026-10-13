@@ -22,6 +22,12 @@ class TargetAnnouncementGate:
         self._candidates = []
         self._reported = []
 
+    def reset(self):
+        """Forget observations and announcements from the previous mission."""
+
+        self._candidates.clear()
+        self._reported.clear()
+
     @staticmethod
     def _distance(first, second):
         return math.hypot(first[0] - second[0], first[1] - second[1])
@@ -88,3 +94,66 @@ def announcement_text(target_type, position):
     return "Detected {} at X {:.1f} metres, Y {:.1f} metres.".format(
         str(target_type).replace("_", " "), x, y
     )
+
+
+def target_event_announcement(message):
+    """Convert an onboard target decision into a short spoken announcement."""
+
+    lines = [line.strip() for line in str(message).strip().splitlines()]
+
+    if len(lines) < 3 or not lines[0].startswith("[TARGET "):
+        return None
+
+    event = lines[0][8:-1].strip().upper()
+    target = lines[1].split("|", 1)[0].strip().lower()
+
+    payloads = {
+        "person": ("EpiPen", "EpiPen"),
+        "backpack": ("tracker", "Tracker"),
+    }
+
+    if target not in payloads:
+        return None
+
+    coordinates = {}
+
+    for field in lines[2].split("|"):
+        name, separator, value = field.partition(":")
+
+        if not separator:
+            continue
+
+        try:
+            coordinates[name.strip()] = float(value.strip())
+        except ValueError:
+            return None
+
+    if "World X" not in coordinates or "World Y" not in coordinates:
+        return None
+
+    display_name = target.title()
+    location = "X {:.1f} metres, Y {:.1f} metres".format(
+        coordinates["World X"],
+        coordinates["World Y"],
+    )
+
+    if event == "DETECTED":
+        return "{} detected at {}.".format(display_name, location)
+
+    if event == "CONFIRMED":
+        return "{} confirmed at {}. Lowering to deploy {}.".format(
+            display_name,
+            location,
+            payloads[target][0],
+        )
+
+    if event == "REJECTED":
+        return "{} rejected. Returning to search.".format(display_name)
+
+    if event == "IGNORED":
+        return "{} ignored. {} already deployed.".format(
+            display_name,
+            payloads[target][1],
+        )
+
+    return None

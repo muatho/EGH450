@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   geometry_msgs
   spar_msgs
+  std_srvs
   vision_msgs
 )
 

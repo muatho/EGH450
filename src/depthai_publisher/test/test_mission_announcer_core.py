@@ -39,11 +39,11 @@ class MissionAnnouncementTest(unittest.TestCase):
     def test_payload_announcements(self):
         self.assertEqual(
             payload_announcement("a"),
-            ("payload:a:person", "Payload A deployed for person."),
+            ("payload:a:person", "EpiPen deployed for person."),
         )
         self.assertEqual(
             payload_announcement("B"),
-            ("payload:b:backpack", "Payload B deployed for backpack."),
+            ("payload:b:backpack", "Tracker deployed for backpack."),
         )
         self.assertIsNone(payload_announcement("unknown"))
 

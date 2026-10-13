@@ -58,8 +58,8 @@ class ArucoPoseEstimator():
             [msg.K[6], msg.K[7], msg.K[8]]
         ], dtype=np.float32)
 
-        # OpenCV accepts the eight rational-polynomial values published by the
-        # updated OAK node. They must describe the same pixels used for detection.
+        # OpenCV accepts the eight rational-polynomial CameraInfo values. They
+        # must describe the same pixels used for marker detection.
         self.dist_coeffs = np.array(
             msg.D,
             dtype=np.float32
@@ -166,7 +166,7 @@ class ArucoPoseEstimator():
         Yc = tvec[1][0]
         Zc = tvec[2][0]
 
-        pose_lines = ( 
+        pose_lines = (
             f"err: {self.last_reprojection_error:.2f}px",
             f"Z: {Zc:.2f}",
             f"Y: {Yc:.2f}",

@@ -122,6 +122,12 @@ class MissionAnnouncer:
         if event is None:
             return
         key, phrase = event
+
+        # Mission start is the reset boundary even if the aircraft was already
+        # armed and therefore produced no new arming-state transition.
+        if key == "mission_start":
+            self.events.clear()
+
         if key in self.events:
             return
         self.events.add(key)
@@ -134,15 +140,20 @@ class MissionAnnouncer:
         self.payload_callback(message, "b")
 
     def payload_callback(self, message, actuator):
+        """Announce each payload deployment command received."""
+
+        # False closes or resets the servo; only True represents deployment.
         if not bool(message.data):
             return
+
         event = payload_announcement(actuator)
+
         if event is None:
             return
-        key, phrase = event
-        if key in self.events:
-            return
-        self.events.add(key)
+
+        # Each True message is a new deployment command. The mission controller
+        # already prevents the same payload being deployed twice in one mission.
+        _, phrase = event
         self.announce(phrase)
 
 

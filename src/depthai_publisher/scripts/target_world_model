@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+from depthai_publisher import target_world_model
+
+
+if __name__ == "__main__":
+    target_world_model.main()

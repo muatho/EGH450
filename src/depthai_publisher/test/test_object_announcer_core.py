@@ -4,6 +4,7 @@ import unittest
 from depthai_publisher.object_announcer_core import (
     TargetAnnouncementGate,
     announcement_text,
+    target_event_announcement,
 )
 
 
@@ -26,6 +27,12 @@ class TargetAnnouncementGateTest(unittest.TestCase):
         self.assertEqual(len(gate.update([("backpack", (2, 3, 0))], now=0)), 1)
         self.assertEqual(gate.update([("backpack", (2.2, 3, 0))], now=59), [])
         self.assertEqual(len(gate.update([("backpack", (2.2, 3, 0))], now=60)), 1)
+
+    def test_reset_forgets_previous_announcements(self):
+        gate = TargetAnnouncementGate(1, 1.0, cooldown_seconds=60)
+        self.assertEqual(len(gate.update([("backpack", (2, 3, 0))], now=0)), 1)
+        gate.reset()
+        self.assertEqual(len(gate.update([("backpack", (2, 3, 0))], now=1)), 1)
 
     def test_reports_separate_same_type_targets(self):
         gate = TargetAnnouncementGate(1, 1.0)
@@ -65,6 +72,44 @@ class TargetAnnouncementGateTest(unittest.TestCase):
             TargetAnnouncementGate(match_radius=0)
         with self.assertRaises(ValueError):
             TargetAnnouncementGate(cooldown_seconds=0)
+
+    def test_formats_target_mission_events(self):
+        detected = (
+            "[TARGET DETECTED]\n"
+            "Backpack | Confidence: 72%\n"
+            "World X: 1.24 | World Y: -3.56 | World Z: 0.00\n"
+        )
+        confirmed = detected.replace("DETECTED", "CONFIRMED")
+        rejected = detected.replace("DETECTED", "REJECTED")
+        ignored = detected.replace("DETECTED", "IGNORED")
+
+        self.assertEqual(
+            target_event_announcement(detected),
+            "Backpack detected at X 1.2 metres, Y -3.6 metres.",
+        )
+        self.assertEqual(
+            target_event_announcement(confirmed),
+            "Backpack confirmed at X 1.2 metres, Y -3.6 metres. "
+            "Lowering to deploy tracker.",
+        )
+        self.assertEqual(
+            target_event_announcement(rejected),
+            "Backpack rejected. Returning to search.",
+        )
+        self.assertEqual(
+            target_event_announcement(ignored),
+            "Backpack ignored. Tracker already deployed.",
+        )
+
+        person_confirmed = confirmed.replace("Backpack", "Person")
+        self.assertEqual(
+            target_event_announcement(person_confirmed),
+            "Person confirmed at X 1.2 metres, Y -3.6 metres. "
+            "Lowering to deploy EpiPen.",
+        )
+
+    def test_ignores_unrecognised_target_events(self):
+        self.assertIsNone(target_event_announcement("not a target event"))
 
 
 if __name__ == "__main__":

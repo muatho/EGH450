@@ -3,8 +3,11 @@
 	<arg name="pose_source" default="real" />
 	<arg name="pose_topic" default="$(eval '/uavasr/odom' if arg('pose_source') == 'emulator' else '/mavros/local_position/pose')" />
 	<arg name="deploy" default="true" />
+	<arg name="enable_test_target_injection" default="true" />
+	<arg name="boundary_checks_enabled" default="true" />
 	<arg name="battery_topic" default="$(eval '/uavasr/battery' if arg('pose_source') == 'emulator' else '/mavros/battery')" />
-	<node name="guidance" pkg="spar_node" type="test_breadcrumb_camera" respawn="false" output="screen">
+	<rosparam command="load" file="$(find depthai_publisher)/config/target_confidence.yaml" ns="/target_policy" />
+	<node name="guidance" pkg="spar_node" type="test_breadcrumb_camera" respawn="false" output="screen" clear_params="true">
 		<!-- Linear and yaw motion velocities -->
 		<param name="vel_linear" type="double" value="0.4" />
 		<param name="vel_yaw" type="double" value="0.2" />
@@ -22,18 +25,21 @@
 		<param name="z_max" value="4.0" type="double" />
 		<param name="battery_topic" value="$(arg battery_topic)" />
 
+		<!-- survey altitude-->
+		<param name="surveyAlt" type="double" value="2" />
+		
+
 		<!-- Spar parameters -->
 		<param name="action_topic" type="string" value="spar/flight" />
 		<param name="pose_source" type="string" value="$(arg pose_source)" />
 		<param name="pose_topic" type="string" value="$(arg pose_topic)" />
 		<param name="deploy" type="bool" value="$(arg deploy)" />
+		<param name="enable_test_target_injection" type="bool" value="$(arg enable_test_target_injection)" />
+		<param name="boundary_checks_enabled" type="bool" value="$(arg boundary_checks_enabled)" />
 
-		<!-- Require repeated, nearby map-frame backpack observations before
-		     interrupting the survey, then suppress repeat service nearby. -->
-		<param name="backpack_confidence_threshold" type="double" value="0.60" />
-		<param name="backpack_confirmations_required" type="int" value="3" />
-		<param name="backpack_confirmation_radius" type="double" value="0.75" />
-		<param name="backpack_serviced_radius" type="double" value="1.00" />
+		<!-- Observations supporting an active target and repeat-service filtering. -->
+		<param name="target_association_radius" type="double" value="0.30" />
+		<param name="serviced_target_radius" type="double" value="1.00" />
 
 		<!-- Remappings -->
 		<!--remap from="~/roi" to="target_detection/roi" /-->

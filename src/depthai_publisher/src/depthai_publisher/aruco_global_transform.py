@@ -76,7 +76,6 @@ class ArucoGlobalTransformer(CameraToMap):
 
         return T_map_marker
 
-
     def print_marker_pose(self, marker_position):
         """Print a map-frame position in metres for terminal debugging."""
 

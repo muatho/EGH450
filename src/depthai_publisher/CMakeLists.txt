@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  std_srvs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -110,7 +111,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES depthai_publisher
-  CATKIN_DEPENDS geometry_msgs message_runtime roscpp rospy std_msgs
+  CATKIN_DEPENDS geometry_msgs message_runtime roscpp rospy std_msgs std_srvs
 #  DEPENDS system_lib
 )
 
@@ -171,6 +172,7 @@ catkin_install_python(PROGRAMS
   scripts/object_position_estimator
   scripts/object_announcer
   scripts/mission_voice_announcer
+  scripts/target_world_model
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

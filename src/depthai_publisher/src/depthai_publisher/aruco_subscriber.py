@@ -5,6 +5,7 @@ import cv2
 import rospy
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import CameraInfo, CompressedImage
+from std_srvs.srv import Trigger, TriggerResponse
 from cv_bridge import CvBridge, CvBridgeError
 from scipy.spatial.transform import Rotation as R
 
@@ -55,14 +56,12 @@ class ArucoDetector():
 
         # Machine/RViz-readable global marker locations in the map frame.
         self.marker_pub = rospy.Publisher(
-                    "/world_model/aruco_markers",
-                    MarkerArray,
-                    queue_size=1,
-                    # The array represents persistent world knowledge. Send
-                    # its latest value immediately to subscribers that connect
-                    # or restart after the most recent marker observation.
-                    latch=True,
-                )
+            "/world_model/aruco_markers",
+            MarkerArray,
+            queue_size=1,
+            # Send persistent world knowledge immediately to new subscribers.
+            latch=True,
+        )
 
         # CvBridge decodes ROS CompressedImage data into an OpenCV array.
         self.br = CvBridge()
@@ -78,6 +77,13 @@ class ArucoDetector():
         # is republished whenever a marker is updated. Expiration/deletion is a
         # separate future improvement; last_seen preserves the real image time.
         self.markers = {}
+
+        # A new mission clears landmarks retained from the previous run.
+        self.clear_service = rospy.Service(
+            "/world_model/clear_aruco",
+            Trigger,
+            self.clear_markers,
+        )
 
         # Retain the most recently received fixed camera calibration.
         self.info_sub = rospy.Subscriber(
@@ -112,12 +118,37 @@ class ArucoDetector():
             self.max_pose_age,
         )
 
+    # -----------------------------------------------------------------
+    # PERSISTENT ARUCO WORLD MODEL
+    # -----------------------------------------------------------------
+
+    def clear_markers(self, request):
+        """Clear remembered ArUcos and remove their persistent RViz markers."""
+
+        del request
+        cleared_count = len(self.markers)
+        self.markers.clear()
+
+        marker_array = MarkerArray()
+        marker = Marker()
+        marker.header.frame_id = "map"
+        marker.header.stamp = rospy.Time.now()
+        marker.action = Marker.DELETEALL
+        marker_array.markers.append(marker)
+        self.marker_pub.publish(marker_array)
+
+        rospy.loginfo("Cleared %d remembered ArUco marker(s)", cleared_count)
+        return TriggerResponse(
+            success=True,
+            message="Cleared {} ArUco marker(s)".format(cleared_count),
+        )
+
     def store_marker(self, marker_ID, T, rvec, tvec, image_stamp):
         """Cache one successful global observation and republish the cache.
 
         ``T`` is T_map_marker, so its final column is the marker origin written
-        in map coordinates. rvec/tvec are retained for future diagnostics even
-        and remain useful for image-overlay diagnostics.
+        in map coordinates. rvec/tvec retain the accepted camera-frame pose for
+        diagnostics.
         """
 
         marker_position = T[:3, 3]
@@ -194,8 +225,34 @@ class ArucoDetector():
 
             marker_array.markers.append(marker)
 
+            label = Marker()
+            label.header = marker.header
+            label.ns = "aruco_labels"
+            label.id = marker_data["id"]
+            label.type = Marker.TEXT_VIEW_FACING
+            label.action = Marker.ADD
+            label.pose.position.x = marker_data["position"][0]
+            label.pose.position.y = marker_data["position"][1]
+            label.pose.position.z = marker_data["position"][2] + 0.25
+            label.pose.orientation.w = 1.0
+            label.scale.z = 0.16
+            label.color.r = 1.0
+            label.color.g = 1.0
+            label.color.b = 1.0
+            label.color.a = 1.0
+            label.text = "ArUco {} | X: {:.2f} Y: {:.2f} Z: {:.2f}".format(
+                marker_data["id"],
+                marker_data["position"][0],
+                marker_data["position"][1],
+                marker_data["position"][2],
+            )
+            marker_array.markers.append(label)
+
         self.marker_pub.publish(marker_array)
 
+    # -----------------------------------------------------------------
+    # INPUT CALLBACKS
+    # -----------------------------------------------------------------
 
     def pose_callback(self, pose_msg):
         """Retain the newest vehicle pose without gating image processing."""
@@ -236,6 +293,10 @@ class ArucoDetector():
         """Replace the PnP estimator's calibration with the latest CameraInfo."""
         self.pose_estimator.set_camera_info(msg)
 
+    # -----------------------------------------------------------------
+    # ARUCO IMAGE PROCESSING
+    # -----------------------------------------------------------------
+
     def find_aruco(self, frame, pose_msg, image_stamp):
         """Return image observations and update accepted map-frame landmarks.
 
@@ -248,7 +309,6 @@ class ArucoDetector():
         detector = cv2.aruco.ArucoDetector(self.aruco_dict, self.aruco_params)
         corners, ids, _ = detector.detectMarkers(frame)
         observation_array = ArucoDetectionArray()
-
 
         if len(corners) > 0:
             ids = ids.flatten()

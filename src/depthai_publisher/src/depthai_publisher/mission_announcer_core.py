@@ -25,8 +25,8 @@ def mission_event_announcement(node_name, message):
 def payload_announcement(actuator):
     """Return the stable event key and phrase for a payload actuator."""
     payloads = {
-        "a": ("person", "Payload A deployed for person."),
-        "b": ("backpack", "Payload B deployed for backpack."),
+        "a": ("person", "EpiPen deployed for person."),
+        "b": ("backpack", "Tracker deployed for backpack."),
     }
     key = str(actuator).lower()
     if key not in payloads:

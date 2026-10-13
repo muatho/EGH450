@@ -24,19 +24,31 @@ class DepthaiCamera():
     stay constant, but the header timestamp is updated for every image.
     """
 
+    # Downstream target handling uses this stable two-class interface even
+    # when the deployed detector was trained with additional classes.
+    TARGET_CLASS_IDS = {
+        "person": 0,
+        "backpack": 1,
+    }
+
     def __init__(self):
         """Create ROS publishers and describe the pipeline before opening it."""
         # These dimensions are used consistently for the DepthAI output and
         # CameraInfo. Explicit names avoid width/height ambiguity.
         self.width = 640
         self.height = 360
-        self.fps = 20.0
+        self.fps = 8.0
 
         # YOLO is normally enabled, but can be disabled from the launch file
         # to isolate camera and ArUco behaviour during diagnosis.
         self.enable_yolo = rospy.get_param("~enable_yolo", True)
         self.enable_depth = rospy.get_param("~enable_depth", True)
+        self.publish_nn_diagnostics = rospy.get_param(
+            "~publish_nn_diagnostics", False
+        )
         self.yolo_topic = "/yolo/detections"
+        self.raw_yolo_topic = "/yolo/raw_detections"
+        self.nn_input_topic = "/depthai_node/nn_input"
 
         # Launch parameters keep the deployed blob and its decoder metadata
         # replaceable without changing the publisher implementation.
@@ -75,10 +87,19 @@ class DepthaiCamera():
                 queue_size=1,
             )
         self.pub_yolo = None
+        self.pub_raw_yolo = None
+        self.pub_nn_input = None
         if self.enable_yolo:
             self.pub_yolo = rospy.Publisher(
                 self.yolo_topic, Detection2DArray, queue_size=1
             )
+            if self.publish_nn_diagnostics:
+                self.pub_raw_yolo = rospy.Publisher(
+                    self.raw_yolo_topic, Detection2DArray, queue_size=1
+                )
+                self.pub_nn_input = rospy.Publisher(
+                    self.nn_input_topic, Image, queue_size=1
+                )
 
         # CvBridge converts between OpenCV arrays and ROS Image messages.
         self.bridge = CvBridge()
@@ -105,6 +126,10 @@ class DepthaiCamera():
         )
 
         rospy.on_shutdown(self.shutdown)
+
+    # -----------------------------------------------------------------
+    # MODEL CONFIGURATION
+    # -----------------------------------------------------------------
 
     def read_yolo_config(self):
         """Read the deployed model's DepthAI decoder settings.
@@ -146,6 +171,30 @@ class DepthaiCamera():
         self.yolo_labels = config["mappings"]["labels"]
         if len(self.yolo_labels) != self.yolo_classes:
             raise ValueError("YOLO label count does not match class count")
+
+        # Translate model-specific class indices into the two target IDs used
+        # by the rest of the system. All other detector classes are discarded.
+        self.yolo_class_remap = {
+            source_id: self.TARGET_CLASS_IDS[str(label).strip().lower()]
+            for source_id, label in enumerate(self.yolo_labels)
+            if str(label).strip().lower() in self.TARGET_CLASS_IDS
+        }
+        missing_targets = set(self.TARGET_CLASS_IDS.values()).difference(
+            self.yolo_class_remap.values()
+        )
+        if missing_targets:
+            raise ValueError(
+                "YOLO config must contain person and backpack labels"
+            )
+
+        rospy.loginfo(
+            "YOLO class remap: %s",
+            self.yolo_class_remap,
+        )
+
+    # -----------------------------------------------------------------
+    # DEPTHAI PIPELINE CONSTRUCTION
+    # -----------------------------------------------------------------
 
     def configure_pipeline(self):
         """Build the on-device RGB-to-host data path.
@@ -248,6 +297,18 @@ class DepthaiCamera():
         xout_yolo.input.setBlocking(False)
         network.out.link(xout_yolo.input)
 
+        if self.publish_nn_diagnostics:
+            # This is the resized and padded ImgFrame consumed by the network,
+            # before any host-side overlay or coordinate conversion.
+            xout_nn_input = self.pipeline.createXLinkOut()
+            xout_nn_input.setStreamName("nn_input")
+            xout_nn_input.input.setBlocking(False)
+            network.passthrough.link(xout_nn_input.input)
+
+    # -----------------------------------------------------------------
+    # CAMERA CALIBRATION
+    # -----------------------------------------------------------------
+
     def read_camera_info(self, device):
         """Read RGB EEPROM calibration and build a ROS CameraInfo message.
 
@@ -328,6 +389,10 @@ class DepthaiCamera():
 
         return camera_info
 
+    # -----------------------------------------------------------------
+    # DEVICE PROCESSING LOOP
+    # -----------------------------------------------------------------
+
     def run(self):
         """Open the OAK, read calibration once, then publish incoming frames."""
         # Open the device before starting the prepared pipeline so the RGB lens
@@ -357,10 +422,17 @@ class DepthaiCamera():
                 name="video", maxSize=1, blocking=False)
 
             yolo_queue = None
+            nn_input_queue = None
             if self.enable_yolo:
                 yolo_queue = device.getOutputQueue(
-                    name="yolo_detections", maxSize=1, blocking=False
+                    name="yolo_detections",
+                    maxSize=4 if self.publish_nn_diagnostics else 1,
+                    blocking=False,
                 )
+                if self.publish_nn_diagnostics:
+                    nn_input_queue = device.getOutputQueue(
+                        name="nn_input", maxSize=4, blocking=False
+                    )
             stamps_by_sequence = {}
 
             while not rospy.is_shutdown():
@@ -376,8 +448,8 @@ class DepthaiCamera():
                     rgb_packet = packet
                 frame = rgb_packet.getCvFrame()
 
-                # One timestamp is shared by raw Image, CompressedImage, and
-                # CameraInfo. This replaces the old independent 10 Hz timer.
+                # One timestamp associates raw Image, CompressedImage,
+                # CameraInfo, depth and detections with the same RGB frame.
                 stamp = rospy.Time.now()
                 sequence = int(rgb_packet.getSequenceNum())
                 self.publish_to_ros(frame, stamp, sequence)
@@ -392,6 +464,18 @@ class DepthaiCamera():
                         if key >= sequence - 100
                     }
 
+                    if self.publish_nn_diagnostics:
+                        nn_input = nn_input_queue.tryGet()
+                        while nn_input is not None:
+                            nn_sequence = int(nn_input.getSequenceNum())
+                            nn_stamp = stamps_by_sequence.get(
+                                nn_sequence, rospy.Time.now()
+                            )
+                            self.publish_nn_input(
+                                nn_input, nn_stamp, nn_sequence
+                            )
+                            nn_input = nn_input_queue.tryGet()
+
                     detections = yolo_queue.tryGet()
                     while detections is not None:
                         detection_stamp = stamps_by_sequence.get(
@@ -400,7 +484,57 @@ class DepthaiCamera():
                         self.publish_yolo_detections(
                             detections, detection_stamp
                         )
+                        if self.publish_nn_diagnostics:
+                            self.publish_raw_yolo_detections(
+                                detections, detection_stamp
+                            )
                         detections = yolo_queue.tryGet()
+
+    # -----------------------------------------------------------------
+    # ROS OUTPUT CONVERSION
+    # -----------------------------------------------------------------
+
+    def publish_nn_input(self, packet, stamp, sequence):
+        """Publish the unannotated image packet that entered the network."""
+        frame = packet.getCvFrame()
+        message = self.bridge.cv2_to_imgmsg(frame, encoding="bgr8")
+        message.header.seq = sequence
+        message.header.stamp = stamp
+        message.header.frame_id = self.image_frame
+        self.pub_nn_input.publish(message)
+
+    def publish_raw_yolo_detections(self, packet, stamp):
+        """Publish decoder results in NN-input pixels with source class IDs."""
+        output = Detection2DArray()
+        output.header.seq = int(packet.getSequenceNum())
+        output.header.stamp = stamp
+        output.header.frame_id = self.image_frame
+
+        for result in packet.detections:
+            detection = Detection2D()
+            detection.header = output.header
+            detection.bbox.center.x = float(
+                (result.xmin + result.xmax) * self.yolo_width / 2.0
+            )
+            detection.bbox.center.y = float(
+                (result.ymin + result.ymax) * self.yolo_height / 2.0
+            )
+            detection.bbox.center.theta = 0.0
+            detection.bbox.size_x = float(
+                (result.xmax - result.xmin) * self.yolo_width
+            )
+            detection.bbox.size_y = float(
+                (result.ymax - result.ymin) * self.yolo_height
+            )
+
+            hypothesis = ObjectHypothesisWithPose()
+            hypothesis.id = int(result.label)
+            hypothesis.score = float(result.confidence)
+            hypothesis.pose.pose.orientation.w = 1.0
+            detection.results.append(hypothesis)
+            output.detections.append(detection)
+
+        self.pub_raw_yolo.publish(output)
 
     def publish_depth_to_ros(self, depth_frame, stamp, sequence):
         """Publish RGB-aligned unsigned 16-bit depth in millimetres."""
@@ -429,6 +563,11 @@ class DepthaiCamera():
         pad_y = (self.yolo_height - self.height * scale) / 2.0
 
         for result in packet.detections:
+            source_class_id = int(result.label)
+            published_class_id = self.yolo_class_remap.get(source_class_id)
+            if published_class_id is None:
+                continue
+
             x_min = np.clip(
                 (result.xmin * self.yolo_width - pad_x) / scale,
                 0, self.width,
@@ -457,7 +596,7 @@ class DepthaiCamera():
             detection.bbox.size_y = float(y_max - y_min)
 
             hypothesis = ObjectHypothesisWithPose()
-            hypothesis.id = int(result.label)
+            hypothesis.id = published_class_id
             hypothesis.score = float(result.confidence)
             hypothesis.pose.pose.orientation.w = 1.0
             detection.results.append(hypothesis)
